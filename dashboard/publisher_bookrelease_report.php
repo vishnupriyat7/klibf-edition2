@@ -64,7 +64,7 @@
                                         <th data-ordering="false">Contact Person Email</th>
 
                                         <th data-ordering="false">Remarks</th>
-                                        <th>Action</th>
+                                        <!-- <th>Action</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -207,7 +207,7 @@
 
                                             <td>
                                                 <div class='dropdown d-inline-block'>
-                                                    <button class='btn btn-soft-secondary btn-sm dropdown' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                                    <!-- <button class='btn btn-soft-secondary btn-sm dropdown' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
                                                         <i class='ri-more-fill align-middle'></i>
                                                     </button>
                                                     <ul class='dropdown-menu dropdown-menu-end'>
@@ -215,7 +215,7 @@
                                                             <a href='publisher_bookdiscussion.php?discid=<?= $id; ?>' class='dropdown-item edit-item-btn'>
                                                                 <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Edit
                                                             </a>
-                                                        </li>
+                                                        </li> -->
                                                         <!-- <li>
                                                             <a href='deletesocial.php?id=$id' class='dropdown-item remove-item-btn'>
                                                                 <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Delete
@@ -232,9 +232,9 @@
                                                             //     $btnenbl = "";
                                                             // }
                                                             ?>
-                                                            <a href='' class='dropdown-item remove-item-btn'>
+                                                            <!-- <a href='' class='dropdown-item remove-item-btn'>
                                                                 <i class='ri-delete-bin-fill align-bottom me-2 text-danger'></i>Delete
-                                                            </a>
+                                                            </a> -->
                                                         </li>
                                                     </ul>
                                                 </div>

@@ -159,23 +159,13 @@ $user_id = $user['id'];
                                     $msg . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                                                </div>"; //printing error if found in validation
                             } else {
-
                                 $query = "INSERT INTO event_propsl_bkrls (users_id,book_title,book_genere,brf_description, author,  released_by, relcd_by_cntct, recived_by, recvd_by_contact, guest1, guest1_contct, guest2, guest2_contct, guest3, guest3_contct, contact_persn_name, contact_persn_mobile,contact_persn_email, remarks,  updated_at, status, book_cover) VALUES ('$user_id','$book_title',  '$book_genere','$brief_descrptn','$author',  '$release_by', '$releas_by_cntct','$recvd_by','$recvd_by_cntct', '$guest1','$guest1_cntct', '$guest2', '$guest2_cntct','$guest3','$guest3_cntct','$bkrls_cntct_persn_name', '$bkrls_cntct_persn_mobile', '$bkrls_cntct_persn_email','$remark', '$date','E','$imgContent')";
-
-                                // var_dump($query);
                                 $result1 = mysqli_query($con, $query);
-                                // var_dump($result1);
                                 if ($result1) {
-                                    // var_dump("fjkfdkj");
-                                    // var_dump($user_id);
                                     $querySelectbookrls = "SELECT id FROM event_propsl_bkrls WHERE users_id = '$user_id' ORDER BY id DESC LIMIT 1";
-                                    // var_dump($querySelectbookrls);
                                     $resultSelectBookrls = mysqli_query($con, $querySelectbookrls);
-                                    // var_dump( $resultSelectBookrls);
                                     $book_rls_id = $resultSelectBookrls->fetch_array();
-                                    // var_dump($book_rls_id['id']);
                                     $querydaytime = "INSERT INTO day_time_prefer (user_id, book_rls_id, book_dscn_id, spcl_event_id, day_prfr1, day_prfr2, day_prfr3, time_prfr1, time_prfr2, time_prfr3) VALUES ('$user_id','$book_rls_id[id]' ,'0' , '0', '$evnt_day1', '$evnt_day2', '$evnt_day3', '$time_slot1', '$time_slot2', '$time_slot3')";
-                                    // var_dump($querydaytime);
                                     $resultdaytime = mysqli_query($con, $querydaytime);
                                     if ($resultdaytime) {
                                         $errormsg = "
@@ -200,7 +190,6 @@ $user_id = $user['id'];
                             }
                         }
                         ?>
-
                         <div class="card-body p-4 ">
                             <div class="tab-content">
                                 <?php
@@ -210,265 +199,191 @@ $user_id = $user['id'];
                                 ?>
                                 <form action="" method="post" enctype="multipart/form-data">
                                     <div class="row bg-grey">
-
-                                        <div class="col-6">
-
+                                        <div class="col-6 form-group">
                                             <label> Book Title</label>
-                                            <div class="form-group">
-
-                                                <input type="text" class="form-control" name="book_title" id="book_title" placeholder="Book Title"  <?= $edit; ?>>
-                                            </div>
-                                            <br><label> Brief Description</label>
-                                            <div class="form-group">
-                                                <textarea class="form-control" name="brief_descrptn" id="brief_descrptn" placeholder="Description"  <?= $edit; ?>></textarea>
-                                            </div><br>
-
-                                            <label>Releasing by</label>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="release_by" id="release_by" placeholder="Releasing by"  <?= $edit; ?>>
-                                            </div><br>
-
-
-                                            <label>Receiving by</label>
-                                            <div class="form-group">
-
-                                                <input type="text" class="form-control" name="recvd_by" id="recvd_by" placeholder="Received by"  <?= $edit; ?>>
-                                            </div><br>
-                                            <label>Guest 1</label>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="guest1" id="guest1" placeholder="Guest 1"  <?= $edit; ?>>
-                                            </div><br>
-                                            <label>Guest 2</label>
-                                            <div class="form-group">
-
-                                                <input type="text" class="form-control" name="guest2" id="guest2" placeholder="Guest 2"  <?= $edit; ?>>
-                                            </div><br>
-                                            <label>Guest 3</label>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="guest3" id="guest3" placeholder="Guest 3"  <?= $edit; ?>>
-                                            </div><br>
+                                            <input type="text" class="form-control" name="book_title" id="book_title" placeholder="Book Title" <?= $edit; ?>>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <label>Book Genre</label>
                                             <?php
-                                            $day_query = "SELECT * FROM event_date";
-                                            $day_stmt = $con->prepare($day_query);
-                                            $day_stmt->execute();
-                                            $day_result = $day_stmt->get_result();
-                                            $event_days = $day_result->fetch_all();
-                                            $slot_query = "SELECT * FROM time_slot";
-                                            $slot_stmt = $con->prepare($slot_query);
-                                            $slot_stmt->execute();
-                                            $slot_result = $slot_stmt->get_result();
-                                            $event_slots = $slot_result->fetch_all();
+                                            $bookgenere_query = "SELECT * FROM book_genere";
+                                            $bookgenere_stmt = $con->prepare($bookgenere_query);
+                                            $bookgenere_stmt->execute();
+                                            $bookgenere_result = $bookgenere_stmt->get_result();
+                                            $book_genere = $bookgenere_result->fetch_all();
                                             ?>
-
-
-
+                                            <select class="form-control form-group" name="book_genere" id="book_genere">
+                                                <option value="0">Select Book Genre</option>
+                                                <?php foreach ($book_genere as $genere) { ?>
+                                                    <option value="<?= $genere[0] ?>"><?= $genere[1]; ?> <?= $genere[2]; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br><label> Brief Description</label>
+                                            <textarea class="form-control" name="brief_descrptn" id="brief_descrptn" placeholder="Description" <?= $edit; ?>></textarea>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
+                                            <label>Author</label>
+                                            <input type="text" class="form-control" name="author" id="author" placeholder="Author" <?= $edit; ?>>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
+                                            <label>Releasing by</label>
+                                            <input type="text" class="form-control" name="release_by" id="release_by" placeholder="Releasing by" <?= $edit; ?>>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
+                                            <label>Contact</label>
+                                            <input type="text" class="form-control" name="releas_by_cntct" id="releas_by_cntct" placeholder="Releasing by Contact" <?= $edit; ?>>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
+                                            <label>Receiving by</label>
+                                            <input type="text" class="form-control" name="recvd_by" id="recvd_by" placeholder="Received by" <?= $edit; ?>>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
+                                            <label>Contact</label>
+                                            <input type="text" class="form-control" name="recvd_by_cntct" id="recvd_by_cntct" placeholder="Receiving by Contact" <?= $edit; ?>>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
+                                            <label>Guest 1</label>
+                                            <input type="text" class="form-control" name="guest1" id="guest1" placeholder="Guest 1" <?= $edit; ?>>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
+                                            <label>Contact</label>
+                                            <input type="text" class="form-control" name="guest1_cntct" id="guest1_cntct" placeholder="Guest1 Contact" <?= $edit; ?>>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
+                                            <label>Guest 2</label>
+                                            <input type="text" class="form-control" name="guest2" id="guest2" placeholder="Guest 2" <?= $edit; ?>>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
+                                            <label> Contact</label>
+                                            <input type="text" class="form-control" name="guest2_cntct" id="guest2_cntct" placeholder="Guest2 Contact" <?= $edit; ?>>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
+                                            <label>Guest 3</label>
+                                            <input type="text" class="form-control" name="guest3" id="guest3" placeholder="Guest 3" <?= $edit; ?>>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
+                                            <label> Contact</label>
+                                            <input type="text" class="form-control" name="guest3_cntct" id="guest3_cntct" placeholder="Guest3 Contact" <?= $edit; ?>>
+                                        </div>
+                                        <?php
+                                        $day_query = "SELECT * FROM event_date";
+                                        $day_stmt = $con->prepare($day_query);
+                                        $day_stmt->execute();
+                                        $day_result = $day_stmt->get_result();
+                                        $event_days = $day_result->fetch_all();
+                                        $slot_query = "SELECT * FROM time_slot";
+                                        $slot_stmt = $con->prepare($slot_query);
+                                        $slot_stmt->execute();
+                                        $slot_result = $slot_stmt->get_result();
+                                        $event_slots = $slot_result->fetch_all();
+                                        ?>
+                                        <div class="col-6 form-group">
+                                            <br>
                                             <label>Event Date Preference 1</label>
-                                            <div class="form-group">
-
-                                                <select class="form-control form-group" name="evnt_day1" id="evnt_day1"  style="height:35px;">
-                                                    <option value="0" <?= $select0; ?>>Select Proposed Event Time</option>
-                                                    <?php foreach ($event_days as $days) { ?>
-                                                        <option value="<?= $days[0] ?>"><?= $days[1]; ?> - <?= $days[2]; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div><br>
+                                            <select class="form-control form-group" name="evnt_day1" id="evnt_day1" style="height:35px;">
+                                                <option value="0" <?= $select0; ?>>Select Proposed Event Day</option>
+                                                <?php foreach ($event_days as $days) { ?>
+                                                    <option value="<?= $days[0] ?>"><?= $days[1]; ?> - <?= $days[2]; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
+                                            <label> Time Slot Preference 1</label>
+                                            <select class="form-control form-group" name="time_slot1" id="time_slot1" style="height:35px;">
+                                                <option value="0" <?= $select0; ?>>Select Proposed Event Time</option>
+                                                <?php foreach ($event_slots as $event_slot) { ?>
+                                                    <option value="<?= $event_slot[0] ?>"><?= $event_slot[1]; ?> - <?= $event_slot[2]; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
                                             <label>Event Date Preference 2</label>
-                                            <div class="form-group">
-
-                                                <select class="form-control form-group" name="evnt_day2" id="evnt_day2"  style="height:35px;">
-                                                    <option value="0" <?= $select0; ?>>Select Proposed Event Time</option>
-                                                    <?php foreach ($event_days as $days) { ?>
-                                                        <option value="<?= $days[0] ?>"><?= $days[1]; ?> - <?= $days[2]; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div><br>
+                                            <select class="form-control form-group" name="evnt_day2" id="evnt_day2" style="height:35px;">
+                                                <option value="0" <?= $select0; ?>>Select Proposed Event Day</option>
+                                                <?php foreach ($event_days as $days) { ?>
+                                                    <option value="<?= $days[0] ?>"><?= $days[1]; ?> - <?= $days[2]; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
+                                            <label> Time Slot Preference 2</label>
+                                            <select class="form-control form-group" name="time_slot2" id="time_slot2" style="height:35px;">
+                                                <option value="0" <?= $select0; ?>>Select Proposed Event Time</option>
+                                                <?php foreach ($event_slots as $event_slot) { ?>
+                                                    <option value="<?= $event_slot[0] ?>"><?= $event_slot[1]; ?> - <?= $event_slot[2]; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
                                             <label>Event Date Preference 3</label>
-                                            <div class="form-group">
-
-                                                <select class="form-control form-group" name="evnt_day3" id="evnt_day3"  style="height:35px;">
-                                                    <option value="0" <?= $select0; ?>>Select Proposed Event Time</option>
-                                                    <?php foreach ($event_days as $days) { ?>
-                                                        <option value="<?= $days[0] ?>"><?= $days[1]; ?> - <?= $days[2]; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div><br>
-
-
+                                            <select class="form-control form-group" name="evnt_day3" id="evnt_day3" style="height:35px;">
+                                                <option value="0" <?= $select0; ?>>Select Proposed Event Day</option>
+                                                <?php foreach ($event_days as $days) { ?>
+                                                    <option value="<?= $days[0] ?>"><?= $days[1]; ?> - <?= $days[2]; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
+                                            <label> Time Slot Preference 3</label>
+                                            <select class="form-control form-group" name="time_slot3" id="time_slot3" style="height:35px;">
+                                                <option value="0" <?= $select0; ?>>Select Proposed Event Time</option>
+                                                <?php foreach ($event_slots as $event_slot) { ?>
+                                                    <option value="<?= $event_slot[0] ?>"><?= $event_slot[1]; ?> - <?= $event_slot[2]; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
                                             <label> Contact Person Name</label>
-                                            <div class="form-group">
-
-                                                <input type="text" class="form-control" name="cntct_persn_name" id="cntct_persn_name" placeholder="Contact Person Name"  <?= $edit; ?>>
-                                            </div><br>
-
+                                            <input type="text" class="form-control" name="cntct_persn_name" id="cntct_persn_name" placeholder="Contact Person Name" <?= $edit; ?>>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
+                                            <label>Contact Person Mobile</label>
+                                            <input type="text" class="form-control" name="cntct_persn_mobile" id="cntct_persn_mobile" placeholder="Contact Person Mobile" min="0" <?= $edit; ?>>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
                                             <label>Contact Person Email</label>
-                                            <div class="form-group">
-
-                                                <input type="email" class="form-control" name="cntct_persn_email" id="cntct_persn_email" placeholder="Contact Person Email"  min="0" <?= $edit; ?>>
-                                            </div><br>
-
-
+                                            <input type="email" class="form-control" name="cntct_persn_email" id="cntct_persn_email" placeholder="Contact Person Email" min="0" <?= $edit; ?>>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <br>
+                                            <label>Remarks / Other information</label>
+                                            <textarea class="form-control" name="remark" id="remark" placeholder="Remarks / Other information" <?= $edit; ?>></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <br>
                                             <label>Please upload Book Cover<br>
                                                 (Only JPG, JPEG, PNG files are allowed for uploads.)</label>
-                                            <!-- </div> -->
-
-
-                                            <div class="form-group">
-
-                                                <input type="file" class="form-control" name="book_cover" id="book_cover" placeholder="Upload Book Cover" <?= $hide; ?> <?= $edit; ?>><br>
-                                                <!-- <label id="book_cover_lab">
-                                                <img src="data:image/jpg;charset=utf8;base64,<?= $book_cover; ?>" height="70vh" id="book_cover_img" <?= $edit; ?>>
-                                            </label> -->
-
-                                                <!-- <span id="changebook_cover" onclick="changeLogo();" <?= $edit; ?>><u>Change Book Cover</u></span> -->
-
-                                                <!-- <input type="file" class="form-control" name="book_cover" id="book_cover" placeholder="Upload Logo"> -->
-                                            </div>
-
-                                            <div class="form-group col-6">
-                                                <label>
-                                                    <?= $fileName; ?>
-                                                </label>
-                                            </div>
+                                            <input type="file" class="form-control" name="book_cover" id="book_cover" placeholder="Upload Book Cover" <?= $hide; ?> <?= $edit; ?>><br>
                                         </div>
-                                        <div class="col-6">
-                                            <label>Book Genre</label>
-                                            <div class="form-group">
-                                                <?php
-                                                $bookgenere_query = "SELECT * FROM book_genere";
-                                                $bookgenere_stmt = $con->prepare($bookgenere_query);
-                                                $bookgenere_stmt->execute();
-                                                $bookgenere_result = $bookgenere_stmt->get_result();
-                                                $book_genere = $bookgenere_result->fetch_all();
-                                                // var_dump($book_genere);
-                                                ?>
-
-                                                <select class="form-control form-group" name="book_genere" id="book_genere" >
-                                                    <option value="0">Select Book Genre</option>
-                                                    <?php foreach ($book_genere as $genere) { ?>
-                                                        <option value="<?= $genere[0] ?>"><?= $genere[1]; ?> <?= $genere[2]; ?></option>
-                                                    <?php } ?>
-                                                </select>
-
-                                                <!-- <select class="form-control form-group" name="book_genere" id="book_genere"  onchange="enterPublisher();" style="height:35px;" <?= $edit; ?>>
-                                                    <option value="0" <?= $select0; ?>>Select</option>
-                                                    <option value="Novel" <?= $selectp; ?>>Novel</option>
-                                                    <option value="Drama" <?= $selecta; ?>>Drama</option>
-                                                    <option value="Short Story" <?= $selectp; ?>>Short Story</option>
-                                                    <option value="Poetry" <?= $selecta; ?>>Poetry</option>
-                                                    <option value="Non-Fiction" <?= $selectp; ?>>Non-Fiction</option>
-                                                    <option value="Essay" <?= $selecta; ?>>Essay</option>
-                                                    <option value="History" <?= $selectp; ?>>History</option>
-                                                    <option value="Childrens Literature" <?= $selecta; ?>>Childrens Literature</option>
-                                                    <option value="Biography" <?= $selectp; ?>>Biography</option>
-                                                    <option value="Auto Biography" <?= $selecta; ?>>Auto Biography</option>
-                                                    <option value="Others" <?= $selectp; ?>>Others</option>
-                                                </select> -->
-                                            </div><br>
-                                            <label>Author</label>
-                                            <div class="form-group">
-
-                                                <input type="text" class="form-control" name="author" id="author" placeholder="Author"  <?= $edit; ?>>
-                                            </div>
-                                            <br><br>
-
-                                            <label>Contact</label>
-                                            <div class="form-group">
-
-                                                <input type="text" class="form-control" name="releas_by_cntct" id="releas_by_cntct" placeholder="Releasing by Contact"  <?= $edit; ?>>
-                                            </div><br>
-                                            <label>Contact</label>
-                                            <div class="form-group">
-
-                                                <input type="text" class="form-control" name="recvd_by_cntct" id="recvd_by_cntct" placeholder="Receiving by Contact"  <?= $edit; ?>>
-                                            </div><br>
-                                            <label>Contact</label>
-                                            <div class="form-group">
-
-                                                <input type="text" class="form-control" name="guest1_cntct" id="guest1_cntct" placeholder="Guest1 Contact"  <?= $edit; ?>>
-                                            </div><br>
-
-                                            <label> Contact</label>
-                                            <div class="form-group">
-
-                                                <input type="text" class="form-control" name="guest2_cntct" id="guest2_cntct" placeholder="Guest2 Contact"  <?= $edit; ?>>
-                                            </div><br>
-                                            <label> Contact</label>
-                                            <div class="form-group">
-
-                                                <input type="text" class="form-control" name="guest3_cntct" id="guest3_cntct" placeholder="Guest3 Contact"  <?= $edit; ?>>
-                                            </div><br>
-                                            <div class="row">
-                                                <label>  Time Slot Preference 1</label>
-                                                <div class="form-group">
-
-
-                                                    <select class="form-control form-group" name="time_slot1" id="time_slot1"  style="height:35px;">
-                                                        <option value="0" <?= $select0; ?>>Select Proposed Event Time</option>
-                                                        <?php foreach ($event_slots as $event_slot) { ?>
-                                                            <option value="<?= $event_slot[0] ?>"><?= $event_slot[1]; ?> - <?= $event_slot[2]; ?></option>
-                                                        <?php } ?>
-                                                    </select>
-                                                </div>
-
-                                            </div><br>
-                                            <div class="row">
-                                                <label>  Time Slot Preference 2</label>
-                                                <div class="form-group">
-
-
-                                                    <select class="form-control form-group" name="time_slot2" id="time_slot2"  style="height:35px;">
-                                                        <option value="0" <?= $select0; ?>>Select Proposed Event Time</option>
-                                                        <?php foreach ($event_slots as $event_slot) { ?>
-                                                            <option value="<?= $event_slot[0] ?>"><?= $event_slot[1]; ?> - <?= $event_slot[2]; ?></option>
-                                                        <?php } ?>
-                                                    </select>
-                                                </div>
-
-                                            </div><br>
-                                            <div class="row">
-                                                <label>  Time Slot Preference 3</label>
-                                                <div class="form-group">
-
-
-                                                    <select class="form-control form-group" name="time_slot3" id="time_slot3"  style="height:35px;">
-                                                        <option value="0" <?= $select0; ?>>Select Proposed Event Time</option>
-                                                        <?php foreach ($event_slots as $event_slot) { ?>
-                                                            <option value="<?= $event_slot[0] ?>"><?= $event_slot[1]; ?> - <?= $event_slot[2]; ?></option>
-                                                        <?php } ?>
-                                                    </select>
-                                                </div>
-
-                                            </div><br>
-                                            <label>Contact Person Mobile</label>
-                                            <div class="form-group">
-
-                                                <input type="text" class="form-control" name="cntct_persn_mobile" id="cntct_persn_mobile" placeholder="Contact Person Mobile"  min="0" <?= $edit; ?>>
-                                            </div><br>
-
-
-                                            <label>Remarks / Other information</label>
-                                            <div class="form-group">
-                                                <textarea class="form-control" name="remark" id="remark" placeholder="Remarks / Other information" <?= $edit; ?>></textarea>
-
-                                                <!-- <input class="form-control" name="remark" id="remark" placeholder="Remarks / Other information" <?= $edit; ?>> -->
-                                            </div>
-
-
-                                        </div>
-
-                                        <!-- <div class="col-6"> -->
-                                        </br> </br> </br>
-
-
-                                    </div><br>
-
-                                    <div class="col-lg-12">
-
-                                        <button type="submit" name="bkrls_save" class="btn btn-primary" id="save">Save</button>
-                                        <!-- <?php if ($user_profile) { ?>
+                                        <div class="col-lg-12">
+                                            <br>
+                                            <button type="submit" name="bkrls_save" class="btn btn-primary" id="save">Save</button>
+                                            <!-- <?php if ($user_profile) { ?>
                                             <button type="submit" class="btn btn-success" name="submit-form" id="submit-form">Submit</button>
                                         <?php } ?> -->
-                                        <span class="text-white pr-3"><i class="fas fa-paper-plane"></i></span>
+                                            <span class="text-white pr-3"><i class="fas fa-paper-plane"></i></span>
+                                        </div>
                                     </div>
                                 </form>
                             </div>

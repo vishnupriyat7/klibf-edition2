@@ -1,5 +1,5 @@
 <?php include "header.php"; ?>
-<?php include "sidebar_publisher.php"; ?>
+<?php include "sidebar_pgmcmtee.php"; ?>
 
 <!-- ============================================================== -->
 <!-- Start right Content here -->
@@ -27,171 +27,197 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card" style="width:150%">
+                    <div class="card" style="width: 170%;">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Book Discussion Proposal Report</h5>
+                            <h5 class="card-title mb-0">Book Release Report</h5>
                         </div>
                         <div class="card-body overflow-auto">
                             <!-- <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%"> -->
                             <button onclick="exportTableToExcel('example', 'publisher_book_discussion_report-data')" class="btn btn-primary">Export Table Data To Excel File</button>
-                            <table id="example" class="table table-bordered dt-responsive nowrap table-striped overflow-auto" style="font-style:normal; font-size: 12px;">
+                            <table id="example" class="table table-bordered dt-responsive nowrap table-striped" style="font-style:normal; font-size: 12px;">
                                 <thead>
                                     <tr>
                                         <th data-ordering="false">Sl.No</th>
-                                        <th data-ordering="false">Subject</th>
-                                        <th data-ordering="false">Book Name</th>
+                                        <th data-ordering="false">Publisher Name</th>
+                                        <th data-ordering="false">Book Title</th>
+                                        <th data-ordering="false">Author</th>
+                                        <th data-ordering="false">Book Genere</th>
                                         <th data-ordering="false">Book Cover</th>
-                                        <th data-ordering="false">Moderator</th>
-                                        <th data-ordering="false">Moderator Contact</th>
-                                        <th data-ordering="false">Participant 1</th>
-                                        <th data-ordering="false">Participant 1 Contact No</th>
-                                        <th data-ordering="false">Participant 2</th>
-                                        <th data-ordering="false">Participant 2 Contact No</th>
-                                        <th data-ordering="false">Participant 3</th>
-                                        <th data-ordering="false">Participant 3 Contact No</th>
-                                        <th data-ordering="false">Participant 4</th>
-                                        <th data-ordering="false">Participant 4 Contact No</th>
-                                        <th data-ordering="false">Date Proposed 1</th>
+                                        <th data-ordering="false">Brief Description</th>
+                                        <th data-ordering="false">Releasing by</th>
+                                        <th data-ordering="false">Releasing by Contact No</th>
+                                        <th data-ordering="false">Receiving by </th>
+                                        <th data-ordering="false">Receiving by Contact No</th>
+                                        <th data-ordering="false">Guest 1</th>
+                                        <th data-ordering="false">Guest 1 Contact No</th>
+                                        <th data-ordering="false">Guest 2</th>
+                                        <th data-ordering="false">Guest 2 Contact No</th>
+                                        <th data-ordering="false">Guest 3</th>
+                                        <th data-ordering="false">Guest 3 Contact No</th>
+                                        <th data-ordering="false">Event Date Proposed 1</th>
                                         <th data-ordering="false">Time Proposed 1</th>
-                                        <th data-ordering="false">Date Proposed 2</th>
+                                        <th data-ordering="false">Event Date Proposed 2</th>
                                         <th data-ordering="false">Time Proposed 2</th>
-                                        <th data-ordering="false">Date Proposed 3</th>
+                                        <th data-ordering="false">Event Date Proposed 3</th>
                                         <th data-ordering="false">Time Proposed 3</th>
                                         <th data-ordering="false">Contact Person Name</th>
-                                        <th data-ordering="false">Contact No</th>
-                                        <th data-ordering="false">Email Id</th>
+                                        <th data-ordering="false">Contact Person Mobile</th>
+                                        <th data-ordering="false">Contact Person Email</th>
+
                                         <th data-ordering="false">Remarks</th>
                                         <!-- <th>Action</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $userId = $user['id'];
-                                    $querybookDiscProp = "SELECT epb.*, ed1.event_date as day1_date, ed1.event_day as day1, ed2.event_date as day2_date, ed2.event_day as day2, ed3.event_date as day3_date, ed3.event_day as day3, ts1.slot_time as slotime1, ts1.slot_name as slotname1, ts2.slot_time as slotime2, ts2.slot_name as slotname2, ts3.slot_time as slotime3, ts3.slot_name as slotname3  
-                                    FROM evnt_propsl_bkdscn epb 
-                                    join day_time_prefer dtp on epb.id = dtp.book_dscn_id 
+                                    // $userId = $user['id'];
+
+                                    // $querybookRls = "SELECT * FROM event_propsl_bkrls epb join day_time_prefer dtp on epb.id = dtp.book_rls_id where epb.users_id = '$userId' ORDER BY epb.id DESC";
+
+
+                                    $querybookRls = "SELECT up.org_name, epb.*, ed1.event_date as day1_date, ed1.event_day as day1, ed2.event_date as day2_date, ed2.event_day as day2, ed3.event_date as day3_date, ed3.event_day as day3, ts1.slot_time as slotime1, ts1.slot_name as slotname1, ts2.slot_time as slotime2, ts2.slot_name as slotname2, ts3.slot_time as slotime3, ts3.slot_name as slotname3, bg.genere 
+                                    FROM event_propsl_bkrls epb 
+                                    join book_genere bg on epb.book_genere = bg.id
+                                    join day_time_prefer dtp on epb.id = dtp.book_rls_id
                                     join event_date ed1 on dtp.day_prfr1 = ed1.id 
                                     join event_date ed2 on dtp.day_prfr2 = ed2.id 
                                     join event_date ed3 on dtp.day_prfr3 = ed3.id
                                     join time_slot ts1 on dtp.time_prfr1 = ts1.id
                                     join time_slot ts2 on dtp.time_prfr2 = ts2.id
                                     join time_slot ts3 on dtp.time_prfr3 = ts3.id
-                                    where epb.user_id = '$userId' ORDER BY epb.id DESC";
-                                    $discDiscProps = mysqli_query($con, $querybookDiscProp);
+                                    join users_profile up on epb.users_id = up.user_id
+                                    ORDER BY epb.id DESC";
+                                    // var_dump($querybookRls);
+
+                                    $bookprps = mysqli_query($con, $querybookRls);
                                     $counter = 0;
-                                    while ($discDiscProp = mysqli_fetch_array($discDiscProps)) {
-                                        // var_dump($discDiscProp);die;
-                                        $id = $discDiscProp['id'];
-                                        $subject = $discDiscProp['subject'];
-                                        $bookName = $discDiscProp['book_name'];
-                                        $moderator = $discDiscProp['moderator'];
-                                        $modrtr_cntct = $discDiscProp['modrtr_cntct'];
-                                        $participant1 = $discDiscProp['participant1'];
-                                        $part1_cntct = $discDiscProp['part1_cntct'];
-                                        $participant2 = $discDiscProp['participant2'];
-                                        $part2_cntct = $discDiscProp['part2_cntct'];
-                                        $participant3 = $discDiscProp['participant3'];
-                                        $part3_cntct = $discDiscProp['part3_cntct'];
-                                        $participant4 = $discDiscProp['participant4'];
-                                        $part4_cntct = $discDiscProp['part4_cntct'];
-                                        $cntct_name = $discDiscProp['cntct_name'];
-                                        $cntct_phno = $discDiscProp['cntct_phno'];
-                                        $cntct_mail = $discDiscProp['cntct_mail'];
-                                        $remarks = $discDiscProp['remarks'];
-                                        $book_cover = base64_encode($discDiscProp['book_cover']);
-                                        $day1_date = $discDiscProp['day1_date'];
-                                        $day1 = $discDiscProp['day1'];
-                                        $day2_date = $discDiscProp['day2_date'];
-                                        $day2 = $discDiscProp['day2'];
-                                        $day3_date = $discDiscProp['day3_date'];
-                                        $day3 = $discDiscProp['day3'];
-                                        $slotime1 = $discDiscProp['slotime1'];
-                                        $slotname1 = $discDiscProp['slotname1'];
-                                        $slotime2 = $discDiscProp['slotime2'];
-                                        $slotname2 = $discDiscProp['slotname2'];
-                                        $slotime3 = $discDiscProp['slotime3'];
-                                        $slotname3 = $discDiscProp['slotname3'];
+                                    while ($bookprp = mysqli_fetch_array($bookprps)) {
+                                        $id = $bookprp['id'];
+                                        $org_name = $bookprp['org_name'];
+                                        $booktitle = $bookprp['book_title'];
+                                        $author = $bookprp['author'];
+                                        $book_genere = $bookprp['genere'];
+                                        $book_cover = base64_encode($bookprp['book_cover']);
+                                        $brf_description = $bookprp['brf_description'];
+                                        $released_by = $bookprp['released_by'];
+                                        $relcd_by_cntct = $bookprp['relcd_by_cntct'];
+                                        $recived_by = $bookprp['recived_by'];
+                                        $recvd_by_contact = $bookprp['recvd_by_contact'];
+                                        $guest1 = $bookprp['guest1'];
+                                        $guest1_contct = $bookprp['guest1_contct'];
+                                        $guest2 = $bookprp['guest2'];
+                                        $guest2_contct = $bookprp['guest2_contct'];
+                                        $guest3 = $bookprp['guest3'];
+                                        $guest3_contct = $bookprp['guest3_contct'];
+                                        $contact_persn_name = $bookprp['contact_persn_name'];
+                                        $contact_persn_email = $bookprp['contact_persn_email'];
+                                        $contact_persn_mobile = $bookprp['contact_persn_mobile'];
+                                        $remark = $bookprp['remarks'];
+                                        $day1_date = $bookprp['day1_date'];
+                                        $day1 = $bookprp['day1'];
+                                        $day2_date = $bookprp['day2_date'];
+                                        $day2 = $bookprp['day2'];
+                                        $day3_date = $bookprp['day3_date'];
+                                        $day3 = $bookprp['day3'];
+                                        $slotime1 = $bookprp['slotime1'];
+                                        $slotname1 = $bookprp['slotname1'];
+                                        $slotime2 = $bookprp['slotime2'];
+                                        $slotname2 = $bookprp['slotname2'];
+                                        $slotime3 = $bookprp['slotime3'];
+                                        $slotname3 = $bookprp['slotname3'];
                                     ?>
                                         <tr>
                                             <td>
                                                 <?= ++$counter; ?>
                                             </td>
                                             <td>
-                                                <?= $subject; ?>
+                                                <?= ++$counter; ?>
                                             </td>
                                             <td>
-                                                <?= $bookName; ?>
+                                                <?= $booktitle; ?>
+                                            </td>
+                                            <td>
+                                                <?= $author; ?>
+                                            </td>
+                                            <td>
+                                                <?= $book_genere; ?>
                                             </td>
                                             <td>
                                                 <img src="data:image/jpg;charset=utf8;base64,<?= $book_cover; ?>" height="70vh">
                                             </td>
                                             <td>
-                                                <?= $moderator; ?>
+                                                <?= $brf_description; ?>
+                                            </td>
+
+                                            <td>
+                                                <?= $released_by; ?>
                                             </td>
                                             <td>
-                                                <?= $modrtr_cntct; ?>
+                                                <?= $relcd_by_cntct; ?>
                                             </td>
                                             <td>
-                                                <?= $participant1; ?>
+                                                <?= $recived_by; ?>
                                             </td>
                                             <td>
-                                                <?= $part1_cntct; ?>
+                                                <?= $recvd_by_contact; ?>
                                             </td>
                                             <td>
-                                                <?= $participant2; ?>
+                                                <?= $guest1; ?>
                                             </td>
                                             <td>
-                                                <?= $part2_cntct; ?>
+                                                <?= $guest1_contct; ?>
                                             </td>
                                             <td>
-                                                <?= $participant3; ?>
+                                                <?= $guest2; ?>
                                             </td>
                                             <td>
-                                                <?= $part3_cntct; ?>
+                                                <?= $guest2_contct; ?>
                                             </td>
                                             <td>
-                                                <?= $participant4; ?>
+                                                <?= $guest3; ?>
                                             </td>
                                             <td>
-                                                <?= $part4_cntct; ?>
+                                                <?= $guest3_contct; ?>
                                             </td>
                                             <td>
-                                                <?= $day1; ?> <br> <?= $day1_date; ?>
+                                                <?= $day1; ?><br> <?= $day1_date; ?>
                                             </td>
                                             <td>
-                                                <?= $slotname1; ?> <br> <?= $slotime1; ?>
+                                                <?= $slotname1; ?><br> <?= $slotime1; ?>
+                                            </td>
                                             </td>
                                             <td>
-                                                <?= $day2; ?> <br> <?= $day2_date; ?>
+                                                <?= $day2; ?><br> <?= $day2_date; ?>
                                             </td>
                                             <td>
-                                                <?= $slotname2; ?> <br> <?= $slotime2; ?>
+                                                <?= $slotname2 ?><br> <?= $slotime2; ?>
                                             </td>
                                             <td>
-                                                <?= $day3; ?> <br> <?= $day3_date; ?>
+                                                <?= $day3; ?><br> <?= $day3_date; ?>
                                             </td>
                                             <td>
-                                                <?= $slotname3; ?> <br> <?= $slotime3; ?>
+                                                <?= $slotname3; ?><br> <?= $slotime3; ?>
+                                            </td>
+                                            <td> <?= $contact_persn_name; ?></td>
+                                            <td>
+                                                <?= $contact_persn_mobile; ?>
                                             </td>
                                             <td>
-                                                <?= $cntct_name; ?>
+                                                <?= $contact_persn_email; ?>
                                             </td>
                                             <td>
-                                                <?= $cntct_phno; ?>
+                                                <?= $remark; ?>
                                             </td>
+
+
+
                                             <td>
-                                                <?= $cntct_mail; ?>
-                                            </td>
-                                            <td>
-                                                <?= $remarks; ?>
-                                            </td>
-                                            <!-- <td>
                                                 <div class='dropdown d-inline-block'>
                                                     <button class='btn btn-soft-secondary btn-sm dropdown' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
                                                         <i class='ri-more-fill align-middle'></i>
                                                     </button>
                                                     <ul class='dropdown-menu dropdown-menu-end'>
-                                                        <li>
+                                                        <!-- <li>
                                                             <a href='publisher_bookdiscussion.php?discid=<?= $id; ?>' class='dropdown-item edit-item-btn'>
                                                                 <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Edit
                                                             </a>
@@ -200,7 +226,7 @@
                                                             <a href='deletesocial.php?id=$id' class='dropdown-item remove-item-btn'>
                                                                 <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Delete
                                                             </a>
-                                                        </li>
+                                                        </li> -->
                                                         <li>
                                                             <?php
                                                             // $query = "SELECT * FROM users_profile where user_id='$id'";
@@ -212,13 +238,13 @@
                                                             //     $btnenbl = "";
                                                             // }
                                                             ?>
-                                                            <a href='' class='dropdown-item remove-item-btn'>
+                                                            <!-- <a href='' class='dropdown-item remove-item-btn'>
                                                                 <i class='ri-delete-bin-fill align-bottom me-2 text-danger'></i>Delete
-                                                            </a>
+                                                            </a> -->
                                                         </li>
                                                     </ul>
                                                 </div>
-                                            </td> -->
+                                            </td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

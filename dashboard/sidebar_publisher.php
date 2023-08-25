@@ -104,7 +104,7 @@ include "../z_db.php";
                                 <a href="publisher_book_discussion_report.php" class="nav-link" data-key="t-nft-landing"> Book Discussion Proposal Report </a>
                             </li>
                             <li class="nav-item">
-                                <a href="special_event_proposal_report.php" class="nav-link" data-key="t-nft-landing"> Special Event Proposal Report </a>
+                                <a href="publisher_special_event_proposal_report.php" class="nav-link" data-key="t-nft-landing"> Special Event Proposal Report </a>
                             </li>
                         </ul>
                     </div>
