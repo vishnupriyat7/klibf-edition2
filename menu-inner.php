@@ -60,7 +60,7 @@
             </ul>
           </li> -->
           <li><a class="nav-link scrollto" href="contact-inner-page.php">Contact</a></li>
-          <li><a class="nav-link scrollto" href="login.php">Login / Register</a></li>
+          <li><a class="nav-link scrollto" href="login.php">Login</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
