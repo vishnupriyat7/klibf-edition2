@@ -209,7 +209,7 @@ $user_id = $user['id'];
                                 }
                                 ?>
                                 <form action="" method="post" enctype="multipart/form-data">
-                                    <div class="row bg-grey d-flex ">
+                                    <div class="row bg-grey">
 
                                         <div class="col-6">
 
