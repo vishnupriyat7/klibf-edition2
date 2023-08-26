@@ -71,7 +71,7 @@ include "../z_db.php";
                     <a class="nav-link menu-link" href="#sidebarEvent" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="sidebarLanding">
                         <i class="ri-profile-fill"></i> <span data-key="t-landing">Event Proposal</span>
                     </a>
-                    <div class="menu-dropdown collapse" id="sidebarEvent" style="">
+                    <div class="menu-dropdown collapse" id="sidebarEvent">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="publisher_bookrelease.php" class="nav-link" data-key="t-one-page"> Book Release </a>
@@ -92,7 +92,7 @@ include "../z_db.php";
                     <!-- <a class="nav-link menu-link" href="#sidebarPot" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="sidebarLanding">
                         <i class="ri-profile-fill"></i> <span data-key="t-landing">Event Proposal</span>
                     </a> -->
-                    <div class="menu-dropdown collapse" id="sidebarReport" style="">
+                    <div class="menu-dropdown collapse" id="sidebarReport">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="publisher-report.php" class="nav-link" data-key="t-one-page"> Profile Report </a>

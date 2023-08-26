@@ -192,7 +192,7 @@
                                                     </button>
                                                     <ul class='dropdown-menu dropdown-menu-end'>
                                                         <li>
-                                                            <a href='publisher_bookdiscussion.php?discid=<?= $id; ?>' class='dropdown-item edit-item-btn'>
+                                                            <a href='' class='dropdown-item edit-item-btn'>
                                                                 <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Edit
                                                             </a>
                                                         </li>
