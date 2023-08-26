@@ -49,29 +49,7 @@ $user_id = $user['id'];
                             $resultBookDscn = mysqli_query($con, $querySelectBookDscn);
                             $bookDscn = $resultBookDscn->fetch_array();
                             if($bookDscn) {
-                                $disc_sub = $bookDscn['subject'];
-                                $disc_book =$bookDscn['book_name'];
-                                $modrtr =$bookDscn['moderator'];
-                                $modrtr_cntct =$bookDscn['modrtr_cntct'];
-                                $prtcpnt1 =$bookDscn['participant1'];
-                                $prtcpnt1_cntct =$bookDscn['part1_cntct'];
-                                $prtcpnt2 =$bookDscn['participant2'];
-                                $prtcpnt2_cntct =$bookDscn['part2_cntct'];
-                                $prtcpnt3 =$bookDscn['participant3'];
-                                $prtcpnt3_cntct =$bookDscn['part3_cntct'];
-                                $prtcpnt4 =$bookDscn['participant4'];
-                                $prtcpnt4_cntct =$bookDscn['part4_cntct'];
-                                $evnt_day1 =$bookDscn[''];
-                                $time_slot1 = $bookDscn['modrtr_cntct'];
-                                $bookDscn['modrtr_cntct'];
-                                $bookDscn['modrtr_cntct'];
-                                $bookDscn['modrtr_cntct'];
-                                $bookDscn['modrtr_cntct'];
-                                $bookDscn['modrtr_cntct'];
-                                $bookDscn['modrtr_cntct'];
-
-
-
+                                $disc_sub = $bookDscn['book_name'];
                             // var_dump($book_dscn_id['id']);
                         }
                         }
@@ -126,6 +104,7 @@ $user_id = $user['id'];
                                 // Get file info 
                                 $fileName = basename($_FILES["disc_book_cover"]["name"]);
                                 $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+
                                 // Allow certain file formats 
                                 $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
                                 if (in_array($fileType, $allowTypes)) {
@@ -366,7 +345,7 @@ $user_id = $user['id'];
                                                 <br>
                                                 Event Date Preference 3
                                                 <select class="form-control form-group" name="evnt_day3" id="evnt_day3" style="height:35px;" required="required">
-                                                    <option value="0">Select Proposed Event Time</option>
+                                                    <option value="0">Select Proposed Event Day</option>
                                                     <?php foreach ($event_days as $event_day) {
                                                         // $evntDaySelect = "";
                                                         // if ($event_day[0] == $evnt_day) {
@@ -381,7 +360,7 @@ $user_id = $user['id'];
                                                 <br>
                                                 Time Slot Preference 3
                                                 <select class="form-control form-group" name="time_slot3" id="time_slot3" style="height:35px;" required="required">
-                                                    <option value="0">Select Proposed Event Day</option>
+                                                    <option value="0">Select Proposed Event Time</option>
                                                     <?php foreach ($event_slots as $event_slot) {
                                                         // $evntTmeSelect = "";
                                                         // if ($event_slot[0] == $time_slot) {

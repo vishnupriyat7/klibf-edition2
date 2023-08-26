@@ -49,16 +49,16 @@ include "../z_db.php";
                         <i class="ri-file-list-3-line"></i> <span data-key="t-landing">Terms and Conditions</span>
                     </a>
                 </li>
-                <li class="nav-item" id="profile-menu">
+                <!-- <li class="nav-item" id="profile-menu">
                     <a class="nav-link menu-link" role="button" aria-expanded="true" aria-controls="sidebarLanding" href="profile_add_edit.php" class="nav-link" data-key="t-one-page">
                         <i class="ri-account-box-line"></i> <span data-key="t-landing">Profile</span>
                     </a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a class="nav-link menu-link" role="button" aria-expanded="true" aria-controls="sidebarLanding" href="stall_booking.php">
                         <i class="ri-checkbox-multiple-line"></i> <span data-key="t-landing">Stall Booking</span>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- <li class="nav-item">
                     <a class="nav-link menu-link" role="button" aria-expanded="true" aria-controls="sidebarLanding" href="publisher-report.php" class="nav-link" data-key="t-one-page">
@@ -104,7 +104,7 @@ include "../z_db.php";
                                 <a href="publisher_book_discussion_report.php" class="nav-link" data-key="t-nft-landing"> Book Discussion Proposal Report </a>
                             </li>
                             <li class="nav-item">
-                                <a href="special_event_proposal_report.php" class="nav-link" data-key="t-nft-landing"> Special Event Proposal Report </a>
+                                <a href="publisher_special_event_proposal_report.php" class="nav-link" data-key="t-nft-landing"> Special Event Proposal Report </a>
                             </li>
                         </ul>
                     </div>

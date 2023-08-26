@@ -38,10 +38,9 @@
                                 <thead>
                                     <tr>
                                         <th data-ordering="false">Sl.No</th>
-                                        <th data-ordering="false">Event Name</th>
-                                        <th data-ordering="false">Brief Discription</th>
-                                        <th data-ordering="false">Brief Discription</th>
-                                        <th data-ordering="false">Dignitaries / Guests</th>                                      
+                                        <th data-ordering="false">Name of Event</th>
+                                        <th data-ordering="false">Dignitaries / Guests</th>   
+                                        <th data-ordering="false">Brief Discription</th>                                                                     
                                         <th data-ordering="false">Contact Person Name</th>
                                         <th data-ordering="false">Contact No</th>
                                         <th data-ordering="false">Email Id</th>
@@ -61,8 +60,8 @@
                                         $eventDescription = $spclEventProp['event_brf_description'];
                                         $guests = $spclEventProp['digniteries_guests'];
                                         $cntct_name = $spclEventProp['event_contact_persn'];
-                                        $cntct_phno = $spclEventProp['email'];
-                                        $cntct_mail = $spclEventProp['mobile'];
+                                        $cntct_phno = $spclEventProp['mobile'];
+                                        $cntct_mail = $spclEventProp['email'];
                                         $remarks = $spclEventProp['remarks'];
                                         
                                     ?>
@@ -74,10 +73,10 @@
                                                 <?= $event_name; ?>
                                             </td>
                                             <td>
-                                                <?= $eventDescription; ?>
+                                            <?= $guests; ?>  
                                             </td>                                           
                                             <td>
-                                                <?= $guests; ?>
+                                            <?= $eventDescription; ?>
                                             </td>                    
                                             <td>
                                                 <?= $cntct_name; ?>

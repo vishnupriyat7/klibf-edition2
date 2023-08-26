@@ -314,7 +314,7 @@ $user_id = $user['id'];
                                             <br>
                                             <label>Event Date Preference 2</label>
                                             <select class="form-control form-group" name="evnt_day2" id="evnt_day2" style="height:35px;">
-                                                <option value="0" <?= $select0; ?>>Select Proposed Event Time</option>
+                                                <option value="0" <?= $select0; ?>>Select Proposed Event Day</option>
                                                 <?php foreach ($event_days as $days) { ?>
                                                     <option value="<?= $days[0] ?>"><?= $days[1]; ?> - <?= $days[2]; ?></option>
                                                 <?php } ?>
@@ -334,7 +334,7 @@ $user_id = $user['id'];
                                             <br>
                                             <label>Event Date Preference 3</label>
                                             <select class="form-control form-group" name="evnt_day3" id="evnt_day3" style="height:35px;">
-                                                <option value="0" <?= $select0; ?>>Select Proposed Event Time</option>
+                                                <option value="0" <?= $select0; ?>>Select Proposed Event Day</option>
                                                 <?php foreach ($event_days as $days) { ?>
                                                     <option value="<?= $days[0] ?>"><?= $days[1]; ?> - <?= $days[2]; ?></option>
                                                 <?php } ?>
