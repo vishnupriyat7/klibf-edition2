@@ -38,33 +38,15 @@
                                 <thead>
                                     <tr>
                                         <th data-ordering="false">Sl.No</th>
-                                        <th data-ordering="false">Publisher Name</th>
-                                        <th data-ordering="false">Book Title</th>
-                                        <th data-ordering="false">Author</th>
-                                        <th data-ordering="false">Book Genere</th>
-                                        <th data-ordering="false">Book Cover</th>
+                                        <th data-ordering="false">Name of Event</th>
+                                        <th data-ordering="false">Dignitaries / Celebrities / Guests</th>
                                         <th data-ordering="false">Brief Description</th>
-                                        <th data-ordering="false">Releasing by</th>
-                                        <th data-ordering="false">Releasing by Contact No</th>
-                                        <th data-ordering="false">Receiving by </th>
-                                        <th data-ordering="false">Receiving by Contact No</th>
-                                        <th data-ordering="false">Guest 1</th>
-                                        <th data-ordering="false">Guest 1 Contact No</th>
-                                        <th data-ordering="false">Guest 2</th>
-                                        <th data-ordering="false">Guest 2 Contact No</th>
-                                        <th data-ordering="false">Guest 3</th>
-                                        <th data-ordering="false">Guest 3 Contact No</th>
-                                        <th data-ordering="false">Event Date Proposed 1</th>
-                                        <th data-ordering="false">Time Proposed 1</th>
-                                        <th data-ordering="false">Event Date Proposed 2</th>
-                                        <th data-ordering="false">Time Proposed 2</th>
-                                        <th data-ordering="false">Event Date Proposed 3</th>
-                                        <th data-ordering="false">Time Proposed 3</th>
                                         <th data-ordering="false">Contact Person Name</th>
-                                        <th data-ordering="false">Contact Person Mobile</th>
-                                        <th data-ordering="false">Contact Person Email</th>
+                                        <th data-ordering="false">Contact No.</th>
+                                        <th data-ordering="false">Email Id</th>
+                                        <th data-ordering="false">Remarks / Other Information</th>
+                                       
 
-                                        <th data-ordering="false">Remarks</th>
                                         <!-- <th>Action</th> -->
                                     </tr>
                                 </thead>
@@ -72,11 +54,11 @@
                                     <?php
                                     // $userId = $user['id'];
 
-                                    // $querybookRls = "SELECT * FROM event_propsl_bkrls epb join day_time_prefer dtp on epb.id = dtp.book_rls_id where epb.users_id = '$userId' ORDER BY epb.id DESC";
+                                    // $queryspclevntprpsl = "SELECT * FROM event_propsl_bkrls epb join day_time_prefer dtp on epb.id = dtp.book_rls_id where epb.users_id = '$userId' ORDER BY epb.id DESC";
 
 
-                                    $querybookRls = "SELECT up.org_name, epb.*, ed1.event_date as day1_date, ed1.event_day as day1, ed2.event_date as day2_date, ed2.event_day as day2, ed3.event_date as day3_date, ed3.event_day as day3, ts1.slot_time as slotime1, ts1.slot_name as slotname1, ts2.slot_time as slotime2, ts2.slot_name as slotname2, ts3.slot_time as slotime3, ts3.slot_name as slotname3, bg.genere 
-                                    FROM event_propsl_bkrls epb 
+                                    $queryspclevntprpsl = "SELECT up.org_name, epb.*, ed1.event_date as day1_date, ed1.event_day as day1, ed2.event_date as day2_date, ed2.event_day as day2, ed3.event_date as day3_date, ed3.event_day as day3, ts1.slot_time as slotime1, ts1.slot_name as slotname1, ts2.slot_time as slotime2, ts2.slot_name as slotname2, ts3.slot_time as slotime3, ts3.slot_name as slotname3, bg.genere 
+                                    FROM special_event_propsl epb 
                                     join book_genere bg on epb.book_genere = bg.id
                                     join day_time_prefer dtp on epb.id = dtp.book_rls_id
                                     join event_date ed1 on dtp.day_prfr1 = ed1.id 
@@ -87,9 +69,9 @@
                                     join time_slot ts3 on dtp.time_prfr3 = ts3.id
                                     join users_profile up on epb.users_id = up.user_id
                                     ORDER BY epb.id DESC";
-                                    // var_dump($querybookRls);
+                                    // var_dump($queryspclevntprpsl);
 
-                                    $bookprps = mysqli_query($con, $querybookRls);
+                                    $bookprps = mysqli_query($con, $queryspclevntprpsl);
                                     $counter = 0;
                                     while ($bookprp = mysqli_fetch_array($bookprps)) {
                                         $id = $bookprp['id'];
