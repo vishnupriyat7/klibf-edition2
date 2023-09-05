@@ -33,7 +33,7 @@
 
 
 <?php include "header.php";
-include "sidebar_publisher.php";
+include "publisher_sidebar.php";
 $user_id = $user['id'];
 ?>
 
