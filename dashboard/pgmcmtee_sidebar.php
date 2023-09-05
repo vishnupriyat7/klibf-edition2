@@ -53,13 +53,13 @@ $username = $_SESSION['username'];
                     <div class="menu-dropdown collapse" id="sidebarX">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="publisher_register_report.php" class="nav-link" data-key="t-nft-landing">Publisher Registered </a>
+                                <a href="pgmcmtee_register_report.php" class="nav-link" data-key="t-nft-landing">Publisher Registered </a>
                             </li>
                             <li class="nav-item">
-                                <a href="publisher_profile_report.php" class="nav-link" data-key="t-nft-landing">Profile Created </a>
+                                <a href="pgmcmtee_profile_report.php" class="nav-link" data-key="t-nft-landing">Profile Created </a>
                             </li>
                             <li class="nav-item">
-                                <a href="stall_booking_report.php" class="nav-link" data-key="t-nft-landing">Stall Booking </a>
+                                <a href="pgmcmtee_stall_booking_report.php" class="nav-link" data-key="t-nft-landing">Stall Booking </a>
                             </li>
                             <li class="nav-item">
                                 <a href="pgmcmtee-evnt-bkrls-report.php" class="nav-link" data-key="t-nft-landing">Event Proposal Book Release Report </a>

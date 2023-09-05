@@ -1,5 +1,5 @@
 <?php include "header.php"; ?>
-<?php include "sidebar_pgmcmtee.php"; ?>
+<?php include "pgmcmtee_sidebar.php"; ?>
 
 <!-- ============================================================== -->
 <!-- Start right Content here -->

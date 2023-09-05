@@ -1,5 +1,5 @@
 <?php include "header.php"; ?>
-<?php include "sidebar_pgmcmtee.php"; ?>
+<?php include "pgmcmtee_sidebar.php"; ?>
 
 <!-- ============================================================== -->
 <!-- Start right Content here -->
@@ -8,8 +8,8 @@
     <div class="page-content">
         <div class="container-fluid">
 
-             <!-- start page title -->
-             <div class="row">
+            <!-- start page title -->
+            <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <h4 class="mb-sm-0">Report</h4>
@@ -27,9 +27,9 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card" style="width: 250%;">
+                    <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Stall Booking Report</h5>
+                            <h5 class="card-title mb-0">Publisher Profile Report</h5>
                         </div>
                         <div class="card-body overflow-auto">
                             <!-- <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%"> -->
@@ -56,8 +56,8 @@
                                         <th data-ordering="false">Contact Person Mobile</th>
                                         <th data-ordering="false">Contact Person Email</th>
                                         <th data-ordering="false">Contact Person whatsapp</th>
-                                        <th data-ordering="false">Number of Stalls 3X3</th>
-                                        <th data-ordering="false">Number of Stalls 3X2</th>
+                                        <!-- <th data-ordering="false">Number of Stalls 3X3</th>
+                                        <th data-ordering="false">Number of Stalls 3X2</th> -->
                                         <th data-ordering="false">Status</th>
                                         <th data-ordering="false">Date Applied</th>
                                         <th data-ordering="false">Logo</th>
@@ -69,9 +69,8 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $query = "SELECT up.*, sb.*  FROM users_profile up JOIN stall_booking sb ON up.user_id = sb.user_id ORDER BY up.id DESC";
+                                    $query = "SELECT * FROM users_profile ORDER BY id DESC";
                                     $bookstall = mysqli_query($con, $query);
-                                    // var_dump(mysqli_fetch_array($bookstall));
                                     $counter = 0;
                                     while ($book = mysqli_fetch_array($bookstall)) {
                                         $id = "$book[id]";
@@ -98,8 +97,8 @@
                                         $cntct_prsn_mobile = "$book[cntct_prsn_mobile]";
                                         $cntct_prsn_email = "$book[cntct_prsn_email]";
                                         $cntct_prsn_watsapp = "$book[cntct_prsn_watsapp]";
-                                        $stalls_3x3 = "$book[stalls_3x3]";
-                                        $stalls_3x2 = "$book[stalls_3x2]";
+                                        // $stalls_3x3 = "$book[stalls_3x3]";
+                                        // $stalls_3x2 = "$book[stalls_3x2]";
                                         $status = "$book[status]";
                                         $date = "$book[updated_at]";
                                         $logo = base64_encode($book['logo']);
@@ -164,12 +163,12 @@
                                             <td>
                                                 <?= $cntct_prsn_watsapp; ?>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <?= $stalls_3x3; ?>
                                             </td>
                                             <td>
                                                 <?= $stalls_3x2; ?>
-                                            </td>
+                                            </td> -->
                                             <td>
                                                 <?= $status; ?>
                                             </td>
@@ -178,7 +177,7 @@
                                             </td>
                                             <td>
 
-                                            <img src="data:image/jpg;charset=utf8;base64,<?= $logo; ?>" height="70vh">
+                                                <img src="data:image/jpg;charset=utf8;base64,<?= $logo; ?>" height="70vh">
                                                 <!-- <?= $logo; ?> -->
 
                                             </td>
@@ -194,7 +193,7 @@
                                                         <i class='ri-more-fill align-middle'></i>
                                                     </button>
                                                     <ul class='dropdown-menu dropdown-menu-end'> -->
-                                                        <!-- <li>
+                                            <!-- <li>
                                                             <a href='editstall_registration.php?id=$id' class='dropdown-item edit-item-btn'>
                                                                 <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Edit
                                                             </a>
@@ -204,7 +203,7 @@
                                                                 <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Approve
                                                             </a>
                                                         </li> -->
-                                                        <!-- <li>
+                                            <!-- <li>
                                                             <a href='deletestall_registration.php?id=<?= $id ?>' class='dropdown-item remove-item-btn'>
                                                                 <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Delete
                                                             </a>

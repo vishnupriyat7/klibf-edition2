@@ -17,7 +17,7 @@ if ($user['user_type'] == 'S') {
 } elseif ($user['user_type'] == 'P') {
     include "sidebar_publisher.php";
 }  elseif ($user['user_type'] == 'PC') {
-    include "sidebar_pgmcmtee.php";
+    include "pgmcmtee_sidebar.php";
 }
 ?>
 
@@ -37,7 +37,7 @@ if ($user['user_type'] == 'S') {
             } elseif ($user['user_type'] == 'P') {
                 include "dashboard_publisher.php";
             } elseif ($user['user_type'] == 'PC') {
-                include "dashboard_pgmcmtee.php";
+                include "pgmcmtee_dashboard.php";
              } ?>
 
         </div>
