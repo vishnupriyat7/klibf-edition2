@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', '0'); 
 include "header.php";
-include "sidebar_publisher.php";
+include "publisher_sidebar.php";
 $user_id = $user['id'];
 // var_dump($user_id);die;
 ?>

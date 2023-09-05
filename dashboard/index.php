@@ -15,7 +15,7 @@ $username = $_SESSION['SESSION_EMAIL'];
 if ($user['user_type'] == 'S') {
     include "sidebar.php";
 } elseif ($user['user_type'] == 'P') {
-    include "sidebar_publisher.php";
+    include "publisher_sidebar.php";
 }  elseif ($user['user_type'] == 'PC') {
     include "pgmcmtee_sidebar.php";
 }
@@ -35,7 +35,7 @@ if ($user['user_type'] == 'S') {
             <?php if ($user['user_type'] == 'S') {
                 include "dashboard.php";
             } elseif ($user['user_type'] == 'P') {
-                include "dashboard_publisher.php";
+                include "publisher_dashboard.php";
             } elseif ($user['user_type'] == 'PC') {
                 include "pgmcmtee_dashboard.php";
              } ?>
