@@ -38,6 +38,7 @@
                                 <thead>
                                     <tr>
                                         <th data-ordering="false">Sl.No</th>
+                                        <th data-ordering="false">Allotment</th>
                                         <th data-ordering="false">Organization Name</th>
                                         <th data-ordering="false">Established Year</th>
                                         <th data-ordering="false">Registration Number</th>
@@ -75,6 +76,7 @@
                                     $counter = 0;
                                     while ($book = mysqli_fetch_array($bookstall)) {
                                         $id = "$book[id]";
+                                        $pub_user_id = "$book[user_id]";
                                         $org_name = "$book[org_name]";
                                         $estb_year = "$book[estb_year]";
                                         $reg_no = "$book[reg_no]";
@@ -109,6 +111,24 @@
                                         <tr>
                                             <td>
                                                 <?= ++$counter; ?>
+                                            </td>
+                                            <td>
+                                                <div class='dropdown d-inline-block'>
+                                                    <!-- <button class='btn btn-soft-secondary btn-sm dropdown' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                                        <i class='ri-more-fill align-middle'></i>
+                                                    </button> -->
+                                                    <!-- <ul class='dropdown-menu dropdown-menu-end'>
+                                                        <li> -->
+                                                            <a href='pgmcmtee_allot_stall.php?pubid=<?= $pub_user_id ?>' class='dropdown-item edit-item-btn'>
+                                                                 <!-- <button class='btn btn-soft-secondary btn-sm dropdown' type='button' data-bs-toggle='dropdown' aria-expanded='false'> -->
+                                                        <i class='ri-edit-fill align-middle'></i>
+                                                    <!-- </button> -->
+                                                                <!-- <i class='ri-edit-fill align-bottom me-2 text-muted'></i> Allotment -->
+                                                            </a>
+                                                        <!-- </li>
+                                                       
+                                                    </ul> -->
+                                                </div>
                                             </td>
                                             <td>
                                                 <?= $org_name; ?>
