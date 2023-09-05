@@ -12,7 +12,7 @@
     <!-- <li><a href="#">Drop Down 1</a></li> -->
     <li class="dropdown"><a href="#"><span>Contests</span> <i class="bi bi-chevron-right"></i></a>
       <ul>
-        <li><a href="#">Book Review / വായനാവസന്തം</a></li>
+        <li><a href="contest-bkrvw-regstrn.php">Book Review / വായനാവസന്തം</a></li>
         <li><a href="#">Recitation / പദ്യപാരായണം</a></li>
         <li><a href="#">Story Telling / ഒരു കഥ പറയാം</a></li>
         <li><a href="#">Cartoon / കാർട്ടൂൺ</a></li>
