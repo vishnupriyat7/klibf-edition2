@@ -29,23 +29,24 @@
                 <div class="col-lg-12">
                     <div class="card" style="width: 170%;">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Book Release Report</h5>
+                            <h5 class="card-title mb-0">Special Event Report</h5>
                         </div>
                         <div class="card-body overflow-auto">
                             <!-- <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%"> -->
-                            <button onclick="exportTableToExcel('example', 'publisher_book_discussion_report-data')" class="btn btn-primary">Export Table Data To Excel File</button>
+                            <button onclick="exportTableToExcel('example', 'special_event_report-data')" class="btn btn-primary">Export Table Data To Excel File</button>
                             <table id="example" class="table table-bordered dt-responsive nowrap table-striped" style="font-style:normal; font-size: 12px;">
                                 <thead>
                                     <tr>
                                         <th data-ordering="false">Sl.No</th>
+                                        <th data-ordering="false">Name of Organization</th>
                                         <th data-ordering="false">Name of Event</th>
+                                        <th data-ordering="false">Brief Description of Event</th>
                                         <th data-ordering="false">Dignitaries / Celebrities / Guests</th>
-                                        <th data-ordering="false">Brief Description</th>
                                         <th data-ordering="false">Contact Person Name</th>
-                                        <th data-ordering="false">Contact No.</th>
                                         <th data-ordering="false">Email Id</th>
+                                        <th data-ordering="false">Contact No.</th>
                                         <th data-ordering="false">Remarks / Other Information</th>
-                                       
+
 
                                         <!-- <th>Action</th> -->
                                     </tr>
@@ -57,135 +58,52 @@
                                     // $queryspclevntprpsl = "SELECT * FROM event_propsl_bkrls epb join day_time_prefer dtp on epb.id = dtp.book_rls_id where epb.users_id = '$userId' ORDER BY epb.id DESC";
 
 
-                                    $queryspclevntprpsl = "SELECT up.org_name, epb.*, ed1.event_date as day1_date, ed1.event_day as day1, ed2.event_date as day2_date, ed2.event_day as day2, ed3.event_date as day3_date, ed3.event_day as day3, ts1.slot_time as slotime1, ts1.slot_name as slotname1, ts2.slot_time as slotime2, ts2.slot_name as slotname2, ts3.slot_time as slotime3, ts3.slot_name as slotname3, bg.genere 
-                                    FROM special_event_propsl epb 
-                                    join book_genere bg on epb.book_genere = bg.id
-                                    join day_time_prefer dtp on epb.id = dtp.book_rls_id
-                                    join event_date ed1 on dtp.day_prfr1 = ed1.id 
-                                    join event_date ed2 on dtp.day_prfr2 = ed2.id 
-                                    join event_date ed3 on dtp.day_prfr3 = ed3.id
-                                    join time_slot ts1 on dtp.time_prfr1 = ts1.id
-                                    join time_slot ts2 on dtp.time_prfr2 = ts2.id
-                                    join time_slot ts3 on dtp.time_prfr3 = ts3.id
+                                    $queryspclevntprpsl = "SELECT up.org_name, epb.* FROM special_event_propsl epb 
                                     join users_profile up on epb.users_id = up.user_id
                                     ORDER BY epb.id DESC";
                                     // var_dump($queryspclevntprpsl);
 
-                                    $bookprps = mysqli_query($con, $queryspclevntprpsl);
+                                    $spclevntprpsl = mysqli_query($con, $queryspclevntprpsl);
+                                    // var_dump($spclevntprpsl);
                                     $counter = 0;
-                                    while ($bookprp = mysqli_fetch_array($bookprps)) {
-                                        $id = $bookprp['id'];
-                                        $org_name = $bookprp['org_name'];
-                                        $booktitle = $bookprp['book_title'];
-                                        $author = $bookprp['author'];
-                                        $book_genere = $bookprp['genere'];
-                                        $book_cover = base64_encode($bookprp['book_cover']);
-                                        $brf_description = $bookprp['brf_description'];
-                                        $released_by = $bookprp['released_by'];
-                                        $relcd_by_cntct = $bookprp['relcd_by_cntct'];
-                                        $recived_by = $bookprp['recived_by'];
-                                        $recvd_by_contact = $bookprp['recvd_by_contact'];
-                                        $guest1 = $bookprp['guest1'];
-                                        $guest1_contct = $bookprp['guest1_contct'];
-                                        $guest2 = $bookprp['guest2'];
-                                        $guest2_contct = $bookprp['guest2_contct'];
-                                        $guest3 = $bookprp['guest3'];
-                                        $guest3_contct = $bookprp['guest3_contct'];
-                                        $contact_persn_name = $bookprp['contact_persn_name'];
-                                        $contact_persn_email = $bookprp['contact_persn_email'];
-                                        $contact_persn_mobile = $bookprp['contact_persn_mobile'];
-                                        $remark = $bookprp['remarks'];
-                                        $day1_date = $bookprp['day1_date'];
-                                        $day1 = $bookprp['day1'];
-                                        $day2_date = $bookprp['day2_date'];
-                                        $day2 = $bookprp['day2'];
-                                        $day3_date = $bookprp['day3_date'];
-                                        $day3 = $bookprp['day3'];
-                                        $slotime1 = $bookprp['slotime1'];
-                                        $slotname1 = $bookprp['slotname1'];
-                                        $slotime2 = $bookprp['slotime2'];
-                                        $slotname2 = $bookprp['slotname2'];
-                                        $slotime3 = $bookprp['slotime3'];
-                                        $slotname3 = $bookprp['slotname3'];
+                                    while ($spclevnt = mysqli_fetch_array($spclevntprpsl)) {
+                                        $id = $spclevnt['id'];
+                                        $org_name = $spclevnt['org_name'];
+                                        $event_name = $spclevnt['event_name'];
+                                        $event_brf_description = $spclevnt['event_brf_description'];
+                                        $digniteries_guests = $spclevnt['digniteries_guests'];
+                                        $event_contact_persn = $spclevnt['event_contact_persn'];
+                                        $mobile = $spclevnt['mobile'];
+                                        $email = $spclevnt['email'];
+                                        $remarks = $spclevnt['remarks'];
+
+
                                     ?>
                                         <tr>
                                             <td>
                                                 <?= ++$counter; ?>
                                             </td>
                                             <td>
-                                                <?= ++$counter; ?>
+                                                <?= $org_name; ?>
                                             </td>
                                             <td>
-                                                <?= $booktitle; ?>
+                                                <?= $event_name; ?>
                                             </td>
                                             <td>
-                                                <?= $author; ?>
+                                                <?= $event_brf_description; ?>
                                             </td>
                                             <td>
-                                                <?= $book_genere; ?>
+                                                <?= $digniteries_guests; ?>
                                             </td>
                                             <td>
-                                                <img src="data:image/jpg;charset=utf8;base64,<?= $book_cover; ?>" height="70vh">
+                                                <?= $event_contact_persn; ?>
                                             </td>
                                             <td>
-                                                <?= $brf_description; ?>
+                                                <?= $email; ?>
                                             </td>
 
                                             <td>
-                                                <?= $released_by; ?>
-                                            </td>
-                                            <td>
-                                                <?= $relcd_by_cntct; ?>
-                                            </td>
-                                            <td>
-                                                <?= $recived_by; ?>
-                                            </td>
-                                            <td>
-                                                <?= $recvd_by_contact; ?>
-                                            </td>
-                                            <td>
-                                                <?= $guest1; ?>
-                                            </td>
-                                            <td>
-                                                <?= $guest1_contct; ?>
-                                            </td>
-                                            <td>
-                                                <?= $guest2; ?>
-                                            </td>
-                                            <td>
-                                                <?= $guest2_contct; ?>
-                                            </td>
-                                            <td>
-                                                <?= $guest3; ?>
-                                            </td>
-                                            <td>
-                                                <?= $guest3_contct; ?>
-                                            </td>
-                                            <td>
-                                                <?= $day1; ?><br> <?= $day1_date; ?>
-                                            </td>
-                                            <td>
-                                                <?= $slotname1; ?><br> <?= $slotime1; ?>
-                                            </td>
-                                            </td>
-                                            <td>
-                                                <?= $day2; ?><br> <?= $day2_date; ?>
-                                            </td>
-                                            <td>
-                                                <?= $slotname2 ?><br> <?= $slotime2; ?>
-                                            </td>
-                                            <td>
-                                                <?= $day3; ?><br> <?= $day3_date; ?>
-                                            </td>
-                                            <td>
-                                                <?= $slotname3; ?><br> <?= $slotime3; ?>
-                                            </td>
-                                            <td> <?= $contact_persn_name; ?></td>
-                                            <td>
-                                                <?= $contact_persn_mobile; ?>
-                                            </td>
-                                            <td>
-                                                <?= $contact_persn_email; ?>
+                                                <?= $mobile; ?>
                                             </td>
                                             <td>
                                                 <?= $remark; ?>
