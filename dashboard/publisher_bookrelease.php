@@ -3,6 +3,7 @@ ini_set('display_errors', '0');
 include "header.php";
 include "publisher_sidebar.php";
 $user_id = $user['id'];
+$bkrls_id = $_GET['bkrlsid'];
 // var_dump($user_id);die;
 ?>
 <!-- ============================================================== -->
@@ -44,6 +45,81 @@ $user_id = $user['id'];
                         <?php
                         $status = "OK";
                         $msg = "";
+
+                        if ($user_id) {
+                            $sql1 = "SELECT * FROM event_propsl_bkrls WHERE id = ?;";
+                            $stmt1 = $con->prepare($sql1);
+                            $stmt1->bind_param("s", $bkrls_id);
+                            $stmt1->execute();
+                            $result1 = $stmt1->get_result();
+                            // var_dump($result1);
+                            $bkrlsdetls = $result1->fetch_assoc();
+                            $book_title = $bkrlsdetls['book_title'];
+                            $book_genere = $bkrlsdetls['book_genere'];
+                            $brief_descrptn = $bkrlsdetls['brf_description'];
+                            var_dump($brief_descrptn);
+                            $author = $bkrlsdetls['author'];
+                            $release_by = $bkrlsdetls['released_by'];
+                            $releas_by_cntct = $bkrlsdetls['relcd_by_cntct'];
+                            var_dump($releas_by_cntct);
+                            $recvd_by = $bkrlsdetls['recived_by'];
+                            $recvd_by_cntct = $bkrlsdetls['recvd_by_contact'];
+                            $guest1 = $bkrlsdetls['guest1'];
+                            $guest1_cntct = $bkrlsdetls['guest1_contct'];
+                            $guest2 = $bkrlsdetls['guest2'];
+                            $guest2_cntct = $bkrlsdetls['guest2_contct'];
+                            $guest3 = $bkrlsdetls['guest3'];
+                            $guest3_cntct = $bkrlsdetls['guest3_contct'];
+                            $evnt_day1 = $bkrlsdetls['evnt_day1'];
+                            $time_slot1 = $bkrlsdetls['time_slot1'];
+                            $evnt_day2 = $bkrlsdetls['evnt_day2'];
+                            $time_slot2 = $bkrlsdetls['time_slot2'];
+                            $evnt_day3 = $bkrlsdetls['evnt_day3'];
+                            $time_slot3 = $bkrlsdetls['time_slot3'];
+
+                            $bkrls_cntct_persn_name = $bkrlsdetls['contact_persn_name'];
+                            $bkrls_cntct_persn_mobile = $bkrlsdetls['contact_persn_mobile'];
+                            $bkrls_cntct_persn_email = $bkrlsdetls['contact_persn_email'];
+
+
+
+                            $remark = $bkrlsdetls['remark'];
+                            $logo = base64_encode($bkrlsdetls['book_cover']);
+                            
+                        } else {
+                             $book_title = '';
+                            $book_genere = '';
+                            $brief_descrptn = '';
+                            $author = '';
+                            $release_by = '';
+                            $releas_by_cntct = '';
+                            $recvd_by = '';
+                            $recvd_by_cntct = '';
+                            $guest1 = '';
+                            $guest1_cntct = '';
+                            $guest2 = '';
+                            $guest2_cntct = '';
+                            $guest3 = '';
+                            $guest3_cntct = '';
+                            $evnt_day1 = '';
+                            $time_slot1 = '';
+                            $evnt_day2 = '';
+                            $time_slot2 = '';
+                            $evnt_day3 = '';
+                            $time_slot3 = '';
+
+                            $bkrls_cntct_persn_name = '';
+                            $bkrls_cntct_persn_mobile = '';
+                            $bkrls_cntct_persn_email = '';
+
+                            $remark = '';
+                        }
+
+
+
+
+
+
                         if (isset($_POST['bkrls_save'])) {
 
                             $book_title =
@@ -201,7 +277,7 @@ $user_id = $user['id'];
                                     <div class="row bg-grey">
                                         <div class="col-6 form-group">
                                             <label> Book Title</label>
-                                            <input type="text" class="form-control" name="book_title" id="book_title" placeholder="Book Title" <?= $edit; ?>>
+                                            <input type="text" class="form-control" name="book_title" id="book_title" placeholder="Book Title" value="<?= $book_title; ?>" <?= $edit; ?>>
                                         </div>
                                         <div class="col-6 form-group">
                                             <label>Book Genre</label>
@@ -221,62 +297,62 @@ $user_id = $user['id'];
                                         </div>
                                         <div class="col-6 form-group">
                                             <br><label> Brief Description</label>
-                                            <textarea class="form-control" name="brief_descrptn" id="brief_descrptn" placeholder="Description" <?= $edit; ?>></textarea>
+                                            <textarea class="form-control" name="brief_descrptn" id="brief_descrptn" placeholder="Description" value="<?= $brief_descrptn; ?>" <?= $edit; ?>></textarea>
                                         </div>
                                         <div class="col-6 form-group">
                                             <br>
                                             <label>Author</label>
-                                            <input type="text" class="form-control" name="author" id="author" placeholder="Author" <?= $edit; ?>>
+                                            <input type="text" class="form-control" name="author" id="author" placeholder="Author" value="<?= $author; ?>" <?= $edit; ?>>
                                         </div>
                                         <div class="col-6 form-group">
                                             <br>
                                             <label>Releasing by</label>
-                                            <input type="text" class="form-control" name="release_by" id="release_by" placeholder="Releasing by" <?= $edit; ?>>
+                                            <input type="text" class="form-control" name="release_by" id="release_by" placeholder="Releasing by" value="<?= $release_by; ?>" <?= $edit; ?>>
                                         </div>
                                         <div class="col-6 form-group">
                                             <br>
                                             <label>Contact</label>
-                                            <input type="text" class="form-control" name="releas_by_cntct" id="releas_by_cntct" placeholder="Releasing by Contact" <?= $edit; ?>>
+                                            <input type="text" class="form-control" name="releas_by_cntct" id="releas_by_cntct" placeholder="Releasing by Contact" value="<?= $releas_by_cntct; ?>" <?= $edit; ?>>
                                         </div>
                                         <div class="col-6 form-group">
                                             <br>
                                             <label>Receiving by</label>
-                                            <input type="text" class="form-control" name="recvd_by" id="recvd_by" placeholder="Received by" <?= $edit; ?>>
+                                            <input type="text" class="form-control" name="recvd_by" id="recvd_by" placeholder="Received by" value="<?= $recvd_by; ?>" <?= $edit; ?>>
                                         </div>
                                         <div class="col-6 form-group">
                                             <br>
                                             <label>Contact</label>
-                                            <input type="text" class="form-control" name="recvd_by_cntct" id="recvd_by_cntct" placeholder="Receiving by Contact" <?= $edit; ?>>
+                                            <input type="text" class="form-control" name="recvd_by_cntct" id="recvd_by_cntct" placeholder="Receiving by Contact" value="<?= $recvd_by_cntct; ?>" <?= $edit; ?>>
                                         </div>
                                         <div class="col-6 form-group">
                                             <br>
                                             <label>Guest 1</label>
-                                            <input type="text" class="form-control" name="guest1" id="guest1" placeholder="Guest 1" <?= $edit; ?>>
+                                            <input type="text" class="form-control" name="guest1" id="guest1" placeholder="Guest 1" value="<?= $guest1; ?>" <?= $edit; ?>>
                                         </div>
                                         <div class="col-6 form-group">
                                             <br>
                                             <label>Contact</label>
-                                            <input type="text" class="form-control" name="guest1_cntct" id="guest1_cntct" placeholder="Guest1 Contact" <?= $edit; ?>>
+                                            <input type="text" class="form-control" name="guest1_cntct" id="guest1_cntct" placeholder="Guest1 Contact" value="<?= $guest1_cntct; ?>" <?= $edit; ?>>
                                         </div>
                                         <div class="col-6 form-group">
                                             <br>
                                             <label>Guest 2</label>
-                                            <input type="text" class="form-control" name="guest2" id="guest2" placeholder="Guest 2" <?= $edit; ?>>
+                                            <input type="text" class="form-control" name="guest2" id="guest2" placeholder="Guest 2" value="<?= $guest2; ?>" <?= $edit; ?>>
                                         </div>
                                         <div class="col-6 form-group">
                                             <br>
                                             <label> Contact</label>
-                                            <input type="text" class="form-control" name="guest2_cntct" id="guest2_cntct" placeholder="Guest2 Contact" <?= $edit; ?>>
+                                            <input type="text" class="form-control" name="guest2_cntct" id="guest2_cntct" placeholder="Guest2 Contact" value="<?= $guest2_cntct; ?>" <?= $edit; ?>>
                                         </div>
                                         <div class="col-6 form-group">
                                             <br>
                                             <label>Guest 3</label>
-                                            <input type="text" class="form-control" name="guest3" id="guest3" placeholder="Guest 3" <?= $edit; ?>>
+                                            <input type="text" class="form-control" name="guest3" id="guest3" placeholder="Guest 3" value="<?= $guest3; ?>" <?= $edit; ?>>
                                         </div>
                                         <div class="col-6 form-group">
                                             <br>
                                             <label> Contact</label>
-                                            <input type="text" class="form-control" name="guest3_cntct" id="guest3_cntct" placeholder="Guest3 Contact" <?= $edit; ?>>
+                                            <input type="text" class="form-control" name="guest3_cntct" id="guest3_cntct" placeholder="Guest3 Contact" value="<?= $guest3_cntct; ?>" <?= $edit; ?>>
                                         </div>
                                         <?php
                                         $day_query = "SELECT * FROM event_date";
@@ -353,33 +429,33 @@ $user_id = $user['id'];
                                         <div class="col-6 form-group">
                                             <br>
                                             <label> Contact Person Name</label>
-                                            <input type="text" class="form-control" name="cntct_persn_name" id="cntct_persn_name" placeholder="Contact Person Name" <?= $edit; ?>>
+                                            <input type="text" class="form-control" name="cntct_persn_name" id="cntct_persn_name" placeholder="Contact Person Name" value="<?= $bkrls_cntct_persn_name; ?>" <?= $edit; ?>>
                                         </div>
                                         <div class="col-6 form-group">
                                             <br>
                                             <label>Contact Person Mobile</label>
-                                            <input type="text" class="form-control" name="cntct_persn_mobile" id="cntct_persn_mobile" placeholder="Contact Person Mobile" min="0" <?= $edit; ?>>
+                                            <input type="text" class="form-control" name="cntct_persn_mobile" id="cntct_persn_mobile" placeholder="Contact Person Mobile" min="0" value="<?= $bkrls_cntct_persn_mobile; ?>" <?= $edit; ?>>
                                         </div>
                                         <div class="col-6 form-group">
                                             <br>
                                             <label>Contact Person Email</label>
-                                            <input type="email" class="form-control" name="cntct_persn_email" id="cntct_persn_email" placeholder="Contact Person Email" min="0" <?= $edit; ?>>
+                                            <input type="email" class="form-control" name="cntct_persn_email" id="cntct_persn_email" placeholder="Contact Person Email" min="0" value="<?= $bkrls_cntct_persn_email; ?>" <?= $edit; ?>>
                                         </div>
                                         <div class="col-6 form-group">
                                             <br>
                                             <label>Remarks / Other information</label>
-                                            <textarea class="form-control" name="remark" id="remark" placeholder="Remarks / Other information" <?= $edit; ?>></textarea>
+                                            <textarea class="form-control" name="remark" id="remark" placeholder="Remarks / Other information" value="<?= $comp_name; ?>" <?= $edit; ?>></textarea>
                                         </div>
                                         <div class="form-group">
                                             <br>
                                             <label>Please upload Book Cover<br>
                                                 (Only JPG, JPEG, PNG files are allowed for uploads.)</label>
-                                            <input type="file" class="form-control" name="book_cover" id="book_cover" placeholder="Upload Book Cover" <?= $hide; ?> <?= $edit; ?>><br>
+                                            <input type="file" class="form-control" name="book_cover" id="book_cover" placeholder="Upload Book Cover" <?= $hide; ?> value="<?= $comp_name; ?>" <?= $edit; ?>><br>
                                         </div>
                                         <div class="col-lg-12">
                                             <br>
                                             <button type="submit" name="bkrls_save" class="btn btn-primary" id="save">Save</button>
-                                            <!-- <?php if ($user_profile) { ?>
+                                            <!-- <?php if ($bkrlsdetls) { ?>
                                             <button type="submit" class="btn btn-success" name="submit-form" id="submit-form">Submit</button>
                                         <?php } ?> -->
                                             <span class="text-white pr-3"><i class="fas fa-paper-plane"></i></span>
