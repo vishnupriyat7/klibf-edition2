@@ -265,7 +265,7 @@ $bkrls_id = $_GET['bkrlsid'];
                                     $result2=mysqli_query($con, $querydaytime_prefer);
                                     // var_dump( $result2);
                                     if($result2){
-                                        $querydaytime = "UPDATE day_time_prefer SET day_prfr1 = '$evnt_day1', day_prfr2 = '$evnt_day2', day_prfr3 = '$evnt_day3', time_prfr1 = '$time_slot1', time_prfr2 = '$time_slot2', time_prfr3 = '$time_slot1' WHERE id = 'bkrls_id'";
+                                        $querydaytime = "UPDATE day_time_prefer SET day_prfr1 = '$evnt_day1', day_prfr2 = '$evnt_day2', day_prfr3 = '$evnt_day3', time_prfr1 = '$time_slot1', time_prfr2 = '$time_slot2', time_prfr3 = '$time_slot1' WHERE id = '$bkrls_id'";
 
                                     }else{
                                     
