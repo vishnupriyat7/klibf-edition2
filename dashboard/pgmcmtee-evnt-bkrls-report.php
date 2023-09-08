@@ -131,7 +131,7 @@
                                                 <?= ++$counter; ?>
                                             </td>
                                             <td>
-                                                <?= ++$org_name; ?>
+                                                <?= $org_name; ?>
                                             </td>
                                             <td>
                                                 <?= $booktitle; ?>
