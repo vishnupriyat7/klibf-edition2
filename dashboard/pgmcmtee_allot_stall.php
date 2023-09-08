@@ -186,15 +186,13 @@ $publisher_id = $_GET['pubid'];
                                         <!-- <div class="col-lg-12">
                                             <button type="submit" name="save_stall" class="btn btn-primary" id="save_stall">Save</button>
                                         </div> -->
-                                        <?php if ($stall_status != 'S') { ?>
-                                            <div class="col-lg-12">
+                                       <div class="col-lg-12">
 
                                                 <button type="submit" name="allot_stall" class="btn btn-primary" id="allot_stall">Save</button>
                                                 <!-- </div> -->
                                                 <!-- <button type="submit" class="btn btn-success" name="submit-stall" id="submit-stall">Submit</button> -->
 
                                             </div>
-                                        <?php  } ?>
 
                                     </form>
                                 </div>
