@@ -45,6 +45,9 @@ $username = $_SESSION['username'];
                 <li class="nav-item">
                     <a href="index.php" class="nav-link" data-key="t-analytics"> <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards"> Dashboard </span></a>
                 </li>
+                <li class="nav-item">
+                    <a href="pgmcmtee_stall_allot_list.php" class="nav-link" data-key="t-analytics"> <i class="ri-checkbox-multiple-line"></i> <span data-key="t-dashboards"> Stall Allotment </span></a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarX" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="sidebarLanding">
