@@ -63,11 +63,11 @@ $publisher_id = $_GET['pubid'];
                             $amt3x2 = 7500;
                             $tot_amt3x2 = ($allot_stall_3x2 * $amt3x2) + ($amt3x2 * $allot_stall_3x2 * 18) / 100;
                             $stall_status = $user_stall['status'];
-                            if ($stall_status != 'S') {
-                                $edit_count = '';
-                            } else {
-                                $edit_count = 'disabled';
-                            }
+                            // if ($stall_status != 'S') {
+                            //     $edit_count = '';
+                            // } else {
+                            //     $edit_count = 'disabled';
+                            // }
                             $total_amt = $tot_amt3x3 + $tot_amt3x2;
                         } else {
                             $tot_amt3x3 = $tot_amt3x2 = $total_amt = 0;
