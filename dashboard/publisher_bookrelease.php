@@ -21,7 +21,7 @@ $bkrls_id = $_GET['bkrlsid'];
                             <ol class="breadcrumb m-0">
                                 <!-- <li class="breadcrumb-item"><a href="javascript: void(0);">Profile</a></li> -->
                                 <!-- <li class="breadcrumb-item active">Add</li> -->
-                                <a class="dropdown-item" href="logout.php"><i class="mdi mdi-book_coverut text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-book_coverut">Logout</span></a>
+                                <a class="dropdown-item" href="book_coverut.php"><i class="mdi mdi-book_coverut text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-book_coverut">Bookcoverut</span></a>
                             </ol>
                         </div>
                     </div>
@@ -47,21 +47,29 @@ $bkrls_id = $_GET['bkrlsid'];
                         $msg = "";
 
                         if ($user_id) {
-                            $sql1 = "SELECT * FROM event_propsl_bkrls WHERE id = ?;";
+                            // $sql1 = "SELECT * FROM event_propsl_bkrls WHERE id = ?;";
+
+                            $sql1 = "SELECT epb.*, dtp.* FROM event_propsl_bkrls epb 
+                            join day_time_prefer dtp on epb.id = dtp.book_rls_id                            
+                            WHERE epb.id = ?";
+
+
+
                             $stmt1 = $con->prepare($sql1);
-                            $stmt1->bind_param("s", $bkrls_id);
+                            $stmt1->bind_param("i", $bkrls_id);
                             $stmt1->execute();
                             $result1 = $stmt1->get_result();
                             // var_dump($result1);
                             $bkrlsdetls = $result1->fetch_assoc();
                             $book_title = $bkrlsdetls['book_title'];
                             $book_genere = $bkrlsdetls['book_genere'];
+                            // var_dump($book_genere);
                             $brief_descrptn = $bkrlsdetls['brf_description'];
-                            var_dump($brief_descrptn);
+                            // var_dump($brief_descrptn);
                             $author = $bkrlsdetls['author'];
                             $release_by = $bkrlsdetls['released_by'];
                             $releas_by_cntct = $bkrlsdetls['relcd_by_cntct'];
-                            var_dump($releas_by_cntct);
+                            // var_dump($releas_by_cntct);
                             $recvd_by = $bkrlsdetls['recived_by'];
                             $recvd_by_cntct = $bkrlsdetls['recvd_by_contact'];
                             $guest1 = $bkrlsdetls['guest1'];
@@ -70,12 +78,12 @@ $bkrls_id = $_GET['bkrlsid'];
                             $guest2_cntct = $bkrlsdetls['guest2_contct'];
                             $guest3 = $bkrlsdetls['guest3'];
                             $guest3_cntct = $bkrlsdetls['guest3_contct'];
-                            $evnt_day1 = $bkrlsdetls['evnt_day1'];
-                            $time_slot1 = $bkrlsdetls['time_slot1'];
-                            $evnt_day2 = $bkrlsdetls['evnt_day2'];
-                            $time_slot2 = $bkrlsdetls['time_slot2'];
-                            $evnt_day3 = $bkrlsdetls['evnt_day3'];
-                            $time_slot3 = $bkrlsdetls['time_slot3'];
+                            $evnt_day1 = $bkrlsdetls['day_prfr1'];
+                            $time_slot1 = $bkrlsdetls['time_prfr1'];
+                            $evnt_day2 = $bkrlsdetls['day_prfr2'];
+                            $time_slot2 = $bkrlsdetls['time_prfr2'];
+                            $evnt_day3 = $bkrlsdetls['day_prfr3'];
+                            $time_slot3 = $bkrlsdetls['time_prfr3'];
 
                             $bkrls_cntct_persn_name = $bkrlsdetls['contact_persn_name'];
                             $bkrls_cntct_persn_mobile = $bkrlsdetls['contact_persn_mobile'];
@@ -83,11 +91,10 @@ $bkrls_id = $_GET['bkrlsid'];
 
 
 
-                            $remark = $bkrlsdetls['remark'];
-                            $logo = base64_encode($bkrlsdetls['book_cover']);
-                            
+                            $remark = $bkrlsdetls['remarks'];
+                            $book_cover = base64_encode($bkrlsdetls['book_cover']);
                         } else {
-                             $book_title = '';
+                            $book_title = '';
                             $book_genere = '';
                             $brief_descrptn = '';
                             $author = '';
@@ -204,7 +211,7 @@ $bkrls_id = $_GET['bkrlsid'];
                                     $status = "NOTOK";
                                 }
                             } else {
-                                if (!$book_cover_bkrls) {
+                                if (!$book_cover) {
                                     $msg = 'Please select an image file to upload.';
                                     $status = "NOTOK";
                                 }
@@ -235,26 +242,49 @@ $bkrls_id = $_GET['bkrlsid'];
                                     $msg . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                                                </div>"; //printing error if found in validation
                             } else {
-                                $query = "INSERT INTO event_propsl_bkrls (users_id,book_title,book_genere,brf_description, author,  released_by, relcd_by_cntct, recived_by, recvd_by_contact, guest1, guest1_contct, guest2, guest2_contct, guest3, guest3_contct, contact_persn_name, contact_persn_mobile,contact_persn_email, remarks,  updated_at, status, book_cover) VALUES ('$user_id','$book_title',  '$book_genere','$brief_descrptn','$author',  '$release_by', '$releas_by_cntct','$recvd_by','$recvd_by_cntct', '$guest1','$guest1_cntct', '$guest2', '$guest2_cntct','$guest3','$guest3_cntct','$bkrls_cntct_persn_name', '$bkrls_cntct_persn_mobile', '$bkrls_cntct_persn_email','$remark', '$date','E','$imgContent')";
+                                if ($bkrlsdetls) {
+                                    if (!$imgContent && $book_cover) {
+                                        $query = "UPDATE event_propsl_bkrls SET book_title = '$book_title', author = '$author', book_genere = '$book_genere', brf_description = '$brief_descrptn', released_by = '$release_by', relcd_by_cntct = '$releas_by_cntct',  recived_by = '$recvd_by', recvd_by_contact = '$recvd_by_cntct', guest1 = '$guest1', guest1_contct = '$guest1_cntct', guest2 = '$guest2', guest2_contct = '$guest2_cntct', guest3 = '$guest3', guest3_contct = '$guest3_cntct', contact_persn_name = '$bkrls_cntct_persn_name', contact_persn_email = '$bkrls_cntct_persn_email', contact_persn_mobile = '$bkrls_cntct_persn_mobile', remarks = '$remark' WHERE id = $bkrls_id";
+                                        // var_dump($query);
+                                    } else {
+                                        $query = "UPDATE event_propsl_bkrls SET book_title = '$book_title', author = '$author',book_genere = '$book_genere', brf_description = '$brief_descrptn', released_by = '$release_by', relcd_by_cntct = '$releas_by_cntct', recived_by = '$recvd_by', recvd_by_contact = '$recvd_by_cntct', guest1 = '$guest1', guest1_contct = '$guest1_cntct', guest2 = '$guest2', guest2_contct = '$guest2_cntct', guest3 = '$guest3', guest3_contct = '$guest3_cntct', contact_persn_name = '$bkrls_cntct_persn_name', contact_persn_email = '$bkrls_cntct_persn_email', contact_persn_mobile = '$bkrls_cntct_persn_mobile', remarks = '$remark', book_cover = '$imgContent' WHERE id = $bkrls_id";
+                                    }
+                                } else {
+
+
+                                    $query = "INSERT INTO event_propsl_bkrls (users_id, book_title, book_genere, brf_description, author,  released_by, relcd_by_cntct, recived_by, recvd_by_contact, guest1, guest1_contct, guest2, guest2_contct, guest3, guest3_contct, contact_persn_name, contact_persn_mobile,contact_persn_email, remarks,  updated_at, status, book_cover) VALUES ('$user_id','$book_title',  '$book_genere','$brief_descrptn','$author',  '$release_by', '$releas_by_cntct','$recvd_by','$recvd_by_cntct', '$guest1', '$guest1_cntct', '$guest2', '$guest2_cntct', '$guest3', '$guest3_cntct', '$bkrls_cntct_persn_name', '$bkrls_cntct_persn_mobile', '$bkrls_cntct_persn_email', '$remark', '$date', 'E', '$imgContent')";
+                                }
+                                // var_dump($query);
                                 $result1 = mysqli_query($con, $query);
+                                // var_dump($result1);
                                 if ($result1) {
                                     $querySelectbookrls = "SELECT id FROM event_propsl_bkrls WHERE users_id = '$user_id' ORDER BY id DESC LIMIT 1";
                                     $resultSelectBookrls = mysqli_query($con, $querySelectbookrls);
                                     $book_rls_id = $resultSelectBookrls->fetch_array();
-                                    $querydaytime = "INSERT INTO day_time_prefer (user_id, book_rls_id, book_dscn_id, spcl_event_id, day_prfr1, day_prfr2, day_prfr3, time_prfr1, time_prfr2, time_prfr3) VALUES ('$user_id','$book_rls_id[id]' ,'0' , '0', '$evnt_day1', '$evnt_day2', '$evnt_day3', '$time_slot1', '$time_slot2', '$time_slot3')";
+                                    $querydaytime_prefer = "SELECT id FROM day_time_prefer WHERE id = '$bkrls_id'";
+                                    $result2=mysqli_query($con, $querydaytime_prefer);
+                                    // var_dump( $result2);
+                                    if($result2){
+                                        $querydaytime = "UPDATE day_time_prefer SET day_prfr1 = '$evnt_day1', day_prfr2 = '$evnt_day2', day_prfr3 = '$evnt_day3', time_prfr1 = '$time_slot1', time_prfr2 = '$time_slot2', time_prfr3 = '$time_slot1' WHERE id = 'bkrls_id'";
+
+                                    }else{
+                                    
+                                        $querydaytime = "INSERT INTO day_time_prefer (user_id, book_rls_id, book_dscn_id, spcl_event_id, day_prfr1, day_prfr2, day_prfr3, time_prfr1, time_prfr2, time_prfr3) VALUES ('$user_id','$book_rls_id[id]' ,'0' , '0', '$evnt_day1', '$evnt_day2', '$evnt_day3', '$time_slot1', '$time_slot2', '$time_slot3')";
+                                    }
+                                    // var_dump($querydaytime);
                                     $resultdaytime = mysqli_query($con, $querydaytime);
                                     if ($resultdaytime) {
                                         $errormsg = "
-                              <div class='alert alert-success alert-dismissible alert-outline fade show'>
-                                                Your Event Proposal for Book Release is Successfully Saved. 
-                                                <button type='button' class='btn-close' data-dismiss='alert' aria-label='Close'></button>
-                                                </div>";
+                                      <div class='alert alert-success alert-dismissible alert-outline fade show'>
+                                                        Your Event Proposal for Book Release is Successfully Saved. 
+                                                        <button type='button' class='btn-close' data-dismiss='alert' aria-label='Close'></button>
+                                                        </div>";
                                     } else {
                                         $errormsg = "
-                                    <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                                               Some Technical Glitch Is There. Please Try Again Later Or Ask Admin For Help.
-                                               <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                                               </div>";
+                                            <div class='alert alert-danger alert-dismissible alert-outline fade show'>
+                                                       Some Technical Glitch Is There. Please Try Again Later Or Ask Admin For Help.
+                                                       <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                                       </div>";
                                     }
                                 } else {
                                     $errormsg = "
@@ -286,18 +316,24 @@ $bkrls_id = $_GET['bkrlsid'];
                                             $bookgenere_stmt = $con->prepare($bookgenere_query);
                                             $bookgenere_stmt->execute();
                                             $bookgenere_result = $bookgenere_stmt->get_result();
-                                            $book_genere = $bookgenere_result->fetch_all();
+                                            $book_generes = $bookgenere_result->fetch_all();
                                             ?>
                                             <select class="form-control form-group" name="book_genere" id="book_genere">
                                                 <option value="0">Select Book Genre</option>
-                                                <?php foreach ($book_genere as $genere) { ?>
-                                                    <option value="<?= $genere[0] ?>"><?= $genere[1]; ?> <?= $genere[2]; ?></option>
+
+                                                <?php foreach ($book_generes as $genere) {
+                                                    if ($genere[0] == $book_genere) {
+                                                        $genere_selected = 'selected';
+                                                    } else {
+                                                        $genere_selected = "";
+                                                    } ?>
+                                                    <option value="<?= $genere[0] ?>" <?= $genere_selected ?>><?= $genere[1]; ?> <?= $genere[2]; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
                                         <div class="col-6 form-group">
                                             <br><label> Brief Description</label>
-                                            <textarea class="form-control" name="brief_descrptn" id="brief_descrptn" placeholder="Description" value="<?= $brief_descrptn; ?>" <?= $edit; ?>></textarea>
+                                            <textarea class="form-control" name="brief_descrptn" id="brief_descrptn" placeholder="Description" value="<?= $brief_descrptn; ?>" <?= $edit; ?>><?= $brief_descrptn; ?></textarea>
                                         </div>
                                         <div class="col-6 form-group">
                                             <br>
@@ -369,10 +405,19 @@ $bkrls_id = $_GET['bkrlsid'];
                                         <div class="col-6 form-group">
                                             <br>
                                             <label>Event Date Preference 1</label>
+
+
+
                                             <select class="form-control form-group" name="evnt_day1" id="evnt_day1" style="height:35px;">
                                                 <option value="0" <?= $select0; ?>>Select Proposed Event Day</option>
-                                                <?php foreach ($event_days as $days) { ?>
-                                                    <option value="<?= $days[0] ?>"><?= $days[1]; ?> - <?= $days[2]; ?></option>
+                                                <?php foreach ($event_days as $days) {
+                                                    if ($days[0] == $evnt_day1) {
+                                                        $evnt_day1_selected = 'selected';
+                                                    } else {
+                                                        $evnt_day1_selected = "";
+                                                    }
+                                                ?>
+                                                    <option value="<?= $days[0] ?>" <?= $evnt_day1_selected ?>><?= $days[1]; ?> - <?= $days[2]; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -381,8 +426,13 @@ $bkrls_id = $_GET['bkrlsid'];
                                             <label> Time Slot Preference 1</label>
                                             <select class="form-control form-group" name="time_slot1" id="time_slot1" style="height:35px;">
                                                 <option value="0" <?= $select0; ?>>Select Proposed Event Time</option>
-                                                <?php foreach ($event_slots as $event_slot) { ?>
-                                                    <option value="<?= $event_slot[0] ?>"><?= $event_slot[1]; ?> - <?= $event_slot[2]; ?></option>
+                                                <?php foreach ($event_slots as $event_slot) {
+                                                    if ($event_slot[0] == $time_slot1) {
+                                                        $time_slot1_selected = 'selected';
+                                                    } else {
+                                                        $time_slot1_selected = '';
+                                                    } ?>
+                                                    <option value="<?= $event_slot[0] ?>" <?= $time_slot1_selected ?>><?= $event_slot[1]; ?> - <?= $event_slot[2]; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -391,8 +441,15 @@ $bkrls_id = $_GET['bkrlsid'];
                                             <label>Event Date Preference 2</label>
                                             <select class="form-control form-group" name="evnt_day2" id="evnt_day2" style="height:35px;">
                                                 <option value="0" <?= $select0; ?>>Select Proposed Event Day</option>
-                                                <?php foreach ($event_days as $days) { ?>
-                                                    <option value="<?= $days[0] ?>"><?= $days[1]; ?> - <?= $days[2]; ?></option>
+                                                <?php foreach ($event_days as $days) {
+                                                    if ($days[0] == $evnt_day2) {
+                                                        $evnt_day2_selected = 'selected';
+                                                    } else {
+                                                        $evnt_day2_selected = '';
+                                                    } ?>
+
+
+                                                    <option value="<?= $days[0] ?>" <?= $evnt_day2_selected ?>><?= $days[1]; ?> - <?= $days[2]; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -401,8 +458,13 @@ $bkrls_id = $_GET['bkrlsid'];
                                             <label> Time Slot Preference 2</label>
                                             <select class="form-control form-group" name="time_slot2" id="time_slot2" style="height:35px;">
                                                 <option value="0" <?= $select0; ?>>Select Proposed Event Time</option>
-                                                <?php foreach ($event_slots as $event_slot) { ?>
-                                                    <option value="<?= $event_slot[0] ?>"><?= $event_slot[1]; ?> - <?= $event_slot[2]; ?></option>
+                                                <?php foreach ($event_slots as $event_slot) {
+                                                    if ($event_slot[0] == $time_slot2) {
+                                                        $time_slot2_selected = 'selected';
+                                                    } else {
+                                                        $time_slot2_selected = '';
+                                                    } ?>
+                                                    <option value="<?= $event_slot[0] ?>" <?= $time_slot2_selected ?>><?= $event_slot[1]; ?> - <?= $event_slot[2]; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -411,9 +473,15 @@ $bkrls_id = $_GET['bkrlsid'];
                                             <label>Event Date Preference 3</label>
                                             <select class="form-control form-group" name="evnt_day3" id="evnt_day3" style="height:35px;">
                                                 <option value="0" <?= $select0; ?>>Select Proposed Event Day</option>
-                                                <?php foreach ($event_days as $days) { ?>
-                                                    <option value="<?= $days[0] ?>"><?= $days[1]; ?> - <?= $days[2]; ?></option>
-                                                <?php } ?>
+                                                <?php foreach ($event_days as $days) {
+                                                    if ($days[0] == $evnt_day3) {
+                                                        $evnt_day3_selected = 'selected';
+                                                    } else {
+                                                        $evnt_day3_selected = "";
+                                                    }
+                                                ?>?>
+                                                <option value="<?= $days[0] ?>" <?= $evnt_day3_selected ?>><?= $days[1]; ?> - <?= $days[2]; ?></option>
+                                            <?php } ?>
                                             </select>
                                         </div>
                                         <div class="col-6 form-group">
@@ -421,8 +489,14 @@ $bkrls_id = $_GET['bkrlsid'];
                                             <label> Time Slot Preference 3</label>
                                             <select class="form-control form-group" name="time_slot3" id="time_slot3" style="height:35px;">
                                                 <option value="0" <?= $select0; ?>>Select Proposed Event Time</option>
-                                                <?php foreach ($event_slots as $event_slot) { ?>
-                                                    <option value="<?= $event_slot[0] ?>"><?= $event_slot[1]; ?> - <?= $event_slot[2]; ?></option>
+                                                <?php foreach ($event_slots as $event_slot) {
+                                                    if ($event_slot[0] == $time_slot3) {
+                                                        $time_slot3_selected = 'selected';
+                                                    } else {
+                                                        $time_slot3_selected = '';
+                                                    }
+                                                ?>
+                                                    <option value="<?= $event_slot[0] ?>" <?= $time_slot3_selected ?>><?= $event_slot[1]; ?> - <?= $event_slot[2]; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -444,13 +518,23 @@ $bkrls_id = $_GET['bkrlsid'];
                                         <div class="col-6 form-group">
                                             <br>
                                             <label>Remarks / Other information</label>
-                                            <textarea class="form-control" name="remark" id="remark" placeholder="Remarks / Other information" value="<?= $comp_name; ?>" <?= $edit; ?>></textarea>
+                                            <textarea class="form-control" name="remark" id="remark" placeholder="Remarks / Other information" value="<?= $remark; ?>" <?= $edit; ?>><?= $remark; ?></textarea>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group col-6">
                                             <br>
                                             <label>Please upload Book Cover<br>
                                                 (Only JPG, JPEG, PNG files are allowed for uploads.)</label>
-                                            <input type="file" class="form-control" name="book_cover" id="book_cover" placeholder="Upload Book Cover" <?= $hide; ?> value="<?= $comp_name; ?>" <?= $edit; ?>><br>
+                                            <!-- <input type="file" class="form-control" name="book_cover" id="book_cover" placeholder="Upload Book Cover" <?= $hide; ?> value="<?= $comp_name; ?>" <?= $edit; ?>><br> -->
+                                        </div>
+                                        <div class="form-group col-6">
+                                            </br>
+                                            <input type="file" class="form-control" name="book_cover" id="book_cover" placeholder="*Upload Bookcover" <?= $hide; ?> <?= $edit; ?>>
+                                            <label id="book_cover_lab">
+                                                <img src="data:image/jpg;charset=utf8;base64,<?= $book_cover; ?>" height="70vh" id="book_cover_img" <?= $edit; ?>>
+                                            </label>
+                                            <span id="changebook_cover" onclick="changeBookcover();" <?= $edit; ?>><u>Change Bookcover</u></span>
+
+                                            <!-- <input type="file" class="form-control" name="book_cover" id="book_cover" placeholder="*Upload Bookcover"> -->
                                         </div>
                                         <div class="col-lg-12">
                                             <br>
@@ -498,7 +582,7 @@ $bkrls_id = $_GET['bkrlsid'];
 
     // });
 
-    function changeLogo() {
+    function changeBookcover() {
         $("#book_cover").removeAttr('hidden');
         $("#book_cover_img").remove();
     }
@@ -656,7 +740,7 @@ $bkrls_id = $_GET['bkrlsid'];
         printWindow.document.write($("#fascia").val());
         printWindow.document.write('</td></tr><tr><td>Remarks  </td><td>');
         printWindow.document.write($("#remark").val());
-        printWindow.document.write('</td></tr><tr><td>Logo  </td><td>');
+        printWindow.document.write('</td></tr><tr><td>Bookcover  </td><td>');
         const [file] = book_cover.files
         if (file) {
             printWindow.document.write('<img id = "blah" height="50px" width="100px" src = "');
