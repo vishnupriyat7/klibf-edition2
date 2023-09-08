@@ -147,10 +147,10 @@ $publisher_id = $_GET['pubid'];
                                                         <input class="form-control text-right" value="10000" disabled>
                                                     </div>
                                                     <div class="col-2">
-                                                        <input type="number" class="form-control text-right" placeholder="00" value="<?= $stall3x3; ?>" max="5" min="0" <?= $edit_count; ?> disabled>
+                                                        <input type="number" class="form-control text-right" placeholder="00" value="<?= $stall3x3; ?>" max="5" min="0" disabled>
                                                     </div>
                                                     <div class="col-2">
-                                                        <input type="number" class="form-control text-right" name="allot_stall3x3" placeholder="00" id="allot_stall3x3" onchange="allotamount();" value="<?= $allot_stall_3x3; ?>" max="5" min="0" <?= $edit_count; ?>>
+                                                        <input type="number" class="form-control text-right" name="allot_stall3x3" placeholder="00" id="allot_stall3x3" onchange="allotamount();" value="<?= $allot_stall_3x3; ?>" max="5" min="0">
                                                     </div>
                                                     <div class="col-3">
                                                         <input type="text" class="form-control text-right" name="allot_rate_amt3x3" placeholder="00" id="allot_rate_amt3x3" disabled value="<?= $tot_amt3x3; ?>">
@@ -164,10 +164,10 @@ $publisher_id = $_GET['pubid'];
                                                         <input class="form-control text-right" value="7500" disabled>
                                                     </div>
                                                     <div class="col-2">
-                                                        <input type="number" class="form-control text-right" placeholder="00" value="<?= $stall3x2; ?>" max="5" <?= $edit_count; ?> disabled>
+                                                        <input type="number" class="form-control text-right" placeholder="00" value="<?= $stall3x2; ?>" max="5" disabled>
                                                     </div>
                                                     <div class="col-2">
-                                                        <input type="number" class="form-control text-right" name="allot_stall3x2" id="allot_stall3x2" placeholder="00" onchange="allotamount();" value="<?= $allot_stall_3x2; ?>" max="5" <?= $edit_count; ?>>
+                                                        <input type="number" class="form-control text-right" name="allot_stall3x2" id="allot_stall3x2" placeholder="00" onchange="allotamount();" value="<?= $allot_stall_3x2; ?>" max="5">
                                                     </div>
                                                     <div class="col-3">
                                                         <input type="text" class="form-control text-right" name="allot_rate_amt3x2" id="allot_rate_amt3x2" placeholder="00" disabled value="<?= $tot_amt3x2; ?>">
