@@ -21,7 +21,7 @@ $bkrls_id = $_GET['bkrlsid'];
                             <ol class="breadcrumb m-0">
                                 <!-- <li class="breadcrumb-item"><a href="javascript: void(0);">Profile</a></li> -->
                                 <!-- <li class="breadcrumb-item active">Add</li> -->
-                                <a class="dropdown-item" href="book_coverut.php"><i class="mdi mdi-book_coverut text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-book_coverut">Bookcoverut</span></a>
+                                <a class="dropdown-item" href="logout.php"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
                             </ol>
                         </div>
                     </div>
@@ -261,14 +261,14 @@ $bkrls_id = $_GET['bkrlsid'];
                                     $querySelectbookrls = "SELECT id FROM event_propsl_bkrls WHERE users_id = '$user_id' ORDER BY id DESC LIMIT 1";
                                     $resultSelectBookrls = mysqli_query($con, $querySelectbookrls);
                                     $book_rls_id = $resultSelectBookrls->fetch_array();
-                                    $querydaytime_prefer = "SELECT id FROM day_time_prefer WHERE id = '$bkrls_id'";
+                                    $querydaytime_prefer = "SELECT id FROM day_time_prefer WHERE book_rls_id = '$bkrls_id'";
                                     $result2=mysqli_query($con, $querydaytime_prefer);
-                                    // var_dump( $result2);
-                                    if($result2){
+                                    $result_daytime =$result2->fetch_all(); 
+                                    if($result_daytime){
                                         $querydaytime = "UPDATE day_time_prefer SET day_prfr1 = '$evnt_day1', day_prfr2 = '$evnt_day2', day_prfr3 = '$evnt_day3', time_prfr1 = '$time_slot1', time_prfr2 = '$time_slot2', time_prfr3 = '$time_slot1' WHERE id = '$bkrls_id'";
 
                                     }else{
-                                    
+                                    // var_dump("dfgjkfgh");
                                         $querydaytime = "INSERT INTO day_time_prefer (user_id, book_rls_id, book_dscn_id, spcl_event_id, day_prfr1, day_prfr2, day_prfr3, time_prfr1, time_prfr2, time_prfr3) VALUES ('$user_id','$book_rls_id[id]' ,'0' , '0', '$evnt_day1', '$evnt_day2', '$evnt_day3', '$time_slot1', '$time_slot2', '$time_slot3')";
                                     }
                                     // var_dump($querydaytime);
