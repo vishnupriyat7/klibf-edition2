@@ -131,10 +131,12 @@ $user_id = $user['id'];
                     $fascia = $user_profile['fascia'];
                     $remark = $user_profile['remarks'];
                     $logo = base64_encode($user_profile['logo']);
+                    $alloted_stall3x3 = $user_profile['confirm_3X3'];
+                    $alloted_stall3x2 = $user_profile['confirm_3X2'];
                     $amt3x3 = 10000;
-                    $tot_amt3x3 = ($stall3x3 * $amt3x3) + ($amt3x3 * $stall3x3 * 18) / 100;
+                    $tot_amt3x3 = ($alloted_stall3x3 * $amt3x3) + ($amt3x3 * $alloted_stall3x3 * 18) / 100;
                     $amt3x2 = 7500;
-                    $tot_amt3x2 = ($stall3x2 * $amt3x2) + ($amt3x2 * $stall3x2 * 18) / 100;
+                    $tot_amt3x2 = ($allotted_stall3x2 * $amt3x2) + ($amt3x2 * $allotted_stall3x2 * 18) / 100;
                     $total_amt = $tot_amt3x3 + $tot_amt3x2;
                     $prof_reg_date = $user_profile['updated_at'];
                     $stall_reg_date = $user_profile['updated_date'];
@@ -397,14 +399,14 @@ $user_id = $user['id'];
                                         <label id="rmrk_lab"><?= $stall3x2; ?></label>
                                     </td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td>
                                         Estimated amount for stall booking</td>
                                     </td>
                                     <td>
                                         <label id="3x3amt_lab"><?= $total_amt; ?></label>
                                     </td>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <td>
                                         <label> Logo of Publishing House / Organization</label>
@@ -429,7 +431,30 @@ $user_id = $user['id'];
                                         <label id="logo_lab"><?= $stall_reg_date; ?></label>
                                     </td>
                                 </tr>
-
+                                <tr>
+                                    <td>
+                                        <label>Stalls Alloted 3*3</label>
+                                    </td>
+                                    <td>
+                                        <label><?= $alloted_stall3x3; ?></label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Stalls Alloted 3*2</label>
+                                    </td>
+                                    <td>
+                                        <label><?= $alloted_stall3x2; ?></label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Amount to be paid (in ₹)</td>
+                                    </td>
+                                    <td>
+                                        <label id="3x3amt_lab"><?= $total_amt; ?></label>
+                                    </td>
+                                </tr>
                             </table>
                             <div class="button">
                                 <button type="submit" name="print" class="btn btn-primary" id="print">Print</button>

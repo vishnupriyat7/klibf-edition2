@@ -85,8 +85,8 @@ $publisher_id = $_GET['pubid'];
                             if ($stall3x2 == "") {
                                 $stall3x2 = 0;
                             }
-                            $errormsg = "";                           
-                                $query = "UPDATE stall_booking SET confirm_3X3 = '$stall3x3', confirm_3X2 = '$stall3x2', status = 'A', updated_date = '$date' WHERE user_id = '$publisher_id'";                            
+                            $errormsg = "";
+                            $query = "UPDATE stall_booking SET confirm_3X3 = '$stall3x3', confirm_3X2 = '$stall3x2', status = 'A', updated_date = '$date' WHERE user_id = '$publisher_id'";
                             $result = mysqli_query($con, $query);
                             if ($result) {
                                 $errormsg = "
@@ -95,6 +95,33 @@ $publisher_id = $_GET['pubid'];
                                                 <button type='button' class='btn-close' data-dismiss='alert' aria-label='Close'></button>
                                                 </div>
                                ";
+                                $sql_profile = "SELECT id, org_name FROM users_profile WHERE user_id = ?";
+                                $stmt_prof = $con->prepare($sql_profile);
+                                $stmt_prof->bind_param("s", $publisher_id);
+                                $stmt_prof->execute();
+                                $res_prof = $stmt_prof->get_result();
+                                $user_prof = $res_prof->fetch_assoc();
+                                $sql1 = "SELECT * FROM stall_booking WHERE user_id = ?";
+                                $stmt1 = $con->prepare($sql1);
+                                $stmt1->bind_param("s", $publisher_id);
+                                $stmt1->execute();
+                                $result1 = $stmt1->get_result();
+                                $user_stall = $result1->fetch_assoc();
+                                $stall3x3 = $user_stall['stalls_3x3'];
+                                $stall3x2 = $user_stall['stalls_3x2'];
+                                $allot_stall_3x3 = $user_stall['confirm_3X3'];
+                                $allot_stall_3x2 = $user_stall['confirm_3X2'];
+                                $amt3x3 = 10000;
+                                $tot_amt3x3 = ($allot_stall_3x3 * $amt3x3) + ($amt3x3 * $allot_stall_3x3 * 18) / 100;
+                                $amt3x2 = 7500;
+                                $tot_amt3x2 = ($allot_stall_3x2 * $amt3x2) + ($amt3x2 * $allot_stall_3x2 * 18) / 100;
+                                $stall_status = $user_stall['status'];
+                                // if ($stall_status != 'S') {
+                                //     $edit_count = '';
+                                // } else {
+                                //     $edit_count = 'disabled';
+                                // }
+                                $total_amt = $tot_amt3x3 + $tot_amt3x2;
                             } else {
                                 $errormsg = "
                                     <div class='alert alert-danger alert-dismissible alert-outline fade show'>
@@ -103,7 +130,6 @@ $publisher_id = $_GET['pubid'];
                                                </div>";
                             }
                         }
-
                         ?>
                         <div class="card-body p-4">
                             <div class="tab-content">
@@ -186,13 +212,13 @@ $publisher_id = $_GET['pubid'];
                                         <!-- <div class="col-lg-12">
                                             <button type="submit" name="save_stall" class="btn btn-primary" id="save_stall">Save</button>
                                         </div> -->
-                                       <div class="col-lg-12">
+                                        <div class="col-lg-12">
 
-                                                <button type="submit" name="allot_stall" class="btn btn-primary" id="allot_stall">Save</button>
-                                                <!-- </div> -->
-                                                <!-- <button type="submit" class="btn btn-success" name="submit-stall" id="submit-stall">Submit</button> -->
+                                            <button type="submit" name="allot_stall" class="btn btn-primary" id="allot_stall">Save</button>
+                                            <!-- </div> -->
+                                            <!-- <button type="submit" class="btn btn-success" name="submit-stall" id="submit-stall">Submit</button> -->
 
-                                            </div>
+                                        </div>
 
                                     </form>
                                 </div>
