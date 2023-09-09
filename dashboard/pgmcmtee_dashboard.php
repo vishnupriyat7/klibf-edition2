@@ -35,6 +35,14 @@ $stall3x2_count_result = mysqli_query($con, "SELECT SUM(stalls_3x2) FROM stall_b
 $stall3x2_count_row = mysqli_fetch_row($stall3x2_count_result);
 $stall3x2_count_numrows = $stall3x2_count_row[0];
 
+$allot_stall3x3_count_result = mysqli_query($con, "SELECT SUM(confirm_3x3) FROM stall_booking");
+$allot_stall3x3_count_row = mysqli_fetch_row($allot_stall3x3_count_result);
+$allot_stall3x3_count_numrows = $allot_stall3x3_count_row[0];
+
+$allot_stall3x2_count_result = mysqli_query($con, "SELECT SUM(confirm_3x2) FROM stall_booking");
+$allot_stall3x2_count_row = mysqli_fetch_row($allot_stall3x2_count_result);
+$allot_stall3x2_count_numrows = $allot_stall3x2_count_row[0];
+
 $user_profile_sql = "SELECT up.id, u.id, u.user_type, up.user_id FROM users u JOIN users_profile up on up.user_id = u.id WHERE u.user_type = ?;";
 $user_profile_stmt = $con->prepare($user_profile_sql);
 $user_profile_stmt->bind_param("s", $user_type);
@@ -50,6 +58,23 @@ $user_profile_count = mysqli_num_rows($user_profile_result);
 // var_dump($users_stall);die;
 // $testqry_stall_count = mysqli_num_rows($testqry_stall_result);
 
+$bookrls_sql = "SELECT COUNT(id) FROM event_propsl_bkrls";
+$bookrls_stmt = $con->prepare($bookrls_sql);
+$bookrls_stmt->execute();
+$bookrls_result = $bookrls_stmt->get_result();
+$bookrls_result_count = $bookrls_result->fetch_all();
+
+$bookdscn_sql = "SELECT COUNT(id) FROM evnt_propsl_bkdscn;";
+$bookdscn_stmt = $con->prepare($bookdscn_sql);
+$bookdscn_stmt->execute();
+$bookdscn_result = $bookdscn_stmt->get_result();
+$bookdscn_result_count = $bookdscn_result->fetch_all();
+
+$spclevent_sql = "SELECT COUNT(id) FROM special_event_propsl;";
+$spclevent_stmt = $con->prepare($spclevent_sql);
+$spclevent_stmt->execute();
+$spclevent_result = $spclevent_stmt->get_result();
+$spclevent_result_count = $spclevent_result->fetch_all();
 ?>
 
 
@@ -160,6 +185,96 @@ $user_profile_count = mysqli_num_rows($user_profile_result);
                                 <div class="flex-grow-1 ms-3">
                                     <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> 3X2 Stalls Booked</p>
                                     <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $stall3x2_count_numrows; ?>"></span></h4>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-light text-primary rounded-circle fs-3">
+                                        <i class="ri-git-merge-fill"></i>
+                                    </span>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> 3X3 Stalls Alloted</p>
+                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $allot_stall3x3_count_numrows; ?>"></span></h4>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-light text-primary rounded-circle fs-3">
+                                        <i class="ri-git-merge-fill"></i>
+                                    </span>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> 3X2 Stalls Alloted</p>
+                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $allot_stall3x2_count_numrows; ?>"></span></h4>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-light text-primary rounded-circle fs-3">
+                                        <i class="ri-git-merge-fill"></i>
+                                    </span>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total Book Release Proposed</p>
+                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $bookrls_result_count[0][0]; ?>"></span></h4>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-light text-primary rounded-circle fs-3">
+                                        <i class="ri-git-merge-fill"></i>
+                                    </span>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total Book Discussion Proposed</p>
+                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $bookdscn_result_count[0][0]; ?>"></span></h4>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-light text-primary rounded-circle fs-3">
+                                        <i class="ri-git-merge-fill"></i>
+                                    </span>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total Special Events Proposed</p>
+                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $spclevent_result_count[0][0]; ?>"></span></h4>
                                 </div>
                             </div>
                         </div><!-- end card body -->
