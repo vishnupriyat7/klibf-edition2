@@ -213,7 +213,7 @@
                                                     <ul class='dropdown-menu dropdown-menu-end'>
                                                         <li>
                                                             <a href='publisher_bookrelease.php?bkrlsid=<?= $id; ?>' class='dropdown-item edit-item-btn'>
-                                                                <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Edit
+                                                                <i class='ri-edit-box-fill align-bottom me-2 text-muted'></i> Edit
                                                             </a>
                                                         </li>
                                                         <!-- <li>

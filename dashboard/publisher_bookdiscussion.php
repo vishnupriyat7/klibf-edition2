@@ -3,6 +3,7 @@ ini_set('display_errors', '0');
 include "header.php";
 include "publisher_sidebar.php";
 $user_id = $user['id'];
+$bkdscn_id = $_GET['bkdscnid'];
 ?>
 <!-- ============================================================== -->
 <!-- Start right Content here -->
@@ -43,6 +44,72 @@ $user_id = $user['id'];
                         <?php
                         $status = "OK";
                         $msg = "";
+
+                        if ($user_id) {
+                            $sql1 = "SELECT epb.*, dtp.* FROM evnt_propsl_bkdscn epb join day_time_prefer dtp on epb.id = dtp.book_dscn_id WHERE epb.id = ?";
+                            $stmt1 = $con->prepare($sql1);
+                            $stmt1->bind_param("i", $bkdscn_id);
+                            $stmt1->execute();
+                            $result1 = $stmt1->get_result();
+                            $bkrlsdetls = $result1->fetch_assoc();
+                            $book_title = $bkrlsdetls['book_title'];
+                            $book_genere = $bkrlsdetls['book_genere'];
+                            $brief_descrptn = $bkrlsdetls['brf_description'];
+                            $author = $bkrlsdetls['author'];
+                            $release_by = $bkrlsdetls['released_by'];
+                            $releas_by_cntct = $bkrlsdetls['relcd_by_cntct'];
+                            $recvd_by = $bkrlsdetls['recived_by'];
+                            $recvd_by_cntct = $bkrlsdetls['recvd_by_contact'];
+                            $guest1 = $bkrlsdetls['guest1'];
+                            $guest1_cntct = $bkrlsdetls['guest1_contct'];
+                            $guest2 = $bkrlsdetls['guest2'];
+                            $guest2_cntct = $bkrlsdetls['guest2_contct'];
+                            $guest3 = $bkrlsdetls['guest3'];
+                            $guest3_cntct = $bkrlsdetls['guest3_contct'];
+                            $evnt_day1 = $bkrlsdetls['day_prfr1'];
+                            $time_slot1 = $bkrlsdetls['time_prfr1'];
+                            $evnt_day2 = $bkrlsdetls['day_prfr2'];
+                            $time_slot2 = $bkrlsdetls['time_prfr2'];
+                            $evnt_day3 = $bkrlsdetls['day_prfr3'];
+                            $time_slot3 = $bkrlsdetls['time_prfr3'];
+                            $bkrls_cntct_persn_name = $bkrlsdetls['contact_persn_name'];
+                            $bkrls_cntct_persn_mobile = $bkrlsdetls['contact_persn_mobile'];
+                            $bkrls_cntct_persn_email = $bkrlsdetls['contact_persn_email'];
+                            $remark = $bkrlsdetls['remarks'];
+                            $book_cover = base64_encode($bkrlsdetls['book_cover']);
+                        } else {
+                            $book_title = '';
+                            $book_genere = '';
+                            $brief_descrptn = '';
+                            $author = '';
+                            $release_by = '';
+                            $releas_by_cntct = '';
+                            $recvd_by = '';
+                            $recvd_by_cntct = '';
+                            $guest1 = '';
+                            $guest1_cntct = '';
+                            $guest2 = '';
+                            $guest2_cntct = '';
+                            $guest3 = '';
+                            $guest3_cntct = '';
+                            $evnt_day1 = '';
+                            $time_slot1 = '';
+                            $evnt_day2 = '';
+                            $time_slot2 = '';
+                            $evnt_day3 = '';
+                            $time_slot3 = '';
+                            $bkrls_cntct_persn_name = '';
+                            $bkrls_cntct_persn_mobile = '';
+                            $bkrls_cntct_persn_email = '';
+                            $remark = '';
+                        }
+
+
+
+
+
+
+
                         if (isset($_GET['discid'])) {
                             $bookDiscId = $_GET['discid'];
                             $querySelectBookDscn = "SELECT * FROM evnt_propsl_bkdscn WHERE id = '$bookDiscId'";
@@ -179,6 +246,7 @@ $user_id = $user['id'];
                             <div class="tab-content">
                                 <div class="tab-pane active" id="personalDetails" role="tabpanel">
                                     <?php
+                                    
                                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         print $errormsg;
                                     }
