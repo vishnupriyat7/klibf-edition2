@@ -27,7 +27,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card" style="width:150%">
+                    <div class="card" style="width:170%">
                         <div class="card-header">
                             <h5 class="card-title mb-0">Book Discussion Proposal Report</h5>
                         </div>
