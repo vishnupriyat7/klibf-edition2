@@ -45,7 +45,7 @@
                                         <th data-ordering="false">Contact No</th>
                                         <th data-ordering="false">Email Id</th>
                                         <th data-ordering="false">Remarks</th>
-                                        <!-- <th>Action</th> -->
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -90,25 +90,25 @@
                                             <td>
                                                 <?= $remarks; ?>
                                             </td>
-                                            <!-- <td>
+                                            <td>
                                                 <div class='dropdown d-inline-block'>
                                                     <button class='btn btn-soft-secondary btn-sm dropdown' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
                                                         <i class='ri-more-fill align-middle'></i>
                                                     </button>
                                                     <ul class='dropdown-menu dropdown-menu-end'>
                                                         <li>
-                                                            <a href='publisher_bookdiscussion.php?discid=<?= $id; ?>' class='dropdown-item edit-item-btn'>
-                                                                <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Edit
+                                                            <a href='publisher_special_event_proposal.php?speclevntid=<?= $id; ?>' class='dropdown-item edit-item-btn'>
+                                                                <i class='ri-edit-box-fill align-bottom me-2 text-muted'></i> Edit
                                                             </a>
                                                         </li>                                                 
-                                                        <li>                                                            
+                                                        <!-- <li>                                                            
                                                             <a href='' class='dropdown-item remove-item-btn'>
                                                                 <i class='ri-delete-bin-fill align-bottom me-2 text-danger'></i>Delete
                                                             </a>
-                                                        </li>
+                                                        </li> -->
                                                     </ul>
                                                 </div>
-                                            </td> -->
+                                            </td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

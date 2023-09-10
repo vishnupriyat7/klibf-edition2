@@ -465,7 +465,7 @@ $bkdscn_id = $_GET['bkdscnid'];
                                                 </br>
                                                 <input type="file" class="form-control" name="disc_book_cover" id="disc_book_cover" placeholder="*Upload Bookcover" <?= $hide; ?> <?= $edit; ?>>
                                                 <label id="book_cover_lab">
-                                                    <img src="data:image/jpg;charset=utf8;base64,<?= $book_cover; ?>" height="70vh" id="book_cover_img" <?= $edit; ?>>
+                                                    <img src="data:image/jpg;charset=utf8;base64,<?= $disc_book_cover; ?>" height="70vh" id="book_cover_img" <?= $edit; ?>>
                                                 </label>
                                                 <span id="changebook_cover" onclick="changeBookcover();" <?= $edit; ?>><u>Change Bookcover</u></span>
 
