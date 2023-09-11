@@ -59,6 +59,11 @@ include "../z_db.php";
                         <i class="ri-checkbox-multiple-line"></i> <span data-key="t-landing">Stall Booking</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" role="button" aria-expanded="true" aria-controls="sidebarLanding" href="publisher_chellan_upload.php">
+                        <i class="ri-checkbox-multiple-line"></i> <span data-key="t-landing">Chellan Upload</span>
+                    </a>
+                </li>
 
                 <!-- <li class="nav-item">
                     <a class="nav-link menu-link" role="button" aria-expanded="true" aria-controls="sidebarLanding" href="publisher-report.php" class="nav-link" data-key="t-one-page">
