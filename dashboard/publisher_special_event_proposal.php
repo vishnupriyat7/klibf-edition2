@@ -70,7 +70,6 @@ $spclevnt_id = $_GET['speclevntid'];
                             $spcl_remark = '';
                         }
                         if (isset($_POST['spcl_save'])) {
-
                             $event_name =
                                 mysqli_real_escape_string($con, $_POST['event_name']);
                             $dignitaries =

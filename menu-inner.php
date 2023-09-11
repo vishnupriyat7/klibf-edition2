@@ -10,7 +10,16 @@
     <!-- <li class="dropdown"><a href="#"><span>Edition I</span> <i class="bi bi-chevron-down"></i></a>
             <ul> -->
     <!-- <li><a href="#">Drop Down 1</a></li> -->
-    <li class="dropdown"><a href="#"><span>Contests</span> <i class="bi bi-chevron-right"></i></a>
+    <li class="dropdown"><a href="#"><span>News & Events</span> <i class="bi bi-chevron-right"></i></a>
+      <ul>
+        <li><a href="news.php">News</a></li>
+        <!-- <li><a href="#">Recitation / പദ്യപാരായണം</a></li>
+        <li><a href="#">Story Telling / ഒരു കഥ പറയാം</a></li>
+        <li><a href="#">Cartoon / കാർട്ടൂൺ</a></li>
+        <li><a href="#">Quiz / ക്വിസ്</a></li> -->
+      </ul>
+    </li>
+    <!-- <li class="dropdown"><a href="#"><span>Contests</span> <i class="bi bi-chevron-right"></i></a>
       <ul>
         <li><a href="#">Book Review / വായനാവസന്തം</a></li>
         <li><a href="#">Recitation / പദ്യപാരായണം</a></li>
@@ -18,7 +27,7 @@
         <li><a href="#">Cartoon / കാർട്ടൂൺ</a></li>
         <li><a href="#">Quiz / ക്വിസ്</a></li>
       </ul>
-    </li>
+    </li> -->
     <!-- <li><a href="http://klibf.niyamasabha.org/vision-speakers-new.php" target="_blank">Speakers</a></li>
               <li><a href="http://klibf.niyamasabha.org/publishers.php" target="_blank">Publishers</a></li>
               <li><a href="http://klibf.niyamasabha.org/gallery-new.php" target="_blank">Gallery</a></li>
