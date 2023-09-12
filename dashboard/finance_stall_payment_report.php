@@ -161,7 +161,7 @@
                                                         </li> -->
                                                         <li>
                                                             <a href='deletesocial.php?id=$id' class='dropdown-item remove-item-btn'>
-                                                                <i class='ri-a align-bottom me-2 text-muted'></i> Approve
+                                                                <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Approve
                                                             </a>
                                                         </li>
                                                         <!-- <li>
