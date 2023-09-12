@@ -16,8 +16,10 @@ if ($user['user_type'] == 'S') {
     include "sidebar.php";
 } elseif ($user['user_type'] == 'P') {
     include "publisher_sidebar.php";
-}  elseif ($user['user_type'] == 'PC') {
+} elseif ($user['user_type'] == 'PC') {
     include "pgmcmtee_sidebar.php";
+} elseif ($user['user_type'] == 'FC') {
+    include "finance_sidebar.php";
 }
 ?>
 
@@ -38,7 +40,9 @@ if ($user['user_type'] == 'S') {
                 include "publisher_dashboard.php";
             } elseif ($user['user_type'] == 'PC') {
                 include "pgmcmtee_dashboard.php";
-             } ?>
+            } elseif ($user['user_type'] == 'FC') {
+                include "finance_dashboard.php";
+            } ?>
 
         </div>
     </div>
