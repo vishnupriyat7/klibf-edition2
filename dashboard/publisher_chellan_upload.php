@@ -4,7 +4,12 @@ include "header.php";
 include "publisher_sidebar.php";
 $user_id = $user['id'];
 ?>
-
+<style>
+    #pay-slip td {
+        text-align: right !important;
+        width: 20%;
+    }
+</style>
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
@@ -42,24 +47,28 @@ $user_id = $user['id'];
                         $current_date = new DateTime();
                         $date = date_format($current_date, "Y-m-d H:i:s");
                         if ($user_id) {
-                            // $sql_profile = "SELECT id, org_name FROM users_profile WHERE user_id = ?";
-                            // $stmt_prof = $con->prepare($sql_profile);
-                            // $stmt_prof->bind_param("s", $user_id);
-                            // $stmt_prof->execute();
-                            // $res_prof = $stmt_prof->get_result();
-                            // $user_prof = $res_prof->fetch_assoc();
+                            $sql_profile = "SELECT id, org_name, gst_no FROM users_profile WHERE user_id = ?";
+                            $stmt_prof = $con->prepare($sql_profile);
+                            $stmt_prof->bind_param("s", $user_id);
+                            $stmt_prof->execute();
+                            $res_prof = $stmt_prof->get_result();
+                            $user_prof = $res_prof->fetch_assoc();
                             $sql1 = "SELECT * FROM stall_booking WHERE user_id = ?";
                             $stmt1 = $con->prepare($sql1);
-                            $stmt1->bind_param("s", $user_id);
+                            $stmt1->bind_param("i", $user_id);
                             $stmt1->execute();
                             $result1 = $stmt1->get_result();
                             $user_stall = $result1->fetch_assoc();
-                            $stall3x3 = $user_stall['confirm_3x3'];
-                            $stall3x2 = $user_stall['confirm_3x2'];
+                            $stall3x3 = $user_stall['confirm_3X3'];
+                            $stall3x2 = $user_stall['confirm_3X2'];
                             $amt3x3 = 10000;
-                            $tot_amt3x3 = ($stall3x3 * $amt3x3) + ($amt3x3 * $stall3x3 * 18) / 100;
                             $amt3x2 = 7500;
-                            $tot_amt3x2 = ($stall3x2 * $amt3x2) + ($amt3x2 * $stall3x2 * 18) / 100;
+                            $rate3x3 = $stall3x3 * $amt3x3;
+                            $rate3x2 = $stall3x2 * $amt3x2;
+                            $gst3x3 = ($rate3x3 * 18) / 100;
+                            $gst3x2 = ($rate3x2 * 18) / 100;
+                            $tot_amt3x3 = $rate3x3 + $gst3x3;
+                            $tot_amt3x2 = $rate3x2 +  $gst3x2;
                             // $stall_status = $user_stall['status'];
                             // if ($stall_status != 'S') {
                             //     $edit_count = '';
@@ -112,7 +121,7 @@ $user_id = $user['id'];
                             }
                             $errormsg = "";
                             // var_dump($status);
-                                $query = "INSERT INTO challan (user_id, bank_name, paid_amt, trnctn_no, trnctn_type, trnctn_date, challan_img, status, updated_date) VALUES ('$user_id', '$bank_name', '$paid_amt', '$trnctn_no', '$trnctn_type', '$trnctn_dt', '$imgContent', 'E', '$date');";
+                            $query = "INSERT INTO challan (user_id, bank_name, paid_amt, trnctn_no, trnctn_type, trnctn_date, challan_img, status, updated_date) VALUES ('$user_id', '$bank_name', '$paid_amt', '$trnctn_no', '$trnctn_type', '$trnctn_dt', '$imgContent', 'E', '$date');";
                             $result = mysqli_query($con, $query);
                             if ($result) {
                                 $errormsg = "
@@ -140,61 +149,56 @@ $user_id = $user['id'];
                                         print $errormsg;
                                     }
                                     ?>
+                                    <div class="col-12">
+                                        <label><b>Stall Allotment Details</b></label>
+                                    </div>
+                                    <div class="row">
+                                        <table class="table table-info table-responsive" id="pay-slip">
+                                            <tr>
+                                                <th>
+                                                    Stalls
+                                                </th>
+                                                <th>
+                                                    Alloted
+                                                </th>
+                                                <th>
+                                                    Rate
+                                                </th>
+                                                <th>
+                                                    GST(18%)
+                                                </th>
+                                                <th>Amount</th>
+                                            </tr>
+                                            <tbody>
+                                                <tr>
+                                                    <th>3m X 3m</th>
+                                                    <td class="text-justify"><?= $stall3x3; ?></td>&emsp;
+                                                    <td><?= $rate3x3; ?></td>
+                                                    <td><?= $gst3x3; ?></td>
+                                                    <td><?= $tot_amt3x3; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>3m X 2m</th>
+                                                    <td ><?= $stall3x2; ?></td>
+                                                    <td><?= $rate3x2; ?></td>
+                                                    <td><?= $gst3x2; ?></td>
+                                                    <td><?= $tot_amt3x2; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4">Total amount payable (in ₹ ).</td>
+                                                    <td><b><?= $total_amt; ?></b></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="col-md-4 right">
+                                        <button name="print" class="btn btn-primary" id="print-slip">Print Payment Slip</button>
+                                        </div>
+                                    </div>
                                     <form action="" method="post" enctype="multipart/form-data">
                                         <div class="row bg-grey">
                                             <div class="form-group col-12">
-                                                <label><b>Stall Allotment Details</b></label>
-                                            </div>
-                                            <!-- <div class="form-group col-12"> -->
-                                            <div class="row">
-                                                <table class="table table-info table-striped">
-                                                    <tr>
-                                                        <th>
-                                                            Stalls
-                                                        </th>
-                                                        <th>
-                                                            Alloted
-                                                        </th>
-                                                        <th>Amount</th>
-                                                    </tr>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>3m X 3m</td>
-                                                            <td><?= $stall3x3; ?></td>
-                                                            <td><?= $tot_amt3x3; ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3m X 2m</td>
-                                                            <td><?= $stall3x2; ?></td>
-                                                            <td><?= $tot_amt3x2; ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="2">Total amount payable (in ₹ ).</td>
-                                                            <!-- <td><?= $stall3x2; ?></td> -->
-                                                            <td><?= $$total_amt; ?></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <!-- </div> -->
-                                            <div class="form-group col-12">
                                                 <br>
                                                 <label><b>Upload your Payment Details</b></label>
-                                            </div>
-                                            <div class="form-group col-12">
-                                                <br>
-                                                *Bank Name
-                                                <input type="text" class="form-control" name="bank_name" placeholder="*Bank Name" id="comp_name" value="<?= $comp_name; ?>" <?= $edit; ?>>
-                                            </div>
-                                            <div class="form-group col-12 col-md-3">
-                                                <br>
-                                                *Paid Amount (in ₹ )
-                                                <input type="text" class="form-control" name="paid_amt" id="paid_amt" placeholder="*Paid Amount (in  ₹ )" required="required" <?= $edit; ?>>
-                                            </div>
-                                            <div class="form-group col-12 col-md-3">
-                                                <br>
-                                                *Transaction No
-                                                <input type="text" class="form-control" name="trnctn_no" id="trnctn_no" placeholder="*Transaction No" required="required" value="" <?= $edit; ?>>
                                             </div>
                                             <div class="form-group col-12 col-md-3">
                                                 <br>*Mode of Payment
@@ -204,10 +208,45 @@ $user_id = $user['id'];
                                                     <option value="O" <?= $selecta; ?>>Online Transfer</option>
                                                 </select>
                                             </div>
+                                            <div class="form-group col-12 col-md-9">
+                                                <br>
+                                                Bank Name
+                                                <input type="text" class="form-control" name="bank_name" placeholder="Bank Name" id="comp_name" value="<?= $comp_name; ?>" <?= $edit; ?>>
+                                            </div>
+                                            <div class="form-group col-12 col-md-3">
+                                                <br>
+                                                *Transaction Amount (in ₹ )
+                                                <input type="text" class="form-control" name="paid_amt" id="paid_amt" placeholder="*Paid Amount (in  ₹ )" required="required" <?= $edit; ?>>
+                                            </div>
+                                            <div class="form-group col-12 col-md-3">
+                                                <br>
+                                                Transaction No
+                                                <input type="text" class="form-control" name="trnctn_no" id="trnctn_no" placeholder="Transaction No" value="" <?= $edit; ?>>
+                                            </div> 
+                                            <div class="form-group col-12 col-md-3">
+                                                <br>
+                                                IFSC
+                                                <input type="text" class="form-control" name="ifsc" id="ifsc" placeholder="IFSC" value="" <?= $edit; ?>>
+                                            </div>                                             
                                             <div class="form-group col-12 col-md-3">
                                                 <br>
                                                 *Transaction Date
                                                 <input type="date" class="form-control" name="trnctn_dt" id="trnctn_dt" placeholder="*Transaction Date" required="required" value="" <?= $edit; ?>>
+                                            </div>
+                                            <div class="form-group col-12 col-md-6">
+                                                <br>
+                                                Organization Name
+                                                <input type="text" class="form-control" value="<?= $user_prof['org_name']; ?>" disabled>
+                                            </div>
+                                            <div class="form-group col-12 col-md-6">
+                                                <br>
+                                                *Payee Name
+                                                <input type="text" class="form-control" name="payee_nme" id="payee_nme" placeholder="*Payee Name" required="required" value="" <?= $edit; ?>>
+                                            </div>
+                                            <div class="form-group col-12 col-md-6">
+                                                <br>
+                                                GST Number
+                                                <input type="text" class="form-control" name="gst_num" id="gst_num" placeholder="GST Number" value="<?= $user_prof['gst_no']; ?>" <?= $edit; ?>>
                                             </div>
                                             <div class="form-group col-12 col-md-6">
                                                 </br>
@@ -216,7 +255,7 @@ $user_id = $user['id'];
                                                 <input type="file" class="form-control" name="chellan_img" id="chellan_img" placeholder="*Upload Chellan Image" <?= $edit; ?>>
                                             </div>
 
-                                        </div><br>
+                                        </div> <br>
                                         <!-- <div class="col-lg-12">
                                             <button type="submit" name="save_stall" class="btn btn-primary" id="save_stall">Save</button>
                                         </div> -->
@@ -231,17 +270,14 @@ $user_id = $user['id'];
                                         <div class="col-lg-12">
 
                                             <button type="submit" name="save_payment" class="btn btn-primary" id="save_payment">Save</button>
-
-
+                                            <br><br>
+                                                <medium class="text-danger">Disclaimer: <br>* Once your payment is made, the amount should not refund.<br></medium><br>
+                                                <br>
                                         </div>
-
-
                                     </form>
                                 </div>
                                 <!--end tab-pane-->
-
                                 <!--end tab-pane-->
-
                                 <!--end tab-pane-->
                             </div>
                         </div>
@@ -249,217 +285,30 @@ $user_id = $user['id'];
                 </div>
                 <!--end col-->
             </div>
-
-
         </div>
         <!-- container-fluid -->
     </div>
     <!-- End Page-content -->
 
     <?php include "footer.php"; ?>
-
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
     <script type="text/javascript">
         var _URL = window.URL || window.webkitURL;
-        // document.getElementById("logo").addEventListener("change", function(event) {
-        //     var file;
-        //     const fsize = this.files[0].size;
-        //     if (fsize > 1048576) {
-        //         alert("File size too big, please select a file less than 2MB");
-        //         return false;
-        //     }
-
-        // });
-
-        // function showAlert() {
-        //     alert("Do you want to submit? Once you submit, you cannot edit further.")
-        //     return 1;
-        // }
-
-        function sameCheck() {
-            var sameval = document.getElementById("same-check").checked;
-            if (sameval === true) {
-                $("#prsn_name").val($("#head_name").val());
-                $("#prsn_addr").val($("#head_addr").val());
-                $("#prsn_mobile").val($("#head_mobile").val());
-                $("#prsn_email").val($("#head_email").val());
-            } else {
-                $("#prsn_name").val("");
-                $("#prsn_addr").val("");
-                $("#prsn_mobile").val("");
-                $("#prsn_email").val("");
-            }
+        function printSlip() {
+            var divToPrint = document.getElementById("pay-slip");
+            newWin = window.open("");
+            newWin.document.write('<br><label><img src="assets/images/Logo_01.png" height="70vh" class="text-left"></label>');
+            newWin.document.write('<h3><b>PAYMENT SLIP</b></h3><br>');
+            newWin.document.write('<h4><b>Organization: ');
+            newWin.document.write(<?php echo json_encode ($user_prof['org_name']) ?>);
+            newWin.document.write('</b></h4><br>');
+            newWin.document.write('<html><head> <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/app.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" /></head><body>');
+            newWin.document.write(divToPrint.outerHTML);
+            newWin.document.write('</body></html>');         
+            newWin.print();
+            newWin.close();
         }
-
-        function sameCheckMob() {
-            var samemob = document.getElementById("same-mobile").checked;
-            if (samemob === true) {
-                $("#whatsapp").val($("#prsn_mobile").val());
-            } else {
-                $("#whatsapp").val("");
-            }
-        }
-
-        function enterPublisher() {
-            var orgNature = $("#org_nature").val();
-            if (orgNature !== 'P') {
-                $("#mjr_pub_hse").show();
-            } else {
-                $("#mjr_pub_hse").hide();
-            }
-        }
-
-        function amount() {
-            var amt3x3 = 10000;
-            var stall_count3x3 = $("#stall3x3").val();
-            tot_amt3x3 = (stall_count3x3 * amt3x3) + (amt3x3 * stall_count3x3 * 18) / 100;
-            $("#rate_amt").val(tot_amt3x3);
-            var amt3x2 = 7500;
-            var stall_count3x2 = $("#stall3x2").val();
-            tot_amt3x2 = (stall_count3x2 * amt3x2) + (amt3x2 * stall_count3x2 * 18) / 100;
-            $("#rate_amt3x2").val(tot_amt3x2);
-            var total_amt = tot_amt3x3 + tot_amt3x2;
-            $("#totamt").val(total_amt);
-            var tot_stall = (stall_count3x3 * 1) + (stall_count3x2 * 1);
-            if (stall_count3x3 > 5) {
-                alert("You can't choose more than 5 stalls");
-                $("#stall3x3").val("");
-            }
-            if (stall_count3x2 > 5) {
-                alert("You can't choose more than 5 stalls");
-                $("#stall3x2").val("");
-            }
-            if (tot_stall > 5) {
-                alert("You can select only 5 stalls altogether");
-                $("#stall3x3").val("");
-                $("#stall3x2").val("");
-                $("#rate_amt").val("");
-                $("#rate_amt3x2").val("");
-                $("#totamt").val("");
-            }
-        }
-
-        // function checkTerm() {
-        //     document.getElementById("terms").checked = false;
-        //     document.getElementById("org_name_lab").innerHTML = $("#comp_name").val();
-        //     document.getElementById("yers_lab").innerHTML = $("#estb_year").val();
-        //     document.getElementById("reg_lab").innerHTML = $("#reg_no").val();
-        //     document.getElementById("gst_lab").innerHTML = $("#gst_no").val();
-        //     document.getElementById("lang_lab").innerHTML = $("#book_lang").val();
-        //     document.getElementById("titl_lab").innerHTML = $("#title_no").val();
-        //     document.getElementById("nature_new").innerHTML = "";
-        //     var orgnature = $("#org_nature").val();
-        //     if (orgnature === "P") {
-        //         document.getElementById("natr_lab").innerHTML = "Publisher";
-        //     } else if (orgnature === "A") {
-        //         document.getElementById("natr_lab").innerHTML = "Publisher & Distributer";
-        //         $('#preview-tab').find('#nature_new').append("<td><label>Major Publishing House(s) which are distributed</label></td><td colspan='2'><label>" + $('#mjr_pub_val').val() + "</label></td>");
-        //     }
-        //     document.getElementById("head_nam_lab").innerHTML = $("#head_name").val();
-        //     document.getElementById("head_addr_lab").innerHTML = $("#head_addr").val();
-        //     document.getElementById("head_mob_lab").innerHTML = $("#head_mobile").val();
-        //     document.getElementById("head_email_lab").innerHTML = $("#head_email").val();
-        //     document.getElementById("head_site_lab").innerHTML = $("#head_site").val();
-        //     document.getElementById("prsn_nam_lab").innerHTML = $("#prsn_name").val();
-        //     document.getElementById("prsn_addr_lab").innerHTML = $("#prsn_addr").val();
-        //     document.getElementById("prsn_email_lab").innerHTML = $("#prsn_email").val();
-        //     document.getElementById("prsn_mob_lab").innerHTML = $("#prsn_mobile").val();
-        //     document.getElementById("prsn_wp_lab").innerHTML = $("#whatsapp").val();
-        //     var stall3x3 = $("#stall3x3").val();
-        //     var stall3x2 = $("#stall3x2").val();
-        //     document.getElementById("3x3_lab").innerHTML = $("#stall3x3").val();
-        //     document.getElementById("3x2_lab").innerHTML = $("#stall3x2").val();
-        //     document.getElementById("3x2amt_lab").innerHTML = $("#amt3x2").val();
-        //     document.getElementById("3x3amt_lab").innerHTML = $("#amt3x3").val();
-        //     document.getElementById("fascia_lab").innerHTML = $("#fascia").val();
-        //     document.getElementById("rmrk_lab").innerHTML = $("#remark").val();
-        //     document.getElementById("logo_lab").innerHTML = $("#logo").val();
-        //     $("#preview").modal({
-        //         show: true
-        //     });
-        // }
-
-        // document.getElementById("previewok").addEventListener("click", function(event) {
-        //     event.preventDefault()
-        //     var terms = document.getElementById("terms").checked;
-        //     if (terms !== true) {
-        //         alert("Please accept terms and conditions");
-        //     } else {
-        //         $("#preview-modal").modal('hide');
-        //         $("#register").click();
-        //     }
-        // });
-
-        $("#download").live("click", function() {
-            var printWindow = window.open('', '', 'height=800,width=600');
-            printWindow.document.write('<html><head><title>');
-            printWindow.document.write('</title></head><body align="center">');
-            printWindow.document.write('<img src="');
-            printWindow.document.write('./assets/img/logo/header2.jpg');
-            printWindow.document.write('" height="150" width="100%">');
-            printWindow.document.write("<br><br><br><div align='center'>");
-            printWindow.document.write("<table border='3'>");
-            printWindow.document.write('<thead></thead><tbody><tr><th colspan="2">House / Organization</th></tr><tr><td>Name  <td>');
-            printWindow.document.write($("#comp_name").val());
-            printWindow.document.write('</td></tr><tr><td>Year of Establishment  </td><td>');
-            printWindow.document.write($("#estb_year").val());
-            printWindow.document.write('</td></tr><tr><td>Registration Number  </td><td>');
-            printWindow.document.write($("#reg_no").val());
-            printWindow.document.write('</td></tr><tr><td>GST Number  </td><td>');
-            printWindow.document.write($("#gst_no").val());
-            printWindow.document.write('</td></tr><tr><td>Language(s) in which books are published  </td><td>');
-            printWindow.document.write($("#book_lang").val());
-            printWindow.document.write('</td></tr><tr><td>Number of Titles Published  </td><td>');
-            printWindow.document.write($("#title_no").val());
-            printWindow.document.write('</td></tr><tr><td>Nature of Organization  </td><td>');
-            var org_nature = $("#org_nature").val();
-            if (org_nature == 'P') {
-                printWindow.document.write('Publisher');
-            } else {
-                printWindow.document.write('Publisher & Distributer</td></tr><tr><td>Major Publishing House(s) which are distributed  </td><td>');
-                printWindow.document.write($("#mjr_pub_val").val());
-            }
-            printWindow.document.write('</td></tr><tr><th colspan="2">Head of the Publishing House / Organization</th></tr><tr><td>Name  </td><td>');
-            printWindow.document.write($("#head_name").val());
-            printWindow.document.write('</td></tr><tr><td>Address  </td><td>');
-            printWindow.document.write($("#head_addr").val());
-            printWindow.document.write('</td></tr><tr><td>Email ID  </td><td>');
-            printWindow.document.write($("#head_email").val());
-            printWindow.document.write('</td></tr><tr><td>Website  </td><td>');
-            printWindow.document.write($("#head_site").val());
-            printWindow.document.write('</td></tr><tr><td>Mobile Number  </td><td>');
-            printWindow.document.write($("#head_mobile").val());
-            printWindow.document.write('</td></tr><tr><th colspan="2">Contact (In-charge) Person for the Fair</th></tr><tr><td>Name  </td><td>');
-            printWindow.document.write($("#prsn_name").val());
-            printWindow.document.write('</td></tr><tr><td>Address  </td><td>');
-            printWindow.document.write($("#prsn_addr").val());
-            printWindow.document.write('</td></tr><tr><td>Email ID  </td><td>');
-            printWindow.document.write($("#prsn_email").val());
-            printWindow.document.write('</td></tr><tr><td>Mobile Number  </td><td>');
-            printWindow.document.write($("#prsn_mobile").val());
-            printWindow.document.write('</td></tr><tr><td>WhatsApp Number  </td><td>');
-            printWindow.document.write($("#whatsapp").val());
-            printWindow.document.write('</td></tr><tr><td>Estimated amount to remit (including GST)</td><td>');
-            printWindow.document.write('₹.');
-            printWindow.document.write($("#totamt").val());
-            printWindow.document.write('/-</td></tr><tr><td>FASCIA Text  </td><td>');
-            printWindow.document.write($("#fascia").val());
-            printWindow.document.write('</td></tr><tr><td>Remarks  </td><td>');
-            printWindow.document.write($("#remark").val());
-            printWindow.document.write('</td></tr><tr><td>Logo  </td><td>');
-            const [file] = logo.files
-            if (file) {
-                printWindow.document.write('<img id = "blah" height="50px" width="100px" src = "');
-                printWindow.document.write(URL.createObjectURL(file));
-                printWindow.document.write('" alt = "your image " />');
-            }
-            printWindow.document.write('<img src="');
-            printWindow.document.write('">');
-            printWindow.document.write('</tr></tr></tbody></table>');
-            printWindow.document.write("</div>");
-            printWindow.document.write('</body></html>');
-            printWindow.document.close();
-        });
+        const btn = document.getElementById("print-slip");
+        btn.addEventListener('click', () => printSlip())
     </script>
