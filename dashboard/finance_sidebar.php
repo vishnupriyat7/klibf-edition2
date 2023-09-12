@@ -46,36 +46,11 @@ $username = $_SESSION['username'];
                     <a href="index.php" class="nav-link" data-key="t-analytics"> <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards"> Dashboard </span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="finance_stall_payment_report.php" class="nav-link" data-key="t-analytics"> <i class="ri-checkbox-multiple-line"></i> <span data-key="t-dashboards"> Stall Allotment </span></a>
+                    <a href="finance_stall_payment_report.php" class="nav-link" data-key="t-analytics"> <i class="ri-file-list-3-line"></i> <span data-key="t-dashboards"> Stall Payment Report </span></a>
                 </li>
+         
 
-                <!-- <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarX" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="sidebarLanding">
-                        <i class="ri-file-list-3-line"></i> <span data-key="t-landing">Report</span>
-                    </a>
-                    <div class="menu-dropdown collapse" id="sidebarX">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="pgmcmtee_register_report.php" class="nav-link" data-key="t-nft-landing">Publisher Registered </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pgmcmtee_profile_report.php" class="nav-link" data-key="t-nft-landing">Profile Created </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pgmcmtee_stall_booking_report.php" class="nav-link" data-key="t-nft-landing">Stall Booking </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pgmcmtee-evnt-bkrls-report.php" class="nav-link" data-key="t-nft-landing">Event Proposal Book Release Report </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pgmcmtee-evnt-bkdscn-report.php" class="nav-link" data-key="t-nft-landing">Event Proposal Book Discussion Report </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pgmcmtee-spcl-evnt-prpsl-report.php" class="nav-link" data-key="t-nft-landing">Special Event Proposal Report </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li> -->
+              
 
             </ul>
         </div>
