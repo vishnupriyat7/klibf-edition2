@@ -157,11 +157,12 @@
                                                         <!-- <li>
                                                             <a href='editstall_registration.php?id=$id' class='dropdown-item edit-item-btn'>
                                                                 <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Edit
+                                                                
                                                             </a>
                                                         </li> -->
                                                         <li>
                                                             <a href='deletesocial.php?id=$id' class='dropdown-item remove-item-btn'>
-                                                                <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Approve
+                                                                <i class='ri-check-double-fill align-bottom me-2 text-success'></i> Approve
                                                             </a>
                                                         </li>
                                                         <!-- <li>
