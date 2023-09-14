@@ -276,28 +276,28 @@ $user_id = $user['id'];
                                             </div>
                                             <div class="form-group col-12 col-md-3">
                                                 <br>*Mode of Payment
-                                                <select class="form-control form-group" name="trnctn_type" id="trnctn_type" required="required" style="height:37px;" <?= $edit; ?>>
+                                                <select class="form-control form-group" name="trnctn_type" id="trnctn_type" required="required" style="height:37px;" <?= $edit; ?> onchange="paymentMode()">
                                                     <option value="0" <?= $select0; ?>>Select</option>
                                                     <option value="D" <?= $selectd; ?>>Cash Deposit</option>
                                                     <option value="O" <?= $selecto; ?>>Online Transfer</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-12 col-md-9">
+                                            <div class="form-group col-12 col-md-9" id="bank-name-div" hidden>
                                                 <br>
                                                 Bank Name
-                                                <input type="text" class="form-control" name="bank_name" placeholder="Bank Name" id="comp_name" value="<?= $bank_name; ?>" <?= $edit; ?>>
+                                                <input type="text" class="form-control" name="bank_name" placeholder="Bank Name" id="bank_name" value="<?= $bank_name; ?>" <?= $edit; ?>>
                                             </div>
                                             <div class="form-group col-12 col-md-3">
                                                 <br>
                                                 *Transaction Amount (in ₹ &nbsp;)
                                                 <input type="text" class="form-control" name="paid_amt" id="paid_amt" placeholder="*Paid Amount (in  ₹ &nbsp;)" required="required" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" <?= $edit; ?> value="<?= $total_amt; ?>">
                                             </div>
-                                            <div class="form-group col-12 col-md-3">
+                                            <div class="form-group col-12 col-md-3" hidden id="trnctn-no-div">
                                                 <br>
                                                 Transaction No
                                                 <input type="text" class="form-control" name="trnctn_no" id="trnctn_no" placeholder="Transaction No" value="<?= $trnctn_no; ?>" <?= $edit; ?>>
                                             </div>
-                                            <div class="form-group col-12 col-md-3">
+                                            <div class="form-group col-12 col-md-3" hidden id="ifsc-div">
                                                 <br>
                                                 IFSC
                                                 <input type="text" class="form-control" name="ifsc" id="ifsc" placeholder="IFSC" value="<?= $ifsc; ?>" maxlength="11" minlength="11" <?= $edit; ?>>
@@ -336,14 +336,14 @@ $user_id = $user['id'];
                                             <button type="submit" name="save_payment" class="btn btn-primary" id="save_payment">Save</button>
                                             <br><br>
                                             <medium class="text-danger">Disclaimer: <br>* Once your payment is made, the amount should not refund.<br></medium>
-                                            
+
                                         </div>
                                     </form>
-                                    <?php if($chellan['status'] == 'A') {  ?>
-                                    <hr><br>
-                                    <div class="col-md-4 right">
-                                        <button name="print-invoice" class="btn btn-primary" id="print-invoice" onclick="printInvoice()">Print Invoice</button>
-                                    </div>
+                                    <?php if ($chellan['status'] == 'A') {  ?>
+                                        <hr><br>
+                                        <div class="col-md-4 right">
+                                            <button name="print-invoice" class="btn btn-primary" id="print-invoice" onclick="printInvoice()">Print Invoice</button>
+                                        </div>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -361,6 +361,26 @@ $user_id = $user['id'];
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
     <script type="text/javascript">
         var _URL = window.URL || window.webkitURL;
+        document.addEventListener("DOMContentLoaded", function() {
+            paymentMode();
+        });
+
+        function paymentMode() {
+            var mode = $("#trnctn_type").val();
+            if (mode === 'D') {
+                document.getElementById("bank-name-div").removeAttribute("hidden", "");
+                document.getElementById("ifsc-div").removeAttribute("hidden", "");
+                document.getElementById("trnctn-no-div").setAttribute("hidden", "");
+            } else if (mode === 'O') {
+                document.getElementById("bank-name-div").setAttribute("hidden", "");
+                document.getElementById("ifsc-div").setAttribute("hidden", "");
+                document.getElementById("trnctn-no-div").removeAttribute("hidden", "");
+            } else {
+                document.getElementById("bank-name-div").setAttribute("hidden", "");
+                document.getElementById("ifsc-div").setAttribute("hidden", "");
+                document.getElementById("trnctn-no-div").setAttribute("hidden", "");
+            }
+        }
 
         function printSlip() {
             var divToPrint = document.getElementById("pay-slip");
@@ -372,6 +392,7 @@ $user_id = $user['id'];
             newWin.document.write('</b></h4><br>');
             newWin.document.write('<html><head> <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/app.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" /></head><body>');
             newWin.document.write(divToPrint.outerHTML);
+            newWin.document.write('<b><u>Details of bank account to which payment is to be made:</u></b><br><br>Bank Account Number - 67279812893<br>Name of Bank, Branch  - State Bank of India, Trivandrum City<br>Account holder’s name  - Finance Officer, Kerala Legislature Secretariat<br>IFS Code                        - SBIN0070028');
             newWin.document.write('</body></html>');
             newWin.print();
             newWin.close();
@@ -380,7 +401,12 @@ $user_id = $user['id'];
         btn.addEventListener('click', () => printSlip());
 
         function printInvoice() {
-            
+            var stall3x3 = <?php echo json_encode($stall3x3) ?>;
+            var stall3x2 = <?php echo json_encode($stall3x2) ?>;
+            var slno = 0;
+            var desc3x3 = "";
+            var desc3x2 = "";
+
             var divToPrint = document.getElementById("pay-slip");
             newWin = window.open("");
 
@@ -390,7 +416,7 @@ $user_id = $user['id'];
             // // newWin.document.write(<?php echo json_encode($user_prof['org_name']) ?>);
             // // newWin.document.write('</b></h4><br>');
             // newWin.document.write('<h3 class="text-center"><b>INVOICE</b></h3>');
-            newWin.document.write('<html><head> <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/app.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" /></head><body>');
+            newWin.document.write('<html><head> <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/app.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" /></head><body><style>td, th {font-size:12;}</style>');
             newWin.document.write('<table><tr><th colspan="11" class="text-center">SECRETARIAT OF THE KERALA LEGISLATURE<br></th></tr><tr><td>Post Box No:</td><td>5430</td><td colspan="6"></td><td>GSTN: </td><td><b>32AAAGK0786J1ZD</b></td></tr><tr><td>PIN:</td><td>695 033</td></tr><tr><td>Email:</td><td>secretary@niyamasabha.nic.in</td></tr><tr><th class="text-center" colspan="11"><br><br><br><br>INVOICE<br></th></tr><tr><td rowspan="2">Bill To</td><td rowspan="2">');
             newWin.document.write(<?php echo json_encode($user_prof['org_name']) ?>);
             newWin.document.write('<br>');
@@ -401,17 +427,50 @@ $user_id = $user['id'];
             newWin.document.write(<?php echo json_encode($chellan['updated_date']) ?>);
             newWin.document.write('</td></tr><tr><td>GSTIN: </td><td>');
             newWin.document.write(<?php echo json_encode($user_prof['gst_no']) ?>);
-            newWin.document.write('</td></tr><tr><td colspan="11"><br><br></td></tr><tr><th rowspan="2">No</th><th rowspan="2">Item Description</th><th rowspan="2">HSN/SAC</th><th rowspan="2">Qty</th><th rowspan="2">Unit Price</th><th rowspan="2">Taxable Amount</th><th colspan="3">GST</th><th rowspan="2">Total</th></tr><tr><th>%</th><th>SGST</th><th>CGST</th></tr><tr><td>');
-            var stall3x3 = <?php echo json_encode($stall3x3) ?>;
-            var stall3x2 = <?php echo json_encode($stall3x2) ?>;
-            var slno = 0;
-            if($stall3x3 > 0) { 
-                slno++;
+            newWin.document.write('</td></tr><tr><td colspan="11"><br><br></td></tr><tr><td rowspan="2" style="text-align: center;">No</td><td rowspan="2" style="text-align: center;">Item Description</td><td rowspan="2" style="text-align: center;">HSN/<br>SAC</td><td rowspan="2" style="text-align: center;">Qty</td><td rowspan="2" style="text-align: center;">Unit Price</td><td rowspan="2" style="text-align: center;">Taxable Amount</td><td colspan="3" style="text-align: center;">GST</td><td rowspan="2" style="text-align: center;">Total</td></tr><tr><td style="text-align: center;">%</td><td style="text-align: center;">SGST</td><td style="text-align: center;">CGST</td></tr><tr><td>');
+
+            if (stall3x3 > 0) {
+                // var desc3x3 = "Rent for Stall 3x3m<br>01/11/2023 - 07/11/2023";
+                newWin.document.write(++slno);
+                newWin.document.write('</td><td>Rent for Stall 3x3m 01/11/2023-07/11/2023</td><td>997222</td><td>&emsp;');
+                newWin.document.write(stall3x3);
+                newWin.document.write('</td><td style="text-align: right;">10000</td><td style="text-align: right;">');
+                newWin.document.write(<?php echo json_encode($rate3x3) ?>);
+                newWin.document.write('</td><td style="text-align: right;">18</td><td style="text-align: right;">');
+                newWin.document.write(<?php echo json_encode($gst3x3 / 2) ?>);
+                newWin.document.write('</td><td style="text-align: right;">');
+                newWin.document.write(<?php echo json_encode($gst3x3 / 2) ?>);
+                newWin.document.write('</td><td style="text-align: right;">');
+                newWin.document.write(<?php echo json_encode($tot_amt3x3) ?>);
             }
-            if($stall3x2 > 0) {
-                slno++;
+            if (stall3x2 > 0) {
+                // var desc3x3 = "Rent for Stall 3x2m<br>01/11/2023 - 07/11/2023";
+                newWin.document.write(++slno);
+                newWin.document.write('</td><td>Rent for Stall 3x2m 01/11/2023-07/11/2023</td><td>997222</td><td>');
+                newWin.document.write(stall3x2);
+                newWin.document.write('</td><td style="text-align: right;">10000</td><td style="text-align: right;">');
+                newWin.document.write(<?php echo json_encode($rate3x2) ?>);
+                newWin.document.write('</td><td style="text-align: right;">18</td><td style="text-align: right;">');
+                newWin.document.write(<?php echo json_encode($gst3x2 / 2) ?>);
+                newWin.document.write('</td><td style="text-align: right;">');
+                newWin.document.write(<?php echo json_encode($gst3x2 / 2) ?>);
+                newWin.document.write('</td><td style="text-align: right;">');
+                newWin.document.write(<?php echo json_encode($tot_amt3x2) ?>);
             }
-            newWin.document.write(stall3x3);
+            newWin.document.write('</td></tr><tr><td colspan="11"><br><br></td></tr><tr><td colspan="3" style="text-align: right;">Total</td><td style="text-align: right;">');
+            newWin.document.write(stall3x3 + stall3x2);
+            newWin.document.write('</td><td></td><td style="text-align: right;">');
+            newWin.document.write(<?php echo json_encode($rate3x3 + $rate3x2) ?>);
+            newWin.document.write('</td><td></td><td style="text-align: right;">');
+            newWin.document.write(<?php echo json_encode(($gst3x3 + $gst3x2) / 2) ?>);
+            newWin.document.write('</td><td style="text-align: right;">');
+            newWin.document.write(<?php echo json_encode(($gst3x3 + $gst3x2) / 2) ?>);
+            newWin.document.write('</td><td style="text-align: right;">');
+            newWin.document.write(<?php echo json_encode($total_amt) ?>);
+            newWin.document.write('</td></tr><tr><td colspan="11"><br><br></td></tr><tr><td colspan="6" style="text-align: right;">Total Taxable Amount</td><td colspan="5" style="text-align: right;">');
+            newWin.document.write(<?php echo json_encode($rate3x3 + $rate3x2) ?>);
+            newWin.document.write('</td></tr><tr><td colspan="6" style="text-align: right;">Total Tax Amount</td><td colspan="5" style="text-align: right;">');
+            newWin.document.write(<?php echo json_encode(($gst3x3 + $gst3x2) / 2) ?>);
             // newWin.document.write(divToPrint.outerHTML);
             newWin.document.write('</td></tr></table></body></html>');
             newWin.print();
@@ -420,124 +479,124 @@ $user_id = $user['id'];
 
 
 
-//             <html>
-// <body>
-// <table>
-// <tr>
-// <th colspan="11" class="text-center">SECRETARIAT OF THE KERALA LEGISLATURE<br></th>
-// </tr>
-// <tr>
-// <td>Post Box No:</td>
-// <td>5430</td>
-// <td colspan="6"></td>
-// <td>GSTN: </td>
-// <td><b>32AAAGK0786J1ZD</b></td>
-// </tr>
-// <tr>
-// <td>PIN:</td>
-// <td>695 033</td>
-// </tr>
-// <tr>
-// <td>Email:</td>
-// <td>secretary@niyamasabha.nic.in</td>
-// </tr>
-// <tr>
-// <th class="text-center" colspan="11"><br><br><br><br>INVOICE<br></th>
-// </tr>
-// <tr>
-// <td rowspan="2">Bill To</td>
-// <td rowspan="2">fghdgkjhg<br>hfjfkgkhl</td>
-// <td colspan="6"></td>
-// <td>Invoice No</td>
-// <td>BC0038</td>
-// </tr>
-// <tr>
-// <td colspan="6"></td>
-// <td>Invoice Date</td>
-// <td>vfdgsvdjfh</td>
-// </tr>
-// <tr>
-// <td>GSTIN: </td>
-// <td>CShdachgdcahgf</td>
-// </tr>
-// <tr>
-// <td colspan="11">
-// <br><br>
-// </td>
-// </tr>
-// <tr>
-// <th rowspan="2">No</th>
-// <th rowspan="2">Item Description</th>
-// <th rowspan="2">HSN/SAC</th>
-// <th rowspan="2">Qty</th>
-// <th rowspan="2">Unit Price</th>
-// <th rowspan="2">Taxable Amount</th>
-// <th colspan="3">GST</th>
-// <th rowspan="2">Total</th>
-// </tr>
-// <tr>
-// <th>%</th>
-// <th>SGST</th>
-// <th>CGST</th>
-// </tr>
-// <tr>
-// <td>1</td>
-// <td>Rent for Stall 3x3m 01/11/2023-07/11/2023</td>
-// <td>997222</td>
-// <td>1</td>
-// <td style="text-align: right;">10000</td>
-// <td style="text-align: right;">10000</td>
-// <td style="text-align: right;">18</td>
-// <td style="text-align: right;">900</td>
-// <td style="text-align: right;">900</td>
-// <td style="text-align: right;">11800</td>
-// </tr>
-// <tr>
-// <td colspan="11">
-// <br><br>
-// </td>
-// </tr>
-// <tr>
-// <td colspan="3" style="text-align: right;">Total</td>
-// <td colspan="2">1</td>
-// <td colspan="2" style="text-align: right;">10000</td>
-// <td style="text-align: right;">900</td>
-// <td style="text-align: right;">900</td>
-// <td style="text-align: right;">11800</td>
-// </tr>
-// <tr>
-// <td colspan="11">
-// <br><br>
-// </td>
-// </tr>
-// <tr>
-// <td colspan="6" style="text-align: right;">Total Taxable Amount</td>
-// <td colspan="5" style="text-align: right;">10000</td>
-// </tr>
-// <tr>
-// <td colspan="6" style="text-align: right;">Total Tax Amount</td>
-// <td colspan="5" style="text-align: right;">1800</td>
-// </tr>
-// <tr>
-// <td colspan="6" style="text-align: right;">Total Amount</td>
-// <td colspan="5" style="text-align: right;">11800</td>
-// </tr>
-// <tr>
-// <td colspan="6" style="text-align: right;">Amount Due</td>
-// <td colspan="5" style="text-align: right;">11800</td>
-// </tr>
-// <tr>
-// <td colspan="6" style="text-align: right;">Total (in words)</td>
-// <td colspan="5" style="text-align: right;">Rupees Eleven Thousand and Eight Hundred</td>
-// </tr>
-// <tr>
-// <td colspan="11">
-// <br><br><br><br><br>
-// </td>
-// </tr>
-// <tr>
-// <td colspan="11" style="text-align: right;">Authorized Signatory</td>
-// </tr>
-// </table></body></html>
+            //             <html>
+            // <body>
+            // <table>
+            // <tr>
+            // <th colspan="11" class="text-center">SECRETARIAT OF THE KERALA LEGISLATURE<br></th>
+            // </tr>
+            // <tr>
+            // <td>Post Box No:</td>
+            // <td>5430</td>
+            // <td colspan="6"></td>
+            // <td>GSTN: </td>
+            // <td><b>32AAAGK0786J1ZD</b></td>
+            // </tr>
+            // <tr>
+            // <td>PIN:</td>
+            // <td>695 033</td>
+            // </tr>
+            // <tr>
+            // <td>Email:</td>
+            // <td>secretary@niyamasabha.nic.in</td>
+            // </tr>
+            // <tr>
+            // <th class="text-center" colspan="11"><br><br><br><br>INVOICE<br></th>
+            // </tr>
+            // <tr>
+            // <td rowspan="2">Bill To</td>
+            // <td rowspan="2">fghdgkjhg<br>hfjfkgkhl</td>
+            // <td colspan="6"></td>
+            // <td>Invoice No</td>
+            // <td>BC0038</td>
+            // </tr>
+            // <tr>
+            // <td colspan="6"></td>
+            // <td>Invoice Date</td>
+            // <td>vfdgsvdjfh</td>
+            // </tr>
+            // <tr>
+            // <td>GSTIN: </td>
+            // <td>CShdachgdcahgf</td>
+            // </tr>
+            // <tr>
+            // <td colspan="11">
+            // <br><br>
+            // </td>
+            // </tr>
+            // <tr>
+            // <th rowspan="2">No</th>
+            // <th rowspan="2">Item Description</th>
+            // <th rowspan="2">HSN/SAC</th>
+            // <th rowspan="2">Qty</th>
+            // <th rowspan="2">Unit Price</th>
+            // <th rowspan="2">Taxable Amount</th>
+            // <th colspan="3">GST</th>
+            // <th rowspan="2">Total</th>
+            // </tr>
+            // <tr>
+            // <th>%</th>
+            // <th>SGST</th>
+            // <th>CGST</th>
+            // </tr>
+            // <tr>
+            // <td>1</td>
+            // <td>Rent for Stall 3x3m 01/11/2023-07/11/2023</td>
+            // <td>997222</td>
+            // <td>1</td>
+            // <td style="text-align: right;">10000</td>
+            // <td style="text-align: right;">10000</td>
+            // <td style="text-align: right;">18</td>
+            // <td style="text-align: right;">900</td>
+            // <td style="text-align: right;">900</td>
+            // <td style="text-align: right;">11800</td>
+            // </tr>
+            // <tr>
+            // <td colspan="11">
+            // <br><br>
+            // </td>
+            // </tr>
+            // <tr>
+            // <td colspan="3" style="text-align: right;">Total</td>
+            // <td colspan="2">1</td>
+            // <td colspan="2" style="text-align: right;">10000</td>
+            // <td style="text-align: right;">900</td>
+            // <td style="text-align: right;">900</td>
+            // <td style="text-align: right;">11800</td>
+            // </tr>
+            // <tr>
+            // <td colspan="11">
+            // <br><br>
+            // </td>
+            // </tr>
+            // <tr>
+            // <td colspan="6" style="text-align: right;">Total Taxable Amount</td>
+            // <td colspan="5" style="text-align: right;">10000</td>
+            // </tr>
+            // <tr>
+            // <td colspan="6" style="text-align: right;">Total Tax Amount</td>
+            // <td colspan="5" style="text-align: right;">1800</td>
+            // </tr>
+            // <tr>
+            // <td colspan="6" style="text-align: right;">Total Amount</td>
+            // <td colspan="5" style="text-align: right;">11800</td>
+            // </tr>
+            // <tr>
+            // <td colspan="6" style="text-align: right;">Amount Due</td>
+            // <td colspan="5" style="text-align: right;">11800</td>
+            // </tr>
+            // <tr>
+            // <td colspan="6" style="text-align: right;">Total (in words)</td>
+            // <td colspan="5" style="text-align: right;">Rupees Eleven Thousand and Eight Hundred</td>
+            // </tr>
+            // <tr>
+            // <td colspan="11">
+            // <br><br><br><br><br>
+            // </td>
+            // </tr>
+            // <tr>
+            // <td colspan="11" style="text-align: right;">Authorized Signatory</td>
+            // </tr>
+            // </table></body></html>
         }
     </script>
