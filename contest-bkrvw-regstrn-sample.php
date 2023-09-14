@@ -47,36 +47,36 @@
             </div> -->
         <!-- <div class="container d-flex justify-content-center align-items-center min-vh-100"> -->
         <!-- Section to hold your Google Sheets link -->
-        <!-- <section> -->
-        <!-- <h1>Your Page Heading</h1> -->
-        <!-- <p>Your page content here...</p> -->
-        <!-- Replace the Google Sheets link with your actual link -->
-        <!-- <a href="https://docs.google.com/spreadsheets/d/YourSheetID" target="_blank">Google Sheets Link</a> -->
-        <!-- <div class="card overflow-auto">
-                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKw20kdrJw7rUjexrK_vo8HU4-mIN3M1NT7wAXfSbFYrph9w/viewform?embedded=true" width="640" height="1815" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-                </div> -->
-        <!-- </section> -->
-        <!-- </div>
-        </section> -->
-        <div class="container d-flex justify-content-center align-items-center min-vh-100">
-            <!-- Section to hold your Google Sheets link -->
-            <section>
-                <h1>Your Page Heading</h1>
-                <p>Your page content here...</p>
-                <!-- <div class="col-12">
-                    <div class="card overflow-auto">
-                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKw20kdrJw7rUjexrK_vo8HU4-mIN3M1NT7wAXfSbFYrph9w/viewform?embedded=true" width="100%" height="600vh" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        <section>
+            
+            <div class="container d-flex justify-content-center align-items-center">
+                <div class="row">
+                    <!--end col-->
+                    <div class="col-xxl-12 col-12 col-md-6">
+                        <div class="card mt-xxl-n5">
+
+
+                            <div class="card-body p-4">
+                                <div class="tab-content">
+                                    <!-- <div class="tab-pane active" id="personalDetails" role="tabpanel"> -->
+
+                                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKw20kdrJw7rUjexrK_vo8HU4-mIN3M1NT7wAXfSbFYrph9w/viewform?embedded=true" width="1000" height="1815" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
+                                    <!-- </div> -->
+                                    <!--end tab-pane-->
+
+                                    <!--end tab-pane-->
+
+                                    <!--end tab-pane-->
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div> -->
-
-                <div class="col-12 col-md-6">
-                    <!-- <iframe class="mb-4 mb-lg-0" src="https://maps.google.com/maps?width=588&amp;height=456&amp;hl=en&amp;q=Kerala Niyamasabha&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe> -->
-                    <!-- <iframe src="https://maps.google.com/maps?width=588&amp;height=456&amp;hl=en&amp;q=Kerala Niyamasabha&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" width="100" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
-                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKw20kdrJw7rUjexrK_vo8HU4-mIN3M1NT7wAXfSbFYrph9w/viewform?embedded=true"  frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-
+                    <!--end col-->
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
+
 
     </main><!-- End #main -->
 

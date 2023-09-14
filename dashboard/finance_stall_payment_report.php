@@ -1,5 +1,18 @@
 <?php include "header.php"; ?>
 <?php include "finance_sidebar.php"; ?>
+<style>
+    .popup {
+        display: none;
+        position: absolute;
+        background-color: white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        z-index: 1;
+        max-width: 300px;
+        /* Adjust the width as needed */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+</style>
 
 <!-- ============================================================== -->
 <!-- Start right Content here -->
@@ -78,7 +91,7 @@
                                         $cntct_prsn_watsapp = "$book[cntct_prsn_watsapp]";
                                         $alloted_stall3x3 = "$book[confirm_3X3]";
                                         $alloted_stall3x2 = "$book[confirm_3X2]";
-                                        $rate = ($amt3x3 * $alloted_stall3x3) + ($amt3x2 *  $alloted_stall3x2);                                                                                           
+                                        $rate = ($amt3x3 * $alloted_stall3x3) + ($amt3x2 *  $alloted_stall3x2);
                                         $gst = ($amt3x3 * $alloted_stall3x3 * 18 / 100) + ($amt3x2 *  $alloted_stall3x2 * 18 / 100);
                                         $amounttobe_paid = $gst + $rate;
                                         $paid_amount = "$book[paid_amt]";
@@ -158,11 +171,13 @@
                                                 <?= $transaction_date; ?>
                                             </td>
                                             <td>
-                                                <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" height="70vh" onclick="enlargeImage(this)" style="cursor: pointer;">
+                                                <!-- <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" height="70vh" onclick="enlargeImage(this)" style="cursor: pointer;"> -->
+                                                <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" class="hover-image" height="70vh">
+
                                             </td>
-                                            <div id="enlarged-image-container" style="display: none;">
+                                            <!-- <div id="enlarged-image-container" style="display: none;">
                                                 <img id="enlarged-image" src="" alt="Enlarged Image" style="max-width: 90%; max-height: 90vh;">
-                                            </div>
+                                            </div> -->
 
                                             <td>
 
@@ -224,23 +239,37 @@
             }
         }
 
-        function enlargeImage(clickedImage) {
-            // Get the source of the clicked image
-            var imageSource = clickedImage.src;
+        const hoverImages = document.querySelectorAll('.hover-image');
 
-            // Get references to the enlarged image and its container
-            var enlargedImage = document.getElementById("enlarged-image");
-            var enlargedImageContainer = document.getElementById("enlarged-image-container");
+        hoverImages.forEach(image => {
+            image.addEventListener('mouseover', () => {
+                const popup = document.createElement('div');
+                popup.className = 'popup';
+                const enlargedImage = new Image();
+                enlargedImage.src = image.src;
+                popup.appendChild(enlargedImage);
 
-            // Set the source of the enlarged image
-            enlargedImage.src = imageSource;
+                // Calculate the center position of the viewport
+                const viewportCenterX = window.innerWidth / 2;
+                const viewportCenterY = window.innerHeight / 2;
 
-            // Show the enlarged image container
-            enlargedImageContainer.style.display = "block";
+                // Position the popup at the center
+                popup.style.top = viewportCenterY + 'px';
+                popup.style.left = viewportCenterX + 'px';
 
-            // Close the enlarged image on click
-            enlargedImage.onclick = function() {
-                enlargedImageContainer.style.display = "none";
-            };
-        }
+                // Add the popup to the document
+                document.body.appendChild(popup);
+
+                // Show the popup
+                popup.style.display = 'block';
+            });
+
+            image.addEventListener('mouseout', () => {
+                const popup = document.querySelector('.popup');
+                if (popup) {
+                    popup.style.display = 'none';
+                    document.body.removeChild(popup);
+                }
+            });
+        });
     </script>
