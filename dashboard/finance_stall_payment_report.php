@@ -240,6 +240,8 @@
         }
 
         const hoverImages = document.querySelectorAll('.hover-image');
+        const popupWidth = 500; // Adjust the desired width
+        const popupHeight = 500; // Adjust the desired height
 
         hoverImages.forEach(image => {
             image.addEventListener('mouseover', () => {
@@ -247,6 +249,8 @@
                 popup.className = 'popup';
                 const enlargedImage = new Image();
                 enlargedImage.src = image.src;
+                enlargedImage.style.width = popupWidth + 'px'; // Set the width
+                enlargedImage.style.height = popupHeight + 'px'; // Set the height
                 popup.appendChild(enlargedImage);
 
                 // Calculate the center position of the viewport
@@ -254,8 +258,8 @@
                 const viewportCenterY = window.innerHeight / 2;
 
                 // Position the popup at the center
-                popup.style.top = viewportCenterY + 'px';
-                popup.style.left = viewportCenterX + 'px';
+                popup.style.top = viewportCenterY - popupHeight / 2 + 'px';
+                popup.style.left = viewportCenterX - popupWidth / 2 + 'px';
 
                 // Add the popup to the document
                 document.body.appendChild(popup);
