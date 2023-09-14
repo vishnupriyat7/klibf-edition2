@@ -27,7 +27,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card">
+                    <div class="card" style="width: 120%;">
                         <div class="card-header">
                             <h5 class="card-title mb-0">Stall Booking Report</h5>
                         </div>
@@ -39,16 +39,16 @@
                                     <tr>
                                         <th data-ordering="false">Sl.No</th>
                                         <th data-ordering="false">Organization Name</th>
-
                                         <th data-ordering="false">GST Number</th>
-
                                         <th data-ordering="false">Contact Person Name</th>
-
                                         <th data-ordering="false">Contact Person Mobile</th>
                                         <th data-ordering="false">Contact Person Email</th>
-
-                                        <th data-ordering="false">Number of Stalls Allotted 3X3</th>
-                                        <th data-ordering="false">Number of Stalls Allotted 3X2</th>
+                                        <th data-ordering="false">Stalls 3X3</th>
+                                        <th data-ordering="false">Stalls 3X2</th>
+                                        <th data-ordering="false">Rate</th>
+                                        <th data-ordering="false">GST</th>
+                                        <th data-ordering="false">Total Amount to be Paid</th>
+                                        <th data-ordering="false">Paid Amount</th>
                                         <th data-ordering="false">Payee Name</th>
                                         <th data-ordering="false">Bank Name</th>
                                         <th data-ordering="false">IFSC</th>
@@ -57,17 +57,17 @@
                                         <th data-ordering="false">Transaction Date</th>
                                         <th data-ordering="false">Challan Image</th>
                                         <th data-ordering="false">Action</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $query = "SELECT up.*, sb.*, ch.*  FROM users_profile up JOIN stall_booking sb ON up.user_id = sb.user_id JOIN challan ch ON up.user_id = ch.user_id ORDER BY up.id DESC";
+                                    $query = "SELECT up.*, sb.*, ch.*, ch.id as chid FROM users_profile up JOIN stall_booking sb ON up.user_id = sb.user_id JOIN challan ch ON up.user_id = ch.user_id ORDER BY up.id DESC";
                                     $bookstall = mysqli_query($con, $query);
-                                    // var_dump(mysqli_fetch_array($bookstall));
                                     $counter = 0;
                                     while ($book = mysqli_fetch_array($bookstall)) {
                                         $id = "$book[id]";
+                                        $amt3x3 = 10000;
+                                        $amt3x2 = 7500;
                                         $pub_user_id = "$book[user_id]";
                                         $org_name = "$book[org_name]";
                                         $gst_no = "$book[gst_no]";
@@ -78,6 +78,10 @@
                                         $cntct_prsn_watsapp = "$book[cntct_prsn_watsapp]";
                                         $alloted_stall3x3 = "$book[confirm_3X3]";
                                         $alloted_stall3x2 = "$book[confirm_3X2]";
+                                        $rate = ($amt3x3 * $alloted_stall3x3) + ($amt3x2 *  $alloted_stall3x2);                                                                                           
+                                        $gst = ($amt3x3 * $alloted_stall3x3 * 18 / 100) + ($amt3x2 *  $alloted_stall3x2 * 18 / 100);
+                                        $amounttobe_paid = $gst + $rate;
+                                        $paid_amount = "$book[paid_amt]";
                                         $payee_name = "$book[paye_name]";
                                         $bank_name = "$book[bank_name]";
                                         $ifsc = "$book[ifsc]";
@@ -123,6 +127,18 @@
                                                 <?= $alloted_stall3x2; ?>
                                             </td>
                                             <td>
+                                                <?= $rate; ?>
+                                            </td>
+                                            <td>
+                                                <?= $gst; ?>
+                                            </td>
+                                            <td>
+                                                <?= $amounttobe_paid; ?>
+                                            </td>
+                                            <td>
+                                                <?= $paid_amount; ?>
+                                            </td>
+                                            <td>
                                                 <?= $payee_name; ?>
                                             </td>
                                             <td>
@@ -142,35 +158,28 @@
                                                 <?= $transaction_date; ?>
                                             </td>
                                             <td>
-
-                                                <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" height="70vh">
-                                                <!-- <?= $logo; ?> -->
-
+                                                <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" height="70vh" onclick="enlargeImage(this)" style="cursor: pointer;">
                                             </td>
+                                            <div id="enlarged-image-container" style="display: none;">
+                                                <img id="enlarged-image" src="" alt="Enlarged Image" style="max-width: 90%; max-height: 90vh;">
+                                            </div>
 
                                             <td>
-                                                <div class='dropdown d-inline-block'>
-                                                    <button class='btn btn-soft-secondary btn-sm dropdown' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                                        <i class='ri-more-fill align-middle'></i>
-                                                    </button>
-                                                    <ul class='dropdown-menu dropdown-menu-end'>
-                                                        <!-- <li>
-                                                            <a href='editstall_registration.php?id=$id' class='dropdown-item edit-item-btn'>
-                                                                <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Edit
-                                                            </a>
-                                                        </li> -->
-                                                        <li>
-                                                            <a href='deletesocial.php?id=$id' class='dropdown-item remove-item-btn'>
-                                                                <i class='ri-a align-bottom me-2 text-muted'></i> Approve
-                                                            </a>
-                                                        </li>
-                                                        <!-- <li>
-                                                            <a href='deletestall_registration.php?id=<?= $id ?>' class='dropdown-item remove-item-btn'>
-                                                                <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Delete
-                                                            </a>
-                                                        </li> -->
-                                                    </ul>
-                                                </div>
+
+                                                <?php
+                                                $query = "SELECT * FROM challan where id= '$book[chid]'";
+                                                $challan_dtls = mysqli_query($con, $query);
+                                                $challan_dtls_row = mysqli_fetch_row($challan_dtls);
+                                                if ($challan_dtls_row[10] == 'A') { ?>
+                                                    <button class="btn btn-success">Approved</button>
+
+                                                <?php } else { ?>
+
+                                                    <a href='update_finance_stall_report.php?id=<?= $book["chid"] ?>' class='dropdown-item remove-item-btn' <?= $btnenbl; ?>>
+                                                        <button class="btn btn-primary"> <i class='ri-user-follow-fill align-bottom me-2 text-white'></i> <span class="text-white">Verify / Approve</span></button>
+                                                    </a>
+                                                <?php   }
+                                                ?>
                                             </td>
                                         </tr>
                                     <?php  }
@@ -213,5 +222,25 @@
                 //triggering the function
                 downloadLink.click();
             }
+        }
+
+        function enlargeImage(clickedImage) {
+            // Get the source of the clicked image
+            var imageSource = clickedImage.src;
+
+            // Get references to the enlarged image and its container
+            var enlargedImage = document.getElementById("enlarged-image");
+            var enlargedImageContainer = document.getElementById("enlarged-image-container");
+
+            // Set the source of the enlarged image
+            enlargedImage.src = imageSource;
+
+            // Show the enlarged image container
+            enlargedImageContainer.style.display = "block";
+
+            // Close the enlarged image on click
+            enlargedImage.onclick = function() {
+                enlargedImageContainer.style.display = "none";
+            };
         }
     </script>
