@@ -3,6 +3,66 @@ ini_set('display_errors', '0');
 include "header.php";
 include "publisher_sidebar.php";
 $user_id = $user['id'];
+
+function convertNumberToWordsForIndia($number){
+    //A function to convert numbers into Indian readable words with Cores, Lakhs and Thousands.
+    $words = array(
+    '0'=> '' ,'1'=> 'one' ,'2'=> 'two' ,'3' => 'three','4' => 'four','5' => 'five',
+    '6' => 'six','7' => 'seven','8' => 'eight','9' => 'nine','10' => 'ten',
+    '11' => 'eleven','12' => 'twelve','13' => 'thirteen','14' => 'fouteen','15' => 'fifteen',
+    '16' => 'sixteen','17' => 'seventeen','18' => 'eighteen','19' => 'nineteen','20' => 'twenty',
+    '30' => 'thirty','40' => 'fourty','50' => 'fifty','60' => 'sixty','70' => 'seventy',
+    '80' => 'eighty','90' => 'ninty');
+    
+    //First find the length of the number
+    $number_length = strlen($number);
+    //Initialize an empty array
+    $number_array = array(0,0,0,0,0,0,0,0,0);        
+    $received_number_array = array();
+    
+    //Store all received numbers into an array
+    for($i=0;$i<$number_length;$i++){    
+  		$received_number_array[$i] = substr($number,$i,1);    
+  	}
+
+    //Populate the empty array with the numbers received - most critical operation
+    for($i=9-$number_length,$j=0;$i<9;$i++,$j++){ 
+        $number_array[$i] = $received_number_array[$j]; 
+    }
+
+    $number_to_words_string = "";
+    //Finding out whether it is teen ? and then multiply by 10, example 17 is seventeen, so if 1 is preceeded with 7 multiply 1 by 10 and add 7 to it.
+    for($i=0,$j=1;$i<9;$i++,$j++){
+        //"01,23,45,6,78"
+        //"00,10,06,7,42"
+        //"00,01,90,0,00"
+        if($i==0 || $i==2 || $i==4 || $i==7){
+            if($number_array[$j]==0 || $number_array[$i] == "1"){
+                $number_array[$j] = intval($number_array[$i])*10+$number_array[$j];
+                $number_array[$i] = 0;
+            }
+               
+        }
+    }
+
+    $value = "";
+    for($i=0;$i<9;$i++){
+        if($i==0 || $i==2 || $i==4 || $i==7){    
+            $value = $number_array[$i]*10; 
+        }
+        else{ 
+            $value = $number_array[$i];    
+        }            
+        if($value!=0)         {    $number_to_words_string.= $words["$value"]." "; }
+        if($i==1 && $value!=0){    $number_to_words_string.= "Crores "; }
+        if($i==3 && $value!=0){    $number_to_words_string.= "Lakhs ";    }
+        if($i==5 && $value!=0){    $number_to_words_string.= "Thousand "; }
+        if($i==6 && $value!=0){    $number_to_words_string.= "Hundred "; }            
+
+    }
+    if($number_length>9){ $number_to_words_string = "Sorry This does not support more than 99 Crores"; }
+    return ucwords(strtolower("Rupees ".$number_to_words_string)." Only.");
+}
 ?>
 <style>
     #pay-slip td {
@@ -76,6 +136,7 @@ $user_id = $user['id'];
                             //     $edit_count = 'disabled';
                             // }
                             $total_amt = $tot_amt3x3 + $tot_amt3x2;
+                            $totalinword = convertNumberToWordsForIndia($total_amt);
                             $chellanQuery = "SELECT * FROM challan WHERE user_id = ?";
                             $stmt_chellan = $con->prepare($chellanQuery);
                             $stmt_chellan->bind_param("s", $user_id);
@@ -395,67 +456,17 @@ $user_id = $user['id'];
             var gst3x2 = <?php echo json_encode($gst3x2) ?>;
             var totAmt3x2 = <?php echo json_encode($tot_amt3x2) ?>;
             var totalAmt = <?php echo json_encode($total_amt) ?>;
+            var totwords = <?php echo json_encode($totalinword) ?>
             // ... (other variables)
 
-            var htmlContent = '<html><head> <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/app.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" /></head><body><br><label><img src="assets/images/Logo_01.png" height="70vh" style="float: left;"></label><h3><b>PAYMENT SLIP</b></h3><br><h4><b>Organization:'+orgName+'<table class="table table-info table-responsive" id="pay-slip"><tr><th>Stalls</th><th>Alloted</th><th>Rate</th><th>GST(18%)</th><th>Amount</th></tr><tbody><tr><th>3m X 3m</th><td class="text-justify">'+stall3x3+'</td><td>'+rate3x3+'</td><td>'+gst3x3+'</td><td>'+totAmt3x3+'</td></tr><tr><th>3m X 2m</th><td>'+stall3x2+'</td><td>'+rate3x2+'</td><td>'+gst3x2+'</td><td>'+totAmt3x2+'</td></tr><tr><td colspan="4">Total amount payable (in ₹&nbsp;&nbsp;).</td><td><b>'+totalAmt+'</b></td></tr></tbody></table><b><u>Details of bank account to which payment is to be made:</u></b><br><br>Bank Account Number - 67279812893<br>Name of Bank, Branch  - State Bank of India, Trivandrum City<br>Account holder’s name  - Finance Officer, Kerala Legislature Secretariat<br>IFS Code                        - SBIN0070028</body></html>';
-    
-    // <td><?= $gst3x3; ?></td>
-    //                                                 <td><?= $tot_amt3x3; ?></td>
-    //                                             </tr>
-    //                                             <tr>
-    //                                                 <th>3m X 2m</th>
-    //                                                 <td><?= $stall3x2; ?></td>
-    //                                                 <td><?= $rate3x2; ?></td>
-    //                                                 <td><?= $gst3x2; ?></td>
-    //                                                 <td><?= $tot_amt3x2; ?></td>
-    //                                             </tr>
-    //                                             <tr>
-    //                                                 <td colspan="4">Total amount payable (in ₹&nbsp;&nbsp;).</td>
-    //                                                 <td><b><?= $total_amt; ?></b></td>
-    //                                             </tr>
-            // var divToPrint = document.getElementById("pay-slip");
+            var htmlContent = '<html><head> <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/app.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" /></head><body><br><label><img src="assets/images/Logo_01.png" height="70vh" style="float: left;"></label><h3><b>PAYMENT SLIP</b></h3><br><h4><b>Organization:'+orgName+'</h4><table class="table table-info table-responsive" id="pay-slip"><tr><th>Stalls</th><th>Alloted</th><th>Rate</th><th>GST(18%)</th><th>Amount</th></tr><tbody><tr><th>3m X 3m</th><td class="text-justify">'+stall3x3+'</td><td>'+rate3x3+'</td><td>'+gst3x3+'</td><td>'+totAmt3x3+'</td></tr><tr><th>3m X 2m</th><td>'+stall3x2+'</td><td>'+rate3x2+'</td><td>'+gst3x2+'</td><td>'+totAmt3x2+'</td></tr><tr><td colspan="4">Total amount payable (in ₹&nbsp;&nbsp;).</td><td><b>'+totalAmt+'</b></td></tr><tr><td colspan="2">Total amount payable (in words).</td><td colspan="3"><b>'+totwords+'</b></td></tr></tbody></table><br><br><b><u>Details of bank account to which payment is to be made:</u></b><br><br>Bank Account Number - 67279812893<br>Name of Bank, Branch  - State Bank of India, Trivandrum City<br>Account holder’s name  - Finance Officer, Kerala Legislature Secretariat<br>IFS Code - SBIN0070028</body></html>';
+   
             var iframe = document.getElementById("print-frame");
             iframe.contentDocument.write(htmlContent);
             iframe.contentDocument.close();
             iframe.focus(); // Optional: focus on the iframe
             iframe.contentWindow.print();
         }
-
-        // function printSlip() {
-        //     var divToPrint = document.getElementById("pay-slip");
-        //     newWin = window.open("");
-        //     newWin.document.write('<br><label><img src="assets/images/Logo_01.png" height="70vh" class="text-left"></label>');
-        //     newWin.document.write('<h3><b>PAYMENT SLIP</b></h3><br>');
-        //     newWin.document.write('<h4><b>Organization: ');
-        //     newWin.document.write(<?php echo json_encode($user_prof['org_name']) ?>);
-        //     newWin.document.write('</b></h4><br>');
-        //     newWin.document.write('<html><head> <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/app.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" /></head><body><table class="table table-info table-responsive" id="pay-slip"><tr><th>Stalls</th><th>Alloted</th><th>Rate</th><th>GST(18%)</th><th>Amount</th></tr><tbody><tr><th>3m X 3m</th><td class="text-justify">');
-        //     newWin.document.write(<?php echo json_encode($stall3x3) ?>);
-        //     newWin.document.write('</td><td>');
-        //     newWin.document.write(<?php echo json_encode($rate3x3) ?>);
-        //     newWin.document.write('</td><td>')
-        //     newWin.document.write(<?php echo json_encode($gst3x3) ?>);
-        //     newWin.document.write('</td><td>');
-        //     newWin.document.write(<?php echo json_encode($tot_amt3x3) ?>);
-        //     newWin.document.write('</td></tr><tr><th>3m X 2m</th><td>');
-        //     newWin.document.write(<?php echo json_encode($stall3x2) ?>);
-        //     newWin.document.write('</td><td>');
-        //     newWin.document.write(<?php echo json_encode($rate3x2) ?>);
-        //     newWin.document.write('</td><td>');
-        //     newWin.document.write(<?php echo json_encode($gst3x2) ?>);
-        //     newWin.document.write('</td><td>');
-        //     newWin.document.write(<?php echo json_encode($tot_amt3x2) ?>);
-        //     newWin.document.write('</td></tr><tr><td colspan="4">Total amount payable (in ₹&nbsp;&nbsp;).</td><td><b>');
-        //     newWin.document.write(<?php echo json_encode($total_amt) ?>);
-        //     newWin.document.write('</b></td></tr></tbody></table>');
-        //     // newWin.document.write(divToPrint.outerHTML);
-        //     newWin.document.write('<b><u>Details of bank account to which payment is to be made:</u></b><br><br>Bank Account Number - 67279812893<br>Name of Bank, Branch  - State Bank of India, Trivandrum City<br>Account holder’s name  - Finance Officer, Kerala Legislature Secretariat<br>IFS Code                        - SBIN0070028');
-        //     newWin.document.write('</body></html>');
-        //     newWin.print();
-        //     newWin.close();
-        // }
-        // const btn = document.getElementById("print-slip");
-        // btn.addEventListener('click', () => printSlip());
 
         function printInvoice() {
             var stall3x3 = <?php echo json_encode($stall3x3) ?>;
