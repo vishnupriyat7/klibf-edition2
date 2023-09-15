@@ -77,6 +77,8 @@ $bkrls_id = $_GET['bkrlsid'];
                             $bkrls_cntct_persn_email = $bkrlsdetls['contact_persn_email'];
                             $remark = $bkrlsdetls['remarks'];
                             $book_cover = base64_encode($bkrlsdetls['book_cover']);
+                            $current_date = new DateTime();
+                            $date = date_format($current_date, "Y-m-d H:i:s");
                         } else {
                             $book_title = '';
                             $book_genere = '';
@@ -199,9 +201,9 @@ $bkrls_id = $_GET['bkrlsid'];
                             } else {
                                 if ($bkrlsdetls) {
                                     if (!$imgContent && $book_cover) {
-                                        $query = "UPDATE event_propsl_bkrls SET book_title = '$book_title', author = '$author', book_genere = '$book_genere', brf_description = '$brief_descrptn', released_by = '$release_by', relcd_by_cntct = '$releas_by_cntct',  recived_by = '$recvd_by', recvd_by_contact = '$recvd_by_cntct', guest1 = '$guest1', guest1_contct = '$guest1_cntct', guest2 = '$guest2', guest2_contct = '$guest2_cntct', guest3 = '$guest3', guest3_contct = '$guest3_cntct', contact_persn_name = '$bkrls_cntct_persn_name', contact_persn_email = '$bkrls_cntct_persn_email', contact_persn_mobile = '$bkrls_cntct_persn_mobile', remarks = '$remark' WHERE id = $bkrls_id";
+                                        $query = "UPDATE event_propsl_bkrls SET book_title = '$book_title', author = '$author', book_genere = '$book_genere', brf_description = '$brief_descrptn', released_by = '$release_by', relcd_by_cntct = '$releas_by_cntct',  recived_by = '$recvd_by', recvd_by_contact = '$recvd_by_cntct', guest1 = '$guest1', guest1_contct = '$guest1_cntct', guest2 = '$guest2', guest2_contct = '$guest2_cntct', guest3 = '$guest3', guest3_contct = '$guest3_cntct', contact_persn_name = '$bkrls_cntct_persn_name', contact_persn_email = '$bkrls_cntct_persn_email', contact_persn_mobile = '$bkrls_cntct_persn_mobile', remarks = '$remark',updated_at = '$date' WHERE id = $bkrls_id";
                                     } else {
-                                        $query = "UPDATE event_propsl_bkrls SET book_title = '$book_title', author = '$author',book_genere = '$book_genere', brf_description = '$brief_descrptn', released_by = '$release_by', relcd_by_cntct = '$releas_by_cntct', recived_by = '$recvd_by', recvd_by_contact = '$recvd_by_cntct', guest1 = '$guest1', guest1_contct = '$guest1_cntct', guest2 = '$guest2', guest2_contct = '$guest2_cntct', guest3 = '$guest3', guest3_contct = '$guest3_cntct', contact_persn_name = '$bkrls_cntct_persn_name', contact_persn_email = '$bkrls_cntct_persn_email', contact_persn_mobile = '$bkrls_cntct_persn_mobile', remarks = '$remark', book_cover = '$imgContent' WHERE id = $bkrls_id";
+                                        $query = "UPDATE event_propsl_bkrls SET book_title = '$book_title', author = '$author',book_genere = '$book_genere', brf_description = '$brief_descrptn', released_by = '$release_by', relcd_by_cntct = '$releas_by_cntct', recived_by = '$recvd_by', recvd_by_contact = '$recvd_by_cntct', guest1 = '$guest1', guest1_contct = '$guest1_cntct', guest2 = '$guest2', guest2_contct = '$guest2_cntct', guest3 = '$guest3', guest3_contct = '$guest3_cntct', contact_persn_name = '$bkrls_cntct_persn_name', contact_persn_email = '$bkrls_cntct_persn_email', contact_persn_mobile = '$bkrls_cntct_persn_mobile', remarks = '$remark', book_cover = '$imgContent', updated_at = '$date' WHERE id = $bkrls_id";
                                     }
                                 } else {
                                     $query = "INSERT INTO event_propsl_bkrls (users_id, book_title, book_genere, brf_description, author,  released_by, relcd_by_cntct, recived_by, recvd_by_contact, guest1, guest1_contct, guest2, guest2_contct, guest3, guest3_contct, contact_persn_name, contact_persn_mobile,contact_persn_email, remarks,  updated_at, status, book_cover) VALUES ('$user_id','$book_title',  '$book_genere','$brief_descrptn','$author',  '$release_by', '$releas_by_cntct','$recvd_by','$recvd_by_cntct', '$guest1', '$guest1_cntct', '$guest2', '$guest2_cntct', '$guest3', '$guest3_cntct', '$bkrls_cntct_persn_name', '$bkrls_cntct_persn_mobile', '$bkrls_cntct_persn_email', '$remark', '$date', 'E', '$imgContent')";
@@ -506,8 +508,9 @@ $bkrls_id = $_GET['bkrlsid'];
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
 <script type="text/javascript">
     var _URL = window.URL || window.webkitURL;
-     function changeBookcover() {
+
+    function changeBookcover() {
         $("#book_cover").removeAttr('hidden');
         $("#book_cover_img").remove();
-    } 
+    }
 </script>

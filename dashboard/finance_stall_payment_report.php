@@ -240,7 +240,7 @@
         }
 
         const hoverImages = document.querySelectorAll('.hover-image');
-        const popupWidth = 500; // Adjust the desired width
+        const popupWidth = 700; // Adjust the desired width
         const popupHeight = 500; // Adjust the desired height
 
         hoverImages.forEach(image => {

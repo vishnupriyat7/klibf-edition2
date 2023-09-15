@@ -81,6 +81,8 @@ $bkdscn_id = $_GET['bkdscnid'];
                             $disc_remark = $bkdscndetls['remarks'];
 
                             $disc_book_cover = base64_encode($bkdscndetls['book_cover']);
+                            $current_date = new DateTime();
+                            $date = date_format($current_date, "Y-m-d H:i:s");
                         } else {
                             $subject = '';
                             $book_name = '';
@@ -219,13 +221,13 @@ $bkdscn_id = $_GET['bkdscnid'];
                                 if ($bkdscndetls) {
                                     // var_dump("jkjfk");
                                     if (!$imgContent && $disc_book_cover) {
-                                        $query1 = "UPDATE evnt_propsl_bkdscn SET subject = '$disc_sub', book_name = '$disc_book', moderator = '$modrtr', modrtr_cntct = '$modrtr_cntct', participant1 = '$prtcpnt1', part1_cntct = '$prtcpnt1_cntct',  participant2 = '$prtcpnt2', part2_cntct = '$prtcpnt2_cntct', participant3 = '$prtcpnt3', part3_cntct = '$prtcpnt3_cntct', participant4 = '$prtcpnt4', part4_cntct = '$prtcpnt4_cntct', cntct_name = '$cntct_name', cntct_mail = '$cntct_mail', cntct_phno = '$cntct_phno', remarks = '$disc_remark' WHERE id = $bkdscn_id";
+                                        $query1 = "UPDATE evnt_propsl_bkdscn SET subject = '$disc_sub', book_name = '$disc_book', moderator = '$modrtr', modrtr_cntct = '$modrtr_cntct', participant1 = '$prtcpnt1', part1_cntct = '$prtcpnt1_cntct',  participant2 = '$prtcpnt2', part2_cntct = '$prtcpnt2_cntct', participant3 = '$prtcpnt3', part3_cntct = '$prtcpnt3_cntct', participant4 = '$prtcpnt4', part4_cntct = '$prtcpnt4_cntct', cntct_name = '$cntct_name', cntct_mail = '$cntct_mail', cntct_phno = '$cntct_phno', remarks = '$disc_remark', updated_at = '$date' WHERE id = $bkdscn_id";
                                     } else {
-                                        $query1 = "UPDATE evnt_propsl_bkdscn SET subject = '$disc_sub', book_name = '$disc_book', moderator = '$modrtr', modrtr_cntct = '$modrtr_cntct', participant1 = '$prtcpnt1', part1_cntct = '$prtcpnt1_cntct',  participant2 = '$prtcpnt2', part2_cntct = '$prtcpnt2_cntct', participant3 = '$prtcpnt3', part3_cntct = '$prtcpnt3_cntct', participant4 = '$prtcpnt4', part4_cntct = '$prtcpnt4_cntct', cntct_name = '$cntct_name', cntct_mail = '$cntct_mail', cntct_phno = '$cntct_phno', remarks = '$disc_remark', book_cover = '$imgContent' WHERE id = $bkdscn_id";
+                                        $query1 = "UPDATE evnt_propsl_bkdscn SET subject = '$disc_sub', book_name = '$disc_book', moderator = '$modrtr', modrtr_cntct = '$modrtr_cntct', participant1 = '$prtcpnt1', part1_cntct = '$prtcpnt1_cntct',  participant2 = '$prtcpnt2', part2_cntct = '$prtcpnt2_cntct', participant3 = '$prtcpnt3', part3_cntct = '$prtcpnt3_cntct', participant4 = '$prtcpnt4', part4_cntct = '$prtcpnt4_cntct', cntct_name = '$cntct_name', cntct_mail = '$cntct_mail', cntct_phno = '$cntct_phno', remarks = '$disc_remark', book_cover = '$imgContent', updated_at = '$date' WHERE id = $bkdscn_id";
                                     }
                                 } else {
-                                $query1 = "INSERT INTO evnt_propsl_bkdscn (user_id, subject, book_name, moderator, participant1, participant2, participant3, participant4, cntct_name, cntct_phno, cntct_mail, updated_at, remarks, status, modrtr_cntct, part1_cntct, part2_cntct, part3_cntct, part4_cntct, book_cover) VALUES ('$user_id', '$disc_sub', '$disc_book', '$modrtr', '$prtcpnt1', '$prtcpnt2', '$prtcpnt3', '$prtcpnt4', '$cntct_name', '$cntct_phno', '$cntct_mail', '$date', '$disc_remark', 'E', '$modrtr_cntct', '$prtcpnt1_cntct', '$prtcpnt2_cntct', '$prtcpnt3_cntct', '$prtcpnt4_cntct', '$imgContent')";
-                            }
+                                    $query1 = "INSERT INTO evnt_propsl_bkdscn (user_id, subject, book_name, moderator, participant1, participant2, participant3, participant4, cntct_name, cntct_phno, cntct_mail, updated_at, remarks, status, modrtr_cntct, part1_cntct, part2_cntct, part3_cntct, part4_cntct, book_cover) VALUES ('$user_id', '$disc_sub', '$disc_book', '$modrtr', '$prtcpnt1', '$prtcpnt2', '$prtcpnt3', '$prtcpnt4', '$cntct_name', '$cntct_phno', '$cntct_mail', '$date', '$disc_remark', 'E', '$modrtr_cntct', '$prtcpnt1_cntct', '$prtcpnt2_cntct', '$prtcpnt3_cntct', '$prtcpnt4_cntct', '$imgContent')";
+                                }
                                 // var_dump($query1);
                                 $result1 = mysqli_query($con, $query1);
                                 if ($result1) {
@@ -355,10 +357,10 @@ $bkdscn_id = $_GET['bkdscnid'];
                                                 <select class="form-control form-group" name="evnt_day1" id="evnt_day1" style="height:35px;" required="required">
                                                     <option value="0">Select Proposed Event Day</option>
                                                     <?php foreach ($event_days as $event_day) {
-                                                       
+
                                                         if ($event_day[0] == $evnt_day1) {
                                                             $evntDay1Select = 'selected';
-                                                        }else{
+                                                        } else {
                                                             $evntDay1Select = "";
                                                         }
                                                     ?>
@@ -372,10 +374,10 @@ $bkdscn_id = $_GET['bkdscnid'];
                                                 <select class="form-control form-group" name="time_slot1" id="time_slot1" style="height:35px;" required="required">
                                                     <option value="0">Select Proposed Event Time</option>
                                                     <?php foreach ($event_slots as $event_slot) {
-                                                       
+
                                                         if ($event_slot[0] == $time_slot1) {
                                                             $evntTme1Select = 'selected';
-                                                        }else{
+                                                        } else {
                                                             $evntTme1Select = "";
                                                         }
                                                     ?>
@@ -389,10 +391,10 @@ $bkdscn_id = $_GET['bkdscnid'];
                                                 <select class="form-control form-group" name="evnt_day2" id="evnt_day2" style="height:35px;" required="required">
                                                     <option value="0">Select Proposed Event Day</option>
                                                     <?php foreach ($event_days as $event_day) {
-                                                        
+
                                                         if ($event_day[0] == $evnt_day2) {
                                                             $evntDay2Select = 'selected';
-                                                        }else{
+                                                        } else {
                                                             $evntDay2Select = "";
                                                         }
                                                     ?>
@@ -406,10 +408,10 @@ $bkdscn_id = $_GET['bkdscnid'];
                                                 <select class="form-control form-group" name="time_slot2" id="time_slot2" style="height:35px;" required="required">
                                                     <option value="0">Select Proposed Event Time</option>
                                                     <?php foreach ($event_slots as $event_slot) {
-                                                 
+
                                                         if ($event_slot[0] == $time_slot2) {
                                                             $evntTme2Select = 'selected';
-                                                        }else{
+                                                        } else {
                                                             $evntTme2Select = "";
                                                         }
                                                     ?>
@@ -423,10 +425,10 @@ $bkdscn_id = $_GET['bkdscnid'];
                                                 <select class="form-control form-group" name="evnt_day3" id="evnt_day3" style="height:35px;" required="required">
                                                     <option value="0">Select Proposed Event Day</option>
                                                     <?php foreach ($event_days as $event_day) {
-                                                      
+
                                                         if ($event_day[0] == $evnt_day3) {
                                                             $evntDay3Select = 'selected';
-                                                        }else{
+                                                        } else {
                                                             $evntDay3Select = "";
                                                         }
                                                     ?>
@@ -440,10 +442,10 @@ $bkdscn_id = $_GET['bkdscnid'];
                                                 <select class="form-control form-group" name="time_slot3" id="time_slot3" style="height:35px;" required="required">
                                                     <option value="0">Select Proposed Event Time</option>
                                                     <?php foreach ($event_slots as $event_slot) {
-                                                       
+
                                                         if ($event_slot[0] == $time_slot3) {
                                                             $evntTme3Select = 'selected';
-                                                        }else{
+                                                        } else {
                                                             $evntTme3Select = "";
                                                         }
                                                     ?>
