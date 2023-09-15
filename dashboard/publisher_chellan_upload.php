@@ -264,7 +264,7 @@ $user_id = $user['id'];
                                             </tbody>
                                         </table>
                                         <div class="col-md-4 right">
-                                            <button name="print" class="btn btn-primary" id="print-slip">Print Payment Slip</button>
+                                            <button name="print" class="btn btn-primary" id="print-slip" onclick="printSlip()">Print Payment Slip</button>
                                         </div>
                                     </div><br>
                                     <hr>
@@ -354,6 +354,7 @@ $user_id = $user['id'];
         </div>
         <!-- container-fluid -->
     </div>
+    <iframe id="print-frame" style="display: none;"></iframe>
     <!-- End Page-content -->
 
     <?php include "footer.php"; ?>
@@ -383,22 +384,78 @@ $user_id = $user['id'];
         }
 
         function printSlip() {
-            var divToPrint = document.getElementById("pay-slip");
-            newWin = window.open("");
-            newWin.document.write('<br><label><img src="assets/images/Logo_01.png" height="70vh" class="text-left"></label>');
-            newWin.document.write('<h3><b>PAYMENT SLIP</b></h3><br>');
-            newWin.document.write('<h4><b>Organization: ');
-            newWin.document.write(<?php echo json_encode($user_prof['org_name']) ?>);
-            newWin.document.write('</b></h4><br>');
-            newWin.document.write('<html><head> <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/app.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" /></head><body>');
-            newWin.document.write(divToPrint.outerHTML);
-            newWin.document.write('<b><u>Details of bank account to which payment is to be made:</u></b><br><br>Bank Account Number - 67279812893<br>Name of Bank, Branch  - State Bank of India, Trivandrum City<br>Account holder’s name  - Finance Officer, Kerala Legislature Secretariat<br>IFS Code                        - SBIN0070028');
-            newWin.document.write('</body></html>');
-            newWin.print();
-            newWin.close();
+            var orgName = <?php echo json_encode($user_prof['org_name']) ?>;
+            var stall3x3 = <?php echo json_encode($stall3x3) ?>;
+            var stall3x3 = <?php echo json_encode($stall3x3) ?>;
+            var rate3x3 = <?php echo json_encode($rate3x3) ?>;
+            var gst3x3 = <?php echo json_encode($gst3x3) ?>;
+            var totAmt3x3 = <?php echo json_encode($tot_amt3x3) ?>;
+            var stall3x2 = <?php echo json_encode($stall3x2) ?>;
+            var rate3x2 = <?php echo json_encode($rate3x2) ?>;
+            var gst3x2 = <?php echo json_encode($gst3x2) ?>;
+            var totAmt3x2 = <?php echo json_encode($tot_amt3x2) ?>;
+            var totalAmt = <?php echo json_encode($total_amt) ?>;
+            // ... (other variables)
+
+            var htmlContent = '<html><head> <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/app.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" /></head><body><br><label><img src="assets/images/Logo_01.png" height="70vh" style="float: left;"></label><h3><b>PAYMENT SLIP</b></h3><br><h4><b>Organization:'+orgName+'<table class="table table-info table-responsive" id="pay-slip"><tr><th>Stalls</th><th>Alloted</th><th>Rate</th><th>GST(18%)</th><th>Amount</th></tr><tbody><tr><th>3m X 3m</th><td class="text-justify">'+stall3x3+'</td><td>'+rate3x3+'</td><td>'+gst3x3+'</td><td>'+totAmt3x3+'</td></tr><tr><th>3m X 2m</th><td>'+stall3x2+'</td><td>'+rate3x2+'</td><td>'+gst3x2+'</td><td>'+totAmt3x2+'</td></tr><tr><td colspan="4">Total amount payable (in ₹&nbsp;&nbsp;).</td><td><b>'+totalAmt+'</b></td></tr></tbody></table><b><u>Details of bank account to which payment is to be made:</u></b><br><br>Bank Account Number - 67279812893<br>Name of Bank, Branch  - State Bank of India, Trivandrum City<br>Account holder’s name  - Finance Officer, Kerala Legislature Secretariat<br>IFS Code                        - SBIN0070028</body></html>';
+    
+    // <td><?= $gst3x3; ?></td>
+    //                                                 <td><?= $tot_amt3x3; ?></td>
+    //                                             </tr>
+    //                                             <tr>
+    //                                                 <th>3m X 2m</th>
+    //                                                 <td><?= $stall3x2; ?></td>
+    //                                                 <td><?= $rate3x2; ?></td>
+    //                                                 <td><?= $gst3x2; ?></td>
+    //                                                 <td><?= $tot_amt3x2; ?></td>
+    //                                             </tr>
+    //                                             <tr>
+    //                                                 <td colspan="4">Total amount payable (in ₹&nbsp;&nbsp;).</td>
+    //                                                 <td><b><?= $total_amt; ?></b></td>
+    //                                             </tr>
+            // var divToPrint = document.getElementById("pay-slip");
+            var iframe = document.getElementById("print-frame");
+            iframe.contentDocument.write(htmlContent);
+            iframe.contentDocument.close();
+            iframe.focus(); // Optional: focus on the iframe
+            iframe.contentWindow.print();
         }
-        const btn = document.getElementById("print-slip");
-        btn.addEventListener('click', () => printSlip());
+
+        // function printSlip() {
+        //     var divToPrint = document.getElementById("pay-slip");
+        //     newWin = window.open("");
+        //     newWin.document.write('<br><label><img src="assets/images/Logo_01.png" height="70vh" class="text-left"></label>');
+        //     newWin.document.write('<h3><b>PAYMENT SLIP</b></h3><br>');
+        //     newWin.document.write('<h4><b>Organization: ');
+        //     newWin.document.write(<?php echo json_encode($user_prof['org_name']) ?>);
+        //     newWin.document.write('</b></h4><br>');
+        //     newWin.document.write('<html><head> <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/app.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" /></head><body><table class="table table-info table-responsive" id="pay-slip"><tr><th>Stalls</th><th>Alloted</th><th>Rate</th><th>GST(18%)</th><th>Amount</th></tr><tbody><tr><th>3m X 3m</th><td class="text-justify">');
+        //     newWin.document.write(<?php echo json_encode($stall3x3) ?>);
+        //     newWin.document.write('</td><td>');
+        //     newWin.document.write(<?php echo json_encode($rate3x3) ?>);
+        //     newWin.document.write('</td><td>')
+        //     newWin.document.write(<?php echo json_encode($gst3x3) ?>);
+        //     newWin.document.write('</td><td>');
+        //     newWin.document.write(<?php echo json_encode($tot_amt3x3) ?>);
+        //     newWin.document.write('</td></tr><tr><th>3m X 2m</th><td>');
+        //     newWin.document.write(<?php echo json_encode($stall3x2) ?>);
+        //     newWin.document.write('</td><td>');
+        //     newWin.document.write(<?php echo json_encode($rate3x2) ?>);
+        //     newWin.document.write('</td><td>');
+        //     newWin.document.write(<?php echo json_encode($gst3x2) ?>);
+        //     newWin.document.write('</td><td>');
+        //     newWin.document.write(<?php echo json_encode($tot_amt3x2) ?>);
+        //     newWin.document.write('</td></tr><tr><td colspan="4">Total amount payable (in ₹&nbsp;&nbsp;).</td><td><b>');
+        //     newWin.document.write(<?php echo json_encode($total_amt) ?>);
+        //     newWin.document.write('</b></td></tr></tbody></table>');
+        //     // newWin.document.write(divToPrint.outerHTML);
+        //     newWin.document.write('<b><u>Details of bank account to which payment is to be made:</u></b><br><br>Bank Account Number - 67279812893<br>Name of Bank, Branch  - State Bank of India, Trivandrum City<br>Account holder’s name  - Finance Officer, Kerala Legislature Secretariat<br>IFS Code                        - SBIN0070028');
+        //     newWin.document.write('</body></html>');
+        //     newWin.print();
+        //     newWin.close();
+        // }
+        // const btn = document.getElementById("print-slip");
+        // btn.addEventListener('click', () => printSlip());
 
         function printInvoice() {
             var stall3x3 = <?php echo json_encode($stall3x3) ?>;
@@ -406,16 +463,8 @@ $user_id = $user['id'];
             var slno = 0;
             var desc3x3 = "";
             var desc3x2 = "";
-
             var divToPrint = document.getElementById("pay-slip");
             newWin = window.open("");
-
-            // newWin.document.write('<br><label class="text-center"><img src="assets/images/Govt_Logo.png" height="70vh" class="text-center" text-align="center"></label>');
-            // newWin.document.write('<h3 class="text-center"><b>SECRETARIAT OF THE KERALA LEGISLATURE</b></h3>');
-            // newWin.document.write('<h6>Post Box No: 5430&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;GSTN: <b>32AAAGK0786J1ZD</b><br>PIN: 695 033<br>Phone: 2512524<br>Email: secretary@niyamasabha.nic.in</h6><br><br><br>');
-            // // newWin.document.write(<?php echo json_encode($user_prof['org_name']) ?>);
-            // // newWin.document.write('</b></h4><br>');
-            // newWin.document.write('<h3 class="text-center"><b>INVOICE</b></h3>');
             newWin.document.write('<html><head> <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/app.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" /></head><body><style>td, th {font-size:12;}</style>');
             newWin.document.write('<table><tr><th colspan="11" class="text-center">SECRETARIAT OF THE KERALA LEGISLATURE<br></th></tr><tr><td>Post Box No:</td><td>5430</td><td colspan="6"></td><td>GSTN: </td><td><b>32AAAGK0786J1ZD</b></td></tr><tr><td>PIN:</td><td>695 033</td></tr><tr><td>Email:</td><td>secretary@niyamasabha.nic.in</td></tr><tr><th class="text-center" colspan="11"><br><br><br><br>INVOICE<br></th></tr><tr><td rowspan="2">Bill To</td><td rowspan="2">');
             newWin.document.write(<?php echo json_encode($user_prof['org_name']) ?>);
@@ -430,7 +479,6 @@ $user_id = $user['id'];
             newWin.document.write('</td></tr><tr><td colspan="11"><br><br></td></tr><tr><td rowspan="2" style="text-align: center;">No</td><td rowspan="2" style="text-align: center;">Item Description</td><td rowspan="2" style="text-align: center;">HSN/<br>SAC</td><td rowspan="2" style="text-align: center;">Qty</td><td rowspan="2" style="text-align: center;">Unit Price</td><td rowspan="2" style="text-align: center;">Taxable Amount</td><td colspan="3" style="text-align: center;">GST</td><td rowspan="2" style="text-align: center;">Total</td></tr><tr><td style="text-align: center;">%</td><td style="text-align: center;">SGST</td><td style="text-align: center;">CGST</td></tr><tr><td>');
 
             if (stall3x3 > 0) {
-                // var desc3x3 = "Rent for Stall 3x3m<br>01/11/2023 - 07/11/2023";
                 newWin.document.write(++slno);
                 newWin.document.write('</td><td>Rent for Stall 3x3m 01/11/2023-07/11/2023</td><td>997222</td><td>&emsp;');
                 newWin.document.write(stall3x3);
@@ -444,7 +492,6 @@ $user_id = $user['id'];
                 newWin.document.write(<?php echo json_encode($tot_amt3x3) ?>);
             }
             if (stall3x2 > 0) {
-                // var desc3x3 = "Rent for Stall 3x2m<br>01/11/2023 - 07/11/2023";
                 newWin.document.write(++slno);
                 newWin.document.write('</td><td>Rent for Stall 3x2m 01/11/2023-07/11/2023</td><td>997222</td><td>');
                 newWin.document.write(stall3x2);
@@ -470,8 +517,9 @@ $user_id = $user['id'];
             newWin.document.write('</td></tr><tr><td colspan="11"><br><br></td></tr><tr><td colspan="6" style="text-align: right;">Total Taxable Amount</td><td colspan="5" style="text-align: right;">');
             newWin.document.write(<?php echo json_encode($rate3x3 + $rate3x2) ?>);
             newWin.document.write('</td></tr><tr><td colspan="6" style="text-align: right;">Total Tax Amount</td><td colspan="5" style="text-align: right;">');
-            newWin.document.write(<?php echo json_encode(($gst3x3 + $gst3x2) / 2) ?>);
-            // newWin.document.write(divToPrint.outerHTML);
+            newWin.document.write(<?php echo json_encode(($gst3x3 + $gst3x2)) ?>);
+            newWin.document.write('</td></tr><tr><td colspan="6" style="text-align: right;">Total Amount</td><td colspan="5" style="text-align: right;">');
+            newWin.document.write();
             newWin.document.write('</td></tr></table></body></html>');
             newWin.print();
             newWin.close();
