@@ -191,7 +191,7 @@
 
                                                             <!-- Modal body -->
                                                             <div class="modal-body">
-                                                            <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" class="hover-image" height="500vh">
+                                                            <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" class="hover-image">
                                                             </div>
 
                                                             <!-- Modal footer -->
