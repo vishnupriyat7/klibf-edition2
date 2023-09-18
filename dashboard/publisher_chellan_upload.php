@@ -171,6 +171,11 @@ function convertNumberToWordsForIndia($number){
                             } else {
                                 $edit = 'disabled';
                             }
+                            if(!$imgChellan) {
+                                $hideimg = '';
+                            } else {
+                                $hideimg = 'hidden';
+                            }
                         } else {
                             $tot_amt3x3 = $tot_amt3x2 = $total_amt = 0;
                             $stall3x3 = 0;
@@ -240,6 +245,7 @@ function convertNumberToWordsForIndia($number){
                                     $status = "NOTOK";
                                 }
                             }
+                            // $imgChellan =  base64_encode($imgContent);
                             $errormsg = "";
                             if ($status == "NOTOK") {
                                 $errormsg = "<div class='alert alert-danger alert-dismissible alert-outline fade show'>" .
@@ -265,6 +271,54 @@ function convertNumberToWordsForIndia($number){
                                                 <button type='button' class='btn-close' data-dismiss='alert' aria-label='Close'></button>
                                                 </div>
                                ";
+                               $sql_profile = "SELECT id, org_name, gst_no, head_org_email FROM users_profile WHERE user_id = ?";
+                               $stmt_prof = $con->prepare($sql_profile);
+                               $stmt_prof->bind_param("s", $user_id);
+                               $stmt_prof->execute();
+                               $res_prof = $stmt_prof->get_result();
+                               $user_prof = $res_prof->fetch_assoc();
+                               $sql1 = "SELECT * FROM stall_booking WHERE user_id = ?";
+                               $stmt1 = $con->prepare($sql1);
+                               $stmt1->bind_param("i", $user_id);
+                               $stmt1->execute();
+                               $result1 = $stmt1->get_result();
+                               $user_stall = $result1->fetch_assoc();
+                               $stall3x3 = $user_stall['confirm_3X3'];
+                               $stall3x2 = $user_stall['confirm_3X2'];
+                               $amt3x3 = 10000;
+                               $amt3x2 = 7500;
+                               $rate3x3 = $stall3x3 * $amt3x3;
+                               $rate3x2 = $stall3x2 * $amt3x2;
+                               $gst3x3 = ($rate3x3 * 18) / 100;
+                               $gst3x2 = ($rate3x2 * 18) / 100;
+                               $tot_amt3x3 = $rate3x3 + $gst3x3;
+                               $tot_amt3x2 = $rate3x2 +  $gst3x2;
+                               // $stall_status = $user_stall['status'];
+                               // if ($stall_status != 'S') {
+                               //     $edit_count = '';
+                               // } else {
+                               //     $edit_count = 'disabled';
+                               // }
+                               $total_amt = $tot_amt3x3 + $tot_amt3x2;
+                               $totalinword = convertNumberToWordsForIndia($total_amt);
+                               $chellanQuery = "SELECT * FROM challan WHERE user_id = ?";
+                               $stmt_chellan = $con->prepare($chellanQuery);
+                               $stmt_chellan->bind_param("s", $user_id);
+                               $stmt_chellan->execute();
+                               $res_chellan = $stmt_chellan->get_result();
+                               $chellan = $res_chellan->fetch_assoc();
+                               $bank_name = $chellan['bank_name'];
+                               $paid_amt = $chellan['paid_amt'];
+                               $trnctn_no = $chellan['trnctn_no'];
+                               $ifsc = $chellan['ifsc'];
+                               $trnctn_dt = $chellan['trnctn_date'];
+                               $payee = $chellan['paye_name'];
+                               $trnctn_type = $chellan['trnctn_type'];
+                               $gst = $user_prof['gst_no'];
+                               $chellanStatus = $chellan['status'];
+                               $imgChellan = base64_encode($chellan['challan_img']);
+
+
                                 } else {
                                     $errormsg = "
                                     <div class='alert alert-danger alert-dismissible alert-outline fade show'>
@@ -387,7 +441,7 @@ function convertNumberToWordsForIndia($number){
                                                 </br>
                                                 *Upload Payment Image
                                                 </br>
-                                                <input type="file" class="form-control" name="chellan_img" id="chellan_img" placeholder="*Upload Chellan Image" <?= $edit; ?>>
+                                                <input type="file" class="form-control" name="chellan_img" id="chellan_img" placeholder="*Upload Chellan Image" <?= $edit; ?> <?= $hideimg; ?>>
                                                 <label id="chellan_image">
                                                     <img src="data:image/jpg;charset=utf8;base64,<?= $imgChellan; ?>" height="100vh" id="image_chellan" <?= $edit; ?>>
                                                 </label>
@@ -428,9 +482,9 @@ function convertNumberToWordsForIndia($number){
             paymentMode();
         });
 
-        function changeLogo() {
-            $("#logo").removeAttr('hidden');
-            $("#logo_img").remove();
+        function changeChellan() {
+            $("#chellan_img").removeAttr('hidden');
+            $("#chellan_image").remove();
         }
 
         function paymentMode() {
