@@ -24,7 +24,7 @@
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Book Review Registration</h2>
+                    <h2>Book Review Rules & Regulations</h2>
                     <ol>
                         <li><a href="index.php">Home</a></li>
                         <li>Book Review</li>
@@ -57,11 +57,11 @@
 
 
                             <div class="card-body p-4">
-                                <a href="contest-bkrvw-rules&regulation.php" class="mr-2 btn btn-success" target="_blank"><i class="fa fa-download"></i> Rules & Regulation</a>
+                                <!-- <a href="assets/broucher/Day_1.pdf" class="mr-2 btn btn-success" target="_blank"><i class="fa fa-download"></i> Rules & Regulation</a> -->
                                 <div class="tab-content">
                                     <!-- <div class="tab-pane active" id="personalDetails" role="tabpanel"> -->
 
-                                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKw20kdrJw7rUjexrK_vo8HU4-mIN3M1NT7wAXfSbFYrph9w/viewform?embedded=true" width="1000" height="1815" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                                    <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKw20kdrJw7rUjexrK_vo8HU4-mIN3M1NT7wAXfSbFYrph9w/viewform?embedded=true" width="1000" height="1815" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe> -->
 
                                     <!-- </div> -->
                                     <!--end tab-pane-->

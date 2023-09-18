@@ -38,6 +38,7 @@
                                 <thead>
                                     <tr>
                                         <th data-ordering="false">Sl.No</th>
+                                        <th>Action</th>
                                         <th data-ordering="false">Subject</th>
                                         <th data-ordering="false">Book Name</th>
                                         <th data-ordering="false">Book Cover</th>
@@ -61,7 +62,7 @@
                                         <th data-ordering="false">Contact No</th>
                                         <th data-ordering="false">Email Id</th>
                                         <th data-ordering="false">Remarks</th>
-                                        <th>Action</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -115,6 +116,13 @@
                                         <tr>
                                             <td>
                                                 <?= ++$counter; ?>
+                                            </td>
+                                            <td>
+
+                                                <a href='publisher_bookdiscussion.php?bkdscnid=<?= $id; ?>' class='dropdown-item edit-item-btn'>
+                                                <button class="btn btn-primary"> <i class='ri-edit-box-fill align-bottom me-2 text-white'></i> Edit</button>
+                                                </a>
+
                                             </td>
                                             <td>
                                                 <?= $subject; ?>
@@ -185,40 +193,7 @@
                                             <td>
                                                 <?= $remarks; ?>
                                             </td>
-                                            <td>
-                                                <div class='dropdown d-inline-block'>
-                                                    <button class='btn btn-soft-secondary btn-sm dropdown' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                                        <i class='ri-more-fill align-middle'></i>
-                                                    </button>
-                                                    <ul class='dropdown-menu dropdown-menu-end'>
-                                                        <li>
-                                                            <a href='publisher_bookdiscussion.php?bkdscnid=<?= $id; ?>' class='dropdown-item edit-item-btn'>
-                                                                <i class='ri-edit-box-fill align-bottom me-2 text-muted'></i> Edit
-                                                            </a>
-                                                        </li>
-                                                        <!-- <li>
-                                                            <a href='deletesocial.php?id=$id' class='dropdown-item remove-item-btn'>
-                                                                <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Delete
-                                                            </a>
-                                                        </li> -->
-                                                        <!-- <li>
-                                                            <?php
-                                                            // $query = "SELECT * FROM users_profile where user_id='$id'";
-                                                            // $profileusers = mysqli_query($con, $query);
-                                                            // $user_profile_row = mysqli_fetch_row($profileusers);
-                                                            // if ($user_profile_row) {
-                                                            //     $btnenbl = "hidden";
-                                                            // } else {
-                                                            //     $btnenbl = "";
-                                                            // }
-                                                            ?>
-                                                            <a href='' class='dropdown-item remove-item-btn'>
-                                                                <i class='ri-delete-bin-fill align-bottom me-2 text-danger'></i>Delete
-                                                            </a>
-                                                        </li> -->
-                                                    </ul>
-                                                </div>
-                                            </td>
+
                                         </tr>
                                     <?php } ?>
                                 </tbody>

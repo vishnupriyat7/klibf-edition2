@@ -38,14 +38,15 @@
                                 <thead>
                                     <tr>
                                         <th data-ordering="false">Sl.No</th>
+                                        <th>Action</th>
                                         <th data-ordering="false">Name of Event</th>
-                                        <th data-ordering="false">Dignitaries / Guests</th>   
-                                        <th data-ordering="false">Brief Discription</th>                                                                     
+                                        <th data-ordering="false">Dignitaries / Guests</th>
+                                        <th data-ordering="false">Brief Discription</th>
                                         <th data-ordering="false">Contact Person Name</th>
                                         <th data-ordering="false">Contact No</th>
                                         <th data-ordering="false">Email Id</th>
                                         <th data-ordering="false">Remarks</th>
-                                        <th>Action</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,20 +65,26 @@
                                         $cntct_mail = $spclEventProp['email'];
                                         $remarks = $spclEventProp['remarks'];
                                         
+
                                     ?>
                                         <tr>
                                             <td>
                                                 <?= ++$counter; ?>
                                             </td>
                                             <td>
+                                                <a href='publisher_special_event_proposal.php?speclevntid=<?= $id; ?>' class='dropdown-item edit-item-btn'>
+                                                    <button class="btn btn-primary"> <i class='ri-edit-box-fill align-bottom me-2 text-white'></i> Edit</button>
+                                                </a>
+                                            </td>
+                                            <td>
                                                 <?= $event_name; ?>
                                             </td>
                                             <td>
-                                            <?= $guests; ?>  
-                                            </td>                                           
+                                                <?= $guests; ?>
+                                            </td>
                                             <td>
-                                            <?= $eventDescription; ?>
-                                            </td>                    
+                                                <?= $eventDescription; ?>
+                                            </td>
                                             <td>
                                                 <?= $cntct_name; ?>
                                             </td>
@@ -90,25 +97,7 @@
                                             <td>
                                                 <?= $remarks; ?>
                                             </td>
-                                            <td>
-                                                <div class='dropdown d-inline-block'>
-                                                    <button class='btn btn-soft-secondary btn-sm dropdown' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                                        <i class='ri-more-fill align-middle'></i>
-                                                    </button>
-                                                    <ul class='dropdown-menu dropdown-menu-end'>
-                                                        <li>
-                                                            <a href='publisher_special_event_proposal.php?speclevntid=<?= $id; ?>' class='dropdown-item edit-item-btn'>
-                                                                <i class='ri-edit-box-fill align-bottom me-2 text-muted'></i> Edit
-                                                            </a>
-                                                        </li>                                                 
-                                                        <!-- <li>                                                            
-                                                            <a href='' class='dropdown-item remove-item-btn'>
-                                                                <i class='ri-delete-bin-fill align-bottom me-2 text-danger'></i>Delete
-                                                            </a>
-                                                        </li> -->
-                                                    </ul>
-                                                </div>
-                                            </td>
+
                                         </tr>
                                     <?php } ?>
                                 </tbody>

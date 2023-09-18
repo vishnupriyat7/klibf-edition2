@@ -60,6 +60,8 @@ $spclevnt_id = $_GET['speclevntid'];
                             $spcl_mobile = $spclevntdtls['mobile'];
                             $spcl_email = $spclevntdtls['email'];
                             $spcl_remark = $spclevntdtls['remarks'];
+                            $current_date = new DateTime();
+                            $date = date_format($current_date, "Y-m-d H:i:s");
                         } else {
                             $event_name = '';
                             $dignitaries = '';
@@ -93,7 +95,7 @@ $spclevnt_id = $_GET['speclevntid'];
                             } else {
 
                                 if ($spclevntdtls) {
-                                    $query1 = "UPDATE special_event_propsl SET event_name = '$event_name', event_brf_description = '$brf_descrptn', digniteries_guests = '$dignitaries', event_contact_persn = '$spcl_prsn_cntct', email = ' $spcl_email', mobile = ' $spcl_mobile', updated_at = now(),remarks = ' $spcl_remark' WHERE id = $spclevnt_id";
+                                    $query1 = "UPDATE special_event_propsl SET event_name = '$event_name', event_brf_description = '$brf_descrptn', digniteries_guests = '$dignitaries', event_contact_persn = '$spcl_prsn_cntct', email = ' $spcl_email', mobile = ' $spcl_mobile', updated_at = now(),remarks = ' $spcl_remark', updated_at = '$date' WHERE id = $spclevnt_id";
                                 } else {
                                     $query1 = "INSERT INTO special_event_propsl (users_id, event_name, event_brf_description, digniteries_guests, event_contact_persn, email, mobile, updated_at, remarks) VALUES ('$user_id', '$event_name', '$brf_descrptn', '$dignitaries', '$spcl_prsn_cntct', '$spcl_email', '$spcl_mobile', '$date', '$spcl_remark')";
                                 }
