@@ -5,6 +5,42 @@
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
+<style>
+    /* Style for the modal container */
+    .image-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Style for the modal popup */
+    .image-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        max-width: 90%;
+        max-height: 90%;
+    }
+
+    /* Style for the enlarged image inside the popup */
+    .image-popup img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Style for the close button (you can customize this) */
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+    }
+</style>
+
 <div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
@@ -28,7 +64,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card" style="width: 200%;">
+                    <div class="card" style="width: 250%;">
                         <div class="card-header">
                             <h5 class="card-title mb-0">Stall Payment Report</h5>
                         </div>
@@ -176,36 +212,43 @@
                                             <td>
                                                 <?= $transaction_date; ?>
                                             </td>
-                                            <td>
-                                                <!-- <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" height="70vh" onclick="enlargeImage(this)" style="cursor: pointer;"> -->
-                                                <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" class="hover-image" height="70vh" data-bs-toggle="modal" data-bs-target="#myModal">
+                                            <!-- <td> -->
+                                            <!-- <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" height="70vh" onclick="enlargeImage(this)" style="cursor: pointer;"> -->
+                                            <!-- <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" class="hover-image" height="70vh" data-bs-toggle="modal" data-bs-target="#myModal">
                                                 <div class="modal" id="myModal">
                                                     <div class="modal-dialog">
-                                                        <div class="modal-content">
+                                                        <div class="modal-content"> -->
 
-                                                            <!-- Modal Header -->
-                                                            <div class="modal-header">
+                                            <!-- Modal Header -->
+                                            <!-- <div class="modal-header">
                                                                 <h4 class="modal-title">Chellan Image</h4>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                                            </div>
+                                                            </div> -->
 
-                                                            <!-- Modal body -->
-                                                            <div class="modal-body">
-                                                            <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" class="hover-image">
-                                                            </div>
+                                            <!-- Modal body -->
+                                            <!-- <div class="modal-body">
+                                                                <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" style="height: 50%; width: 60%;" class="hover-image">
 
-                                                            <!-- Modal footer -->
-                                                            <div class="modal-footer">
+                                                            </div> -->
+
+
+                                            <!-- Modal footer -->
+                                            <!-- <div class="modal-footer">
                                                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                                             </div>
 
                                                         </div>
                                                     </div>
-                                                </div>                                             
+                                                </div> -->
+                                            <!-- </td> -->
+                                            <td>
+                                                <div class="image-container">
+                                                    <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" class="hover-image" height="70vh">
+                                                </div>
                                             </td>
-                                            <!-- <div id="enlarged-image-container" style="display: none;">
+                                            <div id="enlarged-image-container" style="display: none;">
                                                 <img id="enlarged-image" src="" alt="Enlarged Image" style="max-width: 90%; max-height: 90vh;">
-                                            </div> -->
+                                            </div>
 
 
                                         </tr>
@@ -265,40 +308,27 @@
         }
 
         const hoverImages = document.querySelectorAll('.hover-image');
-        const popupWidth = 700; // Adjust the desired width
-        const popupHeight = 500; // Adjust the desired height
 
         hoverImages.forEach(image => {
             image.addEventListener('mouseover', () => {
-                const popup = document.createElement('div');
-                popup.className = 'popup';
                 const enlargedImage = new Image();
                 enlargedImage.src = image.src;
-                enlargedImage.style.width = popupWidth + 'px'; // Set the width
-                enlargedImage.style.height = popupHeight + 'px'; // Set the height
+
+                const popup = document.createElement('div');
+                popup.classList.add('image-popup');
                 popup.appendChild(enlargedImage);
 
-                // Calculate the center position of the viewport
-                const viewportCenterX = window.innerWidth / 2;
-                const viewportCenterY = window.innerHeight / 2;
-
-                // Position the popup at the center
-                popup.style.top = viewportCenterY - popupHeight / 2 + 'px';
-                popup.style.left = viewportCenterX - popupWidth / 2 + 'px';
-
-                // Add the popup to the document
-                document.body.appendChild(popup);
-
-                // Show the popup
-                popup.style.display = 'block';
-            });
-
-            image.addEventListener('mouseout', () => {
-                const popup = document.querySelector('.popup');
-                if (popup) {
-                    popup.style.display = 'none';
+                // Create a close button
+                const closeButton = document.createElement('span');
+                closeButton.innerHTML = '&times;';
+                closeButton.classList.add('close-button');
+                closeButton.addEventListener('click', () => {
                     document.body.removeChild(popup);
-                }
+                });
+                popup.appendChild(closeButton);
+
+                // Append the popup to the body
+                document.body.appendChild(popup);
             });
         });
     </script>

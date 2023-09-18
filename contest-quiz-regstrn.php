@@ -24,10 +24,10 @@
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Book Review Registration</h2>
+                    <h2>Quiz Registration</h2>
                     <ol>
                         <li><a href="index.php">Home</a></li>
-                        <li>Book Review</li>
+                        <li>Quiz</li>
                     </ol>
                 </div>
 
@@ -56,15 +56,8 @@
                         <div class="card mt-xxl-n5">
 
 
-
-
                             <div class="card-body p-4">
                                 <div class="tab-content">
-                                    <div class="align-items-center text-center">
-                                        <h3>Rules & Regulations</h3>
-
-                                    </div>
-
                                     <!-- <div class="tab-pane active" id="personalDetails" role="tabpanel"> -->
 
                                     <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKw20kdrJw7rUjexrK_vo8HU4-mIN3M1NT7wAXfSbFYrph9w/viewform?embedded=true" width="1000" height="1815" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe> -->

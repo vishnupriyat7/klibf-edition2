@@ -21,11 +21,11 @@
     </li>
     <li class="dropdown"><a href="#"><span>Contests</span> <i class="bi bi-chevron-right"></i></a>
       <ul>
-        <li><a href="contest-bkrvw-regstrn-sample.php">Book Review / വായനാവസന്തം</a></li>
-        <li><a href="#">Recitation / പദ്യപാരായണം</a></li>
-        <li><a href="#">Story Telling / ഒരു കഥ പറയാം</a></li>
-        <li><a href="#">Cartoon / കാർട്ടൂൺ</a></li>
-        <li><a href="#">Quiz / ക്വിസ്</a></li>
+        <li><a href="contest-bkrvw-regstrn.php">Book Review / വായനാവസന്തം</a></li>
+        <li><a href="contest-rectn-poem-regstrn.php">Recitation / പദ്യപാരായണം</a></li>
+        <li><a href="contest-story-telling-regstrn.php">Story Telling / ഒരു കഥ പറയാം</a></li>
+        <!-- <li><a href="#">Cartoon / കാർട്ടൂൺ</a></li> -->
+        <li><a href="contest-quiz-regstrn.php">Quiz / ക്വിസ്</a></li>
       </ul>
     </li>
     <!-- <li><a href="http://klibf.niyamasabha.org/vision-speakers-new.php" target="_blank">Speakers</a></li>
