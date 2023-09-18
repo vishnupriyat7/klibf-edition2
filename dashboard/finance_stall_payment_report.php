@@ -40,7 +40,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card" style="width: 120%;">
+                    <div class="card" style="width: 180%;">
                         <div class="card-header">
                             <h5 class="card-title mb-0">Stall Payment Report</h5>
                         </div>
@@ -51,6 +51,7 @@
                                 <thead>
                                     <tr>
                                         <th data-ordering="false">Sl.No</th>
+                                        <th data-ordering="false">Action</th>
                                         <th data-ordering="false">Organization Name</th>
                                         <th data-ordering="false">GST Number</th>
                                         <th data-ordering="false">Contact Person Name</th>
@@ -69,7 +70,7 @@
                                         <th data-ordering="false">Transaction Number</th>
                                         <th data-ordering="false">Transaction Date</th>
                                         <th data-ordering="false">Challan Image</th>
-                                        <th data-ordering="false">Action</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -112,6 +113,23 @@
                                         <tr>
                                             <td>
                                                 <?= ++$counter; ?>
+                                            </td>
+                                            <td>
+
+                                                <?php
+                                                $query = "SELECT * FROM challan where id= '$book[chid]'";
+                                                $challan_dtls = mysqli_query($con, $query);
+                                                $challan_dtls_row = mysqli_fetch_row($challan_dtls);
+                                                if ($challan_dtls_row[10] == 'A') { ?>
+                                                    <button class="btn btn-success">Approved</button>
+
+                                                <?php } else { ?>
+
+                                                    <a href='finance_stall_report_update.php?id=<?= $book["chid"] ?>' class='dropdown-item remove-item-btn' <?= $btnenbl; ?>>
+                                                        <button class="btn btn-primary"> <i class='ri-user-follow-fill align-bottom me-2 text-white'></i> <span class="text-white">Verify / Approve</span></button>
+                                                    </a>
+                                                <?php   }
+                                                ?>
                                             </td>
 
                                             <td>
@@ -179,23 +197,7 @@
                                                 <img id="enlarged-image" src="" alt="Enlarged Image" style="max-width: 90%; max-height: 90vh;">
                                             </div> -->
 
-                                            <td>
 
-                                                <?php
-                                                $query = "SELECT * FROM challan where id= '$book[chid]'";
-                                                $challan_dtls = mysqli_query($con, $query);
-                                                $challan_dtls_row = mysqli_fetch_row($challan_dtls);
-                                                if ($challan_dtls_row[10] == 'A') { ?>
-                                                    <button class="btn btn-success">Approved</button>
-
-                                                <?php } else { ?>
-
-                                                    <a href='update_finance_stall_report.php?id=<?= $book["chid"] ?>' class='dropdown-item remove-item-btn' <?= $btnenbl; ?>>
-                                                        <button class="btn btn-primary"> <i class='ri-user-follow-fill align-bottom me-2 text-white'></i> <span class="text-white">Verify / Approve</span></button>
-                                                    </a>
-                                                <?php   }
-                                                ?>
-                                            </td>
                                         </tr>
                                     <?php  }
                                     ?>
