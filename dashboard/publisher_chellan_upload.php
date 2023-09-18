@@ -391,6 +391,7 @@ function convertNumberToWordsForIndia($number){
                                                 <label id="chellan_image">
                                                     <img src="data:image/jpg;charset=utf8;base64,<?= $imgChellan; ?>" height="100vh" id="image_chellan" <?= $edit; ?>>
                                                 </label>
+                                                <span id="changeChellan" onclick="changeChellan();" <?= $edit; ?>><u>Change Chellan Image</u></span>
                                             </div>
                                         </div> <br>
                                         <div class="col-lg-12">
@@ -426,6 +427,11 @@ function convertNumberToWordsForIndia($number){
         document.addEventListener("DOMContentLoaded", function() {
             paymentMode();
         });
+
+        function changeLogo() {
+            $("#logo").removeAttr('hidden');
+            $("#logo_img").remove();
+        }
 
         function paymentMode() {
             var mode = $("#trnctn_type").val();
