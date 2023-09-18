@@ -207,7 +207,7 @@ function convertNumberToWordsForIndia($number){
                                     $msg = 'IFSC should be 11 characters length.';
                                     $status = "NOTOK";
                                 }
-                            } elseif ($trnctn_type == 'o') {
+                            } elseif ($trnctn_type == 'O') {
                                 if ($trnctn_no == '') {
                                     $msg = 'Please enter Transaction Number.';
                                     $status = "NOTOK";
