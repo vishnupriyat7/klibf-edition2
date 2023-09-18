@@ -1,18 +1,6 @@
 <?php include "header.php"; ?>
 <?php include "finance_sidebar.php"; ?>
-<style>
-    .popup {
-        display: none;
-        position: absolute;
-        background-color: white;
-        border: 1px solid #ccc;
-        padding: 10px;
-        z-index: 1;
-        max-width: 300px;
-        /* Adjust the width as needed */
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    }
-</style>
+
 
 <!-- ============================================================== -->
 <!-- Start right Content here -->
@@ -40,7 +28,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card" style="width: 180%;">
+                    <div class="card" style="width: 200%;">
                         <div class="card-header">
                             <h5 class="card-title mb-0">Stall Payment Report</h5>
                         </div>
@@ -190,8 +178,30 @@
                                             </td>
                                             <td>
                                                 <!-- <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" height="70vh" onclick="enlargeImage(this)" style="cursor: pointer;"> -->
-                                                <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" class="hover-image" height="70vh">
+                                                <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" class="hover-image" height="70vh" data-bs-toggle="modal" data-bs-target="#myModal">
+                                                <div class="modal" id="myModal">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
 
+                                                            <!-- Modal Header -->
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Chellan Image</h4>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                            </div>
+
+                                                            <!-- Modal body -->
+                                                            <div class="modal-body">
+                                                            <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" class="hover-image" height="500vh">
+                                                            </div>
+
+                                                            <!-- Modal footer -->
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>                                             
                                             </td>
                                             <!-- <div id="enlarged-image-container" style="display: none;">
                                                 <img id="enlarged-image" src="" alt="Enlarged Image" style="max-width: 90%; max-height: 90vh;">
@@ -212,10 +222,23 @@
         </div>
         <!-- container-fluid -->
     </div>
+
     <!-- End Page-content -->
     <?php include "footer.php"; ?>
 
     <script>
+        const popupImage = document.getElementById("popup-image");
+        const popup = document.getElementById("popup");
+        const closePopup = document.getElementById("close-popup");
+
+        popupImage.addEventListener("click", () => {
+            popup.style.display = "block";
+        });
+
+        closePopup.addEventListener("click", () => {
+            popup.style.display = "none";
+        });
+
         function exportTableToExcel(example, filename = '') {
             var downloadLink;
             var dataType = 'application/vnd.ms-excel';
