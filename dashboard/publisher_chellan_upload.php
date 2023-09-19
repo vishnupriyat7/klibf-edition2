@@ -75,51 +75,23 @@ function convertNumberToWordsForIndia($number)
 }
 function generateInvoice($invoiceNo)
 {
-    $movies = array(
-        array(
-            "code" => "1",
-            "alpbt" => "A"
-        ),
-        array(
-            "code" => "2",
-            "alpbt" => "B"
-        ),
-        array(
-            "code" => "3",
-            "alpbt" => "C"
-        ),
-        array(
-            "code" => "4",
-            "alpbt" => "D"
-        ),
-        array(
-            "code" => "5",
-            "alpbt" => "E"
-        ),
-        array(
-            "code" => "6",
-            "alpbt" => "F"
-        ),
-        array(
-            "code" => "7",
-            "alpbt" => "G"
-        ),
-        array(
-            "code" => "8",
-            "alpbt" => "H"
-        ),
-        array(
-            "code" => "9",
-            "alpbt" => "I"
-        ),
-        array(
-            "code" => "0",
-            "alpbt" => "J"
-        )
+    $alphaCode = array(
+        "1" => "A",
+        "2" => "B",
+        "3" => "C",
+        "4" => "D",
+        "5" => "E",
+        "6" => "F",
+        "7" => "G",
+        "8" => "H",
+        "9" => "I",
+        "0" => "J"
     );
     $currentDate = new DateTime();
     $year = $currentDate->format("y");
-    echo $year;
+    $arr1 = str_split($year);
+    $generatedNo = $alphaCode[$arr1[0]] . $alphaCode[$arr1[1]] . $invoiceNo;
+    return $generatedNo;
 }
 ?>
 <style>
@@ -234,6 +206,8 @@ function generateInvoice($invoiceNo)
                             } else {
                                 $hideimg = 'hidden';
                             }
+                            // $invcNo = $chellan['invoice_no'];
+                            $invoice = generateInvoice($chellan['invoice_no']);
                         } else {
                             $tot_amt3x3 = $tot_amt3x2 = $total_amt = 0;
                             $stall3x3 = 0;
@@ -505,7 +479,9 @@ function generateInvoice($invoiceNo)
                                             </div>
                                         </div> <br>
                                         <div class="col-lg-12">
-                                            <button type="submit" name="save_payment" class="btn btn-primary" id="save_payment">Save</button>
+                                            <?php if ($chellan['status'] != 'A') {  ?>
+                                                <button type="submit" name="save_payment" class="btn btn-primary" id="save_payment">Save</button>
+                                            <?php } ?>
                                             <br><br>
                                             <medium class="text-danger">Disclaimer: <br>* Once your payment is made, the amount should not refund.<br></medium>
 
@@ -592,22 +568,22 @@ function generateInvoice($invoiceNo)
             var desc3x2 = "";
             var divToPrint = document.getElementById("pay-slip");
             newWin = window.open("");
-            newWin.document.write('<html><head> <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/app.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" /></head><body><style>td, th {font-size:12;}</style>');
-            newWin.document.write('<table><tr><th colspan="11" class="text-center">SECRETARIAT OF THE KERALA LEGISLATURE<br></th></tr><tr><td>Post Box No:</td><td>5430</td><td colspan="6"></td><td>GSTN: </td><td><b>32AAAGK0786J1ZD</b></td></tr><tr><td>PIN:</td><td>695 033</td></tr><tr><td>Email:</td><td>secretary@niyamasabha.nic.in</td></tr><tr><th class="text-center" colspan="11"><br><br><br><br>INVOICE<br></th></tr><tr><td rowspan="2">Bill To</td><td rowspan="2">');
+            newWin.document.write('<html><head> <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/app.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" /></head><body><style>td, th {font-size:12;} .center {display: block; margin-left: auto; margin-right: auto;width: auto; }</style>');
+            newWin.document.write('<br><div class="text-center"><img src="assets/images/Govt_Logo.png" height="70vh" class="center"><br></div><table><tr><th colspan="11" class="text-center">SECRETARIAT OF THE KERALA LEGISLATURE<br></th></tr><tr><td>Post Box No:</td><td>5430</td><td colspan="6"></td><td>GSTN: </td><td><b>32AAAGK0786J1ZD</b></td></tr><tr><td>PIN:</td><td>695 033</td></tr><tr><td>Email:</td><td>secretary@niyamasabha.nic.in</td></tr><tr><th class="text-center" colspan="11"><br><br><br><br>INVOICE<br></th></tr><tr><td rowspan="2">Bill To</td><td rowspan="2">');
             newWin.document.write(<?php echo json_encode($user_prof['org_name']) ?>);
             newWin.document.write('<br>');
             newWin.document.write(<?php echo json_encode($user_prof['head_org_email']) ?>);
-            newWin.document.write('</td><td colspan="6"></td><td>Invoice No</td><td>');
-            newWin.document.write(<?php echo json_encode($chellan['invoice_no']) ?>);
-            newWin.document.write('</td></tr><tr><td colspan="6"></td><td>Invoice Date</td><td>');
+            newWin.document.write('</td><td colspan="4"></td><td colspan="3">Invoice No</td><td>');
+            newWin.document.write(<?php echo json_encode($invoice) ?>);
+            newWin.document.write('</td></tr><tr><td colspan="4"></td><td colspan="3">Invoice Date</td><td>');
             newWin.document.write(<?php echo json_encode($chellan['updated_date']) ?>);
             newWin.document.write('</td></tr><tr><td>GSTIN: </td><td>');
             newWin.document.write(<?php echo json_encode($user_prof['gst_no']) ?>);
-            newWin.document.write('</td></tr><tr><td colspan="11"><br><br></td></tr><tr><td rowspan="2" style="text-align: center;">No</td><td rowspan="2" style="text-align: center;">Item Description</td><td rowspan="2" style="text-align: center;">HSN/<br>SAC</td><td rowspan="2" style="text-align: center;">Qty</td><td rowspan="2" style="text-align: center;">Unit Price</td><td rowspan="2" style="text-align: center;">Taxable Amount</td><td colspan="3" style="text-align: center;">GST</td><td rowspan="2" style="text-align: center;">Total</td></tr><tr><td style="text-align: center;">%</td><td style="text-align: center;">SGST</td><td style="text-align: center;">CGST</td></tr><tr><td>');
+            newWin.document.write('</td></tr><tr><td colspan="11"><br><br></td></tr><tr><td rowspan="2" style="text-align: center;">No</td><td rowspan="2" style="text-align: center;">Item Description</td><td rowspan="2" style="text-align: center;">HSN/<br>SAC</td><td rowspan="2" style="text-align: center;">Qty</td><td rowspan="2" style="text-align: center;">Unit Price</td><td rowspan="2" style="text-align: center;">Taxable Amount</td><td colspan="3" style="text-align: center;">GST</td><td rowspan="2" style="text-align: center;">Total</td></tr><tr><td style="text-align: center;">%</td><td style="text-align: center;">SGST</td><td style="text-align: center;">CGST</td></tr><tr><td style="text-align: center;">');
 
             if (stall3x3 > 0) {
                 newWin.document.write(++slno);
-                newWin.document.write('</td><td>Rent for Stall 3x3m 01/11/2023-07/11/2023</td><td>997222</td><td>&emsp;');
+                newWin.document.write('</td><td>Rent for Stall 3x3m 01/11/2023-07/11/2023</td><td>997222</td><td style="text-align: right;">&emsp;');
                 newWin.document.write(stall3x3);
                 newWin.document.write('</td><td style="text-align: right;">10000</td><td style="text-align: right;">');
                 newWin.document.write(<?php echo json_encode($rate3x3) ?>);
@@ -620,7 +596,7 @@ function generateInvoice($invoiceNo)
             }
             if (stall3x2 > 0) {
                 newWin.document.write(++slno);
-                newWin.document.write('</td><td>Rent for Stall 3x2m 01/11/2023-07/11/2023</td><td>997222</td><td>');
+                newWin.document.write('</td><td>Rent for Stall 3x2m 01/11/2023-07/11/2023</td><td>997222</td><td style="text-align: right;">');
                 newWin.document.write(stall3x2);
                 newWin.document.write('</td><td style="text-align: right;">10000</td><td style="text-align: right;">');
                 newWin.document.write(<?php echo json_encode($rate3x2) ?>);
@@ -641,13 +617,17 @@ function generateInvoice($invoiceNo)
             newWin.document.write(<?php echo json_encode(($gst3x3 + $gst3x2) / 2) ?>);
             newWin.document.write('</td><td style="text-align: right;">');
             newWin.document.write(<?php echo json_encode($total_amt) ?>);
-            newWin.document.write('</td></tr><tr><td colspan="11"><br><br></td></tr><tr><td colspan="6" style="text-align: right;">Total Taxable Amount</td><td colspan="5" style="text-align: right;">');
+            newWin.document.write('</td></tr><tr><td colspan="11"><br><br></td></tr><tr><td colspan="4" style="text-align: right;">Total Taxable Amount</td><td colspan="7" style="text-align: right;">');
             newWin.document.write(<?php echo json_encode($rate3x3 + $rate3x2) ?>);
-            newWin.document.write('</td></tr><tr><td colspan="6" style="text-align: right;">Total Tax Amount</td><td colspan="5" style="text-align: right;">');
+            newWin.document.write('</td></tr><tr><td colspan="4" style="text-align: right;">Total Tax Amount</td><td colspan="7" style="text-align: right;">');
             newWin.document.write(<?php echo json_encode(($gst3x3 + $gst3x2)) ?>);
-            newWin.document.write('</td></tr><tr><td colspan="6" style="text-align: right;">Total Amount</td><td colspan="5" style="text-align: right;">');
-            newWin.document.write();
-            newWin.document.write('</td></tr></table></body></html>');
+            newWin.document.write('</td></tr><tr><td colspan="4" style="text-align: right;">Total Amount</td><td colspan="7" style="text-align: right;">');
+            newWin.document.write(<?php echo json_encode($total_amt) ?>);
+            newWin.document.write('</td></tr><tr><td colspan="4" style="text-align: right;">Amount Due</td><td colspan="7" style="text-align: right;">');
+            newWin.document.write(<?php echo json_encode($total_amt) ?>);
+            newWin.document.write('</td></tr><tr><td colspan="4" style="text-align: right;">Total (in words)</td><td colspan="7" style="text-align: right;">');
+            newWin.document.write(<?php echo json_encode($totalinword) ?>);
+            newWin.document.write('</td></tr><tr><td colspan="11" style="text-align: right;"><br><br><br><br><br><br><br>Authorized Signatory</td></tr></table></body></html>');
             newWin.print();
             newWin.close();
         }
