@@ -9,6 +9,37 @@
         max-width: 100vw;
         /* Allow the card to expand to its container's width */
     }
+    .horizontal-shake {
+        position: relative;
+        animation: shake 0.8s infinite;
+    }
+
+
+    @keyframes shake {
+        0% {
+            transform: translateX(0);
+        }
+
+        20% {
+            transform: translateX(-5px);
+        }
+
+        40% {
+            transform: translateX(5px);
+        }
+
+        60% {
+            transform: translateX(-5px);
+        }
+
+        80% {
+            transform: translateX(5px);
+        }
+
+        100% {
+            transform: translateX(0);
+        }
+    }
 </style>
 
 <body>
@@ -49,15 +80,28 @@
         <!-- Section to hold your Google Sheets link -->
         <section>
 
-            <div class="container d-flex justify-content-center align-items-center">
+            <div class="container d-flex justify-content-center">
                 <div class="row">
                     <!--end col-->
                     <div class="col-xxl-12 col-12 col-md-6">
                         <div class="card mt-xxl-n5">
-
+                        <div class="text-center">
+                                <img class="mx-auto d-block img-fluid" src="./assets/img/contests/orukatha-parayam.jpg">
+                            </div>
 
                             <div class="card-body p-4">
                                 <div class="tab-content">
+                                    <div class="d-flex justify-content-end align-items-end">
+
+                                        <a href="https://forms.gle/qjpH2FqjraRcnWGc9" class="mr-2 btn btn-success horizontal-shake" target="_blank"><i class="fa fa-download"></i> Click Here to Apply</a>
+
+                                    </div>
+                                    <br>
+
+                                    <div class="align-items-center text-center">
+                                        <h3><b>Rules & Regulations</b></h3>
+
+                                    </div>
                                     <!-- <div class="tab-pane active" id="personalDetails" role="tabpanel"> -->
 
                                     <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKw20kdrJw7rUjexrK_vo8HU4-mIN3M1NT7wAXfSbFYrph9w/viewform?embedded=true" width="1000" height="1815" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe> -->
@@ -158,11 +202,7 @@
 
                                     <!--end tab-pane-->
                                 </div>
-                                <div class="d-flex justify-content-center align-items-center">
 
-                                    <a href="https://docs.google.com/forms/d/11d3YLOtjtA_osjraiAfxXyNvLuv2N14Om0dKEuGdJpY/edit" class="mr-2 btn btn-success" target="_blank"><i class="fa fa-download"></i> Click Here to Apply</a>
-
-                                </div>
 
                             </div>
                         </div>
