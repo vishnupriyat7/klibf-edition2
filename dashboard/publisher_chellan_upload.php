@@ -3,65 +3,123 @@ ini_set('display_errors', '0');
 include "header.php";
 include "publisher_sidebar.php";
 $user_id = $user['id'];
-
-function convertNumberToWordsForIndia($number){
+function convertNumberToWordsForIndia($number)
+{
     //A function to convert numbers into Indian readable words with Cores, Lakhs and Thousands.
     $words = array(
-    '0'=> '' ,'1'=> 'one' ,'2'=> 'two' ,'3' => 'three','4' => 'four','5' => 'five',
-    '6' => 'six','7' => 'seven','8' => 'eight','9' => 'nine','10' => 'ten',
-    '11' => 'eleven','12' => 'twelve','13' => 'thirteen','14' => 'fouteen','15' => 'fifteen',
-    '16' => 'sixteen','17' => 'seventeen','18' => 'eighteen','19' => 'nineteen','20' => 'twenty',
-    '30' => 'thirty','40' => 'fourty','50' => 'fifty','60' => 'sixty','70' => 'seventy',
-    '80' => 'eighty','90' => 'ninty');
-    
+        '0' => '', '1' => 'one', '2' => 'two', '3' => 'three', '4' => 'four', '5' => 'five',
+        '6' => 'six', '7' => 'seven', '8' => 'eight', '9' => 'nine', '10' => 'ten',
+        '11' => 'eleven', '12' => 'twelve', '13' => 'thirteen', '14' => 'fouteen', '15' => 'fifteen',
+        '16' => 'sixteen', '17' => 'seventeen', '18' => 'eighteen', '19' => 'nineteen', '20' => 'twenty',
+        '30' => 'thirty', '40' => 'fourty', '50' => 'fifty', '60' => 'sixty', '70' => 'seventy',
+        '80' => 'eighty', '90' => 'ninty'
+    );
+
     //First find the length of the number
     $number_length = strlen($number);
     //Initialize an empty array
-    $number_array = array(0,0,0,0,0,0,0,0,0);        
+    $number_array = array(0, 0, 0, 0, 0, 0, 0, 0, 0);
     $received_number_array = array();
-    
+
     //Store all received numbers into an array
-    for($i=0;$i<$number_length;$i++){    
-  		$received_number_array[$i] = substr($number,$i,1);    
-  	}
+    for ($i = 0; $i < $number_length; $i++) {
+        $received_number_array[$i] = substr($number, $i, 1);
+    }
 
     //Populate the empty array with the numbers received - most critical operation
-    for($i=9-$number_length,$j=0;$i<9;$i++,$j++){ 
-        $number_array[$i] = $received_number_array[$j]; 
+    for ($i = 9 - $number_length, $j = 0; $i < 9; $i++, $j++) {
+        $number_array[$i] = $received_number_array[$j];
     }
 
     $number_to_words_string = "";
     //Finding out whether it is teen ? and then multiply by 10, example 17 is seventeen, so if 1 is preceeded with 7 multiply 1 by 10 and add 7 to it.
-    for($i=0,$j=1;$i<9;$i++,$j++){
+    for ($i = 0, $j = 1; $i < 9; $i++, $j++) {
         //"01,23,45,6,78"
         //"00,10,06,7,42"
         //"00,01,90,0,00"
-        if($i==0 || $i==2 || $i==4 || $i==7){
-            if($number_array[$j]==0 || $number_array[$i] == "1"){
-                $number_array[$j] = intval($number_array[$i])*10+$number_array[$j];
+        if ($i == 0 || $i == 2 || $i == 4 || $i == 7) {
+            if ($number_array[$j] == 0 || $number_array[$i] == "1") {
+                $number_array[$j] = intval($number_array[$i]) * 10 + $number_array[$j];
                 $number_array[$i] = 0;
             }
-               
         }
     }
 
     $value = "";
-    for($i=0;$i<9;$i++){
-        if($i==0 || $i==2 || $i==4 || $i==7){    
-            $value = $number_array[$i]*10; 
+    for ($i = 0; $i < 9; $i++) {
+        if ($i == 0 || $i == 2 || $i == 4 || $i == 7) {
+            $value = $number_array[$i] * 10;
+        } else {
+            $value = $number_array[$i];
         }
-        else{ 
-            $value = $number_array[$i];    
-        }            
-        if($value!=0)         {    $number_to_words_string.= $words["$value"]." "; }
-        if($i==1 && $value!=0){    $number_to_words_string.= "Crores "; }
-        if($i==3 && $value!=0){    $number_to_words_string.= "Lakhs ";    }
-        if($i==5 && $value!=0){    $number_to_words_string.= "Thousand "; }
-        if($i==6 && $value!=0){    $number_to_words_string.= "Hundred "; }            
-
+        if ($value != 0) {
+            $number_to_words_string .= $words["$value"] . " ";
+        }
+        if ($i == 1 && $value != 0) {
+            $number_to_words_string .= "Crores ";
+        }
+        if ($i == 3 && $value != 0) {
+            $number_to_words_string .= "Lakhs ";
+        }
+        if ($i == 5 && $value != 0) {
+            $number_to_words_string .= "Thousand ";
+        }
+        if ($i == 6 && $value != 0) {
+            $number_to_words_string .= "Hundred ";
+        }
     }
-    if($number_length>9){ $number_to_words_string = "Sorry This does not support more than 99 Crores"; }
-    return ucwords(strtolower("Rupees ".$number_to_words_string)." Only.");
+    if ($number_length > 9) {
+        $number_to_words_string = "Sorry This does not support more than 99 Crores";
+    }
+    return ucwords(strtolower("Rupees " . $number_to_words_string) . " Only.");
+}
+function generateInvoice($invoiceNo)
+{
+    $movies = array(
+        array(
+            "code" => "1",
+            "alpbt" => "A"
+        ),
+        array(
+            "code" => "2",
+            "alpbt" => "B"
+        ),
+        array(
+            "code" => "3",
+            "alpbt" => "C"
+        ),
+        array(
+            "code" => "4",
+            "alpbt" => "D"
+        ),
+        array(
+            "code" => "5",
+            "alpbt" => "E"
+        ),
+        array(
+            "code" => "6",
+            "alpbt" => "F"
+        ),
+        array(
+            "code" => "7",
+            "alpbt" => "G"
+        ),
+        array(
+            "code" => "8",
+            "alpbt" => "H"
+        ),
+        array(
+            "code" => "9",
+            "alpbt" => "I"
+        ),
+        array(
+            "code" => "0",
+            "alpbt" => "J"
+        )
+    );
+    $currentDate = new DateTime();
+    $year = $currentDate->format("y");
+    echo $year;
 }
 ?>
 <style>
@@ -171,7 +229,7 @@ function convertNumberToWordsForIndia($number){
                             } else {
                                 $edit = 'disabled';
                             }
-                            if(!$imgChellan) {
+                            if (!$imgChellan) {
                                 $hideimg = '';
                             } else {
                                 $hideimg = 'hidden';
@@ -271,54 +329,52 @@ function convertNumberToWordsForIndia($number){
                                                 <button type='button' class='btn-close' data-dismiss='alert' aria-label='Close'></button>
                                                 </div>
                                ";
-                               $sql_profile = "SELECT id, org_name, gst_no, head_org_email FROM users_profile WHERE user_id = ?";
-                               $stmt_prof = $con->prepare($sql_profile);
-                               $stmt_prof->bind_param("s", $user_id);
-                               $stmt_prof->execute();
-                               $res_prof = $stmt_prof->get_result();
-                               $user_prof = $res_prof->fetch_assoc();
-                               $sql1 = "SELECT * FROM stall_booking WHERE user_id = ?";
-                               $stmt1 = $con->prepare($sql1);
-                               $stmt1->bind_param("i", $user_id);
-                               $stmt1->execute();
-                               $result1 = $stmt1->get_result();
-                               $user_stall = $result1->fetch_assoc();
-                               $stall3x3 = $user_stall['confirm_3X3'];
-                               $stall3x2 = $user_stall['confirm_3X2'];
-                               $amt3x3 = 10000;
-                               $amt3x2 = 7500;
-                               $rate3x3 = $stall3x3 * $amt3x3;
-                               $rate3x2 = $stall3x2 * $amt3x2;
-                               $gst3x3 = ($rate3x3 * 18) / 100;
-                               $gst3x2 = ($rate3x2 * 18) / 100;
-                               $tot_amt3x3 = $rate3x3 + $gst3x3;
-                               $tot_amt3x2 = $rate3x2 +  $gst3x2;
-                               // $stall_status = $user_stall['status'];
-                               // if ($stall_status != 'S') {
-                               //     $edit_count = '';
-                               // } else {
-                               //     $edit_count = 'disabled';
-                               // }
-                               $total_amt = $tot_amt3x3 + $tot_amt3x2;
-                               $totalinword = convertNumberToWordsForIndia($total_amt);
-                               $chellanQuery = "SELECT * FROM challan WHERE user_id = ?";
-                               $stmt_chellan = $con->prepare($chellanQuery);
-                               $stmt_chellan->bind_param("s", $user_id);
-                               $stmt_chellan->execute();
-                               $res_chellan = $stmt_chellan->get_result();
-                               $chellan = $res_chellan->fetch_assoc();
-                               $bank_name = $chellan['bank_name'];
-                               $paid_amt = $chellan['paid_amt'];
-                               $trnctn_no = $chellan['trnctn_no'];
-                               $ifsc = $chellan['ifsc'];
-                               $trnctn_dt = $chellan['trnctn_date'];
-                               $payee = $chellan['paye_name'];
-                               $trnctn_type = $chellan['trnctn_type'];
-                               $gst = $user_prof['gst_no'];
-                               $chellanStatus = $chellan['status'];
-                               $imgChellan = base64_encode($chellan['challan_img']);
-
-
+                                    $sql_profile = "SELECT id, org_name, gst_no, head_org_email FROM users_profile WHERE user_id = ?";
+                                    $stmt_prof = $con->prepare($sql_profile);
+                                    $stmt_prof->bind_param("s", $user_id);
+                                    $stmt_prof->execute();
+                                    $res_prof = $stmt_prof->get_result();
+                                    $user_prof = $res_prof->fetch_assoc();
+                                    $sql1 = "SELECT * FROM stall_booking WHERE user_id = ?";
+                                    $stmt1 = $con->prepare($sql1);
+                                    $stmt1->bind_param("i", $user_id);
+                                    $stmt1->execute();
+                                    $result1 = $stmt1->get_result();
+                                    $user_stall = $result1->fetch_assoc();
+                                    $stall3x3 = $user_stall['confirm_3X3'];
+                                    $stall3x2 = $user_stall['confirm_3X2'];
+                                    $amt3x3 = 10000;
+                                    $amt3x2 = 7500;
+                                    $rate3x3 = $stall3x3 * $amt3x3;
+                                    $rate3x2 = $stall3x2 * $amt3x2;
+                                    $gst3x3 = ($rate3x3 * 18) / 100;
+                                    $gst3x2 = ($rate3x2 * 18) / 100;
+                                    $tot_amt3x3 = $rate3x3 + $gst3x3;
+                                    $tot_amt3x2 = $rate3x2 +  $gst3x2;
+                                    // $stall_status = $user_stall['status'];
+                                    // if ($stall_status != 'S') {
+                                    //     $edit_count = '';
+                                    // } else {
+                                    //     $edit_count = 'disabled';
+                                    // }
+                                    $total_amt = $tot_amt3x3 + $tot_amt3x2;
+                                    $totalinword = convertNumberToWordsForIndia($total_amt);
+                                    $chellanQuery = "SELECT * FROM challan WHERE user_id = ?";
+                                    $stmt_chellan = $con->prepare($chellanQuery);
+                                    $stmt_chellan->bind_param("s", $user_id);
+                                    $stmt_chellan->execute();
+                                    $res_chellan = $stmt_chellan->get_result();
+                                    $chellan = $res_chellan->fetch_assoc();
+                                    $bank_name = $chellan['bank_name'];
+                                    $paid_amt = $chellan['paid_amt'];
+                                    $trnctn_no = $chellan['trnctn_no'];
+                                    $ifsc = $chellan['ifsc'];
+                                    $trnctn_dt = $chellan['trnctn_date'];
+                                    $payee = $chellan['paye_name'];
+                                    $trnctn_type = $chellan['trnctn_type'];
+                                    $gst = $user_prof['gst_no'];
+                                    $chellanStatus = $chellan['status'];
+                                    $imgChellan = base64_encode($chellan['challan_img']);
                                 } else {
                                     $errormsg = "
                                     <div class='alert alert-danger alert-dismissible alert-outline fade show'>
@@ -519,8 +575,8 @@ function convertNumberToWordsForIndia($number){
             var totwords = <?php echo json_encode($totalinword) ?>
             // ... (other variables)
 
-            var htmlContent = '<html><head> <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/app.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" /></head><body><br><label><img src="assets/images/Logo_01.png" height="70vh" style="float: left;"></label><h3><b>PAYMENT SLIP</b></h3><br><h4><b>Organization:'+orgName+'</h4><table class="table table-info table-responsive" id="pay-slip"><tr><th>Stalls</th><th>Alloted</th><th>Rate</th><th>GST(18%)</th><th>Amount</th></tr><tbody><tr><th>3m X 3m</th><td class="text-justify">'+stall3x3+'</td><td>'+rate3x3+'</td><td>'+gst3x3+'</td><td>'+totAmt3x3+'</td></tr><tr><th>3m X 2m</th><td>'+stall3x2+'</td><td>'+rate3x2+'</td><td>'+gst3x2+'</td><td>'+totAmt3x2+'</td></tr><tr><td colspan="4">Total amount payable (in ₹&nbsp;&nbsp;).</td><td><b>'+totalAmt+'</b></td></tr><tr><td colspan="2">Total amount payable (in words).</td><td colspan="3"><b>'+totwords+'</b></td></tr></tbody></table><br><br><b><u>Details of bank account to which payment is to be made:</u></b><br><br>Bank Account Number - 67279812893<br>Name of Bank, Branch  - State Bank of India, Trivandrum City<br>Account holder’s name  - Finance Officer, Kerala Legislature Secretariat<br>IFS Code - SBIN0070028</body></html>';
-   
+            var htmlContent = '<html><head> <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/app.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" /></head><body><br><label><img src="assets/images/Logo_01.png" height="70vh" style="float: left;"></label><h3><b>PAYMENT SLIP</b></h3><br><h4><b>Organization:' + orgName + '</h4><table class="table table-info table-responsive" id="pay-slip"><tr><th>Stalls</th><th>Alloted</th><th>Rate</th><th>GST(18%)</th><th>Amount</th></tr><tbody><tr><th>3m X 3m</th><td class="text-justify">' + stall3x3 + '</td><td>' + rate3x3 + '</td><td>' + gst3x3 + '</td><td>' + totAmt3x3 + '</td></tr><tr><th>3m X 2m</th><td>' + stall3x2 + '</td><td>' + rate3x2 + '</td><td>' + gst3x2 + '</td><td>' + totAmt3x2 + '</td></tr><tr><td colspan="4">Total amount payable (in ₹&nbsp;&nbsp;).</td><td><b>' + totalAmt + '</b></td></tr><tr><td colspan="2">Total amount payable (in words).</td><td colspan="3"><b>' + totwords + '</b></td></tr></tbody></table><br><br><b><u>Details of bank account to which payment is to be made:</u></b><br><br>Bank Account Number - 67279812893<br>Name of Bank, Branch  - State Bank of India, Trivandrum City<br>Account holder’s name  - Finance Officer, Kerala Legislature Secretariat<br>IFS Code - SBIN0070028</body></html>';
+
             var iframe = document.getElementById("print-frame");
             iframe.contentDocument.write(htmlContent);
             iframe.contentDocument.close();
@@ -594,128 +650,5 @@ function convertNumberToWordsForIndia($number){
             newWin.document.write('</td></tr></table></body></html>');
             newWin.print();
             newWin.close();
-
-
-
-
-            //             <html>
-            // <body>
-            // <table>
-            // <tr>
-            // <th colspan="11" class="text-center">SECRETARIAT OF THE KERALA LEGISLATURE<br></th>
-            // </tr>
-            // <tr>
-            // <td>Post Box No:</td>
-            // <td>5430</td>
-            // <td colspan="6"></td>
-            // <td>GSTN: </td>
-            // <td><b>32AAAGK0786J1ZD</b></td>
-            // </tr>
-            // <tr>
-            // <td>PIN:</td>
-            // <td>695 033</td>
-            // </tr>
-            // <tr>
-            // <td>Email:</td>
-            // <td>secretary@niyamasabha.nic.in</td>
-            // </tr>
-            // <tr>
-            // <th class="text-center" colspan="11"><br><br><br><br>INVOICE<br></th>
-            // </tr>
-            // <tr>
-            // <td rowspan="2">Bill To</td>
-            // <td rowspan="2">fghdgkjhg<br>hfjfkgkhl</td>
-            // <td colspan="6"></td>
-            // <td>Invoice No</td>
-            // <td>BC0038</td>
-            // </tr>
-            // <tr>
-            // <td colspan="6"></td>
-            // <td>Invoice Date</td>
-            // <td>vfdgsvdjfh</td>
-            // </tr>
-            // <tr>
-            // <td>GSTIN: </td>
-            // <td>CShdachgdcahgf</td>
-            // </tr>
-            // <tr>
-            // <td colspan="11">
-            // <br><br>
-            // </td>
-            // </tr>
-            // <tr>
-            // <th rowspan="2">No</th>
-            // <th rowspan="2">Item Description</th>
-            // <th rowspan="2">HSN/SAC</th>
-            // <th rowspan="2">Qty</th>
-            // <th rowspan="2">Unit Price</th>
-            // <th rowspan="2">Taxable Amount</th>
-            // <th colspan="3">GST</th>
-            // <th rowspan="2">Total</th>
-            // </tr>
-            // <tr>
-            // <th>%</th>
-            // <th>SGST</th>
-            // <th>CGST</th>
-            // </tr>
-            // <tr>
-            // <td>1</td>
-            // <td>Rent for Stall 3x3m 01/11/2023-07/11/2023</td>
-            // <td>997222</td>
-            // <td>1</td>
-            // <td style="text-align: right;">10000</td>
-            // <td style="text-align: right;">10000</td>
-            // <td style="text-align: right;">18</td>
-            // <td style="text-align: right;">900</td>
-            // <td style="text-align: right;">900</td>
-            // <td style="text-align: right;">11800</td>
-            // </tr>
-            // <tr>
-            // <td colspan="11">
-            // <br><br>
-            // </td>
-            // </tr>
-            // <tr>
-            // <td colspan="3" style="text-align: right;">Total</td>
-            // <td colspan="2">1</td>
-            // <td colspan="2" style="text-align: right;">10000</td>
-            // <td style="text-align: right;">900</td>
-            // <td style="text-align: right;">900</td>
-            // <td style="text-align: right;">11800</td>
-            // </tr>
-            // <tr>
-            // <td colspan="11">
-            // <br><br>
-            // </td>
-            // </tr>
-            // <tr>
-            // <td colspan="6" style="text-align: right;">Total Taxable Amount</td>
-            // <td colspan="5" style="text-align: right;">10000</td>
-            // </tr>
-            // <tr>
-            // <td colspan="6" style="text-align: right;">Total Tax Amount</td>
-            // <td colspan="5" style="text-align: right;">1800</td>
-            // </tr>
-            // <tr>
-            // <td colspan="6" style="text-align: right;">Total Amount</td>
-            // <td colspan="5" style="text-align: right;">11800</td>
-            // </tr>
-            // <tr>
-            // <td colspan="6" style="text-align: right;">Amount Due</td>
-            // <td colspan="5" style="text-align: right;">11800</td>
-            // </tr>
-            // <tr>
-            // <td colspan="6" style="text-align: right;">Total (in words)</td>
-            // <td colspan="5" style="text-align: right;">Rupees Eleven Thousand and Eight Hundred</td>
-            // </tr>
-            // <tr>
-            // <td colspan="11">
-            // <br><br><br><br><br>
-            // </td>
-            // </tr>
-            // <tr>
-            // <td colspan="11" style="text-align: right;">Authorized Signatory</td>
-            // </tr>
-            // </table></body></html>
         }
     </script>
