@@ -80,7 +80,6 @@
         <!-- <div class="container d-flex justify-content-center align-items-center min-vh-100"> -->
         <!-- Section to hold your Google Sheets link -->
         <section>
-
             <div class="container d-flex justify-content-center align-items-center">
                 <div class="row">
                     <!--end col-->
@@ -173,16 +172,7 @@
                                                         <li>
                                                             <h5> <b><span>2.&emsp; Booking of Space : </span></b></h5>
                                                         </li>
-                                                        <ul>
-                                                            <li>&emsp;<b>&emsp;2.1</b>&emsp; The process for booking of space at the Fair is on first-cum-first-serve basis</li><br>
-                                                            <li>&emsp;<b>&emsp;2.2</b>&emsp; No application will be entertained after the last date of booking
-                                                                i.e.<span> 20th August 2023.<span></span></li><br>
-                                                            <li>&emsp;<b>&emsp;2.3</b>&emsp; In case Stall(s) is allotted to an exhibitor, the Organizer will provide duly
-                                                                constructed Stall(s) having provision for display of books.</li><br>
-                                                            <li>&emsp;<b>&emsp;2.4</b>&emsp; Exhibitors are obliged to allow the Organizer to see and check the Stall(s)
-                                                                and items at any time during the fair.</li><br>
-                                                            <li>&emsp;<b>&emsp;2.5</b>&emsp; The maximum number of stalls, one can register and that can be clubbed together is limited to 5.</li>
-                                                        </ul>
+                                                       
 
 
 
