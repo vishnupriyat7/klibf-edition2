@@ -1,5 +1,10 @@
 <?php include "header.php"; ?>
-<?php include "finance_sidebar.php"; ?>
+<?php if ($user['user_type'] == 'FC') {
+    include "finance_sidebar.php";
+} else {
+    include "pgmcmtee_sidebar.php";
+}
+?>
 
 
 <!-- ============================================================== -->
@@ -31,7 +36,7 @@
                 <div class="col-lg-12">
                     <div class="card" style="width: 250%;">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Stall Payment Report</h5>
+                            <h5 class="card-title mb-0">Payment Chellan Report</h5>
                         </div>
                         <div class="card-body overflow-auto">
                             <!-- <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%"> -->
@@ -188,112 +193,112 @@
                                                                 <img src="data:image/jpg;charset=utf8;base64,<?= $img_chellan; ?>" height="auto" width="auto" class="hover-image">
                                                             </div>
 
-                                                            </div>
-                                                            <!-- Modal footer -->
-                                                            <!-- <div class="modal-footer">
+                                                        </div>
+                                                        <!-- Modal footer -->
+                                                        <!-- <div class="modal-footer">
                                                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                                             </div> -->
 
-                                                        </div>
                                                     </div>
                                                 </div>
-                                            </td>
-                                            <!-- <div id="enlarged-image-container" style="display: none;">
+                        </div>
+                        </td>
+                        <!-- <div id="enlarged-image-container" style="display: none;">
                                                 <img id="enlarged-image" src="" alt="Enlarged Image" style="max-width: 90%; max-height: 90vh;">
                                             </div> -->
-                                        </tr>
-                                    <?php  }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
+                        </tr>
+                    <?php  }
+                    ?>
+                    </tbody>
+                    </table>
                     </div>
                 </div>
-                <!--end col-->
             </div>
-            <!--end row-->
+            <!--end col-->
         </div>
-        <!-- container-fluid -->
+        <!--end row-->
     </div>
+    <!-- container-fluid -->
+</div>
 
-    <!-- End Page-content -->
-    <?php include "footer.php"; ?>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        const popupImage = document.getElementById("popup-image");
-        const popup = document.getElementById("popup");
-        const closePopup = document.getElementById("close-popup");
+<!-- End Page-content -->
+<?php include "footer.php"; ?>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    const popupImage = document.getElementById("popup-image");
+    const popup = document.getElementById("popup");
+    const closePopup = document.getElementById("close-popup");
 
-        popupImage.addEventListener("click", () => {
-            popup.style.display = "block";
-        });
+    popupImage.addEventListener("click", () => {
+        popup.style.display = "block";
+    });
 
-        closePopup.addEventListener("click", () => {
-            popup.style.display = "none";
-        });
+    closePopup.addEventListener("click", () => {
+        popup.style.display = "none";
+    });
 
-        function exportTableToExcel(example, filename = '') {
-            var downloadLink;
-            var dataType = 'application/vnd.ms-excel';
-            var tableSelect = document.getElementById(example);
-            var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-            // Specify file name
-            filename = filename ? filename + '.xls' : 'excel_data.xls';
-            // Create download link element
-            downloadLink = document.createElement("a");
-            document.body.appendChild(downloadLink);
-            if (navigator.msSaveOrOpenBlob) {
-                var blob = new Blob(['\ufeff', tableHTML], {
-                    type: dataType
-                });
-                navigator.msSaveOrOpenBlob(blob, filename);
-            } else {
-                // Create a link to the file
-                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-                // Setting the file name
-                downloadLink.download = filename;
-                //triggering the function
-                downloadLink.click();
-            }
+    function exportTableToExcel(example, filename = '') {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(example);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+        // Create download link element
+        downloadLink = document.createElement("a");
+        document.body.appendChild(downloadLink);
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+            // Setting the file name
+            downloadLink.download = filename;
+            //triggering the function
+            downloadLink.click();
         }
+    }
 
-        const hoverImages = document.querySelectorAll('.hover-image');
-        const popupWidth = 700; // Adjust the desired width
-        const popupHeight = 500; // Adjust the desired height
+    const hoverImages = document.querySelectorAll('.hover-image');
+    const popupWidth = 700; // Adjust the desired width
+    const popupHeight = 500; // Adjust the desired height
 
-        hoverImages.forEach(image => {
-            image.addEventListener('mouseover', () => {
-                const popup = document.createElement('div');
-                popup.className = 'popup';
-                const enlargedImage = new Image();
-                enlargedImage.src = image.src;
-                enlargedImage.style.width = popupWidth + 'px'; // Set the width
-                enlargedImage.style.height = popupHeight + 'px'; // Set the height
-                popup.appendChild(enlargedImage);
+    hoverImages.forEach(image => {
+        image.addEventListener('mouseover', () => {
+            const popup = document.createElement('div');
+            popup.className = 'popup';
+            const enlargedImage = new Image();
+            enlargedImage.src = image.src;
+            enlargedImage.style.width = popupWidth + 'px'; // Set the width
+            enlargedImage.style.height = popupHeight + 'px'; // Set the height
+            popup.appendChild(enlargedImage);
 
-                // Calculate the center position of the viewport
-                const viewportCenterX = window.innerWidth / 2;
-                const viewportCenterY = window.innerHeight / 2;
+            // Calculate the center position of the viewport
+            const viewportCenterX = window.innerWidth / 2;
+            const viewportCenterY = window.innerHeight / 2;
 
-                // Position the popup at the center
-                popup.style.top = viewportCenterY - popupHeight / 2 + 'px';
-                popup.style.left = viewportCenterX - popupWidth / 2 + 'px';
+            // Position the popup at the center
+            popup.style.top = viewportCenterY - popupHeight / 2 + 'px';
+            popup.style.left = viewportCenterX - popupWidth / 2 + 'px';
 
-                // Add the popup to the document
-                document.body.appendChild(popup);
+            // Add the popup to the document
+            document.body.appendChild(popup);
 
-                // Show the popup
-                popup.style.display = 'block';
-            });
-
-            image.addEventListener('mouseout', () => {
-                const popup = document.querySelector('.popup');
-                if (popup) {
-                    popup.style.display = 'none';
-                    document.body.removeChild(popup);
-                }
-            });
+            // Show the popup
+            popup.style.display = 'block';
         });
-    </script>
+
+        image.addEventListener('mouseout', () => {
+            const popup = document.querySelector('.popup');
+            if (popup) {
+                popup.style.display = 'none';
+                document.body.removeChild(popup);
+            }
+        });
+    });
+</script>
