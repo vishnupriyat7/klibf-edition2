@@ -5,6 +5,7 @@
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
@@ -28,7 +29,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card" style="width: 200%;">
+                    <div class="card" style="width: 250%;">
                         <div class="card-header">
                             <h5 class="card-title mb-0">Stall Payment Report</h5>
                         </div>
@@ -172,7 +173,7 @@
 
                                                             <!-- Modal Header -->
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title">Chellan Image</h4>
+                                                                <h4 class="modal-title"><?= $org_name; ?></h4>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                             </div>
 
@@ -187,10 +188,11 @@
                                                                 <img src="data:image/jpg;charset=utf8;base64,<?= $img_chellan; ?>" height="auto" width="auto" class="hover-image">
                                                             </div>
 
-                                                            <!-- Modal footer -->
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                                             </div>
+                                                            <!-- Modal footer -->
+                                                            <!-- <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                            </div> -->
 
                                                         </div>
                                                     </div>
@@ -216,7 +218,9 @@
 
     <!-- End Page-content -->
     <?php include "footer.php"; ?>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         const popupImage = document.getElementById("popup-image");
         const popup = document.getElementById("popup");
