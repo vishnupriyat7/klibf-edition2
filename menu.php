@@ -25,7 +25,7 @@
         <li><a href="contest-poetryrecitation-registration.php">Poetry Recitation / പദ്യപാരായണം</a></li>
         <li><a href="contest-story-telling-registration.php">Story Telling / ഒരു കഥ പറയാം</a></li>
         <!-- <li><a href="#">Cartoon / കാർട്ടൂൺ</a></li> -->
-        <!-- <li><a href="contest-quiz-registration.php">Quiz / ക്വിസ്</a></li> -->
+        <li><a href="contest-quiz-registration.php">Quiz / ക്വിസ്</a></li>
         <li><a href="contest-enneswadhnicha-vayanashala-regstn.php">എന്നെ സ്വാധീനിച്ച വായനശാല</a></li>
       </ul>
     </li>

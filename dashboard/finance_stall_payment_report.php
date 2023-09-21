@@ -10,7 +10,7 @@
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
 <div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
@@ -190,7 +190,8 @@
                                                                 $challan_image = $imgStmt->fetch_assoc();
                                                                 $img_chellan = base64_encode($challan_image["challan_img"]);
                                                                 ?>
-                                                                <img src="data:image/jpg;charset=utf8;base64,<?= $img_chellan; ?>" height="auto" width="auto" class="hover-image">
+                                                                <img src="data:image/jpg;charset=utf8;base64,<?= $img_chellan; ?>" height="auto" width="auto" style="max-width: 100%;" class="hover-image">
+
                                                             </div>
 
                                                         </div>
@@ -204,6 +205,11 @@
                         </div>
                         </td>
                         <!-- <div id="enlarged-image-container" style="display: none;">
+                                                    </div>
+                                                </div>
+                        </div>
+                        </td>
+                        <div id="enlarged-image-container" style="display: none;">
                                                 <img id="enlarged-image" src="" alt="Enlarged Image" style="max-width: 90%; max-height: 90vh;">
                                             </div> -->
                         </tr>
@@ -223,82 +229,3 @@
 
 <!-- End Page-content -->
 <?php include "footer.php"; ?>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    const popupImage = document.getElementById("popup-image");
-    const popup = document.getElementById("popup");
-    const closePopup = document.getElementById("close-popup");
-
-    popupImage.addEventListener("click", () => {
-        popup.style.display = "block";
-    });
-
-    closePopup.addEventListener("click", () => {
-        popup.style.display = "none";
-    });
-
-    function exportTableToExcel(example, filename = '') {
-        var downloadLink;
-        var dataType = 'application/vnd.ms-excel';
-        var tableSelect = document.getElementById(example);
-        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-        // Specify file name
-        filename = filename ? filename + '.xls' : 'excel_data.xls';
-        // Create download link element
-        downloadLink = document.createElement("a");
-        document.body.appendChild(downloadLink);
-        if (navigator.msSaveOrOpenBlob) {
-            var blob = new Blob(['\ufeff', tableHTML], {
-                type: dataType
-            });
-            navigator.msSaveOrOpenBlob(blob, filename);
-        } else {
-            // Create a link to the file
-            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-            // Setting the file name
-            downloadLink.download = filename;
-            //triggering the function
-            downloadLink.click();
-        }
-    }
-
-    const hoverImages = document.querySelectorAll('.hover-image');
-    const popupWidth = 700; // Adjust the desired width
-    const popupHeight = 500; // Adjust the desired height
-
-    hoverImages.forEach(image => {
-        image.addEventListener('mouseover', () => {
-            const popup = document.createElement('div');
-            popup.className = 'popup';
-            const enlargedImage = new Image();
-            enlargedImage.src = image.src;
-            enlargedImage.style.width = popupWidth + 'px'; // Set the width
-            enlargedImage.style.height = popupHeight + 'px'; // Set the height
-            popup.appendChild(enlargedImage);
-
-            // Calculate the center position of the viewport
-            const viewportCenterX = window.innerWidth / 2;
-            const viewportCenterY = window.innerHeight / 2;
-
-            // Position the popup at the center
-            popup.style.top = viewportCenterY - popupHeight / 2 + 'px';
-            popup.style.left = viewportCenterX - popupWidth / 2 + 'px';
-
-            // Add the popup to the document
-            document.body.appendChild(popup);
-
-            // Show the popup
-            popup.style.display = 'block';
-        });
-
-        image.addEventListener('mouseout', () => {
-            const popup = document.querySelector('.popup');
-            if (popup) {
-                popup.style.display = 'none';
-                document.body.removeChild(popup);
-            }
-        });
-    });
-</script>

@@ -4,6 +4,9 @@
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
+
+
+
 <div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
@@ -243,44 +246,7 @@
                                             </td>
                                             <td>
                                                 <?= $remark; ?>
-                                            </td>
-
-
-
-                                            <td>
-                                                <div class='dropdown d-inline-block'>
-                                                    <button class='btn btn-soft-secondary btn-sm dropdown' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                                        <i class='ri-more-fill align-middle'></i>
-                                                    </button>
-                                                    <ul class='dropdown-menu dropdown-menu-end'>
-                                                        <!-- <li>
-                                                            <a href='publisher_bookdiscussion.php?discid=<?= $id; ?>' class='dropdown-item edit-item-btn'>
-                                                                <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Edit
-                                                            </a>
-                                                        </li> -->
-                                                        <!-- <li>
-                                                            <a href='deletesocial.php?id=$id' class='dropdown-item remove-item-btn'>
-                                                                <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Delete
-                                                            </a>
-                                                        </li> -->
-                                                        <li>
-                                                            <?php
-                                                            // $query = "SELECT * FROM users_profile where user_id='$id'";
-                                                            // $profileusers = mysqli_query($con, $query);
-                                                            // $user_profile_row = mysqli_fetch_row($profileusers);
-                                                            // if ($user_profile_row) {
-                                                            //     $btnenbl = "hidden";
-                                                            // } else {
-                                                            //     $btnenbl = "";
-                                                            // }
-                                                            ?>
-                                                            <!-- <a href='' class='dropdown-item remove-item-btn'>
-                                                                <i class='ri-delete-bin-fill align-bottom me-2 text-danger'></i>Delete
-                                                            </a> -->
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
+                                            </td>                                          
                                         </tr>
                                     <?php } ?>
                                 </tbody>
@@ -294,32 +260,36 @@
         </div>
         <!-- container-fluid -->
     </div>
-    <!-- End Page-content -->
-    <?php include "footer.php"; ?>
+</div>
+<!-- End Page-content -->
+<?php include "footer.php"; ?>
 
-    <script>
-        function exportTableToExcel(example, filename = '') {
-            var downloadLink;
-            var dataType = 'application/vnd.ms-excel';
-            var tableSelect = document.getElementById(example);
-            var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-            // Specify file name
-            filename = filename ? filename + '.xls' : 'excel_data.xls';
-            // Create download link element
-            downloadLink = document.createElement("a");
-            document.body.appendChild(downloadLink);
-            if (navigator.msSaveOrOpenBlob) {
-                var blob = new Blob(['\ufeff', tableHTML], {
-                    type: dataType
-                });
-                navigator.msSaveOrOpenBlob(blob, filename);
-            } else {
-                // Create a link to the file
-                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-                // Setting the file name
-                downloadLink.download = filename;
-                //triggering the function
-                downloadLink.click();
-            }
+<script>
+    function exportTableToExcel(example, filename = '') {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(example);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+        // Create download link element
+        downloadLink = document.createElement("a");
+        document.body.appendChild(downloadLink);
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+            // Setting the file name
+            downloadLink.download = filename;
+            //triggering the function
+            downloadLink.click();
         }
-    </script>
+    }
+
+
+   
+</script>
