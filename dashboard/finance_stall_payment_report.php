@@ -34,8 +34,8 @@
                         </div>
                         <div class="card-body overflow-auto">
                             <!-- <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%"> -->
-                            <button onclick="exportTableToExcel('example', 'stallpaymentreport-data')" class="btn btn-primary">Export Table Data To Excel File</button>
-                            <table id="example" class="table table-bordered dt-responsive nowrap table-striped" style="font-style:normal; font-size: 12px;">
+                            <button onclick="exportTableToExcel('chellan_report', 'stallpaymentreport-data')" class="btn btn-primary">Export Table Data To Excel File</button>
+                            <table id="chellan_report" class="table table-bordered dt-responsive nowrap table-striped" style="font-style:normal; font-size: 12px;">
                                 <thead>
                                     <tr>
                                         <th data-ordering="false">Sl.No</th>
@@ -58,12 +58,11 @@
                                         <th data-ordering="false">Transaction Number</th>
                                         <th data-ordering="false">Transaction Date</th>
                                         <th data-ordering="false">Challan Image</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $query = "SELECT up.*, sb.*, ch.*, ch.id as chid FROM users_profile up JOIN stall_booking sb ON up.user_id = sb.user_id JOIN challan ch ON up.user_id = ch.user_id ORDER BY up.id DESC";
+                                    $query = "SELECT up.*, sb.*, ch.user_id, ch.bank_name, ch.paid_amt, ch.trnctn_no, ch.trnctn_type, ch.trnctn_date, ch.paye_name, ch.ifsc, ch.status, ch.updated_date, ch.invoice_no, ch.id as chid FROM users_profile up JOIN stall_booking sb ON up.user_id = sb.user_id JOIN challan ch ON up.user_id = ch.user_id ORDER BY up.id DESC";
                                     $bookstall = mysqli_query($con, $query);
                                     $counter = 0;
                                     while ($book = mysqli_fetch_array($bookstall)) {
@@ -95,50 +94,40 @@
                                         }
                                         $transaction_number = "$book[trnctn_no]";
                                         $transaction_date = "$book[trnctn_date]";
-                                        $challan_image = base64_encode($book['challan_img']);
-
+                                        $status = $book["status"];
+                                        $chellan_id = $book["chid"];
                                     ?>
                                         <tr>
                                             <td>
                                                 <?= ++$counter; ?>
                                             </td>
                                             <td>
-
-                                                <?php
-                                                $query = "SELECT * FROM challan where id= '$book[chid]'";
-                                                $challan_dtls = mysqli_query($con, $query);
-                                                $challan_dtls_row = mysqli_fetch_row($challan_dtls);
-                                                if ($challan_dtls_row[10] == 'A') { ?>
+                                                <?php if ($status == 'A') { ?>
                                                     <button class="btn btn-success">Approved</button>
-
                                                 <?php } else { ?>
-
-                                                    <a href='finance_stall_report_update.php?id=<?= $book["chid"] ?>' class='dropdown-item remove-item-btn' <?= $btnenbl; ?>>
-                                                        <button class="btn btn-primary"> <i class='ri-user-follow-fill align-bottom me-2 text-white'></i> <span class="text-white">Verify / Approve</span></button>
-                                                    </a>
+                                                    <?php if ($user['user_type'] != 'PC') { ?>
+                                                        <a href='finance_stall_report_update.php?id=<?= $chellan_id ?>' class='dropdown-item remove-item-btn' <?= $btnenbl; ?>>
+                                                            <button class="btn btn-primary"> <i class='ri-user-follow-fill align-bottom me-2 text-white'></i> <span class="text-white">Verify / Approve</span></button>
+                                                        </a>
+                                                    <?php } ?>
                                                 <?php   }
                                                 ?>
                                             </td>
-
                                             <td>
                                                 <?= $org_name; ?>
                                             </td>
-
                                             <td>
                                                 <?= $gst_no; ?>
                                             </td>
-
                                             <td>
                                                 <?= $cntct_prsn_name; ?>
                                             </td>
-
                                             <td>
                                                 <?= $cntct_prsn_mobile; ?>
                                             </td>
                                             <td>
                                                 <?= $cntct_prsn_email; ?>
                                             </td>
-
                                             <td>
                                                 <?= $alloted_stall3x3; ?>
                                             </td>
@@ -172,14 +161,12 @@
                                             <td>
                                                 <?= $transaction_number; ?>
                                             </td>
-
                                             <td>
                                                 <?= $transaction_date; ?>
                                             </td>
                                             <td>
-                                                <!-- <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" height="70vh" onclick="enlargeImage(this)" style="cursor: pointer;"> -->
-                                                <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" class="hover-image" height="70vh" data-bs-toggle="modal" data-bs-target="#myModal">
-                                                <div class="modal" id="myModal">
+                                                <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal<?= $id; ?>">View</button>
+                                                <div class="modal" id="myModal<?= $id; ?>">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
 
@@ -191,7 +178,13 @@
 
                                                             <!-- Modal body -->
                                                             <div class="modal-body">
-                                                            <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" class="hover-image">
+                                                                <?php
+                                                                $imgQuery = "select challan_img from challan where id = $chellan_id";
+                                                                $imgStmt = mysqli_query($con, $imgQuery);
+                                                                $challan_image = $imgStmt->fetch_assoc();
+                                                                $img_chellan = base64_encode($challan_image["challan_img"]);
+                                                                ?>
+                                                                <img src="data:image/jpg;charset=utf8;base64,<?= $img_chellan; ?>" height="auto" width="auto" class="hover-image">
                                                             </div>
 
                                                             <!-- Modal footer -->
@@ -201,13 +194,11 @@
 
                                                         </div>
                                                     </div>
-                                                </div>                                             
+                                                </div>
                                             </td>
                                             <!-- <div id="enlarged-image-container" style="display: none;">
                                                 <img id="enlarged-image" src="" alt="Enlarged Image" style="max-width: 90%; max-height: 90vh;">
                                             </div> -->
-
-
                                         </tr>
                                     <?php  }
                                     ?>

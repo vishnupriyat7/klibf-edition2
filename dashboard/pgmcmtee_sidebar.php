@@ -65,6 +65,9 @@ $username = $_SESSION['username'];
                                 <a href="pgmcmtee_stall_booking_report.php" class="nav-link" data-key="t-nft-landing">Stall Booking </a>
                             </li>
                             <li class="nav-item">
+                                <a href="finance_stall_payment_report.php" class="nav-link" data-key="t-nft-landing">Publisher Payment Chellan Report </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="pgmcmtee-evnt-bkrls-report.php" class="nav-link" data-key="t-nft-landing">Event Proposal Book Release Report </a>
                             </li>
                             <li class="nav-item">
