@@ -42,7 +42,7 @@
                                         <th data-ordering="false">Book Title</th>
                                         <th data-ordering="false">Author</th>
                                         <th data-ordering="false">Book Genere</th>
-                                        <th data-ordering="false">Book Cover</th>
+                                        <!-- <th data-ordering="false">Book Cover</th> -->
                                         <th data-ordering="false">Brief Description</th>
                                         <th data-ordering="false">Releasing by</th>
                                         <th data-ordering="false">Releasing by Contact No</th>
@@ -75,7 +75,44 @@
                                     // $querybookRls = "SELECT * FROM event_propsl_bkrls epb join day_time_prefer dtp on epb.id = dtp.book_rls_id where epb.users_id = '$userId' ORDER BY epb.id DESC";
 
 
-                                    $querybookRls = "SELECT up.org_name, epb.*, ed1.event_date as day1_date, ed1.event_day as day1, ed2.event_date as day2_date, ed2.event_day as day2, ed3.event_date as day3_date, ed3.event_day as day3, ts1.slot_time as slotime1, ts1.slot_name as slotname1, ts2.slot_time as slotime2, ts2.slot_name as slotname2, ts3.slot_time as slotime3, ts3.slot_name as slotname3, bg.genere 
+                                    // $querybookRls = "SELECT up.org_name, epb.*, ed1.event_date as day1_date, ed1.event_day as day1, ed2.event_date as day2_date, ed2.event_day as day2, ed3.event_date as day3_date, ed3.event_day as day3, ts1.slot_time as slotime1, ts1.slot_name as slotname1, ts2.slot_time as slotime2, ts2.slot_name as slotname2, ts3.slot_time as slotime3, ts3.slot_name as slotname3, bg.genere 
+                                    // FROM event_propsl_bkrls epb 
+                                    // join book_genere bg on epb.book_genere = bg.id
+                                    // join day_time_prefer dtp on epb.id = dtp.book_rls_id
+                                    // join event_date ed1 on dtp.day_prfr1 = ed1.id 
+                                    // join event_date ed2 on dtp.day_prfr2 = ed2.id 
+                                    // join event_date ed3 on dtp.day_prfr3 = ed3.id
+                                    // join time_slot ts1 on dtp.time_prfr1 = ts1.id
+                                    // join time_slot ts2 on dtp.time_prfr2 = ts2.id
+                                    // join time_slot ts3 on dtp.time_prfr3 = ts3.id
+                                    // join users_profile up on epb.users_id = up.user_id
+                                    // ORDER BY epb.id DESC";
+
+                                    // var_dump($querybookRls);
+
+
+                                    $querybookRls = "SELECT up.org_name, epb.id,
+                                    up.org_name,
+                                    epb.book_title,
+                                    bg.genere,
+                                    epb.author,
+                                    epb.brf_description,
+                                    epb.released_by,
+                                    epb.relcd_by_cntct,
+                                    epb.recived_by,
+                                    epb.recvd_by_contact,
+                                    epb.guest1,
+                                    epb.guest1_contct,
+                                    epb.guest2,
+                                    epb.guest2_contct,
+                                    epb.guest3,
+                                    epb.guest3_contct,
+                                    epb.contact_persn_name,
+                                    epb.contact_persn_email,
+                                    epb.contact_persn_mobile,
+                                    epb.updated_at,
+                                    epb.remarks,
+                                    epb.status, ed1.event_date as day1_date, ed1.event_day as day1, ed2.event_date as day2_date, ed2.event_day as day2, ed3.event_date as day3_date, ed3.event_day as day3, ts1.slot_time as slotime1, ts1.slot_name as slotname1, ts2.slot_time as slotime2, ts2.slot_name as slotname2, ts3.slot_time as slotime3, ts3.slot_name as slotname3, bg.genere 
                                     FROM event_propsl_bkrls epb 
                                     join book_genere bg on epb.book_genere = bg.id
                                     join day_time_prefer dtp on epb.id = dtp.book_rls_id
@@ -87,7 +124,6 @@
                                     join time_slot ts3 on dtp.time_prfr3 = ts3.id
                                     join users_profile up on epb.users_id = up.user_id
                                     ORDER BY epb.id DESC";
-                                    // var_dump($querybookRls);
 
                                     $bookprps = mysqli_query($con, $querybookRls);
                                     $counter = 0;
@@ -142,9 +178,9 @@
                                             <td>
                                                 <?= $book_genere; ?>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <img src="data:image/jpg;charset=utf8;base64,<?= $book_cover; ?>" height="70vh">
-                                            </td>
+                                            </td> -->
                                             <td>
                                                 <?= $brf_description; ?>
                                             </td>

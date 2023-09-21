@@ -21,12 +21,12 @@
     </li>
     <li class="dropdown"><a href="#"><span>Contests Registration</span> <i class="bi bi-chevron-right"></i></a>
       <ul>
-        <li><a href="contest-bkrvw-regstrn.php">Book Review / പുസ്തകാസ്വാദനം</a></li>
-        <li><a href="contest-rectn-poem-regstrn.php">Poetry Recitation / പദ്യപാരായണം</a></li>
-        <li><a href="contest-story-telling-regstrn.php">Story Telling / ഒരു കഥ പറയാം</a></li>
+        <li><a href="contst-bookreview-regstrn.php">Book Review / പുസ്തകാസ്വാദനം</a></li>
+        <li><a href="contest-poetryrecitation-registration.php">Poetry Recitation / പദ്യപാരായണം</a></li>
+        <li><a href="contest-story-telling-registration.php">Story Telling / ഒരു കഥ പറയാം</a></li>
         <!-- <li><a href="#">Cartoon / കാർട്ടൂൺ</a></li> -->
-        <li><a href="contest-quiz-regstrn.php">Quiz / ക്വിസ്</a></li>
-          <li><a href="contest-enneswadhnicha.php">എന്നെ സ്വാധീനിച്ച വായനശാല</a></li>
+        <!-- <li><a href="contest-quiz-registration.php">Quiz / ക്വിസ്</a></li> -->
+        <li><a href="contest-enneswadhnicha-vayanashala-regstn.php">എന്നെ സ്വാധീനിച്ച വായനശാല</a></li>
       </ul>
     </li>
     <!-- <li><a href="http://klibf.niyamasabha.org/vision-speakers-new.php" target="_blank">Speakers</a></li>

@@ -56,10 +56,10 @@
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Book Review Registration</h2>
+                    <h2>Quiz Registration</h2>
                     <ol>
                         <li><a href="index.php">Home</a></li>
-                        <li>Book Review</li>
+                        <li>Quiz</li>
                     </ol>
                 </div>
 
@@ -80,32 +80,25 @@
         <!-- <div class="container d-flex justify-content-center align-items-center min-vh-100"> -->
         <!-- Section to hold your Google Sheets link -->
         <section>
-
             <div class="container d-flex justify-content-center align-items-center">
                 <div class="row">
                     <!--end col-->
-                    <div class="col-xxl-12 col-12 col-md-6">
+                    <div class="col-xxl-12 col-12 col-md-12 col-lg-12">
                         <div class="card mt-xxl-n5">
 
-                            <div class="text-center">
-                                <img class="mx-auto d-block img-fluid" src="./assets/img/contests/contst-bkrvw.jpg">
-                            </div>
 
                             <div class="card-body p-4">
                                 <div class="tab-content">
                                     <div class="d-flex justify-content-end">
-                                        <!-- <a href="https://docs.google.com/forms/d/11d3YLOtjtA_osjraiAfxXyNvLuv2N14Om0dKEuGdJpY/edit" class="mr-2 btn btn-success" target="_blank"><i class="fa fa-download"></i> <span class="horizontal-shake">Click Here to Apply</a></span> -->
-                                        <a href="https://docs.google.com/forms/d/11d3YLOtjtA_osjraiAfxXyNvLuv2N14Om0dKEuGdJpY/edit" class="mr-2 btn btn-success horizontal-shake" target="_blank"><i class="fa fa-download"></i> Click Here to Apply</a>
+
+                                        <a href="https://forms.gle/R88MphceQWm3JfsA8" class="mr-2 btn btn-success horizontal-shake" target="_blank"><i class="fa fa-download"></i> Click Here to Apply</a>
 
                                     </div>
-                                    <br>
-
 
                                     <div class="align-items-center text-center">
                                         <h3><b>Rules & Regulations</b></h3>
 
                                     </div>
-
                                     <!-- <div class="tab-pane active" id="personalDetails" role="tabpanel"> -->
 
                                     <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKw20kdrJw7rUjexrK_vo8HU4-mIN3M1NT7wAXfSbFYrph9w/viewform?embedded=true" width="1000" height="1815" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe> -->
@@ -179,16 +172,7 @@
                                                         <li>
                                                             <h5> <b><span>2.&emsp; Booking of Space : </span></b></h5>
                                                         </li>
-                                                        <ul>
-                                                            <li>&emsp;<b>&emsp;2.1</b>&emsp; The process for booking of space at the Fair is on first-cum-first-serve basis</li><br>
-                                                            <li>&emsp;<b>&emsp;2.2</b>&emsp; No application will be entertained after the last date of booking
-                                                                i.e.<span> 20th August 2023.<span></span></li><br>
-                                                            <li>&emsp;<b>&emsp;2.3</b>&emsp; In case Stall(s) is allotted to an exhibitor, the Organizer will provide duly
-                                                                constructed Stall(s) having provision for display of books.</li><br>
-                                                            <li>&emsp;<b>&emsp;2.4</b>&emsp; Exhibitors are obliged to allow the Organizer to see and check the Stall(s)
-                                                                and items at any time during the fair.</li><br>
-                                                            <li>&emsp;<b>&emsp;2.5</b>&emsp; The maximum number of stalls, one can register and that can be clubbed together is limited to 5.</li>
-                                                        </ul>
+                                                       
 
 
 
