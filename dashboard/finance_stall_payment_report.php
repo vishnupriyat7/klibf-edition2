@@ -5,7 +5,7 @@
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
 <div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
@@ -59,12 +59,11 @@
                                         <th data-ordering="false">Transaction Number</th>
                                         <th data-ordering="false">Transaction Date</th>
                                         <th data-ordering="false">Challan Image</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $query = "SELECT up.*, sb.*, ch.*, ch.id as chid FROM users_profile up JOIN stall_booking sb ON up.user_id = sb.user_id JOIN challan ch ON up.user_id = ch.user_id ORDER BY up.id DESC";
+                                    $query = "SELECT up.*, sb.*, ch.user_id, ch.bank_name, ch.paid_amt, ch.trnctn_no, ch.trnctn_type, ch.trnctn_date, ch.paye_name, ch.ifsc, ch.status, ch.updated_date, ch.invoice_no, ch.id as chid FROM users_profile up JOIN stall_booking sb ON up.user_id = sb.user_id JOIN challan ch ON up.user_id = ch.user_id ORDER BY up.id DESC";
                                     $bookstall = mysqli_query($con, $query);
                                     $counter = 0;
                                     while ($book = mysqli_fetch_array($bookstall)) {
@@ -96,50 +95,40 @@
                                         }
                                         $transaction_number = "$book[trnctn_no]";
                                         $transaction_date = "$book[trnctn_date]";
-                                        $challan_image = base64_encode($book['challan_img']);
-
+                                        $status = $book["status"];
+                                        $chellan_id = $book["chid"];
                                     ?>
                                         <tr>
                                             <td>
                                                 <?= ++$counter; ?>
                                             </td>
                                             <td>
-
-                                                <?php
-                                                $query = "SELECT * FROM challan where id= '$book[chid]'";
-                                                $challan_dtls = mysqli_query($con, $query);
-                                                $challan_dtls_row = mysqli_fetch_row($challan_dtls);
-                                                if ($challan_dtls_row[10] == 'A') { ?>
+                                                <?php if ($status == 'A') { ?>
                                                     <button class="btn btn-success">Approved</button>
-
                                                 <?php } else { ?>
-
-                                                    <a href='finance_stall_report_update.php?id=<?= $book["chid"] ?>' class='dropdown-item remove-item-btn' <?= $btnenbl; ?>>
-                                                        <button class="btn btn-primary"> <i class='ri-user-follow-fill align-bottom me-2 text-white'></i> <span class="text-white">Verify / Approve</span></button>
-                                                    </a>
+                                                    <?php if ($user['user_type'] != 'PC') { ?>
+                                                        <a href='finance_stall_report_update.php?id=<?= $chellan_id ?>' class='dropdown-item remove-item-btn' <?= $btnenbl; ?>>
+                                                            <button class="btn btn-primary"> <i class='ri-user-follow-fill align-bottom me-2 text-white'></i> <span class="text-white">Verify / Approve</span></button>
+                                                        </a>
+                                                    <?php } ?>
                                                 <?php   }
                                                 ?>
                                             </td>
-
                                             <td>
                                                 <?= $org_name; ?>
                                             </td>
-
                                             <td>
                                                 <?= $gst_no; ?>
                                             </td>
-
                                             <td>
                                                 <?= $cntct_prsn_name; ?>
                                             </td>
-
                                             <td>
                                                 <?= $cntct_prsn_mobile; ?>
                                             </td>
                                             <td>
                                                 <?= $cntct_prsn_email; ?>
                                             </td>
-
                                             <td>
                                                 <?= $alloted_stall3x3; ?>
                                             </td>
@@ -173,13 +162,11 @@
                                             <td>
                                                 <?= $transaction_number; ?>
                                             </td>
-
                                             <td>
                                                 <?= $transaction_date; ?>
                                             </td>
                                             <td>
-                                                <!-- <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" height="70vh" onclick="enlargeImage(this)" style="cursor: pointer;"> -->
-                                                <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" class="hover-image" height="70vh" data-bs-toggle="modal" data-bs-target="#myModal<?= $id; ?>">
+                                                <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal<?= $id; ?>">View</button>
                                                 <div class="modal" id="myModal<?= $id; ?>">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
@@ -192,116 +179,123 @@
 
                                                             <!-- Modal body -->
                                                             <div class="modal-body">
-                                                                <img src="data:image/jpg;charset=utf8;base64,<?= $challan_image; ?>" style="max-width: 100%;" class="hover-image">
+                                                                <?php
+                                                                $imgQuery = "select challan_img from challan where id = $chellan_id";
+                                                                $imgStmt = mysqli_query($con, $imgQuery);
+                                                                $challan_image = $imgStmt->fetch_assoc();
+                                                                $img_chellan = base64_encode($challan_image["challan_img"]);
+                                                                ?>
+                                                                <img src="data:image/jpg;charset=utf8;base64,<?= $img_chellan; ?>" height="auto" width="auto" style="max-width: 100%;" class="hover-image">
 
-                                                            </div>
-                                                            <!-- Modal footer -->
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                                             </div>
 
                                                         </div>
+                                                        <!-- Modal footer -->
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+
                                                     </div>
                                                 </div>
-                                            </td>
-                                            <!-- <div id="enlarged-image-container" style="display: none;">
+                        </div>
+                        </td>
+                        <!-- <div id="enlarged-image-container" style="display: none;">
                                                 <img id="enlarged-image" src="" alt="Enlarged Image" style="max-width: 90%; max-height: 90vh;">
                                             </div> -->
-
-
-                                        </tr>
-                                    <?php  }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
+                        </tr>
+                    <?php  }
+                    ?>
+                    </tbody>
+                    </table>
                     </div>
                 </div>
-                <!--end col-->
             </div>
-            <!--end row-->
+            <!--end col-->
         </div>
-        <!-- container-fluid -->
+        <!--end row-->
     </div>
+    <!-- container-fluid -->
+</div>
 
-    <!-- End Page-content -->
-    <?php include "footer.php"; ?>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        const popupImage = document.getElementById("popup-image");
-        const popup = document.getElementById("popup");
-        const closePopup = document.getElementById("close-popup");
 
-        popupImage.addEventListener("click", () => {
-            popup.style.display = "block";
-        });
+<!-- End Page-content -->
+<?php include "footer.php"; ?>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+<script>
+    const popupImage = document.getElementById("popup-image");
+    const popup = document.getElementById("popup");
+    const closePopup = document.getElementById("close-popup");
 
-        closePopup.addEventListener("click", () => {
-            popup.style.display = "none";
-        });
+    popupImage.addEventListener("click", () => {
+        popup.style.display = "block";
+    });
 
-        function exportTableToExcel(example, filename = '') {
-            var downloadLink;
-            var dataType = 'application/vnd.ms-excel';
-            var tableSelect = document.getElementById(example);
-            var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-            // Specify file name
-            filename = filename ? filename + '.xls' : 'excel_data.xls';
-            // Create download link element
-            downloadLink = document.createElement("a");
-            document.body.appendChild(downloadLink);
-            if (navigator.msSaveOrOpenBlob) {
-                var blob = new Blob(['\ufeff', tableHTML], {
-                    type: dataType
-                });
-                navigator.msSaveOrOpenBlob(blob, filename);
-            } else {
-                // Create a link to the file
-                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-                // Setting the file name
-                downloadLink.download = filename;
-                //triggering the function
-                downloadLink.click();
-            }
+    closePopup.addEventListener("click", () => {
+        popup.style.display = "none";
+    });
+
+    function exportTableToExcel(example, filename = '') {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(example);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+        // Create download link element
+        downloadLink = document.createElement("a");
+        document.body.appendChild(downloadLink);
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+            // Setting the file name
+            downloadLink.download = filename;
+            //triggering the function
+            downloadLink.click();
         }
+    }
 
-        const hoverImages = document.querySelectorAll('.hover-image');
-        const popupWidth = 700; // Adjust the desired width
-        const popupHeight = 500; // Adjust the desired height
+    const hoverImages = document.querySelectorAll('.hover-image');
+    const popupWidth = 700; // Adjust the desired width
+    const popupHeight = 500; // Adjust the desired height
 
-        hoverImages.forEach(image => {
-            image.addEventListener('mouseover', () => {
-                const popup = document.createElement('div');
-                popup.className = 'popup';
-                const enlargedImage = new Image();
-                enlargedImage.src = image.src;
-                enlargedImage.style.width = popupWidth + 'px'; // Set the width
-                enlargedImage.style.height = popupHeight + 'px'; // Set the height
-                popup.appendChild(enlargedImage);
+    hoverImages.forEach(image => {
+        image.addEventListener('mouseover', () => {
+            const popup = document.createElement('div');
+            popup.className = 'popup';
+            const enlargedImage = new Image();
+            enlargedImage.src = image.src;
+            enlargedImage.style.width = popupWidth + 'px'; // Set the width
+            enlargedImage.style.height = popupHeight + 'px'; // Set the height
+            popup.appendChild(enlargedImage);
 
-                // Calculate the center position of the viewport
-                const viewportCenterX = window.innerWidth / 2;
-                const viewportCenterY = window.innerHeight / 2;
+            // Calculate the center position of the viewport
+            const viewportCenterX = window.innerWidth / 2;
+            const viewportCenterY = window.innerHeight / 2;
 
-                // Position the popup at the center
-                popup.style.top = viewportCenterY - popupHeight / 2 + 'px';
-                popup.style.left = viewportCenterX - popupWidth / 2 + 'px';
+            // Position the popup at the center
+            popup.style.top = viewportCenterY - popupHeight / 2 + 'px';
+            popup.style.left = viewportCenterX - popupWidth / 2 + 'px';
 
-                // Add the popup to the document
-                document.body.appendChild(popup);
+            // Add the popup to the document
+            document.body.appendChild(popup);
 
-                // Show the popup
-                popup.style.display = 'block';
-            });
-
-            image.addEventListener('mouseout', () => {
-                const popup = document.querySelector('.popup');
-                if (popup) {
-                    popup.style.display = 'none';
-                    document.body.removeChild(popup);
-                }
-            });
+            // Show the popup
+            popup.style.display = 'block';
         });
-    </script>
+
+        image.addEventListener('mouseout', () => {
+            const popup = document.querySelector('.popup');
+            if (popup) {
+                popup.style.display = 'none';
+                document.body.removeChild(popup);
+            }
+        });
+    });
+</script>

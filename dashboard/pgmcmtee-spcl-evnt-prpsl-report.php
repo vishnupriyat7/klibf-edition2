@@ -111,40 +111,7 @@
 
 
 
-                                            <td>
-                                                <div class='dropdown d-inline-block'>
-                                                    <button class='btn btn-soft-secondary btn-sm dropdown' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                                        <i class='ri-more-fill align-middle'></i>
-                                                    </button>
-                                                    <ul class='dropdown-menu dropdown-menu-end'>
-                                                        <!-- <li>
-                                                            <a href='publisher_bookdiscussion.php?discid=<?= $id; ?>' class='dropdown-item edit-item-btn'>
-                                                                <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Edit
-                                                            </a>
-                                                        </li> -->
-                                                        <!-- <li>
-                                                            <a href='deletesocial.php?id=$id' class='dropdown-item remove-item-btn'>
-                                                                <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Delete
-                                                            </a>
-                                                        </li> -->
-                                                        <li>
-                                                            <?php
-                                                            // $query = "SELECT * FROM users_profile where user_id='$id'";
-                                                            // $profileusers = mysqli_query($con, $query);
-                                                            // $user_profile_row = mysqli_fetch_row($profileusers);
-                                                            // if ($user_profile_row) {
-                                                            //     $btnenbl = "hidden";
-                                                            // } else {
-                                                            //     $btnenbl = "";
-                                                            // }
-                                                            ?>
-                                                            <!-- <a href='' class='dropdown-item remove-item-btn'>
-                                                                <i class='ri-delete-bin-fill align-bottom me-2 text-danger'></i>Delete
-                                                            </a> -->
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
+                                           
                                         </tr>
                                     <?php } ?>
                                 </tbody>

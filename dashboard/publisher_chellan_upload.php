@@ -598,7 +598,7 @@ function generateInvoice($invoiceNo)
                 newWin.document.write(++slno);
                 newWin.document.write('</td><td>Rent for Stall 3x2m 01/11/2023-07/11/2023</td><td>997222</td><td style="text-align: right;">');
                 newWin.document.write(stall3x2);
-                newWin.document.write('</td><td style="text-align: right;">10000</td><td style="text-align: right;">');
+                newWin.document.write('</td><td style="text-align: right;">8500</td><td style="text-align: right;">');
                 newWin.document.write(<?php echo json_encode($rate3x2) ?>);
                 newWin.document.write('</td><td style="text-align: right;">18</td><td style="text-align: right;">');
                 newWin.document.write(<?php echo json_encode($gst3x2 / 2) ?>);
