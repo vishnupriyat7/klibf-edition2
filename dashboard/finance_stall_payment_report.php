@@ -45,7 +45,7 @@
                                 <thead>
                                     <tr>
                                         <th data-ordering="false">Sl.No</th>
-                                        <th data-ordering="false">Action</th>
+                                        <!-- <th data-ordering="false">Action</th> -->
                                         <th data-ordering="false">Organization Name</th>
                                         <th data-ordering="false">GST Number</th>
                                         <th data-ordering="false">Contact Person Name</th>
@@ -63,7 +63,7 @@
                                         <th data-ordering="false">Transaction Type</th>
                                         <th data-ordering="false">Transaction Number</th>
                                         <th data-ordering="false">Transaction Date</th>
-                                        <th data-ordering="false">Challan Image</th>
+                                        <!-- <th data-ordering="false">Challan Image</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -107,7 +107,7 @@
                                             <td>
                                                 <?= ++$counter; ?>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <?php if ($status == 'A') { ?>
                                                     <button class="btn btn-success">Approved</button>
                                                 <?php } else { ?>
@@ -118,7 +118,7 @@
                                                     <?php } ?>
                                                 <?php   }
                                                 ?>
-                                            </td>
+                                            </td> -->
                                             <td>
                                                 <?= $org_name; ?>
                                             </td>
@@ -170,19 +170,15 @@
                                             <td>
                                                 <?= $transaction_date; ?>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal<?= $id; ?>">View</button>
                                                 <div class="modal" id="myModal<?= $id; ?>">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
-
-                                                            <!-- Modal Header -->
                                                             <div class="modal-header">
                                                                 <h4 class="modal-title"><?= $org_name; ?></h4>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                             </div>
-
-                                                            <!-- Modal body -->
                                                             <div class="modal-body">
                                                                 <?php
                                                                 $imgQuery = "select challan_img from challan where id = $chellan_id";
@@ -191,40 +187,24 @@
                                                                 $img_chellan = base64_encode($challan_image["challan_img"]);
                                                                 ?>
                                                                 <img src="data:image/jpg;charset=utf8;base64,<?= $img_chellan; ?>" height="auto" width="auto" style="max-width: 100%;" class="hover-image">
-
                                                             </div>
-
                                                         </div>
-                                                        <!-- Modal footer -->
-                                                        <!-- <div class="modal-footer">
-                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                                            </div> -->
-
                                                     </div>
                                                 </div>
+                                            </td> -->
+                                        </tr>
+                                    <?php  }  ?>                                   
+                                </tbody>
+                            </table>
                         </div>
-                        </td>
-                        <!-- <div id="enlarged-image-container" style="display: none;">
-                                                    </div>
-                                                </div>
-                        </div>
-                        </td>
-                        <div id="enlarged-image-container" style="display: none;">
-                                                <img id="enlarged-image" src="" alt="Enlarged Image" style="max-width: 90%; max-height: 90vh;">
-                                            </div> -->
-                        </tr>
-                    <?php  }
-                    ?>
-                    </tbody>
-                    </table>
                     </div>
                 </div>
+                <!--end col-->
             </div>
-            <!--end col-->
+            <!--end row-->
         </div>
-        <!--end row-->
+        <!-- container-fluid -->
     </div>
-    <!-- container-fluid -->
 </div>
 
 <!-- End Page-content -->

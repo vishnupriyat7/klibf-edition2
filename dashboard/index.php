@@ -20,6 +20,8 @@ if ($user['user_type'] == 'S') {
     include "pgmcmtee_sidebar.php";
 } elseif ($user['user_type'] == 'FC') {
     include "finance_sidebar.php";
+} elseif ($user['user_type'] == 'CC') {
+    include "cultural_sidebar.php";
 }
 ?>
 
@@ -42,6 +44,8 @@ if ($user['user_type'] == 'S') {
                 include "pgmcmtee_dashboard.php";
             } elseif ($user['user_type'] == 'FC') {
                 include "finance_dashboard.php";
+            } elseif ($user['user_type'] == 'CC') {
+                include "cultural_dashboard.php";
             } ?>
 
         </div>
