@@ -71,7 +71,7 @@ include "../z_db.php";
                     </a>
                 </li> -->
                 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     
                     <a class="nav-link menu-link" href="#sidebarEvent" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="sidebarLanding">
                         <i class="ri-profile-fill"></i> <span data-key="t-landing">Event Proposal</span>
@@ -89,7 +89,7 @@ include "../z_db.php";
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link menu-link" role="button" aria-expanded="true" aria-controls="sidebarLanding" href="#sidebarReport" data-bs-toggle="collapse">
                         <i class="ri-file-list-3-line"></i> <span data-key="t-landing">Report</span>
