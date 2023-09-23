@@ -15,7 +15,6 @@
         animation: shake 0.8s infinite;
     }
 
-
     @keyframes shake {
         0% {
             transform: translateX(0);
@@ -64,7 +63,8 @@
                 </div>
 
             </div>
-        </section><!-- End Breadcrumbs Section -->
+        </section>
+        <!-- End Breadcrumbs Section -->
 
         <!-- <section class="contest-bkrvw-reg"> -->
         <!-- <div class="container">
@@ -86,7 +86,7 @@
                     <div class="col-xxl-12 col-12 col-md-12 col-lg-12">
                         <div class="card mt-xxl-n5">
                             <div class="text-center">
-                                <img class="mx-auto d-block img-fluid" src="./assets/img/contests/Quizweb-copy.jpg">
+                                <img class="mx-auto d-block img-fluid" src="./assets/img/contests/Quizweb.jpg">
                             </div>
 
 
@@ -148,7 +148,6 @@
                                                                                 </td>
                                                                                 <td style="text-align: center;">
                                                                                     <label>35%</label>
-
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -175,15 +174,9 @@
                                                         <li>
                                                             <h5> <b><span>2.&emsp; Booking of Space : </span></b></h5>
                                                         </li>
-
-
-
-
                                                     </ul>
                                                 </small>
                                             </h5>
-
-
                                         </li>
                                     </ul>
                                     <!-- </div> -->
