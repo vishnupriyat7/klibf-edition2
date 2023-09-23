@@ -45,7 +45,7 @@
                                 <thead>
                                     <tr>
                                         <th data-ordering="false">Sl.No</th>
-                                        <!-- <th data-ordering="false">Action</th> -->
+                                        <th data-ordering="false">Action</th>
                                         <th data-ordering="false">Organization Name</th>
                                         <th data-ordering="false">GST Number</th>
                                         <th data-ordering="false">Contact Person Name</th>
@@ -63,7 +63,7 @@
                                         <th data-ordering="false">Transaction Type</th>
                                         <th data-ordering="false">Transaction Number</th>
                                         <th data-ordering="false">Transaction Date</th>
-                                        <!-- <th data-ordering="false">Challan Image</th> -->
+                                        <th data-ordering="false">Challan Image</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -107,7 +107,7 @@
                                             <td>
                                                 <?= ++$counter; ?>
                                             </td>
-                                            <!-- <td>
+                                            <td>
                                                 <?php if ($status == 'A') { ?>
                                                     <button class="btn btn-success">Approved</button>
                                                 <?php } else { ?>
@@ -118,7 +118,7 @@
                                                     <?php } ?>
                                                 <?php   }
                                                 ?>
-                                            </td> -->
+                                            </td>
                                             <td>
                                                 <?= $org_name; ?>
                                             </td>
@@ -170,7 +170,7 @@
                                             <td>
                                                 <?= $transaction_date; ?>
                                             </td>
-                                            <!-- <td>
+                                            <td>
                                                 <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal<?= $id; ?>">View</button>
                                                 <div class="modal" id="myModal<?= $id; ?>">
                                                     <div class="modal-dialog">
@@ -191,7 +191,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td> -->
+                                            </td>
                                         </tr>
                                     <?php  }  ?>                                   
                                 </tbody>
