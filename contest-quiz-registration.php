@@ -94,14 +94,15 @@
                                 <div class="tab-content">
                                     <div class="d-flex justify-content-end">
 
-                                        <a href="https://forms.gle/R88MphceQWm3JfsA8" class="mr-2 btn btn-success horizontal-shake" target="_blank"><i class="fa fa-download"></i> Click Here to Apply</a>
+                                        <a href="https://forms.gle/Y58w5WuM5QKu24FN9 " class="mr-2 btn btn-success horizontal-shake" target="_blank"><i class="fa fa-download"></i> Click Here to Apply</a>
 
                                     </div>
 
                                     <div class="align-items-center text-center">
-                                        <h3><b>Rules & Regulations</b></h3>
+                                    <h3><b>ക്വിസ് മത്സരം - പൊതുമാർഗ്ഗനിർദ്ദേശങ്ങൾ</b></h3>
 
                                     </div>
+
                                     <!-- <div class="tab-pane active" id="personalDetails" role="tabpanel"> -->
 
                                     <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKw20kdrJw7rUjexrK_vo8HU4-mIN3M1NT7wAXfSbFYrph9w/viewform?embedded=true" width="1000" height="1815" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe> -->
@@ -110,72 +111,40 @@
                                             <!-- <h3>Rules & Regulations</h3> -->
 
                                             <h5>
-                                                <small>
-                                                    <ul>
-                                                        <li>
+                                                <ul>
+                                                    <small>
+                                                        <p>കേരള നിയമസഭ അന്താരാഷ്ട്ര പുസ്തകോത്സവം രണ്ടാം പതിപ്പിന്റെ ഭാഗമായി സ്കൂൾ, കോളേജ് വിദ്യാർത്ഥികൾക്കും പൊതു ജനങ്ങൾക്കുമായി സംഘടിപ്പിക്കുന്ന ക്വിസ്
+മത്സരത്തിനു താഴെ പറയുന്ന വിഭാഗങ്ങളിൽ രണ്ടു പേരടങ്ങുന്ന ടീമിന് പങ്കെടുക്കാവുന്നതാണ്.</p>
+
+                                                        <!-- <li>
                                                             <h5> <b><span> 1. Overview </b></span></h5>
-                                                        </li>
+                                                        </li> -->
                                                         <ul>
-
-                                                            <li>&emsp;<b>&emsp;1.1</b>&emsp; Allotment of the Stalls to publishers will be at the sole discretion of the Kerala Legislature Secretariat(hereinafter referred to as ‘Organizer’). The Organizer reserves the right to accept or reject Applications without assigning any reason thereof. </li><br>
-                                                            <li>&emsp;<b>&emsp;1.2</b>&emsp; In case of a natural disaster or if circumstances so warrant, the Organizer reserves the right to postpone, alter or cancel the Fair. In case the Fair is cancelled before the inauguration, rental collected will be refunded at the earliest after deducting the GST.</li><br>
-                                                            <li>&emsp;<b>&emsp;1.3</b>&emsp; The accepted applications will be considered as an agreement (under the accepted terms) between the exhibitor and the Organizer subject to the availability of space. No correspondence will be done with those exhibitors who fail to get stalls allotted in the fair. </li><br>
-                                                            <li>&emsp;<b>&emsp;1.4</b>&emsp; Display of relevant banners, posters, etc. on or within the Stall is permitted. However, no display will be allowed outside the Stall. </li><br>
-                                                            <li>&emsp;<b>&emsp;1.5</b>&emsp; Sale of books and other reading materials will be permitted on the following conditions:<br>
-                                                                <ul>
-                                                                    <li><b>*</b> A minimum discount to be allowed on the printed price at the rate
-                                                                        mentioned below.</li><br>
-                                                                    <div class="table-details">
-                                                                        <table>
-                                                                            <tr>
-                                                                                <th>
-
-                                                                                </th>
-                                                                                <th>
-                                                                                    <label>Malayalam books</label>
-                                                                                </th>
-                                                                                <th>
-                                                                                    <label>English books</label>
-                                                                                </th>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <label>For Individuals</label>
-                                                                                </td>
-                                                                                <td style="text-align: center;">
-                                                                                    <label>35%</label>
-
-                                                                                </td>
-                                                                                <td style="text-align: center;">
-                                                                                    <label>35%</label>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <label>For Library and
-                                                                                        Institutional purchase</label>
-                                                                                </td>
-                                                                                <td style="text-align: center;">
-                                                                                    <label>35%</label>
-
-                                                                                </td>
-                                                                                <td style="text-align: center;">
-                                                                                    <label>35%</label>
-
-                                                                                </td>
-                                                                            </tr>
-
-                                                                        </table>
-                                                                    </div>
-                                                                    <br>
-                                                                    <li><b>*</b> No books or materials forbidden by law, including those violating the Copyright Act, should be displayed or sold. Exhibitors will be solely responsible for any violation in this regard and the Organizer will not be liable for such violations. Exhibitors will indemnify the Organizer from and against all proceedings and expenses whatsoever in consequence of any such violation.</li>
-                                                                </ul>
+                                                            <li>ഹൈസ്കൂൾ-ഹയർസെക്കണ്ടറി വിദ്യാർത്ഥികൾ </li><br>
+                                                            <li>കോളേജ് വിദ്യാർഥികൾ</li><br>
+                                                            <li>പൊതുജനം (25 വയസ്സ് മുതൽ)</li><br>
+                                                            <p>(ഒരു ടീമിന് ഒരു വിഭാഗത്തിൽ മത്സരിക്കുന്നതിനുള്ള അവസരമേ
+ലഭിക്കുകയുള്ളു.)</p>
                                                         </ul>
                                                         <li>
-                                                            <h5> <b><span>2.&emsp; Booking of Space : </span></b></h5>
+                                                          <p>പങ്കെടുക്കാനാഗ്രഹിക്കുന്നവർ klibf ന്റെ വെബ്സൈറ്റ് വഴി <b>2023 ഒക്ടോബർ
+15</b> നു മുൻപ് രജിസ്റ്റർ ചെയ്യേണ്ടതാണ്.</p>
+                                                        </li>                                                        
+                                                        <li>
+                                                           <p>ഓരോ വിഭാഗത്തിലും പങ്കെടുക്കുന്ന ടീമുകളുടെ എണ്ണം നേരിട്ട് സ്ക്രീനിംഗ്
+നടത്താൻ കഴിയാത്ത വിധം അധികരിക്കുന്ന പക്ഷം ഓൺലൈൻ സ്ക്രീനിംഗ് നടത്തി പ്രാഥമിക മത്സരത്തിനുള്ള ടീമുകളെ തെരെഞ്ഞെടുക്കുന്നതാണ്.</p>
                                                         </li>
-                                                    </ul>
-                                                </small>
+                                                       <li>
+                                                           <p>ഹൈസ്കൂൾ-ഹയർസെക്കണ്ടറി വിദ്യാർത്ഥികൾ, കോളേജ് വിദ്യാർഥികൾ, പൊതുജനം (25  വയസ്സ് മുതൽ) എന്നീ വിഭാഗങ്ങൾക്കായി യഥാക്രമം 2023 ഒക്ടോബർ 2,3,4 തീയതികളിൽ പ്രാഥമിക മത്സരവും ഫൈനൽ മത്സരവും സംഘടിപ്പിക്കുന്നതാണ്.</p>
+                                                        </li>
+                                                        <li>
+                                                           <p>ഓരോ വിഭാഗത്തിലും ഒന്ന്, രണ്ട്, മൂന്ന് സ്ഥാനങ്ങൾ നേടുന്നവർക്ക് യഥാക്രമം 5000/- രൂപയുടെയും 3000/- രൂപയുടെയും 2000/- രൂപയുടെയും പുസ്തകക്കൂപ്പണുകളും കൂടാതെ സർട്ടിഫിക്കറ്റുകളും സമ്മാനമായി നൽകുന്നതാണ്.</p>
+                                                        </li>
+                                                        <li>
+                                                           <p>മത്സരത്തിൽ പങ്കെടുക്കുന്നവർ സ്‌കൂൾ / കോളേജ് ഐ.ഡി കാർഡ്, ആധാർ കാർഡ് എന്നിവ ഹാജരാക്കേണ്ടതാണ്.</p>
+                                                        </li>
+                                                    </small>
+                                                </ul>
                                             </h5>
                                         </li>
                                     </ul>
