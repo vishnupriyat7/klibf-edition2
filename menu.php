@@ -27,6 +27,7 @@
         <!-- <li><a href="#">Cartoon / കാർട്ടൂൺ</a></li> -->
         <li><a href="contest-quiz-registration.php">Quiz / ക്വിസ്</a></li>
         <li><a href="contest-enneswadhnicha-vayanashala-registration.php">എന്നെ സ്വാധീനിച്ച വായനശാല</a></li>
+        <li><a href="contest-parliament-registration.php">Model Parliament / മാതൃകാ നിയമസഭ</a></li>
       </ul>
     </li>
     <!-- <li><a href="http://klibf.niyamasabha.org/vision-speakers-new.php" target="_blank">Speakers</a></li>
