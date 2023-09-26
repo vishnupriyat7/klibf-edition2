@@ -86,7 +86,7 @@
                     <div class="col-xxl-12 col-12 col-md-12 col-lg-12">
                         <div class="card mt-xxl-n5">
                             <div class="text-center">
-                                <img class="mx-auto d-block img-fluid" src="./assets/img/contests/Quizweb-copy.jpg">
+                                <img class="mx-auto d-block img-fluid" src="./assets/img/contests/Quizweb.jpg">
                             </div>
 
 
