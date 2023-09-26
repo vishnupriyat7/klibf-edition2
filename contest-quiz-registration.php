@@ -86,7 +86,7 @@
                     <div class="col-xxl-12 col-12 col-md-12 col-lg-12">
                         <div class="card mt-xxl-n5">
                             <div class="text-center">
-                                <img class="mx-auto d-block img-fluid" src="./assets/img/contests/Quizweb.jpg">
+                                <img class="mx-auto d-block img-fluid" src="./assets/img/contests/Quizweb-copy.jpg">
                             </div>
 
 
@@ -107,14 +107,16 @@
 
                                     <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKw20kdrJw7rUjexrK_vo8HU4-mIN3M1NT7wAXfSbFYrph9w/viewform?embedded=true" width="1000" height="1815" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe> -->
                                     <ul>
-                                        <li class="contact-info color-1 bg-hover active hover-bottom p-2">
+                                        <!-- <li class="contact-info color-1 bg-hover active hover-bottom p-2"> -->
                                             <!-- <h3>Rules & Regulations</h3> -->
 
                                             <h5>
                                                 <ul>
                                                     <small>
+                                                        <li>
                                                         <p>കേരള നിയമസഭ അന്താരാഷ്ട്ര പുസ്തകോത്സവം രണ്ടാം പതിപ്പിന്റെ ഭാഗമായി സ്കൂൾ, കോളേജ് വിദ്യാർത്ഥികൾക്കും പൊതു ജനങ്ങൾക്കുമായി സംഘടിപ്പിക്കുന്ന ക്വിസ്
 മത്സരത്തിനു താഴെ പറയുന്ന വിഭാഗങ്ങളിൽ രണ്ടു പേരടങ്ങുന്ന ടീമിന് പങ്കെടുക്കാവുന്നതാണ്.</p>
+                                                        </li>
 
                                                         <!-- <li>
                                                             <h5> <b><span> 1. Overview </b></span></h5>
@@ -146,7 +148,7 @@
                                                     </small>
                                                 </ul>
                                             </h5>
-                                        </li>
+                                        <!-- </li> -->
                                     </ul>
                                     <!-- </div> -->
                                     <!--end tab-pane-->
