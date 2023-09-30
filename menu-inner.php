@@ -21,7 +21,7 @@
     </li>
     <li class="dropdown"><a href="#"><span>Contests Registration</span> <i class="bi bi-chevron-right"></i></a>
       <ul>
-      <li><a href="contest-bookreview-registration.php">Book Review / പുസ്തകാസ്വാദനം</a></li>
+        <li><a href="contest-bookreview-registration.php">Book Review / പുസ്തകാസ്വാദനം</a></li>
         <li><a href="contest-poetryrecitation-registration.php">Poetry Recitation / പദ്യപാരായണം</a></li>
         <li><a href="contest-story-telling-registration.php">Story Telling / ഒരു കഥ പറയാം</a></li>
         <!-- <li><a href="#">Cartoon / കാർട്ടൂൺ</a></li> -->
@@ -69,6 +69,7 @@
               </li>
             </ul>
           </li> -->
+    <li><a class="nav-link scrollto" href="virtual_queue.php">Virtual Queue</a></li>
     <li><a class="nav-link scrollto" href="contact-inner-page.php">Contact</a></li>
     <li><a class="nav-link scrollto" href="login.php">Login</a></li>
   </ul>
