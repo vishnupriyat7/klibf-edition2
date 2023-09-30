@@ -60,28 +60,28 @@
             'title' => "Chief Minister's Words",
             'content' => 'Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip',
             'link' => 'speaker-message.php',
-            'video_url' => 'https://www.youtube.com/embed/odOihHFxN94',
+            'video_url' => 'https://www.youtube.com/embed/',
           ],
           [
             'image' => 'assets/img/about-msg/spkr1.jpg',
             'title' => "Speaker's Words",
             'content' => 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt',
             'link' => 'speaker-message.php',
-            'video_url' => 'https://www.youtube.com/embed/YOUR_VIDEO_ID_1',
+            'video_url' => 'https://www.youtube.com/embed/odOihHFxN94',
           ],
           [
             'image' => 'assets/img/about-msg/dyspkr.jpg',
             'title' => "Deputy Speaker's Desk",
             'content' => 'Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere',
             'link' => 'speaker-message.php',
-            'video_url' => 'https://www.youtube.com/embed/YOUR_VIDEO_ID_1',
+            'video_url' => 'https://www.youtube.com/embed/SZ5K-IJ3oqA',
           ],
           [
             'image' => 'assets/img/about-msg/secretary.jpg',
             'title' => "Message from Secretary",
             'content' => 'Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere',
             'link' => 'speaker-message.php',
-            'video_url' => 'https://www.youtube.com/embed/YOUR_VIDEO_ID_1',
+            'video_url' => 'https://www.youtube.com/embed/GNAq6um21ac',
           ],
           // Add data for other icon boxes here
         ];
@@ -89,6 +89,8 @@
         ?>
        <div class="col-xl-7 d-flex align-items-stretch">
          <div class="icon-boxes d-flex flex-column justify-content-center">
+
+         <!-- <h3>About Us</h3> -->
            <div class="row">
              <?php foreach ($iconBoxes as $box) :
               ?>
