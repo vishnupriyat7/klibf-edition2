@@ -45,9 +45,9 @@
      <div class="row no-gutters">
        <div class="content col-xl-5 d-flex align-items-stretch" data-aos="fade-up">
          <div class="content">
-           <h3>About Us</h3>
+           <h3>KLIBF-General Information</h3>
            <p>
-           The Kerala Legislature International Book Festival (KLIBF) is one of the unique events, which was born out of the cherished cultural and literary traditions followed in the State of Kerala. The resounding success of the first edition of the KLIBF is an epitome of the love for literature and writing of the people of Kerala. Conceptualized as part of the year long centenary celebrations of the Kerala Legislature Library, the KLIBF bears the imprint of the Literary landscape. The Kerala Legislative Assembly Complex, which hosts as the permanent venue for the festival remains unparalleled with regard to its location, ambience and serenity. The KLIBF etched its mark upon the cultural and literary circles, with its wide ranging events covering not only various literary genres but also by discussing the relevant social issues being addressed through these forms. </p>
+           The Kerala Legislature International Book Festival (KLIBF) is one of the unique events, which was born out of the cherished cultural and literary traditions followed in the State of Kerala. The resounding success of the first edition of the KLIBF is an epitome of the love for literature and writing of the people of Kerala. Conceptualized as part of the year long centenary celebrations of the Kerala Legislature Library, the KLIBF bears the imprint of the Literary landscape. The Kerala Legislative Assembly Complex, which hosts as the permanent venue for the festival remains unparalleled with regard to its location, ambience and serenity. The KLIBF etched its mark upon the cultural and literary circles, with its wide ranging events covering not only various literary genres but also by discussing the relevant social issues being addressed through these forms.  </p>
            <!-- <a href="about-inner-page.php" class="about-btn">About us <i class="bx bx-chevron-right"></i></a> -->
          </div>
        </div>

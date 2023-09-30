@@ -51,9 +51,9 @@ h6 {
   }
 }
 @media (max-width: 414px) {
-#about-inner-main {
-  margin-top: 26%;
-}
+  #about-inner-main {
+    margin-top: 26%;
+  }
 }
 
 /*--------------------------------------------------------------
@@ -702,7 +702,6 @@ section {
 --------------------------------------------------------------*/
 .contest-bkrvw-reg {
   height: fit-content;
-
 }
 
 /*--------------------------------------------------------------
@@ -784,7 +783,9 @@ section {
   padding: 30px 30px 30px 0;
 }
 .about .content-only {
-  padding: 0px 30px 30px 0;
+  /* padding: 0px 0px 30px 0; */
+  margin-left: 30px;
+  margin-right: 0px;
 }
 
 .about .content h3 {
@@ -852,7 +853,7 @@ section {
 
 @media (max-width: 1200px) {
   .about .content {
-    padding-right: 0;
+    padding-right: 10px;
   }
   .about img {
     padding: 3%;
@@ -1116,13 +1117,18 @@ section {
   color: #fff;
   font-size: 28px;
   text-align: center;
-  background: rgba(103, 176, 209, 0.75);
+  /* background: rgba(103, 176, 209, 0.75); */
+  /* background: #117525; */
+  background: rgba(95, 45, 110, 0.9);
+
   transition: 0.3s;
   width: 50%;
 }
 
 .gallery .gallery-wrap .gallery-links a:hover {
-  background: rgba(103, 176, 209, 0.95);
+  /* background: rgba(103, 176, 209, 0.95); */
+  /* background: #117525; */
+  background: rgba(111, 153, 32, 0.9);
 }
 
 .gallery .gallery-wrap .gallery-links a + a {

@@ -15,6 +15,7 @@
   <main id="main">
 
     <!-- ======= About Section ======= -->
+    <?php include "./components/about.php"; ?> 
     <?php include "./components/about-content-only.php"; ?> 
 
     <!-- End About Section -->
@@ -24,7 +25,11 @@
     <!-- End Speaker Section -->
 
 
-    <!-- ======= publishers Section ======= -->
+    <!-- ======= Contest Section ======= -->
+  
+    <?php include "./components/contests.php"; ?>
+
+     <!----- End Contest Section ------>
    
     <!-- End Testimonials Section -->
 

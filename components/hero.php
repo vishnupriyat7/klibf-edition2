@@ -7,8 +7,10 @@
      <h3>2023 Nov 1-7</h3>
      <!-- <h4>Stall Registration is open for Publishers ! Last Date: 20th August 2023 <a href="register.php"> <span class="horizontal-shake">  Click here</span> </a> to Register</h4> -->
     
-     <marquee><h4>Registration for various online Contests started. Please see the  <span class="horizontal-shake">‘Contests Registration’</span> menu ! ......  ഓൺലൈൻ മത്സരങ്ങളുടെ രജിസ്ട്രേഷൻ ആരംഭിച്ചു....</h4></marquee>
-     
+     <!-- <marquee><h4>Registration for various online Contests started. Please see the  <span class="horizontal-shake">‘Contests Registration’</span> menu ! ......  ഓൺലൈൻ മത്സരങ്ങളുടെ രജിസ്ട്രേഷൻ ആരംഭിച്ചു....</h4></marquee> -->
+     <!-- <h4>Registration for various online Contests started. Click here to Apply <span class="horizontal-shake">‘Contests Registration’</span> menu ! ......  ഓൺലൈൻ മത്സരങ്ങളുടെ രജിസ്ട്രേഷൻ ആരംഭിച്ചു....</h4></marquee> -->
+     <h4>Registration for various online Contests started ! <a href="#contests"> <span class="horizontal-shake">  Click here</span> </a> to Register..</h4>
+
      <!-- <a href="#about" class="btn-get-started scrollto"><i class="bx bx-chevrons-down"></i></a> -->
    </div>
  </section>
