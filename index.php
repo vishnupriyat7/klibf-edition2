@@ -28,6 +28,7 @@
     <!-- ======= Contest Section ======= -->
   
     <?php include "./components/contests.php"; ?>
+    <?php include "./components/reflections.php"; ?>
 
      <!----- End Contest Section ------>
    
