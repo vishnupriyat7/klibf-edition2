@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include "head-style.php"; ?>
+
+<?php
+include 'config.php';
+include "head-style.php"; ?>
 
 <body>
 
@@ -28,33 +31,33 @@
             <div class="container">
                 <div class="justify-content-between align-items-center">
                     <!-- <div class="col-12 col-lg-3 col-md-2 col-sm-12"></div> -->
-                    <div class="col-12 col-lg-8 col-md-12 col-sm-12 contact-info color-1 bg-hover active hover-bottom" style="margin: 0 auto;">                        
+                    <div class="col-12 col-lg-8 col-md-12 col-sm-12 contact-info color-1 bg-hover active hover-bottom" style="margin: 0 auto;">
                         <!-- Register Box -->
                         <div class="contact-box col-lg-12 col-md-12 col-sm-12 text-center">
                             <?php
                             $status = "OK";
                             $msg = "";
-                            if (isset($_POST['save'])) {
+                            if (isset($_POST['register_queue'])) {
                                 $inst_name =
-                                    mysqli_real_escape_string($con, $_POST['inst_name']);
+                                    mysqli_real_escape_string($conn, $_POST['inst_name']);
                                 $inst_addr =
-                                    mysqli_real_escape_string($con, $_POST['inst_addr']);
+                                    mysqli_real_escape_string($conn, $_POST['inst_addr']);
                                 $cntct_prsn1 =
-                                    mysqli_real_escape_string($con, $_POST['cntct_prsn1']);
+                                    mysqli_real_escape_string($conn, $_POST['cntct_prsn1']);
                                 $cntct_no1 =
-                                    mysqli_real_escape_string($con, $_POST['cntct_no1']);
+                                    mysqli_real_escape_string($conn, $_POST['cntct_no1']);
                                 $cntct_prsn2 =
-                                    mysqli_real_escape_string($con, $_POST['cntct_prsn2']);
+                                    mysqli_real_escape_string($conn, $_POST['cntct_prsn2']);
                                 $cntct_no2 =
-                                    mysqli_real_escape_string($con, $_POST['cntct_no2']);
+                                    mysqli_real_escape_string($conn, $_POST['cntct_no2']);
                                 $cntct_mail =
-                                    mysqli_real_escape_string($con, $_POST['cntct_mail']);
+                                    mysqli_real_escape_string($conn, $_POST['cntct_mail']);
                                 $queue_date =
-                                    mysqli_real_escape_string($con, $_POST['date_select']);
+                                    mysqli_real_escape_string($conn, $_POST['date_select']);
                                 $queue_slot =
-                                    mysqli_real_escape_string($con, $_POST['slot_select']);
+                                    mysqli_real_escape_string($conn, $_POST['slot_select']);
                                 $prsn_count =
-                                    mysqli_real_escape_string($con, $_POST['prsn_count']);
+                                    mysqli_real_escape_string($conn, $_POST['prsn_count']);
                                 $current_date = (new \DateTime())->format('Y-m-d H:i:s');
                                 $errormsg = "";
                                 if ($status == "NOTOK") {
@@ -62,16 +65,16 @@
                                         $msg . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                                                </div>"; //printing error if found in validation
                                 } else {
-                                    $query = "INSERT INTO queue (inst_name, inst_addr, cntct_name1, cntct_no1, cntct_name2, cntct_no2, email, count, date_id, slot_id, booked_date, status) VALUES ('$inst_name', '$inst_addr', '$cntct_prsn1','$cntct_no1', '$cntct_prsn2', '$cntct_no2', '$cntct_mail', $prsn_count, $queue_date, $queue_slot, '$current_date', 'E')";
-                                    $result = mysqli_query($con, $query);
-                                    $query_date = "SELECT queue_date FROM queue_date WHERE id = $queue_date";
-                                    $result_date = mysqli_query($con, $query_date);
-                                    $query_slot = "SELECT slot FROM queue_slot WHERE id = $queue_slot";
-                                    $result_slot = mysqli_query($con, $query_slot);
+                                    $query = "INSERT INTO queue (inst_name, inst_addr, cntct_name1, cntct_no1, cntct_name2, cntct_no2, email, count, date_id, slot_id, booked_date, status) VALUES ('$inst_name', '$inst_addr', '$cntct_prsn1','$cntct_no1', '$cntct_prsn2', '$cntct_no2', '$cntct_mail', '$prsn_count', '$queue_date', '$queue_slot', '$current_date', 'E')";
+                                    $result = mysqli_query($conn, $query);
+                                    $query_date = "SELECT event_date FROM event_date WHERE id = $queue_date";
+                                    $result_date = mysqli_query($conn, $query_date);
+                                    $query_slot = "SELECT slot_name FROM queue_slot WHERE id = $queue_slot";
+                                    $result_slot = mysqli_query($conn, $query_slot);
                                     $book_date = $result_date->fetch_all();
                                     $book_slot = $result_slot->fetch_all();
                                     // var_dump($result_date->fetch_all(), $result_slot->fetch_all());
-                                    if ($result) {
+                                    if ($result) { 
                                         $errormsg = "
                               <div class='alert alert-success alert-dismissible alert-outline fade show'>
                                                 <b>Registered Successfully. <br>Your booking has been confirmed for " . $book_date[0][0] . " at " . $book_slot[0][0] . ".</b></div>
@@ -104,7 +107,7 @@
                                     </div>
                                     <div class="form-group col-12 col-lg-4 col-md-6 col-sm-12">
                                         <br>
-                                        <input type="number" class="form-control col-sm-12" name="cntct_no1" id="cntct_no1" placeholder="*Contact No." required="required" min="0">
+                                        <input type="text" class="form-control col-sm-12" name="cntct_no1" id="cntct_no1" placeholder="*Contact No." required="required" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                     </div>
                                     <div class="form-group col-12 col-lg-8 col-md-6 col-sm-12">
                                         <br>
@@ -112,7 +115,7 @@
                                     </div>
                                     <div class="form-group col-12 col-lg-4 col-md-6 col-sm-12">
                                         <br>
-                                        <input type="number" class="form-control col-sm-12" name="cntct_no2" id="cntct_no2" placeholder="*Contact No." required="required" min="0">
+                                        <input type="text" class="form-control col-sm-12" name="cntct_no2" id="cntct_no2" placeholder="*Contact No." required="required" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                     </div>
                                     <div class="form-group col-12 col-lg-12 col-md-12 col-sm-12">
                                         <br>
@@ -120,38 +123,64 @@
                                     </div>
                                     <div class="form-group col-12 col-lg-4 col-md-6 col-sm-12">
                                         <br>
-                                        <input type="number" class="form-control col-sm-12" name="prsn_count" id="prsn_count" placeholder="*No.of persons" required="required" min="0">
+                                        <input type="number" class="form-control col-sm-12" name="prsn_count" id="prsn_count" placeholder="*No.of persons" required="required" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                     </div>
-                                    <div class="form-group col-12 col-lg-6 col-md-6 col-sm-12">
+                                    <?php
+                                    $day_query = "SELECT * FROM event_date";
+                                    $day_stmt = $conn->prepare($day_query);
+                                    $day_stmt->execute();
+                                    $day_result = $day_stmt->get_result();
+                                    $event_days = $day_result->fetch_all();
+                                    $slot_query = "SELECT * FROM queue_slot";
+                                    $slot_stmt = $conn->prepare($slot_query);
+                                    $slot_stmt->execute();
+                                    $slot_result = $slot_stmt->get_result();
+                                    $event_slots = $slot_result->fetch_all();
+                                    ?>
+                                    <div class="form-group col-12 col-lg-4 col-md-6 col-sm-12">
                                         <br>
                                         <!-- <div class="col-2"> -->
                                         <!-- <b>Select Date</b> -->
                                         <!-- </div> -->
                                         <!-- <div class="form-group col-6"> -->
                                         <!-- <b>Select Date</b> -->
-                                        <input type="date" name="begin" placeholder="Select Date" id="queue_date" value="" min="2023-11-01" max="2023-11-07" onchange="loadSlot();">
+                                        <select class="form-control form-group" name="date_select" id="date_select" style="height:35px;" onchange="loadSlot();">
+                                            <option value="0">Select Proposed Visit Day</option>
+                                            <?php foreach ($event_days as $days) { ?>
+                                                <option value="<?= $days[0] ?>" <?= $evnt_day1_selected ?>><?= $days[1]; ?> - <?= $days[2]; ?></option>
+                                            <?php } ?>
+                                        </select>
                                         <!-- <input type="date" id="part2_dob" name="part2_dob" placeholder="Date of Birth"> -->
                                         <!-- </div> -->
                                     </div>
+                                    <!-- <div class="form-group col-12 col-lg-4 col-md-6 col-sm-12">
+                                        <br>
+                                        <select class="form-control form-group" name="slot_select" id="slot_select" style="height:35px;">
+                                            <option value="0">Select Proposed Visit Time</option>
+                                            <?php foreach ($event_slots as $event_slot) {
+                                                // if ($event_slot[0] == $time_slot1) {
+                                                //     $time_slot1_selected = 'selected';
+                                                // } else {
+                                                //     $time_slot1_selected = '';
+                                                // } ?>
+                                                <option value="<?= $event_slot[0] ?>"><?= $event_slot[1]; ?> - <?= $event_slot[2]; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div> -->
                                     <input type="hidden" id="slot_select" name="slot_select">
-                                    <input type="hidden" id="date_select" name="date_select">
                                     <div class="col-12" id="avail_slot"></div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-bordered btn-success btn-block mt-3" name="register_queue" id="register_queue"><span class="text-white pr-3"><i class="fas fa-paper-plane"></i></span>Book Queue</button>
+                                    </div>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-bordered active btn-block mt-3" name="save" id="register_queue"><span class="text-white pr-3"><i class="fas fa-paper-plane"></i></span>Book Queue</button>
-                                </div><br>
-                                <div class="col-12">
-                                    <p style="font-family: Verdana, Geneva, Tahoma, sans-serif; text-align: left; font-size: small;">For any queries, please contact:<br>
-
-                                        Sheeja PK, Under Secretary- 9446334859 <br>
-
-                                        Sheeba Varghese, Deputy Secretary- 9446122660 <br>
-
-                                        Jayasree VL, Section Officer- 9207196761 <br>
-
+                                <br>
+                                    <p><b>For any queries, please contact:</b><br>
+                                        Shaji R, Deputy Secretary - 9497015937<br>
+                                        Sheeja P K, Under Secretary- 9446334859 <br>
+                                        Jayasree V L, Under Secretary- 9207196761 <br>
                                         Bindhuraj, Section Officer- 9447036221 <br>
-
-                                        Remya HR, Section Officer- 9446284522 </p>
+                                        Remya H R, Section Officer- 9446284522 </p>
                                 </div>
                             </form>
                             <p class="form-message"></p>
@@ -174,32 +203,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
 <script type="text/javascript">
     function loadSlot() {
-        event.preventDefault();
-        var date_select = $("#queue_date").val();
-        switch (date_select) {
-            case '2023-01-09':
-                date_id = 1;
-                break;
-            case '2023-01-10':
-                date_id = 2;
-                break;
-            case '2023-01-11':
-                date_id = 3;
-                break;
-            case '2023-01-12':
-                date_id = 4;
-                break;
-            case '2023-01-13':
-                date_id = 5;
-                break;
-            case '2023-01-14':
-                date_id = 6;
-                break;
-            case '2023-01-15':
-                date_id = 7;
-                break;
-        }
-        $("#date_select").val(date_id);
+        // event.preventDefault();
+        var date_id = $("#date_select").val(); 
         if (date_id === 0) {
             $("#avail_slot").empty();
         } else {
