@@ -1,7 +1,7 @@
  <style>
      /* CSS for the modal */
 
-    
+
 
      .img-fluid:hover {
          /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); */
@@ -25,47 +25,38 @@
                 // Sample data for each icon box
                 $iconBoxes = [
                     [
-                      'image' => 'assets/img/about-msg/Pinarayi_Vijyan_File__1__1200x.webp',
-                      'title' => "Chief Minister's Words",
-                      'content' => 'Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip',
-                      'link' => 'speaker-message.php',
-                      'video_url' => 'https://www.youtube.com/embed/',
-                    ],
-                    [
-                        'image' => 'assets/img/about-msg/spkr.png',
                         'title' => "Speaker's Message",
-                        'content' => 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt',
-                        'link' => 'speaker-message.php',
-                        'video_url' => 'https://www.youtube.com/embed/odOihHFxN94',
+                        'video_url' => 'https://www.youtube.com/embed/oFmxTQSoyb4',
                     ],
                     [
-                        'image' => 'assets/img/about-msg/dyspkr.png',
-                        'title' => "Deputy Speaker's Message",
-                        'content' => 'Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere',
-                        'link' => 'speaker-message.php',
-                        'video_url' => 'https://www.youtube.com/embed/SZ5K-IJ3oqA',
+                        'title' => "Speaker's Message",
+                        'video_url' => 'https://www.youtube.com/embed/Yd24pGERN3w',
                     ],
                     [
-                        'image' => 'assets/img/about-msg/sec.png',
-                        'title' => "Secretary Speaks",
-                        'content' => 'Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere',
-                        'link' => 'speaker-message.php',
-                        'video_url' => 'https://www.youtube.com/embed/GNAq6um21ac',
+                        'title' => "Speaker's Message",
+                        'video_url' => 'https://www.youtube.com/embed/ucQZZL4Dl8I',
                     ],
                     [
-                        'image' => 'assets/img/about-msg/dyspkr.png',
-                        'title' => "Deputy Speaker's Message",
-                        'content' => 'Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere',
-                        'link' => 'speaker-message.php',
-                        'video_url' => 'https://www.youtube.com/embed/SZ5K-IJ3oqA',
+                        'title' => "Speaker's Message",
+                        'video_url' => 'https://www.youtube.com/embed/j586OuoUNXs',
                     ],
                     [
-                        'image' => 'assets/img/about-msg/sec.png',
-                        'title' => "Secretary Speaks",
-                        'content' => 'Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere',
-                        'link' => 'speaker-message.php',
-                        'video_url' => 'https://www.youtube.com/embed/GNAq6um21ac',
+                        'title' => "Speaker's Message",
+                        'video_url' => 'https://www.youtube.com/embed/282dYpr2YHQ',
                     ],
+                    [
+                        'title' => "Speaker's Message",
+                        'video_url' => 'https://www.youtube.com/embed/Zz4441kSC1I',
+                    ],
+                    [
+                        'title' => "Speaker's Message",
+                        'video_url' => 'https://www.youtube.com/embed/zXriw5xaumY',
+                    ],
+                    [
+                        'title' => "Speaker's Message",
+                        'video_url' => 'https://www.youtube.com/embed/Vi0MBVueEI0',
+                    ],
+
                     // Add data for other icon boxes here
                 ];
 
@@ -91,12 +82,21 @@
                                      </iframe>
                                  </div>
 
-                                 <h4><?= $box['title'] ?></h4>
+                                 <!-- <h4><?= $box['title'] ?></h4> -->
                                  <!-- <p><?= $box['content'] ?> <a href="<?= $box['link'] ?>" class="open-modal-link">Read More...</a></p> -->
                              </div>
                          <?php endforeach; ?>
+                     </div>
+                     <!-- <div class="text-center">
+                         <button type="button" class="about-btn" href="reflection-view-more.php">View More</button>
+                     </div> -->
+                     <div class="text-center">
+                         <!-- <a href="https://docs.google.com/forms/d/11d3YLOtjtA_osjraiAfxXyNvLuv2N14Om0dKEuGdJpY/edit" class="mr-2 btn btn-success" target="_blank"><i class="fa fa-download"></i> <span class="horizontal-shake">Click Here to Apply</a></span> -->
+                         <a href="reflection-view-more.php" class="mr-2 btn about-btn">View More</a>
 
                      </div>
+
+                     <!-- <div><button></button></div> -->
                  </div>
                  <!-- End .content-->
              </div>
