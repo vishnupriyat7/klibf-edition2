@@ -107,7 +107,7 @@ include "head-style.php"; ?>
                                     </div>
                                     <div class="form-group col-12 col-lg-4 col-md-6 col-sm-12">
                                         <br>
-                                        <input type="text" class="form-control col-sm-12" name="cntct_no1" id="cntct_no1" placeholder="*Contact No." required="required" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                        <input type="text" class="form-control col-sm-12" name="cntct_no1" id="cntct_no1" placeholder="*Mobile No." required="required" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                     </div>
                                     <div class="form-group col-12 col-lg-8 col-md-6 col-sm-12">
                                         <br>
@@ -115,7 +115,7 @@ include "head-style.php"; ?>
                                     </div>
                                     <div class="form-group col-12 col-lg-4 col-md-6 col-sm-12">
                                         <br>
-                                        <input type="text" class="form-control col-sm-12" name="cntct_no2" id="cntct_no2" placeholder="*Contact No." required="required" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                        <input type="text" class="form-control col-sm-12" name="cntct_no2" id="cntct_no2" placeholder="*Mobile No." required="required" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                     </div>
                                     <div class="form-group col-12 col-lg-12 col-md-12 col-sm-12">
                                         <br>
@@ -168,7 +168,7 @@ include "head-style.php"; ?>
                                         </select>
                                     </div> -->
                                     <input type="hidden" id="slot_select" name="slot_select">
-                                    <div class="col-12" id="avail_slot"></div>
+                                    <div class="form-group col-12" id="avail_slot"></div>
                                     <div class="col-12">
                                         <button type="submit" class="btn btn-bordered btn-success btn-block mt-3" name="register_queue" id="register_queue"><span class="text-white pr-3"><i class="fas fa-paper-plane"></i></span>Book Queue</button>
                                     </div>
@@ -219,7 +219,7 @@ include "head-style.php"; ?>
                 success: function(data) {
                     $("#avail_slot").empty();
                     // var add_slot = "";
-                    var add_slot = "<div class='row'><div class='col-12'><b>Choose your Slot</b1></div>";
+                    var add_slot = "<b>Choose your Slot</b><div class='row'>";
                     for (var i = 0; i < data.length; i++) {
                         if (data[i].count === null) {
                             var avail = 500 - 0;
@@ -227,12 +227,12 @@ include "head-style.php"; ?>
                             var avail = 500 - data[i].count;
                         }
                         if (avail <= 0) {
-                            add_slot = add_slot + "<button class='col-12 btn-danger col-lg-3 col-md-6 col-sm-12' style='padding:0 !important;margin:.5% !important;' onclick='checkSlot(" + data[i].id + ");'>" + data[i].slot + "<br>Availability: " + avail + "</button>";
+                            add_slot = add_slot + "<div class='form-group col-12 col-lg-3 col-md-4 col-sm-12'><button class='col-12 btn btn-danger mt-3' onclick='checkSlot(" + data[i].id + ");' style='margin:0;'>" + data[i].slot + "<br>Availability: " + avail + "</button></div>";
                             // var btn_style = 'btn-danger';
                         } else {
                             // var btn_style = 'btn-info';
 
-                            add_slot = add_slot + "<button class='col-12 btn-info col-lg-3 col-md-6 col-sm-12' style='padding:0 !important;margin:.5% !important;' onclick='checkSlot(" + data[i].id + ");'>" + data[i].slot + "<br>Availability: " + avail + "</button>";
+                            add_slot = add_slot + "<div class='form-group col-12 col-lg-3 col-md-4 col-sm-12'><button class='col-12 btn btn-info mt-3' onclick='checkSlot(" + data[i].id + ");' style='margin:0;'>" + data[i].slot + "<br>Availability: " + avail + "</button></div>";
                         }
                     }
                     // add_slot = add_slot + "<button class='col-12 btn-danger col-lg-3 col-md-6 col-sm-12' style='padding:0 !important;margin:.5% !important;' onclick='checkSlot(" + data[i].id + ");'>" + data[i].slot + "<br>Availability: " + avail + "</button>";
