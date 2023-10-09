@@ -3,6 +3,29 @@
 
 <?php include "head-style.php"; ?>
 
+<style>
+    /* Highlighted pagination */
+    .pagination {
+        /* background-color: #007bff; */
+        background: rgba(111, 153, 32, 0.9);
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    /* Pagination links style */
+    .pagination .page-link {
+        color: white;
+        background-color: transparent;
+        border: none;
+        font-size: large;
+    }
+
+    /* Active page style */
+    .pagination .page-item.active .page-link {
+        /* background-color: #0056b3; */
+        background: rgba(95, 45, 110, 0.9);
+    }
+</style>
 
 <body>
 
@@ -287,21 +310,21 @@
                     // Loop through the items for the current page
                     for ($i = $startIndex; $i < $endIndex; $i++) {
                         $box = $iconBoxes[$i];
-                        ?>
+                    ?>
                         <div class="col-md-3 icon-box" data-aos="fade-up" data-aos-delay="100">
                             <div class="youtube-thumbnail">
                                 <iframe class="img-fluid" src="<?= $box['video_url'] ?>" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" data-video-src="<?= $box['video_url'] ?>" title="<b>Click to View</b>">
                                 </iframe>
                             </div>
                         </div>
-                        <?php
+                    <?php
                     }
                     ?>
                 </div>
 
                 <!-- Pagination -->
-                <div class="text-center">
-                    <ul class="pagination">
+                <div class="text-center mt-4">
+                    <ul class="pagination justify-content-center">
                         <?php if ($currentPage > 1) : ?>
                             <li class="page-item">
                                 <a class="page-link" href="?page=<?= $currentPage - 1 ?>">Previous</a>
@@ -328,15 +351,7 @@
     <!-- ======= Footer ======= -->
     <?php include "footer.php" ?>
 
-    <script>
-        // Initialize Bootstrap tooltips
-        $(document).ready(function() {
-            $('.image-link').tooltip({
-                trigger: 'hover',
-                html: true
-            });
-        });
-    </script>
+   
 </body>
 
 </html>
