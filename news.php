@@ -55,11 +55,25 @@
                     $imageDirectory = "assets/img/Newpaper/";
 
                     // Get all image files from the directory
-                    // $imageFiles = glob($imageDirectory . "*.jpeg");
                     $imageFiles = glob($imageDirectory . "*.{jpg,jpeg,png}", GLOB_BRACE);
 
+                    // Number of images per page
+                    $imagesPerPage = 6;
+
+                    // Current page number
+                    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+
+                    // Calculate the total number of pages
+                    $totalPages = ceil(count($imageFiles) / $imagesPerPage);
+
+                    // Calculate the starting index of images for the current page
+                    $startIndex = ($currentPage - 1) * $imagesPerPage;
+
+                    // Slice the image files for the current page
+                    $imageFilesOnPage = array_slice($imageFiles, $startIndex, $imagesPerPage);
+
                     // Loop through the image files and generate HTML for each
-                    foreach ($imageFiles as $index => $imagePath) {
+                    foreach ($imageFilesOnPage as $index => $imagePath) {
                         $imageName = basename($imagePath);
                     ?>
                         <div class="col-lg-4 col-md-6 mb-0 p-2">
@@ -74,12 +88,8 @@
                                                 <img class="card-img-top mx-auto" src="<?php echo $imagePath; ?>" alt="">
                                             </div>
                                         </div>
-                                        <!-- <div class="modal-body mb-0 p-0 d-flex justify-content-center align-items-center">
-                                            <img class="card-img-top mx-auto" src="<?php echo $imagePath; ?>" alt="">
-                                        </div> -->
                                         <!-- Footer -->
                                         <div class="modal-footer justify-content-center">
-                                            <!-- <span class="mr-4">Spread the word!</span> -->
                                             <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
@@ -88,14 +98,52 @@
                             </div>
                             <!-- Modal: Name -->
                             <a href="#" data-toggle="modal" data-target="#modal<?php echo $index; ?>" data-html="true" data-placement="bottom" title="<b>Click to Read</b>" class="image-link">
-                                <img class="img-fluid z-depth-1 equal-proportion" src="<?php echo $imagePath; ?>" alt="video" data-toggle="modal" data-target="#modal<?php echo $index; ?>">
+                                <img class="img-fluid z-depth-1 equal-proportion" src="<?php echo $imagePath; ?>" alt="image" data-toggle="modal" data-target="#modal<?php echo $index; ?>">
                             </a>
-                            <p style="text-align: center;font-weight: bold;"><?php echo pathinfo($imageName, PATHINFO_FILENAME); ?></p>
+                            <p style="text-align: center; font-weight: bold;"><?php echo pathinfo($imageName, PATHINFO_FILENAME); ?></p>
                         </div>
                     <?php
                     }
                     ?>
                     <!-- Grid column -->
+                </div>
+
+                <!-- Pagination -->
+                <!-- <div class="text-center mt-4">
+                    <ul class="pagination">
+                        <?php
+                        for ($page = 1; $page <= $totalPages; $page++) {
+                            $activeClass = ($page == $currentPage) ? 'active' : '';
+                        ?>
+                            <li class="page-item <?php echo $activeClass; ?>">
+                                <a class="page-link" href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
+                            </li>
+                        <?php
+                        }
+                        ?>
+                    </ul>
+                </div> -->
+                <!-- End Pagination -->
+                <div class="text-center mt-4">
+                    <ul class="pagination justify-content-center">
+                        <?php if ($currentPage > 1) : ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?= $currentPage - 1 ?>">Previous</a>
+                            </li>
+                        <?php endif; ?>
+
+                        <?php for ($page = 1; $page <= $totalPages; $page++) : ?>
+                            <li class="page-item <?= ($page == $currentPage) ? 'active' : '' ?>">
+                                <a class="page-link" href="?page=<?= $page ?>"><?= $page ?></a>
+                            </li>
+                        <?php endfor; ?>
+
+                        <?php if ($currentPage < $totalPages) : ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?= $currentPage + 1 ?>">Next</a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
                 </div>
             </div>
         </section>

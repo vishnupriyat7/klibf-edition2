@@ -2,9 +2,17 @@
 <html lang="en">
 
 <?php include "head-style.php"; ?>
+<head>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<style>
-    /* Highlighted pagination */
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <style>
+         /* Highlighted pagination */
     .pagination {
         /* background-color: #007bff; */
         background: rgba(111, 153, 32, 0.9);
@@ -25,8 +33,8 @@
         /* background-color: #0056b3; */
         background: rgba(95, 45, 110, 0.9);
     }
-</style>
-
+    </style>
+</head>
 <body>
 
     <!-- ======= Header ======= -->

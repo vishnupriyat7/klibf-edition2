@@ -2,7 +2,7 @@
    /* CSS for the modal */
    .modal {
      display: none;
-     position: fixed;
+     position: relative;
      top: 0;
      left: 0;
      width: 100%;
@@ -141,6 +141,7 @@
  <script>
    $(document).ready(function() {
      $("#videoModal").hide();
+    //  $("#videoModal").fadeOut();
      // Open modal when clicking on an icon box
      $(".open-modal").click(function() {
        var videoSrc = $(this).data("video-src");
