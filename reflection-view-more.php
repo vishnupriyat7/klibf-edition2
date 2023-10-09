@@ -3,25 +3,6 @@
 
 <?php include "head-style.php"; ?>
 
-<head>
-    <!-- Include Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <!-- Include jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-
-    <!-- Include Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <style>
-        /* CSS for maintaining equal proportions */
-        .equal-proportion {
-            max-width: 100%;
-            max-height: 100vh;
-            width: 80vw;
-            height: 40vh;
-        }
-    </style>
-</head>
 
 <body>
 
@@ -273,52 +254,74 @@
                             'title' => "Speaker's Message",
                             'video_url' => 'https://www.youtube.com/embed/Zz4441kSC1I',
                         ],
-
-
-
-
-                       
-
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/gG_ZOc0vqdI',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/FRaoFhjwyJs',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/jBlmv7_UGkA',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/HNPsREruRy0',
+                        ],
                         // Add data for other icon boxes here
+
                     ];
 
-                    ?>
-                    <div class="col-xl-12 d-flex align-items-baseline">
-                        <div class="icon-boxes d-flex flex-column justify-content-center">
+                    // Pagination setup
+                    $itemsPerPage = 12;  // Adjust the number of items per page as needed
+                    $totalItems = count($iconBoxes);
+                    $totalPages = ceil($totalItems / $itemsPerPage);
+                    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
-                            <!-- <h3>About Us</h3> -->
-                            <div class="row text-center">
-                                <?php foreach ($iconBoxes as $box) :
-                                ?>
+                    // Calculate the range for the current page
+                    $startIndex = ($currentPage - 1) * $itemsPerPage;
+                    $endIndex = min($startIndex + $itemsPerPage, $totalItems);
 
-                                    <div class="col-md-3 icon-box" data-aos="fade-up" data-aos-delay="100">
-                                        <!-- <i class="bx bx-receipt"></i> -->
-
-                                        <!-- <h1 class="text-light"><a href="index.html"><span>KLIBF</span></a></h1> -->
-                                        <!-- Uncomment below if you prefer to use an image logo -->
-                                        <!-- <a class="open-modal" data-video-src="<?= $box['video_url'] ?>" title="<b>Click to View</b>">
-                   <img src="<?= $box['image'] ?>" alt="" class="img-fluid">
-                 </a> -->
-                                        <div class="youtube-thumbnail">
-                                            <iframe class="img-fluid" src="<?= $box['video_url'] ?>" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" data-video-src="<?= $box['video_url'] ?>" title="<b>Click to View</b>">
-                                            </iframe>
-                                        </div>
-
-                                        <!-- <h4><?= $box['title'] ?></h4> -->
-                                        <!-- <p><?= $box['content'] ?> <a href="<?= $box['link'] ?>" class="open-modal-link">Read More...</a></p> -->
-                                    </div>
-                                <?php endforeach; ?>
+                    // Loop through the items for the current page
+                    for ($i = $startIndex; $i < $endIndex; $i++) {
+                        $box = $iconBoxes[$i];
+                        ?>
+                        <div class="col-md-3 icon-box" data-aos="fade-up" data-aos-delay="100">
+                            <div class="youtube-thumbnail">
+                                <iframe class="img-fluid" src="<?= $box['video_url'] ?>" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" data-video-src="<?= $box['video_url'] ?>" title="<b>Click to View</b>">
+                                </iframe>
                             </div>
-                            <!-- <div class="text-center">
-                         <button type="button" class="about-btn" href="reflection-view-more.php">View More</button>
-                     </div> -->
-
-
-                            <!-- <div><button></button></div> -->
                         </div>
-                        <!-- End .content-->
-                    </div>
+                        <?php
+                    }
+                    ?>
                 </div>
+
+                <!-- Pagination -->
+                <div class="text-center">
+                    <ul class="pagination">
+                        <?php if ($currentPage > 1) : ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?= $currentPage - 1 ?>">Previous</a>
+                            </li>
+                        <?php endif; ?>
+
+                        <?php for ($page = 1; $page <= $totalPages; $page++) : ?>
+                            <li class="page-item <?= ($page == $currentPage) ? 'active' : '' ?>">
+                                <a class="page-link" href="?page=<?= $page ?>"><?= $page ?></a>
+                            </li>
+                        <?php endfor; ?>
+
+                        <?php if ($currentPage < $totalPages) : ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?= $currentPage + 1 ?>">Next</a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+                <!-- End Pagination -->
             </div>
         </section>
     </main><!-- End #main -->
