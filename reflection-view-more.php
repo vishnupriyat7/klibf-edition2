@@ -277,7 +277,7 @@
 
 
 
-
+                       
 
                         // Add data for other icon boxes here
                     ];
@@ -300,7 +300,8 @@
                    <img src="<?= $box['image'] ?>" alt="" class="img-fluid">
                  </a> -->
                                         <div class="youtube-thumbnail">
-                                            <iframe class="img-fluid video-iframe" src="<?= $box['video_url'] ?>" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" data-video-src="<?= $box['video_url'] ?>" title="<b>Click to View</b>"></iframe>
+                                            <iframe class="img-fluid" src="<?= $box['video_url'] ?>" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" data-video-src="<?= $box['video_url'] ?>" title="<b>Click to View</b>">
+                                            </iframe>
                                         </div>
 
                                         <!-- <h4><?= $box['title'] ?></h4> -->
@@ -325,20 +326,11 @@
     <?php include "footer.php" ?>
 
     <script>
-        // JavaScript to control video playback
-        const videoFrames = document.querySelectorAll('.video-iframe');
-
-        function stopAllVideos() {
-            videoFrames.forEach(frame => {
-                frame.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
-            });
-        }
-
-        videoFrames.forEach(frame => {
-            frame.addEventListener('click', function() {
-                const videoIndex = this.getAttribute('data-video-index');
-                stopAllVideos();
-                frame.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        // Initialize Bootstrap tooltips
+        $(document).ready(function() {
+            $('.image-link').tooltip({
+                trigger: 'hover',
+                html: true
             });
         });
     </script>

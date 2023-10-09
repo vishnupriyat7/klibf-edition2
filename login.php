@@ -80,7 +80,7 @@ if (isset($_POST['submit'])) {
                             <button name="submit" class="btn" type="submit">Login</button>
                         </form>
                         <div class="social-icons">
-                            <p>Create Account! <a href="register.php"><b>Register</b></a>.</p>
+                            <!-- <p>Create Account! <a href="register.php"><b>Register</b></a>.</p> -->
                         </div>
                     </div>
                 </div>

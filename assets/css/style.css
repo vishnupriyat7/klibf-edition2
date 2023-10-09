@@ -37,21 +37,21 @@ h6 {
 #main {
   margin-top: 90px;
 }
-#about-inner-main {
+#about-inner-main, #queue-inner-main {
   margin-top: 7%;
 }
 @media (max-width: 1024px) {
-  #about-inner-main {
+  #about-inner-main, #queue-inner-main {
     margin-top: 15%;
   }
 }
 @media (max-width: 768px) {
-  #about-inner-main {
+  #about-inner-main, #queue-inner-main {
     margin-top: 20%;
   }
 }
 @media (max-width: 414px) {
-  #about-inner-main {
+  #about-inner-main, #queue-inner-main {
     margin-top: 26%;
   }
 }
