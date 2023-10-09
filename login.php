@@ -79,9 +79,9 @@ if (isset($_POST['submit'])) {
                             <p><a href="forgot-password.php" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password?</a></p>
                             <button name="submit" class="btn" type="submit">Login</button>
                         </form>
-                        <!-- <div class="social-icons">
-                            <p>Create Account! <a href="register.php"><b>Register</b></a>.</p>
-                        </div> -->
+                        <div class="social-icons">
+                            <!-- <p>Create Account! <a href="register.php"><b>Register</b></a>.</p> -->
+                        </div>
                     </div>
                 </div>
             </div>

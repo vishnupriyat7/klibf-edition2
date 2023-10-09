@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<?php include "head-style.php"; ?>
+
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <?php include "header-inner.php"; ?>
+    <!-- End Header -->
+
+    <main id="about-inner-main">
+
+        <!-- ======= Breadcrumbs Section ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Reflections</h2>
+                    <ol>
+                        <li><a href="index.php">Home</a></li>
+                        <li>Reflections</li>
+                    </ol>
+                </div>
+
+            </div>
+        </section><!-- End Breadcrumbs Section -->
+
+        <section id="reflections" class="reflections">
+            <div class="container">
+                <div class="row">
+                    <!-- Grid column -->
+                    <?php
+                    // Sample data for each icon box
+                    $iconBoxes = [
+                        [
+                            'title' => "Chief Minister's Words",
+                            'video_url' => 'https://www.youtube.com/embed/reVml83GCYk',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/VGIWB856AhE',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/c35uWtzIhTQ',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/zerUARndr8o',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/GvJK4NQJjhk',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/u3BHM6qtrkI',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/8HQ0AqvJjbk',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/wqUqG_jfg8s',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/pzFcJzfUCoI',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/eDVuottyTYg',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/eYi7GRvdXAg',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/OlmzR_EaoCU',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/jrQyeOnv7gQ',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/qRh4dE4prAQ',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/U5hnFzGPBhE',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/ibeu708Y80U',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/uiFls0eh3cM',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/HdyCa64MpoI',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/UFzwsKlj4BE',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/aC4262pnk-0',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/-g_Ec90x4KY',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/74zP3p6oaE4',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/-ILDT4ptLmc',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/_6wyVlAIpcg',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/tsJvgY5Rlqw',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/IQ9aXOYegzQU',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/FER613OTDFU',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/tJyOmq-iFBw',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/xvFmG-2q4ws',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/q4mlVROeTs4',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/o3-9SEKM8vU',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/WpKIZN2wZYE',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/dC8oswxgREg',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/tvBWNzetY50',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/SIODceCTdKQ',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/MIEf-sSM38I',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/1_7bHIYExh4',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/18_pYbugxa0',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/jG_AD_Ut3m8',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/FeiXxaRC-ac',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/bJLsiOJEwng',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/p1O4gVLWsgs',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/jtMY5MQavoc',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/1l3sbPgjsAs',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/Xik_8W2BBCw',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/-oHjG-xQyZk',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/QNl9upcY1EY',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/zXriw5xaumY',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/Vi0MBVueEI0',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/oFmxTQSoyb4',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/Yd24pGERN3w',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/ucQZZL4Dl8I',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/j586OuoUNXs',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/282dYpr2YHQ',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/Zz4441kSC1I',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/gG_ZOc0vqdI',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/FRaoFhjwyJs',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/jBlmv7_UGkA',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/HNPsREruRy0',
+                        ],
+                        // Add data for other icon boxes here
+
+                    ];
+
+                    // Pagination setup
+                    $itemsPerPage = 12;  // Adjust the number of items per page as needed
+                    $totalItems = count($iconBoxes);
+                    $totalPages = ceil($totalItems / $itemsPerPage);
+                    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+
+                    // Calculate the range for the current page
+                    $startIndex = ($currentPage - 1) * $itemsPerPage;
+                    $endIndex = min($startIndex + $itemsPerPage, $totalItems);
+
+                    // Loop through the items for the current page
+                    for ($i = $startIndex; $i < $endIndex; $i++) {
+                        $box = $iconBoxes[$i];
+                        ?>
+                        <div class="col-md-3 icon-box" data-aos="fade-up" data-aos-delay="100">
+                            <div class="youtube-thumbnail">
+                                <iframe class="img-fluid" src="<?= $box['video_url'] ?>" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" data-video-src="<?= $box['video_url'] ?>" title="<b>Click to View</b>">
+                                </iframe>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+
+                <!-- Pagination -->
+                <div class="text-center">
+                    <ul class="pagination">
+                        <?php if ($currentPage > 1) : ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?= $currentPage - 1 ?>">Previous</a>
+                            </li>
+                        <?php endif; ?>
+
+                        <?php for ($page = 1; $page <= $totalPages; $page++) : ?>
+                            <li class="page-item <?= ($page == $currentPage) ? 'active' : '' ?>">
+                                <a class="page-link" href="?page=<?= $page ?>"><?= $page ?></a>
+                            </li>
+                        <?php endfor; ?>
+
+                        <?php if ($currentPage < $totalPages) : ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?= $currentPage + 1 ?>">Next</a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+                <!-- End Pagination -->
+            </div>
+        </section>
+    </main><!-- End #main -->
+    <!-- ======= Footer ======= -->
+    <?php include "footer.php" ?>
+
+    <script>
+        // Initialize Bootstrap tooltips
+        $(document).ready(function() {
+            $('.image-link').tooltip({
+                trigger: 'hover',
+                html: true
+            });
+        });
+    </script>
+</body>
+
+</html>

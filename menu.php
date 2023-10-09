@@ -1,6 +1,6 @@
 <nav id="navbar" class="navbar">
   <ul>
-    <li><a class="nav-link scrollto active" href="index.php">Home</a></li>
+    <li><a class="nav-link scrollto active" href="index.php" id="home-link">Home</a></li>
     <li><a class="nav-link scrollto" href="#about">About Us</a></li>
     <!-- <li><a class="nav-link scrollto" href="#speakers">Speakers</a></li>
           <li><a class="nav-link scrollto" href="#testimonials">Publishers</a></li>
@@ -19,7 +19,7 @@
         <li><a href="#">Quiz / ക്വിസ്</a></li> -->
       </ul>
     </li>
-    <li class="dropdown"><a href="#"><span>Contests Registration</span> <i class="bi bi-chevron-right"></i></a>
+    <li class="dropdown"><a href="#contests"><span>Contests Registration</span> <i class="bi bi-chevron-right"></i></a>
       <ul>
         <li><a href="contest-bookreview-registration.php">Book Review / പുസ്തകാസ്വാദനം</a></li>
         <li><a href="contest-poetryrecitation-registration.php">Poetry Recitation / പദ്യപാരായണം</a></li>
