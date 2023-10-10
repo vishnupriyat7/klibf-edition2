@@ -26,23 +26,28 @@
                 $iconBoxes = [
                     [
                         'title' => "Speaker's Message",
-                        'video_url' => 'https://www.youtube.com/embed/oFmxTQSoyb4',
+                        'video_url' => 'https://www.youtube.com/embed/3uqI9zGrt-Q',
+                    ],
+
+                    [
+                        'title' => "Speaker's Message",
+                        'video_url' => 'https://www.youtube.com/embed/pBgZVq2ndRQ',
                     ],
                     [
                         'title' => "Speaker's Message",
-                        'video_url' => 'https://www.youtube.com/embed/Yd24pGERN3w',
+                        'video_url' => 'https://www.youtube.com/embed/HNPsREruRy0',
                     ],
                     [
                         'title' => "Speaker's Message",
-                        'video_url' => 'https://www.youtube.com/embed/ucQZZL4Dl8I',
+                        'video_url' => 'https://www.youtube.com/embed/jBlmv7_UGkA',
                     ],
                     [
                         'title' => "Speaker's Message",
-                        'video_url' => 'https://www.youtube.com/embed/j586OuoUNXs',
+                        'video_url' => 'https://www.youtube.com/embed/FRaoFhjwyJs',
                     ],
                     [
                         'title' => "Speaker's Message",
-                        'video_url' => 'https://www.youtube.com/embed/282dYpr2YHQ',
+                        'video_url' => 'https://www.youtube.com/embed/gG_ZOc0vqdI',
                     ],
                     [
                         'title' => "Speaker's Message",
@@ -50,11 +55,7 @@
                     ],
                     [
                         'title' => "Speaker's Message",
-                        'video_url' => 'https://www.youtube.com/embed/zXriw5xaumY',
-                    ],
-                    [
-                        'title' => "Speaker's Message",
-                        'video_url' => 'https://www.youtube.com/embed/Vi0MBVueEI0',
+                        'video_url' => 'https://www.youtube.com/embed/282dYpr2YHQ',
                     ],
 
                     // Add data for other icon boxes here

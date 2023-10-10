@@ -2,18 +2,20 @@
    /* CSS for the modal */
    .modal {
      display: none;
-     position: relative;
+     position: fixed;
      top: 0;
      left: 0;
      width: 100%;
      height: 100%;
      background-color: rgba(0, 0, 0, 0.7);
-     z-index: 9999;
-     display: flex;
      justify-content: center;
+     /* Center horizontally */
      align-items: center;
+     /* Center vertically */
+     z-index: 9999;
    }
 
+   /* CSS for the modal content */
    .modal-content {
      background-color: #fff;
      max-width: 800px;
@@ -31,8 +33,6 @@
 
    /* CSS for the iframe video player */
    #youtubePlayer {
-
-
      width: 100%;
      height: 400px;
    }
@@ -102,7 +102,7 @@
          <div class="icon-boxes d-flex flex-column">
 
            <!-- <h3>About Us</h3> -->
-           <div class="row justify-content-around text-center" >
+           <div class="row justify-content-around text-center">
              <?php foreach ($iconBoxes as $box) :
               ?>
 
@@ -141,30 +141,18 @@
  <script>
    $(document).ready(function() {
      $("#videoModal").hide();
-    //  $("#videoModal").fadeOut();
-     // Open modal when clicking on an icon box
+
      $(".open-modal").click(function() {
        var videoSrc = $(this).data("video-src");
        $("#youtubePlayer").attr("src", videoSrc);
-       $("#videoModal").fadeIn();
-     });
-     $(".open-modal-link").click(function(e) {
-       e.preventDefault();
-       //  var videoSrc = $(this).closest('.icon-box').find('.open-modal').data("video-src");
-       //  $("#youtubePlayer").attr("src", videoSrc);
-       // 
-       // Get the content from the corresponding <p> tag
-       var modalContent = $(this).closest('.icon-box').find('.modal-content-text').html();
-       $("#modalContent").html(modalContent);
-
-       $("#videoModal").fadeIn();
+       $("#videoModal").css("display", "flex"); // Use flexbox for centering
      });
 
-     // Close modal when clicking the close button
      $(".close-modal").click(function() {
        $("#youtubePlayer").attr("src", "");
-       $("#videoModal").fadeOut();
+       $("#videoModal").hide(); // Hide modal
      });
+
      $('.open-modal').tooltip({
        trigger: 'hover',
        html: true
