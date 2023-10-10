@@ -37,13 +37,13 @@
 
         <div class="row">
 
-          <div class="col-lg-6 ">
+          <div class="col-lg-12 ">
             <iframe class="mb-4 mb-lg-0" src="https://maps.google.com/maps?width=588&amp;height=456&amp;hl=en&amp;q=Kerala Niyamasabha&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
             <!-- <iframe src="https://maps.google.com/maps?width=588&amp;height=456&amp;hl=en&amp;q=Kerala Niyamasabha&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" width="100" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
 
           </div>
 
-          <div class="col-lg-6">
+          <!-- <div class="col-lg-6">
             <form action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="row">
                 <div class="col-md-6 form-group">
@@ -66,7 +66,7 @@
               </div>
               <div class="text-center"><button type="submit">Send Feedback</button></div>
             </form>
-          </div>
+          </div> -->
 
         </div>
 
