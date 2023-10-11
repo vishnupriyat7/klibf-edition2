@@ -22,6 +22,8 @@ if ($user['user_type'] == 'S') {
     include "finance_sidebar.php";
 } elseif ($user['user_type'] == 'CC') {
     include "cultural_sidebar.php";
+} elseif ($user['user_type'] == 'RC') {
+    include "reception_sidebar.php";
 }
 ?>
 
@@ -46,6 +48,8 @@ if ($user['user_type'] == 'S') {
                 include "finance_dashboard.php";
             } elseif ($user['user_type'] == 'CC') {
                 include "cultural_dashboard.php";
+            } elseif ($user['user_type'] == 'RC') {
+                include "receptioncmtee_dashboard.php";
             } ?>
 
         </div>

@@ -220,6 +220,7 @@ include "head-style.php"; ?>
                     $("#avail_slot").empty();
                     // var add_slot = "";
                     var add_slot = "<b>Choose your Slot</b><div class='row'>";
+                    // var add_slot = "<div class='form-group col-12 col-lg-4 col-md-6 col-sm-12'><br><select class='form-control form-group' name='slot_select' id='slot_select' style='height:35px;'><option value='0'>Select Proposed Visit Time</option>";
                     for (var i = 0; i < data.length; i++) {
                         if (data[i].count === null) {
                             var avail = 500 - 0;
@@ -227,12 +228,13 @@ include "head-style.php"; ?>
                             var avail = 500 - data[i].count;
                         }
                         if (avail <= 0) {
-                            add_slot = add_slot + "<div class='form-group col-12 col-lg-3 col-md-4 col-sm-12'><button class='col-12 btn btn-danger mt-3' onclick='checkSlot(" + data[i].id + ");' style='margin:0;'>" + data[i].slot + "<br>Availability: " + avail + "</button></div>";
+                            add_slot = add_slot + "<div class='form-group col-12 col-lg-2 col-md-3 col-sm-6'><button class='col-12 btn btn-danger mt-3' onclick='checkSlot(" + data[i].id + ");'><p style='font-size:10px; margin-bottom: 0rem;! important;'>" + data[i].slot + "<br>Free: " + avail + "</p></button></div>";
                             // var btn_style = 'btn-danger';
+                            // add_slot = add_slot + "<option value="+ data[i].id +">"+ data[i].slot + "- Availabe: " + avail + "</option>";
                         } else {
                             // var btn_style = 'btn-info';
-
-                            add_slot = add_slot + "<div class='form-group col-12 col-lg-3 col-md-4 col-sm-12'><button class='col-12 btn btn-info mt-3' onclick='checkSlot(" + data[i].id + ");' style='margin:0;'>" + data[i].slot + "<br>Availability: " + avail + "</button></div>";
+                            // add_slot = add_slot + "<option value="+ data[i].id +">"+ data[i].slot + "- Availability: " + avail + "</option>";
+                            add_slot = add_slot + "<div class='form-group col-12 col-lg-2 col-md-3 col-sm-6'><button class='col-12 btn btn-info mt-3' onclick='checkSlot(" + data[i].id + ");'><p style='font-size:10px; margin-bottom: 0rem;! important;'>" + data[i].slot + "<br>Free: " + avail + "</p></button></div>";
                         }
                     }
                     // add_slot = add_slot + "<button class='col-12 btn-danger col-lg-3 col-md-6 col-sm-12' style='padding:0 !important;margin:.5% !important;' onclick='checkSlot(" + data[i].id + ");'>" + data[i].slot + "<br>Availability: " + avail + "</button>";
