@@ -70,12 +70,13 @@
               </li>
             </ul>
           </li> -->
+    <li><a class="nav-link scrollto" href="publishers.php">Publishers</a></li>
     <li><a class="nav-link scrollto" href="virtual_queue.php">Virtual Queue</a></li>
     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
     <li><a class="nav-link scrollto" href="login.php">Login </a></li>
     <li class="dropdown"><a href="#"><span>Edition I</span> <i class="bi bi-chevron-right"></i></a>
       <ul>
-      <li><a href="https://klibf.niyamasabha.org/edition1/" target="_blank">Website</a></li>
+        <li><a href="https://klibf.niyamasabha.org/edition1/" target="_blank">Website</a></li>
         <li><a href="https://www.youtube.com/playlist?list=PLWnK7DhsuZ9DzLy735Wb7oD7Uv-qLOfcH" target="_blank">Highlights</a></li>
         <li><a href="https://klibf.niyamasabha.org/edition1/gallery-new.php" target="_blank">Gallery</a></li>
       </ul>
