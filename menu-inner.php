@@ -10,11 +10,11 @@
     <!-- <li class="dropdown"><a href="#"><span>Edition I</span> <i class="bi bi-chevron-down"></i></a>
             <ul> -->
     <!-- <li><a href="#">Drop Down 1</a></li> -->
-    <li class="dropdown"><a href="#"><span>News & Events</span> <i class="bi bi-chevron-right"></i></a>
+    <li class="dropdown"><a href="#"><span>Gallery</span> <i class="bi bi-chevron-right"></i></a>
       <ul>
         <li><a href="news.php">News</a></li>
-        <!-- <li><a href="#">Recitation / പദ്യപാരായണം</a></li>
-        <li><a href="#">Story Telling / ഒരു കഥ പറയാം</a></li>
+        <li><a href="reflection-view-more.php">Reflections</a></li>
+        <!-- <li><a href="#">Story Telling / ഒരു കഥ പറയാം</a></li>
         <li><a href="#">Cartoon / കാർട്ടൂൺ</a></li>
         <li><a href="#">Quiz / ക്വിസ്</a></li> -->
       </ul>
