@@ -44,24 +44,12 @@
               <td>Otto</td>
               <td>@mdo</td>
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
           </tbody>
         </table>
         <table id="example" class="table table-success table-striped table-hover">
           <thead>
             <tr>
               <th data-ordering="false">Sl.No</th>
-
               <th data-ordering="false">Logo</th>
               <th data-ordering="false">Organization Name</th>
               <th data-ordering="false">Catalog</th>
