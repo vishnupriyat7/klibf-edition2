@@ -14,7 +14,7 @@
 </div>
 <!-- end page title -->
 <?php
-$queue_count_sql = "SELECT COUNT(count) FROM queue;";
+$queue_count_sql = "SELECT SUM(count) FROM queue;";
 $queue_count_stmt = $con->prepare($queue_count_sql);
 $queue_count_stmt->execute();
 $queue_count_result = $queue_count_stmt->get_result();

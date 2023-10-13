@@ -67,6 +67,68 @@
                     <?php
                     // Sample data for each icon box
                     $iconBoxes = [
+                                              
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/nZ7FAtGUySc',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/lNHGChL_QCA',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/sWZTxGs67eE',
+                        ],
+
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/wkLEz0lHUng',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/Y6p4nUxzSHs',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/iHWwaX7kBmk',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/-0S12AJLeWo',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/RsZnEMer3MY',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/4XCmI1Br5w8',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/a3AC6pEREOs',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/69h9Jkk8tY0',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/AYzifniTk7k',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/IsWkbZ3_ok4',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/SeIFgV_P6G4',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/DfbgvvgCxN4',
+                        ],
                         
                         [
                             'title' => "Speaker's Message",

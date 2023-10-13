@@ -82,6 +82,9 @@
                                             <td>
                                                 <?= $inst_name; ?>
                                             </td>
+                                            <td>
+                                                <?= $inst_addr; ?>
+                                            </td>
 
                                             <td>
                                                 <?= $cntct_name1; ?>
