@@ -57,14 +57,17 @@
           </thead>
           <tbody>
             <?php
-            $query = "SELECT up.user_id, up.org_name, up.logo FROM users_profile up";
-            $bookstall = mysqli_query($conn, $query);
+            $query = "SELECT up.id, up.user_id, up.org_name, up.logo FROM users_profile up ORDER BY up.id DESC";
+            $publshrdetls = mysqli_query($conn, $query);
             $counter = 0;
-            while ($book = mysqli_fetch_array($bookstall)) {
-              $id = "$book[id]";
-              $pub_user_id = "$book[user_id]";
-              $org_name = "$book[org_name]";
-              $logo = base64_encode($book['logo']);
+            while ($publshr = mysqli_fetch_array($publshrdetls)) {
+              $id = "$publshr[id]";
+              var_dump($id);
+              $pub_user_id = "$publshr[user_id]";
+              var_dump($pub_user_id);
+              $org_name = "$publshr[org_name]";
+              var_dump($org_name);
+              $logo = base64_encode($publshr['logo']);
             ?>
               <tr>
                 <td>
