@@ -5,6 +5,7 @@ if (isset($_POST['day_id'])) {
     $query = "SELECT q.*, ed.*, qs.* FROM queue q JOIN event_date ed on q.date_id = ed.id JOIN queue_slot qs on q.slot_id = qs.id WHERE ed.id = $day_id";
     $queueList = mysqli_query($con, $query);
     $counter = 0;
+    $result = "";
     while ($queue = mysqli_fetch_array($queueList)) {
         $id = "$queue[id]";
         $inst_name = "$queue[inst_name]";
@@ -21,7 +22,7 @@ if (isset($_POST['day_id'])) {
         $slot_name = "$queue[slot_name]";
         $booked_date = "$queue[booked_date]";
         ++$counter;
-        $result = "<tr>
+        $result = $result . "<tr>
             <td>
                $counter
             </td>
