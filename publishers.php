@@ -3,6 +3,14 @@
 
 <?php include "head-style.php"; ?>
 <?php include "config.php"; ?>
+<style>
+  #example {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css">
 
 <body>
 
@@ -34,7 +42,7 @@
               <th data-ordering="false">Sl.No</th>
               <th data-ordering="false">Logo</th>
               <th data-ordering="false">Organization Name</th>
-              <th data-ordering="false">Catalog</th>
+              <!-- <th data-ordering="false">Catalog</th> -->
             </tr>
           </thead>
           <tbody>
@@ -61,7 +69,6 @@
                 <td>
                   <?= $org_name; ?>
                 </td>
-
               </tr>
             <?php  }  ?>
           </tbody>
@@ -73,6 +80,14 @@
 
   <!-- ======= Footer ======= -->
   <?php include "footer.php" ?>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#example').DataTable({
+        paging: true,
+      });
+    });
+  </script>
 
 </body>
 
