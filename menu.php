@@ -8,8 +8,8 @@
           <li><a class="nav-link scrollto" href="#contests">Contests</a></li> -->
     <!-- <li><a class="nav-link scrollto" href="#contests">Edition I</a></li> -->
     <!-- <li class="dropdown"><a href="#"><span>Edition I</span> <i class="bi bi-chevron-down"></i></a>
-            <ul> -->
-    <!-- <li><a href="#">Drop Down 1</a></li> -->
+            <ul> 
+    <li><a href="#">Drop Down 1</a></li> -->
     <li class="dropdown"><a href="#"><span>Gallery</span> <i class="bi bi-chevron-right"></i></a>
       <ul>
         <li><a href="news.php">News</a></li>
@@ -19,6 +19,7 @@
         <li><a href="#">Quiz / ക്വിസ്</a></li> -->
       </ul>
     </li>
+
     <li class="dropdown"><a href="#contests"><span>Contests Registration</span> <i class="bi bi-chevron-right"></i></a>
       <ul>
         <li><a href="contest-bookreview-registration.php">Book Review / പുസ്തകാസ്വാദനം</a></li>
@@ -69,9 +70,18 @@
               </li>
             </ul>
           </li> -->
+    <li><a class="nav-link scrollto" href="publishers.php">Publishers</a></li>
     <li><a class="nav-link scrollto" href="virtual_queue.php">Virtual Queue</a></li>
     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
     <li><a class="nav-link scrollto" href="login.php">Login </a></li>
+    <li class="dropdown"><a href="#"><span>Edition I</span> <i class="bi bi-chevron-right"></i></a>
+      <ul>
+        <li><a href="https://klibf.niyamasabha.org/edition1/" target="_blank">Website</a></li>
+        <li><a href="https://www.youtube.com/playlist?list=PLWnK7DhsuZ9DzLy735Wb7oD7Uv-qLOfcH" target="_blank">Highlights</a></li>
+        <li><a href="https://klibf.niyamasabha.org/edition1/gallery-new.php" target="_blank">Gallery</a></li>
+      </ul>
+    </li>
+
   </ul>
   <i class="bi bi-list mobile-nav-toggle"></i>
 </nav>
