@@ -10,7 +10,6 @@
     margin-right: auto;
   }
 </style>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css">
 
 <body>
 
@@ -74,17 +73,49 @@
           </tbody>
         </table>
       </div>
+      <div class="pagination">
+        <a id="prev" href="#">Previous</a>
+        <a id="next" href="#">Next</a>
+      </div>
     </section>
 
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <?php include "footer.php" ?>
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <script>
     $(document).ready(function() {
-      $('#example').DataTable({
-        paging: true,
+      // Set the number of rows to display per page
+      var rowsPerPage = 10;
+      var currentPage = 1;
+
+      function showPage(page) {
+        var tableRows = $('#example tbody tr');
+        tableRows.hide();
+        tableRows.slice((page - 1) * rowsPerPage, page * rowsPerPage).show();
+      }
+
+      // Initial display
+      showPage(currentPage);
+
+      // Previous page
+      $('#prev').click(function(e) {
+        e.preventDefault();
+        if (currentPage > 1) {
+          currentPage--;
+          showPage(currentPage);
+        }
+      });
+
+      // Next page
+      $('#next').click(function(e) {
+        e.preventDefault();
+        if (currentPage < Math.ceil($('#example tbody tr').length / rowsPerPage)) {
+          currentPage++;
+          showPage(currentPage);
+        }
       });
     });
   </script>
