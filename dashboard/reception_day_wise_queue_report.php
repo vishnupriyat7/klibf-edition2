@@ -8,8 +8,8 @@
     <div class="page-content">
         <div class="container-fluid">
 
-             <!-- start page title -->
-             <div class="row">
+            <!-- start page title -->
+            <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <h4 class="mb-sm-0">Report</h4>
@@ -34,11 +34,38 @@
                         <div class="card-body overflow-auto">
                             <!-- <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%"> -->
                             <button onclick="exportTableToExcel('example', 'stallbookingreport-data')" class="btn btn-primary">Export Table Data To Excel File</button>
-                            <div class="row">Select a Date</div>
-                            <table id="example" class="table table-bordered dt-responsive nowrap table-striped" style="font-style:normal; font-size: 12px;">
+                            <?php
+                            $day_query = "SELECT * FROM event_date";
+                            $day_stmt = $con->prepare($day_query);
+                            $day_stmt->execute();
+                            $day_result = $day_stmt->get_result();
+                            $event_days = $day_result->fetch_all();
+                            ?>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="example_length">
+                                        <br>
+                                        <label>Select a Day <select aria-controls="example" class="form-select form-group" name="report_date_select" id="report_date_select" onchange="getQueue();">
+                                                <option value="0">Select Proposed Visit Day</option>
+                                                <?php foreach ($event_days as $days) { ?>
+                                                    <option value="<?= $days[0] ?>" <?= $evnt_day1_selected ?>><?= $days[1]; ?> - <?= $days[2]; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                            <!-- <label>Select a Day <select name="example_length" aria-controls="example" class="form-select form-select-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>-->
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="row">Select a Date</div> -->
+                            <table id="example" class="table table-bordered dt-responsive nowrap table-striped daywise-report" style="font-style:normal; font-size: 12px;">
                                 <thead>
                                     <tr>
-                                        <th data-ordering="false">Sl.No</th>                                        
+                                        <th data-ordering="false">Sl.No</th>
                                         <th data-ordering="false">Institution Name</th>
                                         <th data-ordering="false">Institution Address</th>
                                         <th data-ordering="false">Contact Person 1</th>
@@ -47,70 +74,13 @@
                                         <th data-ordering="false">Contact No.</th>
                                         <th data-ordering="false">Email</th>
                                         <th data-ordering="false">No.of Persons</th>
-                                        <th data-ordering="false">Choosed Day</th>
                                         <th data-ordering="false">Choosed Slot</th>
                                         <!-- <th>Action</th> -->
                                         <!-- <th></th> -->
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?php
-                                    $query = "SELECT q.*, ed.*, qs.* FROM queue q JOIN event_date ed on q.date_id = ed.id JOIN queue_slot qs on q.slot_id = qs.id";
-                                    $queueList = mysqli_query($con, $query);
-                                    // var_dump(mysqli_fetch_array($bookstall));
-                                    $counter = 0;
-                                    while ($queue = mysqli_fetch_array($queueList)) {
-                                        $id = "$queue[id]";
-                                        $inst_name = "$queue[inst_name]";
-                                        $inst_addr = "$queue[inst_addr]";                                        
-                                        $cntct_name1 = "$queue[cntct_name1]";
-                                        $cntct_name2 = "$queue[cntct_name2]";    
-                                        $cntct_no1 = "$queue[cntct_no1]";
-                                        $cntct_no2 = "$queue[cntct_no2]";
-                                        $email = "$queue[email]";
-                                        $count = "$queue[count]";
-                                        $event_date = "$queue[event_date]";
-                                        $event_day = "$queue[event_day]";
-                                        $slot_time = "$queue[slot_time]";
-                                        $slot_name = "$queue[slot_name]";
-                                        $booked_date = "$queue[booked_date]";
-                                    ?>
-                                        <tr>
-                                            <td>
-                                                <?= ++$counter; ?>
-                                            </td>
-                                           
-                                            <td>
-                                                <?= $inst_name; ?>
-                                            </td>
-                                           
-                                            <td>
-                                                <?= $cntct_name1; ?>
-                                            </td>
-                                            <td>
-                                                <?= $cntct_no1; ?>
-                                            </td>
-                                            <td>
-                                                <?= $cntct_name2; ?>
-                                            </td>
-                                            <td>
-                                                <?= $cntct_no2; ?>
-                                            </td>
-                                            <td>
-                                                <?= $email; ?>
-                                            </td>
-                                            <td>
-                                                <?= $count; ?>
-                                            </td>
-                                            <td>
-                                                <?= $event_date; ?> - <?= $event_day; ?>
-                                            </td>
-                                            <td>
-                                                <?= $slot_time; ?> - <?= $slot_name; ?>
-                                            </td>
-                                        </tr>
-                                    <?php  }
-                                    ?>
+                                <tbody id="report-daywise">
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -150,4 +120,46 @@
                 downloadLink.click();
             }
         }
+
+        function getQueue() {
+            var day_id = $("#report_date_select").val();
+            $.ajax({
+                type: "POST",
+                url: "reception_get_queue_list.php",
+                data: {
+                    'day_id': day_id
+                },
+                dataType: "json",
+                encode: true,
+            }).done(function(data) {
+                // console.log(data);
+                $("#report-daywise").empty();
+                $("#report-daywise").append(data);
+            });
+        }
+
+
+
+
+        //         $(document).ready(function () {
+        //   $("form").submit(function (event) {
+        //     var formData = {
+        //       name: $("#name").val(),
+        //       email: $("#email").val(),
+        //       superheroAlias: $("#superheroAlias").val(),
+        //     };
+
+        //     $.ajax({
+        //       type: "POST",
+        //       url: "process.php",
+        //       data: formData,
+        //       dataType: "json",
+        //       encode: true,
+        //     }).done(function (data) {
+        //       console.log(data);
+        //     });
+
+        //     event.preventDefault();
+        // });
+        // });
     </script>
