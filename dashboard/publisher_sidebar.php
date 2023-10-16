@@ -65,8 +65,8 @@ include "../z_db.php";
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" role="button" aria-expanded="true" aria-controls="sidebarLanding" href="publisher_chellan_upload.php">
-                        <i class="ri-checkbox-multiple-line"></i> <span data-key="t-landing">Stall Payment Details</span>
+                    <a class="nav-link menu-link" role="button" aria-expanded="true" aria-controls="sidebarLanding" href="publisher_catalog_upload.php">
+                        <i class="ri-checkbox-multiple-line"></i> <span data-key="t-landing">Catalog Upload</span>
                     </a>
                 </li>
                 <!-- <li class="nav-item">
