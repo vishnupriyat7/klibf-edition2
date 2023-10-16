@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                             <!-- <div class="row">Select a Date</div> -->
-                            <table id="example" class="table table-bordered dt-responsive nowrap table-striped" style="font-style:normal; font-size: 12px;">
+                            <table id="example" class="table table-bordered dt-responsive nowrap table-striped daywise-report" style="font-style:normal; font-size: 12px;">
                                 <thead>
                                     <tr>
                                         <th data-ordering="false">Sl.No</th>
@@ -74,70 +74,13 @@
                                         <th data-ordering="false">Contact No.</th>
                                         <th data-ordering="false">Email</th>
                                         <th data-ordering="false">No.of Persons</th>
-                                        <th data-ordering="false">Choosed Day</th>
                                         <th data-ordering="false">Choosed Slot</th>
                                         <!-- <th>Action</th> -->
                                         <!-- <th></th> -->
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?php
-                                    $query = "SELECT q.*, ed.*, qs.* FROM queue q JOIN event_date ed on q.date_id = ed.id JOIN queue_slot qs on q.slot_id = qs.id";
-                                    $queueList = mysqli_query($con, $query);
-                                    // var_dump(mysqli_fetch_array($bookstall));
-                                    $counter = 0;
-                                    while ($queue = mysqli_fetch_array($queueList)) {
-                                        $id = "$queue[id]";
-                                        $inst_name = "$queue[inst_name]";
-                                        $inst_addr = "$queue[inst_addr]";
-                                        $cntct_name1 = "$queue[cntct_name1]";
-                                        $cntct_name2 = "$queue[cntct_name2]";
-                                        $cntct_no1 = "$queue[cntct_no1]";
-                                        $cntct_no2 = "$queue[cntct_no2]";
-                                        $email = "$queue[email]";
-                                        $count = "$queue[count]";
-                                        $event_date = "$queue[event_date]";
-                                        $event_day = "$queue[event_day]";
-                                        $slot_time = "$queue[slot_time]";
-                                        $slot_name = "$queue[slot_name]";
-                                        $booked_date = "$queue[booked_date]";
-                                    ?>
-                                        <tr>
-                                            <td>
-                                                <?= ++$counter; ?>
-                                            </td>
-
-                                            <td>
-                                                <?= $inst_name; ?>
-                                            </td>
-
-                                            <td>
-                                                <?= $cntct_name1; ?>
-                                            </td>
-                                            <td>
-                                                <?= $cntct_no1; ?>
-                                            </td>
-                                            <td>
-                                                <?= $cntct_name2; ?>
-                                            </td>
-                                            <td>
-                                                <?= $cntct_no2; ?>
-                                            </td>
-                                            <td>
-                                                <?= $email; ?>
-                                            </td>
-                                            <td>
-                                                <?= $count; ?>
-                                            </td>
-                                            <td>
-                                                <?= $event_date; ?> - <?= $event_day; ?>
-                                            </td>
-                                            <td>
-                                                <?= $slot_time; ?> - <?= $slot_name; ?>
-                                            </td>
-                                        </tr>
-                                    <?php  }
-                                    ?>
+                                <tbody id="report-daywise">
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -189,7 +132,9 @@
                 dataType: "json",
                 encode: true,
             }).done(function(data) {
-                console.log(data);
+                // console.log(data);
+                $("#report-daywise").empty();
+                $("#report-daywise").append(data);
             });
         }
 
