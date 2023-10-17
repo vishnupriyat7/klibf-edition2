@@ -9,6 +9,10 @@
     margin-left: auto;
     margin-right: auto;
   }
+  #example th {
+    font-size: medium;
+    font-weight: bold;
+  }
 
   .container {
     text-align: center;
@@ -88,7 +92,7 @@
     <section class="inner-page">
       <div class="container">
         <div class="table-responsive">
-          <table id="example" class="table table-success table-striped table-hover">
+          <table id="example" class="table table-light table-bordered table-hover">
             <thead>
               <tr>
                 <th data-ordering="false">Sl.No</th>
