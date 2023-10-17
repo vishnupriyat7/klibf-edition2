@@ -28,7 +28,7 @@
     <div class="container">
 
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-            <h2>Contests Registration</h2>
+            <h2>Contests</h2>
             <!-- <p>Click Image to View the Rules & Regulations for each contests and Apply</p> -->
             <div class="contests-only">
                 <p>2023 നവംബർ 01 മുതൽ 07 വരെ നിയമസഭാ സമുച്ചയത്തിൽ സംഘടിപ്പിക്കുന്ന കേരള നിയമസഭ അന്താരാഷ്ട്ര പുസ്തകോത്സവം രണ്ടാം പതിപ്പിന്റെ ഭാഗമായി സ്കൂൾ - കോളേജ് വിദ്യാർത്ഥികൾക്കും പൊതുജനങ്ങൾക്കുമായി താഴെപ്പറയുന്ന മത്സരങ്ങൾ, വിവിധ വിഭാഗങ്ങളിലായി സംഘടിപ്പിക്കുന്നു:
@@ -80,7 +80,11 @@
                     </a>
                     <div class="gallery-links">
                         <a href="assets/img/contests/Guide Lines.pdf" data-gallery="galleryGallery" class="gallery-lightbox" title=""><i class="bx bx-plus"></i><span>Rules</span></a>
-                        <a href="https://docs.google.com/forms/d/11d3YLOtjtA_osjraiAfxXyNvLuv2N14Om0dKEuGdJpY/edit" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Apply</span></a>
+                        <!-- <a href="https://docs.google.com/forms/d/11d3YLOtjtA_osjraiAfxXyNvLuv2N14Om0dKEuGdJpY/edit" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Apply</span></a> -->
+
+                        <a href="https://www.youtube.com/watch?v=tIrV4JzbRF4&list=PLWnK7DhsuZ9CnwyahQsrezv_GYZbDlvQ8" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Entries</span></a>
+
+
                     </div>
                 </div>
             </div>
@@ -92,7 +96,9 @@
                     </a>
                     <div class="gallery-links">
                         <a href="assets/img/contests/Guide Lines.pdf" data-gallery="galleryGallery" class="gallery-lightbox" title=""><i class="bx bx-plus"></i><span>Rules</span></a>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfPrYWa1gRqVD4FG1wSSmDPAzw6n8I2_ybOT3XlvcOSulCtEA/viewform" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Apply</span></a>
+                        <!-- <a href="https://docs.google.com/forms/d/e/1FAIpQLSfPrYWa1gRqVD4FG1wSSmDPAzw6n8I2_ybOT3XlvcOSulCtEA/viewform" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Apply</span></a> -->
+                        <a href="https://www.youtube.com/watch?v=7evzxFxrxRU&list=PLWnK7DhsuZ9AaxYR2wbH2869cUtzr0sCk" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Entries</span></a>
+
                     </div>
                 </div>
             </div>
@@ -102,17 +108,8 @@
                     <img src="assets/img/contests/story-telling-new.jpg" href="https://docs.google.com/forms/d/e/1FAIpQLSenjtwMpymnTi7mF88Iq38uGuackVdFhmM9hkbXjj_XRuX8Qw/viewform" target="_blank" class="img-fluid" alt="">
                     <div class="gallery-links">
                         <a href="assets/img/contests/Guide Lines.pdf" data-gallery="galleryGallery" class="gallery-lightbox" title=""><i class="bx bx-plus"></i><span>Rules</span></a>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSenjtwMpymnTi7mF88Iq38uGuackVdFhmM9hkbXjj_XRuX8Qw/viewform" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Apply</span></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 gallery-item filter-card">
-                <div class="gallery-wrap">
-                    <img src="assets/img/contests/quiz-new.jpg" href="https://docs.google.com/forms/d/e/1FAIpQLScNPUBC97PcQdcaERDE-1nPFeHyEMIEPkkKgTRVR-Ou9phOwg/viewform?usp=send_form" target="_blank" class="img-fluid" alt="">
-                    <div class="gallery-links">
-                        <a href="assets/img/contests/Quiz Guide Lines.pdf" data-gallery="galleryGallery" class="gallery-lightbox" title=""><i class="bx bx-plus"></i><span>Rules</span></a>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScNPUBC97PcQdcaERDE-1nPFeHyEMIEPkkKgTRVR-Ou9phOwg/viewform?usp=send_form" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Apply</span></a>
+                        <!-- <a href="https://docs.google.com/forms/d/e/1FAIpQLSenjtwMpymnTi7mF88Iq38uGuackVdFhmM9hkbXjj_XRuX8Qw/viewform" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Apply</span></a> -->
+                        <a href="https://www.youtube.com/watch?v=Lg-BCS3p3sA&list=PLWnK7DhsuZ9CJlcJaV1VCbIRuy9tYURIc" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Entries</span></a>
                     </div>
                 </div>
             </div>
@@ -122,7 +119,20 @@
                     <img src="assets/img/contests/enne-swadheenicha-new.jpg" href="https://docs.google.com/forms/d/e/1FAIpQLSd0sQ8y6i5MIWK51x29rOHZMFpelMr5WJXxj18L8TStjJoVTg/viewform" target="_blank" class="img-fluid" alt="">
                     <div class="gallery-links">
                         <a href="assets/img/contests/Guide Lines.pdf" data-gallery="galleryGallery" class="gallery-lightbox" title=""><i class="bx bx-plus"></i><span>Rules</span></a>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd0sQ8y6i5MIWK51x29rOHZMFpelMr5WJXxj18L8TStjJoVTg/viewform" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Apply</span></a>
+                        <!-- <a href="https://docs.google.com/forms/d/e/1FAIpQLSd0sQ8y6i5MIWK51x29rOHZMFpelMr5WJXxj18L8TStjJoVTg/viewform" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Apply</span></a> -->
+                        <a href="https://www.youtube.com/watch?v=SYhHiAijWSI&list=PLWnK7DhsuZ9AHgSDTDXzVEORnRROCUevX" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Entries</span></a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 gallery-item filter-card">
+                <div class="gallery-wrap">
+                    <img src="assets/img/contests/quiz-new.jpg" href="https://docs.google.com/forms/d/e/1FAIpQLScNPUBC97PcQdcaERDE-1nPFeHyEMIEPkkKgTRVR-Ou9phOwg/viewform?usp=send_form" target="_blank" class="img-fluid" alt="">
+                    <div class="gallery-links">
+                        <a href="assets/img/contests/Quiz Guide Lines.pdf" data-gallery="galleryGallery" class="gallery-lightbox" title=""><i class="bx bx-plus"></i><span>Rules</span></a>
+                        <!-- <a href="https://docs.google.com/forms/d/e/1FAIpQLScNPUBC97PcQdcaERDE-1nPFeHyEMIEPkkKgTRVR-Ou9phOwg/viewform?usp=send_form" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Apply</span></a> -->
+                        <a href="#" title="More Details"><i class="bx bx-link"></i><span></span></a>
+
                     </div>
                 </div>
             </div>
@@ -132,7 +142,9 @@
                     <img src="assets/img/contests/model-parliamnt-new.jpg" href="https://klibf.niyamasabha.org/contest-parliament-registration.php" target="_blank" class="img-fluid" alt="">
                     <div class="gallery-links">
                         <a href="assets/img/contests/Model Parliament Guide Lines.pdf" data-gallery="galleryGallery" class="gallery-lightbox" title=""><i class="bx bx-plus"></i><span>Rules</span></a>
-                        <a href="https://klibf.niyamasabha.org/contest-parliament-registration.php" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Apply</span></a>
+                        <!-- <a href="https://klibf.niyamasabha.org/contest-parliament-registration.php" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Apply</span></a> -->
+                        <a href="#" title="More Details"><i class="bx bx-link"></i><span></span></a>
+
                     </div>
                 </div>
             </div>

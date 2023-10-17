@@ -30,6 +30,34 @@
     padding: 8px 16px;
     text-decoration: none;
   }
+
+
+  .modal {
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: 576px) {
+    .modal-dialog {
+      max-width: 90%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .pagination {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #pageNumbers {
+      margin: 10px 0;
+    }
+
+    #prev,
+    #next {
+      margin-top: 10px;
+    }
+  }
 </style>
 
 
@@ -54,47 +82,86 @@
         </div>
 
       </div>
-    </section><!-- End Breadcrumbs Section -->
+    </section>
+    <!-- End Breadcrumbs Section -->
 
     <section class="inner-page">
       <div class="container">
-        <table id="example" class="table table-success table-striped table-hover">
-          <thead>
-            <tr>
-              <th data-ordering="false">Sl.No</th>
-              <th data-ordering="false">Logo</th>
-              <th data-ordering="false">Organization Name</th>
-              <!-- <th data-ordering="false">Catalog</th> -->
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            $query = "SELECT up.id, up.user_id, up.org_name, up.logo, ch.user_id, ch.status FROM users_profile up JOIN challan ch ON up.user_id = ch.user_id WHERE ch.status = 'A' ORDER BY up.org_name ASC";
-            // $query = "SELECT up.*, sb.*, ch.user_id, ch.bank_name, ch.paid_amt, ch.trnctn_no, ch.trnctn_type, ch.trnctn_date, ch.paye_name, ch.ifsc, ch.status, ch.updated_date, ch.invoice_no, ch.id as chid FROM users_profile up JOIN stall_booking sb ON up.user_id = sb.user_id JOIN challan ch ON up.user_id = ch.user_id ORDER BY up.id DESC";
-            $publshrdetls = mysqli_query($conn, $query);
-            // var_dump($publshrdetls);
-            $counter = 0;
-            while ($publshr = mysqli_fetch_array($publshrdetls)) {
-              $id = "$publshr[id]";
-              $pub_user_id = "$publshr[user_id]";
-              $org_name = "$publshr[org_name]";
-              $logo = base64_encode($publshr['logo']);
-            ?>
+        <div class="table-responsive">
+          <table id="example" class="table table-success table-striped table-hover">
+            <thead>
               <tr>
-                <td>
-                  <?= ++$counter; ?>
-                </td>
-                <td>
-                  <img src="data:image/jpg;charset=utf8;base64,<?= $logo; ?>" height="80vh" width="95vw">
-                  <!-- <?= $logo; ?> -->
-                </td>
-                <td>
-                  <?= $org_name; ?>
-                </td>
+                <th data-ordering="false">Sl.No</th>
+                <th data-ordering="false">Logo</th>
+                <th data-ordering="false">Organization Name</th>
+                <th data-ordering="false">Catalogue</th>
               </tr>
-            <?php  }  ?>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <?php
+              $query = "SELECT up.id, up.user_id, up.org_name, up.logo, ch.user_id, ch.status FROM users_profile up JOIN challan ch ON up.user_id = ch.user_id WHERE ch.status = 'A' ORDER BY up.org_name ASC";
+              $publshrdetls = mysqli_query($conn, $query);
+              $counter = 0;
+              while ($publshr = mysqli_fetch_array($publshrdetls)) {
+                $id = "$publshr[id]";
+                $pub_user_id = "$publshr[user_id]";
+                $org_name = "$publshr[org_name]";
+                $logo = base64_encode($publshr['logo']);
+              ?>
+                <tr>
+                  <td>
+                    <?= ++$counter; ?>
+                  </td>
+                  <td>
+                    <img src="data:image/jpg;charset=utf8;base64,<?= $logo; ?>" height="80vh" width="95vw">
+                    <!-- <?= $logo; ?> -->
+                  </td>
+                  <td>
+                    <?= $org_name; ?>
+                  </td>
+                  <td>
+                    <?php
+                    $sql1 = "SELECT * FROM publisher_catalogue WHERE user_id = ?";
+                    $stmt1 = $conn->prepare($sql1);
+                    $stmt1->bind_param("i", $pub_user_id);
+                    $stmt1->execute();
+                    $result1 = $stmt1->get_result();
+                    $publsr_catalogue = $result1->fetch_assoc();
+                    // var_dump($result1);
+                    $filename = "$publsr_catalogue[filename]";
+                    $file_dir = 'catalogue/';
+                    // var_dump($filename);
+                    if ($filename) {
+                      $file = $file_dir . '/' . $filename;
+                    ?>
+
+                      <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal<?= $pub_user_id ?>">View</button>
+                      <div class="modal" id="myModal<?= $pub_user_id ?>">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h4 class="modal-title"><?= $org_name; ?></h4>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="embed-responsive embed-responsive-16by9">
+                                <iframe src="<?= $file; ?>" class="embed-responsive-item" width="100%" height="700px"></iframe>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <?php } else {
+                      echo '';
+                    }
+                    ?>
+                    <!-- <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">View</button> -->
+                  </td>
+                </tr>
+              <?php  }  ?>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="pagination " id="pagination">
         <a id="prev" href="#">Previous</a>

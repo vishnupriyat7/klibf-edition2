@@ -119,7 +119,8 @@
                                     <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKw20kdrJw7rUjexrK_vo8HU4-mIN3M1NT7wAXfSbFYrph9w/viewform?embedded=true" width="1000" height="1815" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe> -->
                                     <div class="d-flex justify-content-end align-items-end">
 
-                                        <a href="https://forms.gle/s5Qw1ogja3woaai89" class="mr-2 btn btn-success horizontal-shake" target="_blank"><i class="fa fa-download"></i> Click Here to Apply</a>
+                                        <!-- <a href="https://forms.gle/s5Qw1ogja3woaai89" class="mr-2 btn btn-success horizontal-shake" target="_blank"><i class="fa fa-download"></i> Click Here to Apply</a> -->
+                                        <a href="https://www.youtube.com/watch?v=7evzxFxrxRU&list=PLWnK7DhsuZ9AaxYR2wbH2869cUtzr0sCk" class="mr-2 btn btn-success horizontal-shake" target="_blank"><i class="fa fa-download"></i> Entries</a>
 
                                     </div>
 

@@ -19,7 +19,7 @@
         <li><a href="#">Quiz / ക്വിസ്</a></li> -->
       </ul>
     </li>
-    <li class="dropdown"><a href="#index.php"><span>Contests Registration</span> <i class="bi bi-chevron-right"></i></a>
+    <li class="dropdown"><a href="#index.php"><span>Contests</span> <i class="bi bi-chevron-right"></i></a>
       <ul>
         <li><a href="contest-bookreview-registration.php">Book Review / പുസ്തകാസ്വാദനം</a></li>
         <li><a href="contest-poetryrecitation-registration.php">Poetry Recitation / പദ്യപാരായണം</a></li>
