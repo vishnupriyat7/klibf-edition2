@@ -4,12 +4,6 @@ include "header.php";
 include "publisher_sidebar.php";
 $user_id = $user['id'];
 ?>
-<style>
-    #pay-slip td {
-        text-align: right !important;
-        width: 20%;
-    }
-</style>
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
@@ -49,6 +43,8 @@ $user_id = $user['id'];
                     if ($file_ext == '.pdf') {
                         move_uploaded_file($_FILES['catalogue']['tmp_name'], "$idir" . $destination);
                         $pdf = $domain . "/catalogue/" . $destination;
+                        $query = "INSERT INTO publisher_catalogue (user_id, filename, updated_date) VALUES ('$user_id', '$destination', '$date')";
+                        $result = mysqli_query($con, $query);
                     } else {
                         $msg = 'File type not supported.';
                         $status = "NOTOK";
@@ -59,8 +55,6 @@ $user_id = $user['id'];
                         $msg . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                                    </div>"; //printing error if found in validation
                 } else {
-                    $query = "INSERT INTO publisher_catalogue (user_id, filename, updated_date) VALUES ('$user_id', '$destination', '$date')";
-                    $result = mysqli_query($con, $query);
                     if ($result) {
                         $errormsg = "
               <div class='alert alert-success alert-dismissible alert-outline fade show'>
@@ -87,25 +81,32 @@ $user_id = $user['id'];
                                     ?>
                                     <form action="" method="post" enctype="multipart/form-data">
                                         <div class="row bg-grey">
-                                            <div class="form-group col-12">
+                                            <?php $query_cat = "SELECT * FROM publisher_catalogue WHERE user_id = ?";
+                                            $stmt_cat = $con->prepare($query_cat);
+                                            $stmt_cat->bind_param("i", $user_id);
+                                            $stmt_cat->execute();
+                                            $res_cat = $stmt_cat->get_result();
+                                            $user_cat = $res_cat->fetch_assoc();
+                                            if ($user_cat['filename']) {?>
                                                 <br>
-                                                <label><b>Upload Your Catalogue</b></label>
-                                            </div>
-
-                                            <div class="form-group col-12 col-md-6">
-                                                </br>
-                                                *Upload PDF File
-                                                </br>
-                                                <input type="file" class="form-control" name="catalogue" id="catalogue" placeholder="*Upload PDF File">
-                                                <!-- <label id="catalogue">
-                                                    <img src="data:image/jpg;charset=utf8;base64,<?= $imgChellan; ?>" height="100vh" id="image_chellan" <?= $edit; ?>>
-                                                </label>
-                                                <span id="changeChellan" onclick="changeChellan();" <?= $edit; ?>><u>Change Chellan Image</u></span> -->
-                                            </div>
+                                                    <label><b>You have already uploaded a Catalogue</b></label>
+                                                    <iframe src="../catalogue/<?= $user_cat['filename'] ?>" height="600vh"></iframe>
+                                                <?php } else { ?>
+                                                <div class="form-group col-12">
+                                                    <br>
+                                                    <label><b>Upload Your Catalogue</b></label>
+                                                </div>
+                                                <div class="form-group col-12 col-md-6">
+                                                    </br>
+                                                    *Upload PDF File
+                                                    </br>
+                                                    <input type="file" class="form-control" name="catalogue" id="catalogue" placeholder="*Upload PDF File">                                                    
+                                                </div>
                                         </div> <br>
                                         <div class="col-lg-12">
                                             <button type="submit" name="save_catalogue" class="btn btn-primary" id="save_catalogue">Save</button>
                                         </div>
+                                    <?php } ?>
                                     </form>
                                 </div>
                             </div>
