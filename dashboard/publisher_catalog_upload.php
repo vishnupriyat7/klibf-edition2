@@ -41,12 +41,17 @@ $user_id = $user['id'];
                     //   grabs file extension. my code checked if the file was a pdf a different way and neither seems to work.
                     $destination = $randomd . $file_ext; //new filename
                     if ($file_ext == '.pdf') {
-                        move_uploaded_file($_FILES['catalogue']['tmp_name'], "$idir" . $destination);
+                        $fileupload = move_uploaded_file($_FILES['catalogue']['tmp_name'], "$idir" . $destination);
                         $pdf = $domain . "/catalogue/" . $destination;
-                        $query = "INSERT INTO publisher_catalogue (user_id, filename, updated_date) VALUES ('$user_id', '$destination', '$date')";
-                        $result = mysqli_query($con, $query);
+                        if ($fileupload) {
+                            $query = "INSERT INTO publisher_catalogue (user_id, filename, updated_date) VALUES ('$user_id', '$destination', '$date')";
+                            $result = mysqli_query($con, $query);
+                        } else {
+                            $msg = 'File type not supported. Kindly upload a PDF file.';
+                            $status = "NOTOK";
+                        }
                     } else {
-                        $msg = 'File type not supported.';
+                        $msg = 'File type not supported. Kindly upload a PDF file.';
                         $status = "NOTOK";
                     }
                 }
@@ -87,11 +92,11 @@ $user_id = $user['id'];
                                             $stmt_cat->execute();
                                             $res_cat = $stmt_cat->get_result();
                                             $user_cat = $res_cat->fetch_assoc();
-                                            if ($user_cat['filename']) {?>
+                                            if ($user_cat['filename']) { ?>
                                                 <br>
-                                                    <label><b>You have already uploaded a Catalogue</b></label>
-                                                    <iframe src="../catalogue/<?= $user_cat['filename'] ?>" height="600vh"></iframe>
-                                                <?php } else { ?>
+                                                <label><b>You have already uploaded a Catalogue</b></label>
+                                                <iframe src="../catalogue/<?= $user_cat['filename'] ?>" height="600vh"></iframe>
+                                            <?php } else { ?>
                                                 <div class="form-group col-12">
                                                     <br>
                                                     <label><b>Upload Your Catalogue</b></label>
@@ -100,7 +105,7 @@ $user_id = $user['id'];
                                                     </br>
                                                     *Upload PDF File
                                                     </br>
-                                                    <input type="file" class="form-control" name="catalogue" id="catalogue" placeholder="*Upload PDF File">                                                    
+                                                    <input type="file" class="form-control" name="catalogue" id="catalogue" placeholder="*Upload PDF File">
                                                 </div>
                                         </div> <br>
                                         <div class="col-lg-12">
