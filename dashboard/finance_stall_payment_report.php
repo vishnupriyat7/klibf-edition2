@@ -73,6 +73,7 @@
                                     $counter = 0;
                                     while ($book = mysqli_fetch_array($bookstall)) {
                                         $id = "$book[id]";
+                                        var_dump($id);
                                         $amt3x3 = 10000;
                                         $amt3x2 = 7500;
                                         $pub_user_id = "$book[user_id]";

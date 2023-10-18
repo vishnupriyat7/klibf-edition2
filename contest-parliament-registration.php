@@ -94,7 +94,8 @@
                                 <div class="tab-content">
                                     <div class="d-flex justify-content-end">
 
-                                        <a href="https://forms.gle/vewPX4R5TFYjZP3S8" class="mr-2 btn btn-success horizontal-shake" target="_blank"><i class="fa fa-download"></i> Click Here to Apply</a>
+                                        <!-- <a href="https://forms.gle/vewPX4R5TFYjZP3S8" class="mr-2 btn btn-success horizontal-shake" target="_blank"><i class="fa fa-download"></i> Click Here to Apply</a> -->
+                                        <a href="#" class="mr-2 btn btn-success horizontal-shake"><i class="fa fa-download"></i> Click Here to Apply</a>
 
                                     </div>
 

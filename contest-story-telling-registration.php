@@ -114,7 +114,8 @@
                                 <div class="tab-content">
                                     <div class="d-flex justify-content-end align-items-end">
 
-                                        <a href="https://forms.gle/qjpH2FqjraRcnWGc9" class="mr-2 btn btn-success horizontal-shake" target="_blank"><i class="fa fa-download"></i> Click Here to Apply</a>
+                                        <!-- <a href="https://forms.gle/qjpH2FqjraRcnWGc9" class="mr-2 btn btn-success horizontal-shake" target="_blank"><i class="fa fa-download"></i> Click Here to Apply</a> -->
+                                        <a href="https://www.youtube.com/watch?v=Lg-BCS3p3sA&list=PLWnK7DhsuZ9CJlcJaV1VCbIRuy9tYURIc" class="mr-2 btn btn-success horizontal-shake" target="_blank"><i class="fa fa-download"></i> Entries</a>
 
                                     </div>
                                     <br>
