@@ -24,38 +24,42 @@
              <?php
                 // Sample data for each icon box
                 $iconBoxes = [
+                                      
                     [
                         'title' => "Speaker's Message",
-                        'video_url' => 'https://www.youtube.com/embed/nZ7FAtGUySc',
+                        'video_url' => 'https://www.youtube.com/embed/VM-NZCdQ26U',
+                    ],
+                    
+                    [
+                        'title' => "Speaker's Message",
+                        'video_url' => 'https://www.youtube.com/embed/XFg_4dh6gXw',
+                    ],
+                    
+                    [
+                        'title' => "Speaker's Message",
+                        'video_url' => 'https://www.youtube.com/embed/_TzaXCz3Tcc',
+                    ],
+                    
+                    [
+                        'title' => "Speaker's Message",
+                        'video_url' => 'https://www.youtube.com/embed/q3mZh_ZyO1o',
                     ],
                     [
                         'title' => "Speaker's Message",
-                        'video_url' => 'https://www.youtube.com/embed/lNHGChL_QCA',
+                        'video_url' => 'https://www.youtube.com/embed/mAI-6q3QKdA',
                     ],
                     [
                         'title' => "Speaker's Message",
-                        'video_url' => 'https://www.youtube.com/embed/sWZTxGs67eE',
+                        'video_url' => 'https://www.youtube.com/embed/HbFgM0SS6S8',
                     ],
-
+                    
                     [
                         'title' => "Speaker's Message",
-                        'video_url' => 'https://www.youtube.com/embed/wkLEz0lHUng',
-                    ],
-                    [
-                        'title' => "Speaker's Message",
-                        'video_url' => 'https://www.youtube.com/embed/Y6p4nUxzSHs',
+                        'video_url' => 'https://www.youtube.com/embed/osALdL8nCrw',
                     ],
                     [
                         'title' => "Speaker's Message",
-                        'video_url' => 'https://www.youtube.com/embed/iHWwaX7kBmk',
-                    ],
-                    [
-                        'title' => "Speaker's Message",
-                        'video_url' => 'https://www.youtube.com/embed/-0S12AJLeWo',
-                    ],
-                    [
-                        'title' => "Speaker's Message",
-                        'video_url' => 'https://www.youtube.com/embed/RsZnEMer3MY',
+                        'video_url' => 'https://www.youtube.com/embed/yW6ZuvpOKxY',
                     ],
 
                     // Add data for other icon boxes here

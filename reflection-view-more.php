@@ -70,6 +70,86 @@
                                               
                         [
                             'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/VM-NZCdQ26U',
+                        ],
+                        
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/XFg_4dh6gXw',
+                        ],
+                        
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/_TzaXCz3Tcc',
+                        ],
+                        
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/q3mZh_ZyO1o',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/mAI-6q3QKdA',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/HbFgM0SS6S8',
+                        ],
+                        
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/osALdL8nCrw',
+                        ],
+                       
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/yW6ZuvpOKxY',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/m1uopaXZWng',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/0MZSvrwrKbg',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/YnCRkW7uumw',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/g2Kr-07tBLg',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/u5ReN2y3IGw',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/fQ40fTGu7CM',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/Zhet8evRLxo',
+                        ],
+                        
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/fxmjy4_y8V0',
+                        ],
+                      
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/23ndPjLjQdA',
+                        ],
+                        [
+                            'title' => "Speaker's Message",
+                            'video_url' => 'https://www.youtube.com/embed/Y2eQUPUllk4',
+                        ],
+                                              
+                        [
+                            'title' => "Speaker's Message",
                             'video_url' => 'https://www.youtube.com/embed/nZ7FAtGUySc',
                         ],
                         [
