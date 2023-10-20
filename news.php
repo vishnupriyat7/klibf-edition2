@@ -57,6 +57,15 @@
                     // Get all image files from the directory
                     $imageFiles = glob($imageDirectory . "*.{jpg,jpeg,png}", GLOB_BRACE);
 
+                    // Function to compare image files based on modification time
+                    function compareByModificationTime($a, $b)
+                    {
+                        return filemtime($b) - filemtime($a);
+                    }
+
+                    // Sort the image files based on modification time
+                    usort($imageFiles, 'compareByModificationTime');
+
                     // Number of images per page
                     $imagesPerPage = 6;
 
@@ -105,6 +114,7 @@
                     <?php
                     }
                     ?>
+
                     <!-- Grid column -->
                 </div>
 
