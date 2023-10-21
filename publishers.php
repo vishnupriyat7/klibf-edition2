@@ -36,6 +36,27 @@
     text-decoration: none;
   }
 
+  .logo-popup {
+    cursor: pointer;
+  }
+
+  .popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    text-align: center;
+  }
+
+  .popup img {
+    max-width: 80%;
+    max-height: 80%;
+    margin: 10% auto;
+  }
+
 
   .modal {
     justify-content: center;
@@ -111,13 +132,13 @@
               </thead>
               <tbody id="table-body">
                 <?php
-                $query = "SELECT up.id, up.user_id, up.org_name, up.logo, ch.user_id, ch.status FROM users_profile up JOIN challan ch ON up.user_id = ch.user_id WHERE ch.status = 'A' ORDER BY up.org_name ASC";
+                $query = "SELECT up.id, up.user_id, up.fascia, up.logo, ch.user_id, ch.status FROM users_profile up JOIN challan ch ON up.user_id = ch.user_id WHERE ch.status = 'A' ORDER BY up.fascia ASC";
                 $publshrdetls = mysqli_query($conn, $query);
                 $counter = 0;
                 while ($publshr = mysqli_fetch_array($publshrdetls)) {
                   $id = "$publshr[id]";
                   $pub_user_id = "$publshr[user_id]";
-                  $org_name = "$publshr[org_name]";
+                  $org_name = "$publshr[fascia]";
                   $logo = base64_encode($publshr['logo']);
                 ?>
                   <tr>
@@ -125,8 +146,11 @@
                       <?= ++$counter; ?>
                     </td>
                     <td>
-                      <img src="data:image/jpg;charset=utf8;base64,<?= $logo; ?>" height="80vh" width="95vw">
+                      <!-- <img src="data:image/jpg;charset=utf8;base64,<?= $logo; ?>" height="80vh" width="95vw"> -->
                       <!-- <?= $logo; ?> -->
+                      <div class="logo-popup" onmouseover="showPopup(this);" onmouseout="hidePopup();">
+                        <img src="data:image/jpg;charset=utf8;base64,<?= $logo; ?>" height="80vh" width="95vw">
+                      </div>
                     </td>
                     <td>
                       <?= $org_name; ?>
@@ -195,6 +219,21 @@
         });
       });
     });
+
+    function showPopup(element) {
+      const imgSrc = element.querySelector('img').getAttribute('src');
+      const popup = document.createElement('div');
+      popup.className = 'popup';
+      popup.innerHTML = `<img src="${imgSrc}" alt="Logo">`;
+      document.body.appendChild(popup);
+    }
+
+    function hidePopup() {
+      const popup = document.querySelector('.popup');
+      if (popup) {
+        popup.remove();
+      }
+    }
   </script>
 
 
