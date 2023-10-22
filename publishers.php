@@ -40,22 +40,40 @@
     cursor: pointer;
   }
 
-  .popup {
+  .popup-container {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 70%;
     background: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
     text-align: center;
   }
 
-  .popup img {
-    max-width: 80%;
-    max-height: 80%;
-    margin: 10% auto;
+  .popup-image {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 30px;
+  }
+
 
 
   .modal {
@@ -148,10 +166,15 @@
                     <td>
                       <!-- <img src="data:image/jpg;charset=utf8;base64,<?= $logo; ?>" height="80vh" width="95vw"> -->
                       <!-- <?= $logo; ?> -->
-                      <div class="logo-popup" onmouseover="showPopup(this);" onmouseout="hidePopup();">
+                      <!-- <div class="logo-popup" onclick="preloadAndShowPopup('<?= $logo; ?>');" on="hidePopup();">
+                        <img src="data:image/jpg;charset=utf8;base64,<?= $logo; ?>" height="80vh" width="95vw">
+                      </div> -->
+                      <div class="logo-popup" onclick="showPopup('<?= $logo; ?>');">
                         <img src="data:image/jpg;charset=utf8;base64,<?= $logo; ?>" height="80vh" width="95vw">
                       </div>
                     </td>
+
+
                     <td>
                       <?= $org_name; ?>
                     </td>
@@ -201,6 +224,10 @@
         </div>
 
       </section>
+      <div class="popup-container" id="popupContainer">
+        <span class="close-button" onclick="hidePopup();">&times;</span>
+        <img class="popup-image" id="popupImage" src="" alt="Logo">
+      </div>
     </div>
 
 
@@ -220,19 +247,16 @@
       });
     });
 
-    function showPopup(element) {
-      const imgSrc = element.querySelector('img').getAttribute('src');
-      const popup = document.createElement('div');
-      popup.className = 'popup';
-      popup.innerHTML = `<img src="${imgSrc}" alt="Logo">`;
-      document.body.appendChild(popup);
+    function showPopup(imageData) {
+      const popupContainer = document.getElementById('popupContainer');
+      const popupImage = document.getElementById('popupImage');
+      popupImage.src = `data:image/jpg;charset=utf8;base64,${imageData}`;
+      popupContainer.style.display = 'block';
     }
 
     function hidePopup() {
-      const popup = document.querySelector('.popup');
-      if (popup) {
-        popup.remove();
-      }
+      const popupContainer = document.getElementById('popupContainer');
+      popupContainer.style.display = 'none';
     }
   </script>
 
