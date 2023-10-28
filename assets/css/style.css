@@ -149,7 +149,7 @@ h6 {
   font-size: 200%;
   color: white;
   font-weight: bold;
-  margin-left: -18%;
+  margin-left: 0%;
 
   animation: fadeInX 1s infinite alternate;
 }

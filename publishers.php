@@ -90,7 +90,7 @@
     </section>
     <!-- End Breadcrumbs Section -->
     <div class="container shadow min-vh-100 py-4">
-      <div class="row mt-5">
+      <div class="row mt-2">
         <div class="col-md-5 mx-auto">
           <div class="input-group">
             <input class="form-control border rounded-pill" type="search" placeholder="Search" id="search-input">
