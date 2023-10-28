@@ -41,6 +41,7 @@
                                 <thead>
                                     <tr>
                                         <th data-ordering="false">Sl.No</th>
+                                        <th data-ordering="false">Id</th>
                                         <th data-ordering="false">Publisher Name</th>
                                         <th data-ordering="false">Book Title</th>
                                         <th data-ordering="false">Author</th>
@@ -168,6 +169,9 @@
                                         <tr>
                                             <td>
                                                 <?= ++$counter; ?>
+                                            </td>
+                                            <td>
+                                                <?= $id; ?>
                                             </td>
                                             <td>
                                                 <?= $org_name; ?>

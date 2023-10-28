@@ -74,8 +74,6 @@
     font-size: 30px;
   }
 
-
-
   .modal {
     justify-content: center;
     align-items: center;
