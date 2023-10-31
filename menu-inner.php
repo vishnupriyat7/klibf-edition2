@@ -69,6 +69,7 @@
               </li>
             </ul>
           </li> -->
+    <li><a class="nav-link scrollto" href="schedule-inner.php">Schedule</a></li>
     <li><a class="nav-link scrollto" href="publishers.php">Publishers</a></li>
     <li><a class="nav-link scrollto" href="virtual_queue.php">Virtual Queue</a></li>
     <li><a class="nav-link scrollto" href="contact-inner-page.php">Contact</a></li>
