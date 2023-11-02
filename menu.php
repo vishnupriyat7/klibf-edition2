@@ -70,6 +70,7 @@
               </li>
             </ul>
           </li> -->
+    <li><a class="nav-link scrollto" href="#schedule">Schedule</a></li>
     <li><a class="nav-link scrollto" href="publishers.php">Publishers</a></li>
     <li><a class="nav-link scrollto" href="virtual_queue.php">Virtual Queue</a></li>
     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>

@@ -131,7 +131,7 @@
                     <div class="gallery-links">
                         <a href="assets/img/contests/Quiz Guide Lines.pdf" data-gallery="galleryGallery" class="gallery-lightbox" title=""><i class="bx bx-plus"></i><span>Rules</span></a>
                         <!-- <a href="https://docs.google.com/forms/d/e/1FAIpQLScNPUBC97PcQdcaERDE-1nPFeHyEMIEPkkKgTRVR-Ou9phOwg/viewform?usp=send_form" target="_blank" title="More Details"><i class="bx bx-link"></i><span>Apply</span></a> -->
-                        <a href="#" title="More Details"><i class="bx bx-link"></i><span></span></a>
+                        <!-- <a href="#" title="More Details"><i class="bx bx-link"></i><span></span></a> -->
 
                     </div>
                 </div>

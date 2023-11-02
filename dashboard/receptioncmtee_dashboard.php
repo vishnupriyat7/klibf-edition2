@@ -25,6 +25,7 @@ $queue_inst_count_stmt = $con->prepare($queue_inst_count_sql);
 $queue_inst_count_stmt->execute();
 $queue_inst_count_result = $queue_inst_count_stmt->get_result();
 $queue_inst_result_count = $queue_inst_count_result->fetch_all();
+// var_dump($queue_result_count[0][0]);
 ?>
 
 

@@ -35,13 +35,13 @@
           <p style="font-size: large; color: white; font-weight: 500;">09-01-2023</p> 
        </span>
      </div> -->
-     <nav class="text-center count">
+     <!-- <nav class="text-center count">
 
        <?php echo  $daysRemaining; ?><br>
        <p>Days to Go</p>
-       <!-- <p style="font-size: large; color: white; font-weight: 500;">09-01-2023</p> -->
+       
 
-     </nav>
+     </nav> -->
 
      <?php include "menu-inner.php"; ?>
 

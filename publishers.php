@@ -36,6 +36,43 @@
     text-decoration: none;
   }
 
+  .logo-popup {
+    cursor: pointer;
+  }
+
+  .popup-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 70%;
+    background: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .popup-image {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 30px;
+  }
 
   .modal {
     justify-content: center;
@@ -111,13 +148,13 @@
               </thead>
               <tbody id="table-body">
                 <?php
-                $query = "SELECT up.id, up.user_id, up.org_name, up.logo, ch.user_id, ch.status FROM users_profile up JOIN challan ch ON up.user_id = ch.user_id WHERE ch.status = 'A' ORDER BY up.org_name ASC";
+                $query = "SELECT up.id, up.user_id, up.fascia, up.logo, ch.user_id, ch.status FROM users_profile up JOIN challan ch ON up.user_id = ch.user_id WHERE ch.status = 'A' ORDER BY up.fascia ASC";
                 $publshrdetls = mysqli_query($conn, $query);
                 $counter = 0;
                 while ($publshr = mysqli_fetch_array($publshrdetls)) {
                   $id = "$publshr[id]";
                   $pub_user_id = "$publshr[user_id]";
-                  $org_name = "$publshr[org_name]";
+                  $org_name = "$publshr[fascia]";
                   $logo = base64_encode($publshr['logo']);
                 ?>
                   <tr>
@@ -125,10 +162,15 @@
                       <?= ++$counter; ?>
                     </td>
                     <td>
-                      <img src="data:image/jpg;charset=utf8;base64,<?= $logo; ?>" height="80vh" width="95vw">
+                      <!-- <img src="data:image/jpg;charset=utf8;base64,<?= $logo; ?>" height="80vh" width="95vw"> -->
                       <!-- <?= $logo; ?> -->
+                      <!-- <div class="logo-popup" onclick="preloadAndShowPopup('<?= $logo; ?>');" on="hidePopup();">
+                        <img src="data:image/jpg;charset=utf8;base64,<?= $logo; ?>" height="80vh" width="95vw">
+                      </div> -->
+                      <div class="logo-popup" onclick="showPopup('<?= $logo; ?>');">
+                        <img src="data:image/jpg;charset=utf8;base64,<?= $logo; ?>" height="80vh" width="95vw">
+                      </div>
                     </td>
-                    
                     <td>
                       <?= $org_name; ?>
                     </td>
@@ -178,6 +220,10 @@
         </div>
 
       </section>
+      <div class="popup-container" id="popupContainer">
+        <span class="close-button" onclick="hidePopup();">&times;</span>
+        <img class="popup-image" id="popupImage" src="" alt="Logo">
+      </div>
     </div>
 
 
@@ -196,6 +242,18 @@
         });
       });
     });
+
+    function showPopup(imageData) {
+      const popupContainer = document.getElementById('popupContainer');
+      const popupImage = document.getElementById('popupImage');
+      popupImage.src = `data:image/jpg;charset=utf8;base64,${imageData}`;
+      popupContainer.style.display = 'block';
+    }
+
+    function hidePopup() {
+      const popupContainer = document.getElementById('popupContainer');
+      popupContainer.style.display = 'none';
+    }
   </script>
 
 
