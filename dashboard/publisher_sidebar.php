@@ -71,7 +71,7 @@ include "../z_db.php";
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" role="button" aria-expanded="true" aria-controls="sidebarLanding" href="publisher_coupon.php">
-                        <i class="ri-checkbox-multiple-line"></i> <span data-key="t-landing">Coupon Upload</span>
+                        <i class="ri-checkbox-multiple-line"></i> <span data-key="t-landing">Coupon Entry</span>
                     </a>
                 </li>
                 <!-- <li class="nav-item">
