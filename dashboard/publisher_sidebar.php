@@ -79,7 +79,7 @@ include "../z_db.php";
                         <i class="ri-file-list-3-line"></i> <span data-key="t-landing">Report</span>
                     </a>
                 </li> -->
-                
+
                 <!-- <li class="nav-item">
                     
                     <a class="nav-link menu-link" href="#sidebarEvent" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="sidebarLanding">
@@ -119,6 +119,9 @@ include "../z_db.php";
                             </li>
                             <li class="nav-item">
                                 <a href="publisher_special_event_proposal_report.php" class="nav-link" data-key="t-nft-landing"> Special Event Proposal Report </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="publisher_coupon_list_report.php" class="nav-link" data-key="t-nft-landing">Coupon List Report</a>
                             </li>
                         </ul>
                     </div>
