@@ -21,7 +21,7 @@
              </iframe> -->
              <!-- <iframe src="file:///var/www/html/klibf-2/assets/img/schedule/KLIBF-Directory.pdf" width="800" height="500"></iframe> -->
              <div class="embed-responsive embed-responsive-16by9 text-center pt-5">
-                 <iframe src="DAY-1.pdf" class="embed-responsive-item" width="80%" height="800px"></iframe>
+                 <iframe src="DAY-2-Final.pdf" class="embed-responsive-item" width="80%" height="800px"></iframe>
              </div>
 
          </div>

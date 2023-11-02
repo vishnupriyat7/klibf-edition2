@@ -30,7 +30,7 @@
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
             <h2>Contests</h2>
             <!-- <p>Click Image to View the Rules & Regulations for each contests and Apply</p> -->
-            <div class="contests-only">
+            <!-- <div class="contests-only">
                 <p>2023 നവംബർ 01 മുതൽ 07 വരെ നിയമസഭാ സമുച്ചയത്തിൽ സംഘടിപ്പിക്കുന്ന കേരള നിയമസഭ അന്താരാഷ്ട്ര പുസ്തകോത്സവം രണ്ടാം പതിപ്പിന്റെ ഭാഗമായി സ്കൂൾ - കോളേജ് വിദ്യാർത്ഥികൾക്കും പൊതുജനങ്ങൾക്കുമായി താഴെപ്പറയുന്ന മത്സരങ്ങൾ, വിവിധ വിഭാഗങ്ങളിലായി സംഘടിപ്പിക്കുന്നു:
             </div>
             <div>
@@ -56,7 +56,7 @@
 
                 </ul>
             </div>
-        </div>
+        </div> -->
 
         <!-- <div class="row" data-aos="fade-in">
           <div class="col-lg-12 d-flex justify-content-center">

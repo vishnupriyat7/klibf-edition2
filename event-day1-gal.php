@@ -71,7 +71,6 @@
                         <?php
                         $images = glob("assets/img/gallery/day-1/book-release/*.{jpg,png,gif}", GLOB_BRACE);
                         ?>
-
                         <div class="row">
                             <div class="row">
                                 <?php if ($images) : ?>
@@ -183,8 +182,8 @@
                 </div>
                 <div class="tab-pane" id="day1-event6">
                     <br>
-                    <h5>Venue 2 - 5.00 pm - വാക്കുകളുടെ ഇന്ദ്രജാലം & Book Release - മാജിക്കൽ മിസ്റ് ഓഫ് മെമ്മറീസ്   </h5><br>
-               
+                    <h5>Venue 2 - 5.00 pm - വാക്കുകളുടെ ഇന്ദ്രജാലം & Book Release - മാജിക്കൽ മിസ്റ് ഓഫ് മെമ്മറീസ് </h5><br>
+
                     <div class="container pt-4">
                         <?php
                         $images = glob("assets/img/gallery/day-1/visiontalk-bookrls/*.{jpg,png,gif}", GLOB_BRACE);
@@ -222,10 +221,10 @@
                 <img id="image-gallery-day-1-image" class="img-responsive col-md-12" src="">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
+                <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left">Previous</i>
                 </button>
 
-                <button type="button" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>
+                <button type="button" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right">Next</i>
                 </button>
             </div>
         </div>
