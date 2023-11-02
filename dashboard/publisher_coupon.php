@@ -136,8 +136,21 @@ function generateInvoice($invoiceNo)
                         $msg = "";
                         $current_date = new DateTime();
                         $date = date_format($current_date, "Y-m-d H:i:s");
+                        $select_pub_bank_query = "SELECT * FROM coupon_bankdtls WHERE users_id = ?";
+                        $stmt_pub_cpn_bank = $con->prepare($select_pub_bank_query);
+                        $stmt_pub_cpn_bank->bind_param("s", $user_id);
+                        $stmt_pub_cpn_bank->execute();
+                        $res_pub_cpn_bank = $stmt_pub_cpn_bank->get_result();
+                        $cpn_bank_det = $res_pub_cpn_bank->fetch_assoc();
+                        $edit_bank = '';
+                        if ($cpn_bank_det) {
+                            $cpn_bank_name = $cpn_bank_det['bank_name'];
+                            $cpn_bank_branch = $cpn_bank_det['account_no'];
+                            $cpn_acc_no = $cpn_bank_det['bank_branch'];
+                            $cpn_ifsc = $cpn_bank_det['bank_ifsc'];
+                            $edit_bank = "disabled";
+                        }
                         if (isset($_POST['save_cpn'])) {
-                            // var_dump("ndskjhkjd");
                             $cpn_bank_name = mysqli_real_escape_string($con, $_POST['cpn_bank_name']);
                             $cpn_bank_branch = mysqli_real_escape_string($con, $_POST['cpn_bank_branch']);
                             $cpn_acc_no = mysqli_real_escape_string($con, $_POST['cpn_acc_no']);
@@ -149,6 +162,12 @@ function generateInvoice($invoiceNo)
                             $count200 = mysqli_real_escape_string($con, $_POST['count200']);
                             $cpn_serial_200 = mysqli_real_escape_string($con, $_POST['cpn_serial_200']);
                             $cpn_invoice = mysqli_real_escape_string($con, $_POST['cpn_invoice']);
+                            $cpn_bill_qry = "SELECT * FROM coupon_publisher WHERE cpn_bill_no = '$cpn_invoice'";
+                            $cpn_bill = mysqli_query($con, $cpn_bill_qry);
+                            if ($cpn_bill->num_rows > 0) {
+                                $status = "NOTOK";
+                                $msg = "Duplicate Invoice number. Please enetr a different one.";
+                            }
                             $total_cpn_amt = ($count100 * 100) + ($count200 * 200) + ($count50 * 50);
                             $current_date = new DateTime();
                             $date = date_format($current_date, "Y-m-d H:i:s");
@@ -162,7 +181,7 @@ function generateInvoice($invoiceNo)
                                 $query_cpn_pub_bank = "INSERT INTO coupon_bankdtls (users_id, bank_name, account_no, bank_ifsc, bank_branch, updated_date) values ('$user_id', '$cpn_bank_name', '$cpn_acc_no', '$cpn_ifsc', '$cpn_bank_branch', '$date')";
                                 $res_cpn_pub_bank = mysqli_query($con, $query_cpn_pub_bank);
                                 if (!$res_cpn_pub_bank) {
-                                    $status == "NOTOK";
+                                    $status = "NOTOK";
                                     $msg = "Some issues in insertion of bank details.";
                                 }
                             }
@@ -181,53 +200,10 @@ function generateInvoice($invoiceNo)
                                                 <button type='button' class='btn-close' data-dismiss='alert' aria-label='Close'></button>
                                                 </div>
                                ";
-                               
-                                    // $sql_profile = "SELECT id, org_name, gst_no, head_org_email FROM users_profile WHERE user_id = ?";
-                                    // $stmt_prof = $con->prepare($sql_profile);
-                                    // $stmt_prof->bind_param("s", $user_id);
-                                    // $stmt_prof->execute();
-                                    // $res_prof = $stmt_prof->get_result();
-                                    // $user_prof = $res_prof->fetch_assoc();
-                                    // $sql1 = "SELECT * FROM stall_booking WHERE user_id = ?";
-                                    // $stmt1 = $con->prepare($sql1);
-                                    // $stmt1->bind_param("i", $user_id);
-                                    // $stmt1->execute();
-                                    // $result1 = $stmt1->get_result();
-                                    // $user_stall = $result1->fetch_assoc();
-                                    // $stall3x3 = $user_stall['confirm_3X3'];
-                                    // $stall3x2 = $user_stall['confirm_3X2'];
-                                    // $amt3x3 = 10000;
-                                    // $amt3x2 = 7500;
-                                    // $rate3x3 = $stall3x3 * $amt3x3;
-                                    // $rate3x2 = $stall3x2 * $amt3x2;
-                                    // $gst3x3 = ($rate3x3 * 18) / 100;
-                                    // $gst3x2 = ($rate3x2 * 18) / 100;
-                                    // $tot_amt3x3 = $rate3x3 + $gst3x3;
-                                    // $tot_amt3x2 = $rate3x2 +  $gst3x2;
-                                    // // $stall_status = $user_stall['status'];
-                                    // // if ($stall_status != 'S') {
-                                    // //     $edit_count = '';
-                                    // // } else {
-                                    // //     $edit_count = 'disabled';
-                                    // // }
-                                    // $total_amt = $tot_amt3x3 + $tot_amt3x2;
-                                    // $totalinword = convertNumberToWordsForIndia($total_amt);
-                                    // $chellanQuery = "SELECT * FROM challan WHERE user_id = ?";
-                                    // $stmt_chellan = $con->prepare($chellanQuery);
-                                    // $stmt_chellan->bind_param("s", $user_id);
-                                    // $stmt_chellan->execute();
-                                    // $res_chellan = $stmt_chellan->get_result();
-                                    // $chellan = $res_chellan->fetch_assoc();
-                                    // $bank_name = $chellan['bank_name'];
-                                    // $paid_amt = $chellan['paid_amt'];
-                                    // $trnctn_no = $chellan['trnctn_no'];
-                                    // $ifsc = $chellan['ifsc'];
-                                    // $trnctn_dt = $chellan['trnctn_date'];
-                                    // $payee = $chellan['paye_name'];
-                                    // $trnctn_type = $chellan['trnctn_type'];
-                                    // $gst = $user_prof['gst_no'];
-                                    // $chellanStatus = $chellan['status'];
-                                    // $imgChellan = base64_encode($chellan['challan_img']);
+                                    $cpn_bank_name = $cpn_bank_det['bank_name'];
+                                    $cpn_bank_branch = $cpn_bank_det['account_no'];
+                                    $cpn_acc_no = $cpn_bank_det['bank_branch'];
+                                    $cpn_ifsc = $cpn_bank_det['bank_ifsc'];                                    
                                 } else {
                                     $errormsg = "
                                     <div class='alert alert-danger alert-dismissible alert-outline fade show'>
@@ -343,22 +319,22 @@ function generateInvoice($invoiceNo)
                                             <div class="form-group col-12 col-md-6">
                                                 <br>
                                                 Bank Name
-                                                <input type="text" class="form-control" name="cpn_bank_name" placeholder="Bank Name" id="cpn_bank_name" value="<?= $bank_name; ?>" <?= $edit; ?>>
+                                                <input type="text" class="form-control" name="cpn_bank_name" placeholder="Bank Name" id="cpn_bank_name" value="<?= $cpn_bank_name; ?>" <?= $edit_bank; ?>>
                                             </div>
                                             <div class="form-group col-12 col-md-6">
                                                 <br>
                                                 Branch
-                                                <input type="text" class="form-control" name="cpn_bank_branch" placeholder="Branch" id="cpn_bank_branch" value="<?= $bank_name; ?>" <?= $edit; ?>>
+                                                <input type="text" class="form-control" name="cpn_bank_branch" placeholder="Branch" id="cpn_bank_branch" value="<?= $cpn_bank_branch; ?>" <?= $edit_bank; ?>>
                                             </div>
                                             <div class="form-group col-12 col-md-6">
                                                 <br>
                                                 Account No
-                                                <input type="text" class="form-control" name="cpn_acc_no" id="cpn_acc_no" placeholder="Account No" value="<?= $trnctn_no; ?>" <?= $edit; ?>>
+                                                <input type="text" class="form-control" name="cpn_acc_no" id="cpn_acc_no" placeholder="Account No" value="<?= $cpn_acc_no; ?>" <?= $edit_bank; ?>>
                                             </div>
                                             <div class="form-group col-12 col-md-6" id="ifsc-div">
                                                 <br>
                                                 IFSC
-                                                <input type="text" class="form-control" name="cpn_ifsc" id="cpn_ifsc" placeholder="IFSC" value="<?= $ifsc; ?>" maxlength="11" minlength="11" <?= $edit; ?>>
+                                                <input type="text" class="form-control" name="cpn_ifsc" id="cpn_ifsc" placeholder="IFSC" value="<?= $cpn_ifsc; ?>" maxlength="11" minlength="11" <?= $edit_bank; ?>>
                                             </div>
                                             <div class="col-lg-12">
                                                 <br>
