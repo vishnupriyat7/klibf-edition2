@@ -27,9 +27,9 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card" style="width: 170%;">
+                    <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Publisher Coupon List Report</h5>
+                            <h5 class="card-title mb-0">Publisher Coupon List</h5>
                         </div>
                         <div class="card-body overflow-auto">
                             <!-- <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%"> -->
@@ -40,38 +40,33 @@
                                         <th data-ordering="false" rowspan="2">Sl.No</th>
                                         <th data-ordering="false" rowspan="2">Invoice No.</th>
                                         <th data-ordering="false" colspan="2">Coupon 50 </th>
-                                       
+
                                         <th data-ordering="false" colspan="2">Coupon 100</th>
-                                       
+
                                         <th data-ordering="false" colspan="2">Coupon 200</th>
-                                        
+
                                         <th data-ordering="false" rowspan="2">Amount</th>
-                                        <th data-ordering="false" rowspan="2">Bank Name</th>
+                                        <!-- <th data-ordering="false" rowspan="2">Bank Name</th>
                                         <th data-ordering="false" rowspan="2">Branch</th>
                                         <th data-ordering="false" rowspan="2">Account Number</th>
-                                        <th data-ordering="false" rowspan="2">IFSC</th>
-                                        <th data-ordering="false" rowspan="2">Action</th>
+                                        <th data-ordering="false" rowspan="2">IFSC</th> -->
+                                        <!-- <th data-ordering="false" rowspan="2">Action</th> -->
                                     </tr>
                                     <tr>
-                                    
-                                    <th data-ordering="false">Count</th>
-                                    <th data-ordering="false">Sl.No </th>
-                                    
-                                    <th data-ordering="false">Count</th>
-                                    <th data-ordering="false">Sl.No </th>
-                                    <th data-ordering="false">Count</th>
-                                    <th data-ordering="false">Sl.No </th>
+
+                                        <th data-ordering="false">Count</th>
+                                        <th data-ordering="false">Sl.No </th>
+                                        <th data-ordering="false">Count</th>
+                                        <th data-ordering="false">Sl.No </th>
+                                        <th data-ordering="false">Count</th>
+                                        <th data-ordering="false">Sl.No </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     $userId = $user['id'];
-                                    var_dump($userId);
                                     $querycoupon = "SELECT cp.*, cb.*  FROM coupon_publisher cp JOIN  coupon_bankdtls cb ON cp.users_id = cb.users_id WHERE cp.users_id = $userId ORDER BY cp.id DESC";
-                                    // var_dump($querycoupon);
                                     $couponlist = mysqli_query($con, $querycoupon);
-                                    // var_dump($couponlist);
-
                                     $counter = 0;
                                     while ($coupon = mysqli_fetch_array($couponlist)) {
                                         $id = $coupon['id'];
@@ -83,10 +78,10 @@
                                         $coupon200ct = $coupon['cpn_200_count'];
                                         $coupon200slno = $coupon['cpn_200_srlno'];
                                         $coupontotal = $coupon['total_amount'];
-                                        $bankname = $coupon['bank_name'];
-                                        $account_no = $coupon['account_no'];
-                                        $bank_ifsc = $coupon['bank_ifsc'];
-                                        $bank_branch = $coupon['bank_branch'];
+                                        // $bankname = $coupon['bank_name'];
+                                        // $account_no = $coupon['account_no'];
+                                        // $bank_ifsc = $coupon['bank_ifsc'];
+                                        // $bank_branch = $coupon['bank_branch'];
 
                                     ?>
                                         <tr>
@@ -120,7 +115,7 @@
                                             <td>
                                                 <?= $coupontotal; ?>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <?= $bankname; ?>
                                             </td>
                                             <td>
@@ -131,15 +126,15 @@
                                             </td>
                                             <td>
                                                 <?= $bank_branch; ?>
-                                            </td>
-                                            <td>
+                                            </td> -->
+                                            <!-- <td>
 
                                                 <a href='publisher_bookrelease.php?bkrlsid=<?= $id; ?>' class='dropdown-item edit-item-btn'>
                                                     <button class="btn btn-primary"> <i class='ri-edit-box-fill align-bottom me-2 text-white'></i> Edit</button>
                                                 </a>
 
 
-                                            </td>
+                                            </td> -->
 
                                         </tr>
                                     <?php } ?>
