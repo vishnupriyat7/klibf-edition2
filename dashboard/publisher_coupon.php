@@ -136,141 +136,98 @@ function generateInvoice($invoiceNo)
                         $msg = "";
                         $current_date = new DateTime();
                         $date = date_format($current_date, "Y-m-d H:i:s");
-                        if (isset($_POST['save_payment'])) {
-                            $bank_name = mysqli_real_escape_string($con, $_POST['bank_name']);
-                            $paid_amt = mysqli_real_escape_string($con, $_POST['paid_amt']);
-                            $trnctn_no = mysqli_real_escape_string($con, $_POST['trnctn_no']);
-                            $trnctn_type = mysqli_real_escape_string($con, $_POST['trnctn_type']);
-                            $ifsc = mysqli_real_escape_string($con, $_POST['ifsc']);
-                            $trnctn_dt = mysqli_real_escape_string($con, $_POST['trnctn_dt']);
-                            $payee = mysqli_real_escape_string($con, $_POST['payee_nme']);
-                            $gst = mysqli_real_escape_string($con, $_POST['gst_num']);
+                        if (isset($_POST['save_cpn'])) {
+                            // var_dump("ndskjhkjd");
+                            $cpn_bank_name = mysqli_real_escape_string($con, $_POST['cpn_bank_name']);
+                            $cpn_bank_branch = mysqli_real_escape_string($con, $_POST['cpn_bank_branch']);
+                            $cpn_acc_no = mysqli_real_escape_string($con, $_POST['cpn_acc_no']);
+                            $cpn_ifsc = mysqli_real_escape_string($con, $_POST['cpn_ifsc']);
+                            $count50 = mysqli_real_escape_string($con, $_POST['count50']);
+                            $cpn_serial_50 = mysqli_real_escape_string($con, $_POST['cpn_serial_50']);
+                            $count100 = mysqli_real_escape_string($con, $_POST['count100']);
+                            $cpn_serial_100 = mysqli_real_escape_string($con, $_POST['cpn_serial_100']);
+                            $count200 = mysqli_real_escape_string($con, $_POST['count200']);
+                            $cpn_serial_200 = mysqli_real_escape_string($con, $_POST['cpn_serial_200']);
+                            $cpn_invoice = mysqli_real_escape_string($con, $_POST['cpn_invoice']);
+                            $total_cpn_amt = ($count100 * 100) + ($count200 * 200) + ($count50 * 50);
                             $current_date = new DateTime();
                             $date = date_format($current_date, "Y-m-d H:i:s");
-                            if ($total_amt != $paid_amt) {
-                                $msg = 'Transaction amount mismatch. Please enter total amount.';
-                                $status = "NOTOK";
-                            }
-                            if ($trnctn_type == '0') {
-                                $msg = 'Please select mode of transaction.';
-                                $status = "NOTOK";
-                            } elseif ($trnctn_type == 'D') {
-                                if ($bank_name == '') {
-                                    $msg = 'Please enter Bank Name.';
-                                    $status = "NOTOK";
-                                }
-                                if ($ifsc == '') {
-                                    $msg = 'Please enter IFSC.';
-                                    $status = "NOTOK";
-                                } elseif (strlen($ifsc) != 11) {
-                                    $msg = 'IFSC should be 11 characters length.';
-                                    $status = "NOTOK";
-                                }
-                            } elseif ($trnctn_type == 'O') {
-                                if ($trnctn_no == '') {
-                                    $msg = 'Please enter Transaction Number.';
-                                    $status = "NOTOK";
+                            $select_pub_bank_query = "SELECT * FROM coupon_bankdtls WHERE users_id = ?";
+                            $stmt_pub_cpn_bank = $con->prepare($select_pub_bank_query);
+                            $stmt_pub_cpn_bank->bind_param("s", $user_id);
+                            $stmt_pub_cpn_bank->execute();
+                            $res_pub_cpn_bank = $stmt_pub_cpn_bank->get_result();
+                            $cpn_bank_det = $res_pub_cpn_bank->fetch_assoc();
+                            if (!$cpn_bank_det) {
+                                $query_cpn_pub_bank = "INSERT INTO coupon_bankdtls (users_id, bank_name, account_no, bank_ifsc, bank_branch, updated_date) values ('$user_id', '$cpn_bank_name', '$cpn_acc_no', '$cpn_ifsc', '$cpn_bank_branch', '$date')";
+                                $res_cpn_pub_bank = mysqli_query($con, $query_cpn_pub_bank);
+                                if (!$res_cpn_pub_bank) {
+                                    $status == "NOTOK";
+                                    $msg = "Some issues in insertion of bank details.";
                                 }
                             }
-                            if ($payee == '') {
-                                $msg = 'Please enter payee name.';
-                                $status = "NOTOK";
-                            }
-                            if ($gst != '' && strlen($gst) != 15) {
-                                $msg = 'GST Number should be 15 characters length.';
-                                $status = "NOTOK";
-                            }
-                            if (!empty($_FILES["chellan_img"]["name"])) {
-                                // Get file info 
-                                $fileName = basename($_FILES["chellan_img"]["name"]);
-                                $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
-                                // Allow certain file formats 
-                                $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
-                                if (in_array($fileType, $allowTypes)) {
-                                    $image = $_FILES['chellan_img']['tmp_name'];
-                                    $imgContent = addslashes(file_get_contents($image));
-                                } else {
-                                    $msg = 'Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.';
-                                    $status = "NOTOK";
-                                }
-                            } else {
-                                if (!$chellan_img && !$imgChellan) {
-                                    $msg = 'Please select an image file to upload.';
-                                    $status = "NOTOK";
-                                }
-                            }
-                            // $imgChellan =  base64_encode($imgContent);
                             $errormsg = "";
                             if ($status == "NOTOK") {
                                 $errormsg = "<div class='alert alert-danger alert-dismissible alert-outline fade show'>" .
                                     $msg . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                                                </div>"; //printing error if found in validation
                             } else {
-                                if ($chellan['id'] > 0) {
-                                    if ($imgContent) {
-                                        $query = "UPDATE challan SET user_id = '$user_id', bank_name = '$bank_name', paid_amt = '$paid_amt', trnctn_no = '$trnctn_no', trnctn_type = '$trnctn_type', trnctn_date = '$trnctn_dt', challan_img = '$imgContent', updated_date = '$date', paye_name = '$payee', ifsc = '$ifsc' WHERE user_id = '$user_id';";
-                                    } else {
-                                        $query = "UPDATE challan SET user_id = '$user_id', bank_name = '$bank_name', paid_amt = '$paid_amt', trnctn_no = '$trnctn_no', trnctn_type = '$trnctn_type', trnctn_date = '$trnctn_dt', updated_date = '$date', paye_name = '$payee', ifsc = '$ifsc' WHERE user_id = '$user_id';";
-                                    }
-                                } else {
-                                    $query = "INSERT INTO challan (user_id, bank_name, paid_amt, trnctn_no, trnctn_type, trnctn_date, challan_img, status, updated_date, paye_name, ifsc) VALUES ('$user_id', '$bank_name', '$paid_amt', '$trnctn_no', '$trnctn_type', '$trnctn_dt', '$imgContent', 'E', '$date',  '$payee', '$ifsc');";
-                                }
-                                $querygst = "UPDATE users_profile SET gst_no = '$gst' WHERE user_id = '$user_id';";
-                                $result = mysqli_query($con, $query);
-                                $resultusergst = mysqli_query($con, $querygst);
-                                if ($result && $resultusergst) {
+                                $query_cpn_pub = "INSERT INTO coupon_publisher (users_id, cpn_200_count, cpn_100_count, cpn_50_count, cpn_50_srlno, cpn_100_srlno, cpn_200_srlno, cpn_bill_no, total_amount, updated_date, status) values ('$user_id', '$count200', '$count100', '$count50', '$cpn_serial_50', '$cpn_serial_100', '$cpn_serial_200', '$cpn_invoice', '$total_cpn_amt', '$date', 'E')";
+                                $res_cpn_pub = mysqli_query($con, $query_cpn_pub);
+                                if ($res_cpn_pub) {
                                     $errormsg = "
                               <div class='alert alert-success alert-dismissible alert-outline fade show'>
                                                 Your payment details is Successfully Saved.
                                                 <button type='button' class='btn-close' data-dismiss='alert' aria-label='Close'></button>
                                                 </div>
                                ";
-                                    $sql_profile = "SELECT id, org_name, gst_no, head_org_email FROM users_profile WHERE user_id = ?";
-                                    $stmt_prof = $con->prepare($sql_profile);
-                                    $stmt_prof->bind_param("s", $user_id);
-                                    $stmt_prof->execute();
-                                    $res_prof = $stmt_prof->get_result();
-                                    $user_prof = $res_prof->fetch_assoc();
-                                    $sql1 = "SELECT * FROM stall_booking WHERE user_id = ?";
-                                    $stmt1 = $con->prepare($sql1);
-                                    $stmt1->bind_param("i", $user_id);
-                                    $stmt1->execute();
-                                    $result1 = $stmt1->get_result();
-                                    $user_stall = $result1->fetch_assoc();
-                                    $stall3x3 = $user_stall['confirm_3X3'];
-                                    $stall3x2 = $user_stall['confirm_3X2'];
-                                    $amt3x3 = 10000;
-                                    $amt3x2 = 7500;
-                                    $rate3x3 = $stall3x3 * $amt3x3;
-                                    $rate3x2 = $stall3x2 * $amt3x2;
-                                    $gst3x3 = ($rate3x3 * 18) / 100;
-                                    $gst3x2 = ($rate3x2 * 18) / 100;
-                                    $tot_amt3x3 = $rate3x3 + $gst3x3;
-                                    $tot_amt3x2 = $rate3x2 +  $gst3x2;
-                                    // $stall_status = $user_stall['status'];
-                                    // if ($stall_status != 'S') {
-                                    //     $edit_count = '';
-                                    // } else {
-                                    //     $edit_count = 'disabled';
-                                    // }
-                                    $total_amt = $tot_amt3x3 + $tot_amt3x2;
-                                    $totalinword = convertNumberToWordsForIndia($total_amt);
-                                    $chellanQuery = "SELECT * FROM challan WHERE user_id = ?";
-                                    $stmt_chellan = $con->prepare($chellanQuery);
-                                    $stmt_chellan->bind_param("s", $user_id);
-                                    $stmt_chellan->execute();
-                                    $res_chellan = $stmt_chellan->get_result();
-                                    $chellan = $res_chellan->fetch_assoc();
-                                    $bank_name = $chellan['bank_name'];
-                                    $paid_amt = $chellan['paid_amt'];
-                                    $trnctn_no = $chellan['trnctn_no'];
-                                    $ifsc = $chellan['ifsc'];
-                                    $trnctn_dt = $chellan['trnctn_date'];
-                                    $payee = $chellan['paye_name'];
-                                    $trnctn_type = $chellan['trnctn_type'];
-                                    $gst = $user_prof['gst_no'];
-                                    $chellanStatus = $chellan['status'];
-                                    $imgChellan = base64_encode($chellan['challan_img']);
+                               
+                                    // $sql_profile = "SELECT id, org_name, gst_no, head_org_email FROM users_profile WHERE user_id = ?";
+                                    // $stmt_prof = $con->prepare($sql_profile);
+                                    // $stmt_prof->bind_param("s", $user_id);
+                                    // $stmt_prof->execute();
+                                    // $res_prof = $stmt_prof->get_result();
+                                    // $user_prof = $res_prof->fetch_assoc();
+                                    // $sql1 = "SELECT * FROM stall_booking WHERE user_id = ?";
+                                    // $stmt1 = $con->prepare($sql1);
+                                    // $stmt1->bind_param("i", $user_id);
+                                    // $stmt1->execute();
+                                    // $result1 = $stmt1->get_result();
+                                    // $user_stall = $result1->fetch_assoc();
+                                    // $stall3x3 = $user_stall['confirm_3X3'];
+                                    // $stall3x2 = $user_stall['confirm_3X2'];
+                                    // $amt3x3 = 10000;
+                                    // $amt3x2 = 7500;
+                                    // $rate3x3 = $stall3x3 * $amt3x3;
+                                    // $rate3x2 = $stall3x2 * $amt3x2;
+                                    // $gst3x3 = ($rate3x3 * 18) / 100;
+                                    // $gst3x2 = ($rate3x2 * 18) / 100;
+                                    // $tot_amt3x3 = $rate3x3 + $gst3x3;
+                                    // $tot_amt3x2 = $rate3x2 +  $gst3x2;
+                                    // // $stall_status = $user_stall['status'];
+                                    // // if ($stall_status != 'S') {
+                                    // //     $edit_count = '';
+                                    // // } else {
+                                    // //     $edit_count = 'disabled';
+                                    // // }
+                                    // $total_amt = $tot_amt3x3 + $tot_amt3x2;
+                                    // $totalinword = convertNumberToWordsForIndia($total_amt);
+                                    // $chellanQuery = "SELECT * FROM challan WHERE user_id = ?";
+                                    // $stmt_chellan = $con->prepare($chellanQuery);
+                                    // $stmt_chellan->bind_param("s", $user_id);
+                                    // $stmt_chellan->execute();
+                                    // $res_chellan = $stmt_chellan->get_result();
+                                    // $chellan = $res_chellan->fetch_assoc();
+                                    // $bank_name = $chellan['bank_name'];
+                                    // $paid_amt = $chellan['paid_amt'];
+                                    // $trnctn_no = $chellan['trnctn_no'];
+                                    // $ifsc = $chellan['ifsc'];
+                                    // $trnctn_dt = $chellan['trnctn_date'];
+                                    // $payee = $chellan['paye_name'];
+                                    // $trnctn_type = $chellan['trnctn_type'];
+                                    // $gst = $user_prof['gst_no'];
+                                    // $chellanStatus = $chellan['status'];
+                                    // $imgChellan = base64_encode($chellan['challan_img']);
                                 } else {
                                     $errormsg = "
                                     <div class='alert alert-danger alert-dismissible alert-outline fade show'>
@@ -294,11 +251,21 @@ function generateInvoice($invoiceNo)
                                             <div class="form-group col-12"><br>
                                                 <label><b>Coupon Details</b></label>
                                             </div>
+                                            <div class="row">
+                                                <div class="form-group col-12 col-md-2">
+                                                    <br>
+                                                    *Enter Invoice Number
+                                                </div>
+                                                <div class="form-group col-12 col-md-2">
+                                                    <br>
+                                                    <input type="text" class="form-control" name="cpn_invoice" id="cpn_invoice" placeholder="Invoice Number" required="required">
+                                                </div>
+                                            </div>
                                             <!--  -->
                                             <div class="form-group col-12 col-md-1">
                                                 <br>
-                                                *Coupons
-                                                <input type="text" class="form-control" placeholder="₹50" required="required" disabled>
+                                                Coupon
+                                                <input type="text" class="form-control" placeholder="50" disabled>
                                             </div>
                                             <div class="form-group col-12 col-md-1">
                                                 <br>
@@ -308,7 +275,7 @@ function generateInvoice($invoiceNo)
                                             <div class="form-group col-12 col-md-8">
                                                 <br>
                                                 *Serial Number
-                                                <input type="text" class="form-control" name="cpn_serial_50" id="cpn_serial_50" required="required"  placeholder="Serial Numbers">
+                                                <input type="text" class="form-control" name="cpn_serial_50" id="cpn_serial_50" required="required" placeholder="Serial Numbers">
                                             </div>
                                             <!-- <div class="form-group col-12 col-md-1">
                                                 <br>
@@ -317,13 +284,13 @@ function generateInvoice($invoiceNo)
                                             </div> -->
                                             <div class="form-group col-12 col-md-2">
                                                 <br>
-                                                *Amount
-                                                <input type="text" class="form-control" name="total50" id="total50" placeholder="₹0" required="required" disabled>
+                                                Amount (in ₹ )
+                                                <input type="text" class="form-control" name="total50" id="total50" placeholder="0" required="required" disabled>
                                             </div>
                                             <div class="form-group col-12 col-md-1">
                                                 <br>
-                                                <input type="text" class="form-control" placeholder="₹100" disabled>
-                                            </div>                                            
+                                                <input type="text" class="form-control" placeholder="100" disabled>
+                                            </div>
                                             <div class="form-group col-12 col-md-1">
                                                 <br>
                                                 <input type="text" class="form-control" name="count100" id="count100" placeholder="0" required="required" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onchange="claim_amount();">
@@ -338,11 +305,11 @@ function generateInvoice($invoiceNo)
                                             </div> -->
                                             <div class="form-group col-12 col-md-2">
                                                 <br>
-                                                <input type="text" class="form-control" name="total100" id="total100" placeholder="₹0" required="required" disabled>
+                                                <input type="text" class="form-control" name="total100" id="total100" placeholder="0" required="required" disabled>
                                             </div>
                                             <div class="form-group col-12 col-md-1">
                                                 <br>
-                                                <input type="text" class="form-control" placeholder="₹200" disabled>
+                                                <input type="text" class="form-control" placeholder="200" disabled>
                                             </div>
                                             <div class="form-group col-12 col-md-1">
                                                 <br>
@@ -358,15 +325,15 @@ function generateInvoice($invoiceNo)
                                             </div> -->
                                             <div class="form-group col-12 col-md-2">
                                                 <br>
-                                                <input type="text" class="form-control" name="total200" id="total200" placeholder="₹0" required="required" disabled>
+                                                <input type="text" class="form-control" name="total200" id="total200" placeholder="0" required="required" disabled>
                                                 <br>
                                             </div>
                                             <hr>
                                             <div class="form-group col-12 col-md-6">
-                                                <label>Total Coupon Value</label>
+                                                <label>Total Coupon Value (in ₹)</label>
                                             </div>
                                             <div class="form-group col-12 col-md-6">
-                                                <input type="text" class="form-control" name="total_claim" id="total_claim" placeholder="₹0" required="required" disabled>
+                                                <input type="text" class="form-control" name="total_claim" id="total_claim" placeholder="0" required="required" disabled>
                                                 <br>
                                             </div>
                                             <hr>
@@ -423,7 +390,7 @@ function generateInvoice($invoiceNo)
             amt100 = 100 * count100;
             var count200 = $("#count200").val();
             amt200 = 200 * count200;
-            total_amt = amt50 +amt100 +amt200;
+            total_amt = amt50 + amt100 + amt200;
             $("#total50").val(amt50);
             $("#total100").val(amt100);
             $("#total200").val(amt200);
