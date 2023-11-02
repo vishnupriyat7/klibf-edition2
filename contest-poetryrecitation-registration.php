@@ -8,8 +8,9 @@
     .card {
         max-width: 100vw;
         /* Allow the card to expand to its container's width */
-        
+
     }
+
     .card ul,
     p {
         list-style: none;
@@ -18,7 +19,8 @@
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         font-size: large;
     }
-    .card li{
+
+    .card li {
         text-align: justify;
         padding-left: 2%;
         padding-right: 4%;
@@ -114,18 +116,29 @@
 
                             <div class="card-body p-4">
                                 <div class="tab-content">
-                                    <!-- <div class="tab-pane active" id="personalDetails" role="tabpanel"> -->
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-success horizontal-shake" data-bs-toggle="modal" data-bs-target="#myModal">Result</button>&emsp;
+                                        <a href="https://www.youtube.com/watch?v=tIrV4JzbRF4&list=PLWnK7DhsuZ9CnwyahQsrezv_GYZbDlvQ8" class="mr-2 btn btn-success" target="_blank"><i class="fa fa-download"></i> Entries</a>
+                                    </div>
 
-                                    <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKw20kdrJw7rUjexrK_vo8HU4-mIN3M1NT7wAXfSbFYrph9w/viewform?embedded=true" width="1000" height="1815" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe> -->
-                                    <div class="d-flex justify-content-end align-items-end">
-
-                                        <!-- <a href="https://forms.gle/s5Qw1ogja3woaai89" class="mr-2 btn btn-success horizontal-shake" target="_blank"><i class="fa fa-download"></i> Click Here to Apply</a> -->
-                                        <a href="https://www.youtube.com/watch?v=7evzxFxrxRU&list=PLWnK7DhsuZ9AaxYR2wbH2869cUtzr0sCk" class="mr-2 btn btn-success horizontal-shake" target="_blank"><i class="fa fa-download"></i> Entries</a>
-
+                                    <div class="modal" id="myModal">
+                                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title"></h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="embed-responsive embed-responsive-16by9">
+                                                        <iframe src="./contestsresult/result-poetry-recitation.pdf" class="embed-responsive-item" width="100%" height="700px"></iframe>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="align-items-center text-center">
-                                    <h3><b>ഓൺലൈൻ മത്സരങ്ങള്‍ - പൊതു മാര്‍ഗ്ഗനിര്‍ദ്ദേശങ്ങള്‍</b></h3>
+                                        <h3><b>ഓൺലൈൻ മത്സരങ്ങള്‍ - പൊതു മാര്‍ഗ്ഗനിര്‍ദ്ദേശങ്ങള്‍</b></h3>
 
                                     </div>
 
