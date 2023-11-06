@@ -203,7 +203,7 @@ function generateInvoice($invoiceNo)
                                     $cpn_bank_name = $cpn_bank_det['bank_name'];
                                     $cpn_bank_branch = $cpn_bank_det['account_no'];
                                     $cpn_acc_no = $cpn_bank_det['bank_branch'];
-                                    $cpn_ifsc = $cpn_bank_det['bank_ifsc'];                                    
+                                    $cpn_ifsc = $cpn_bank_det['bank_ifsc'];
                                 } else {
                                     $errormsg = "
                                     <div class='alert alert-danger alert-dismissible alert-outline fade show'>
@@ -227,119 +227,48 @@ function generateInvoice($invoiceNo)
                                             <div class="form-group col-12"><br>
                                                 <label><b>Coupon Details</b></label>
                                             </div>
-                                            <div class="row">
-                                                <div class="form-group col-12 col-md-2">
+
+                                            
+                                            <?php
+                                            $cpn_denom_query = "SELECT * FROM coupon_denomination";
+                                            $cpn_denom_stmt = $con->prepare($cpn_denom_query);                                            
+                                            $cpn_denom_stmt->execute();
+                                            $cpn_denom_res = $cpn_denom_stmt->get_result();
+                                            $cpn_denoms = $cpn_denom_res->fetch_all();
+                                            ?>
+                                              <div class="form-group col-12 col-md-2">
                                                     <br>
-                                                    *Enter Invoice Number
-                                                </div>
-                                                <div class="form-group col-12 col-md-2">
-                                                    <br>
+                                                    *Enter Invoice Number                                               
                                                     <input type="text" class="form-control" name="cpn_invoice" id="cpn_invoice" placeholder="Invoice Number" required="required">
                                                 </div>
-                                            </div>
-                                            <!--  -->
                                             <div class="form-group col-12 col-md-1">
-                                                <br>
-                                                Coupon
-                                                <input type="text" class="form-control" placeholder="50" disabled>
-                                            </div>
-                                            <div class="form-group col-12 col-md-1">
-                                                <br>
-                                                *Count
-                                                <input type="text" class="form-control" name="count50" id="count50" placeholder="0" required="required" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onchange="claim_amount();">
-                                            </div>
-                                            <div class="form-group col-12 col-md-8">
-                                                <br>
-                                                *Serial Number
-                                                <input type="text" class="form-control" name="cpn_serial_50" id="cpn_serial_50" required="required" placeholder="Serial Numbers">
+                                            <br>
+                                                *Coupon
+                                            <select class="form-control form-group" name="coupon_denom" id="coupon_denom" style="height:35px;">
+                                                <option value="0">Select Coupon</option>
+                                                <?php foreach ($cpn_denoms as $cpn_denom) {?>
+                                                    <option value="<?= $cpn_denom[0] ?>"><?= $cpn_denom[1]; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                                
+                                                <!-- <input type="text" class="form-control" placeholder="50" disabled> -->
                                             </div>
                                             <!-- <div class="form-group col-12 col-md-1">
                                                 <br>
-                                                *Bill No
-                                                <input type="text" class="form-control" name="cpn_bill_50" id="cpn_bill_50" required="required"  placeholder="Bill No.">
+                                                *Count
+                                                <input type="text" class="form-control" name="count50" id="count50" placeholder="0" required="required" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onchange="claim_amount();">
                                             </div> -->
+                                            <div class="form-group col-12 col-md-2">
+                                                <br>
+                                                *Sl.No
+                                                <input type="text" class="form-control" name="cpn_serial_50" id="cpn_serial_50" required="required" placeholder="Serial Numbers">
+                                            </div>                                           
                                             <div class="form-group col-12 col-md-2">
                                                 <br>
                                                 Amount (in ₹ )
                                                 <input type="text" class="form-control" name="total50" id="total50" placeholder="0" required="required" disabled>
                                             </div>
-                                            <div class="form-group col-12 col-md-1">
-                                                <br>
-                                                <input type="text" class="form-control" placeholder="100" disabled>
-                                            </div>
-                                            <div class="form-group col-12 col-md-1">
-                                                <br>
-                                                <input type="text" class="form-control" name="count100" id="count100" placeholder="0" required="required" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onchange="claim_amount();">
-                                            </div>
-                                            <div class="form-group col-12 col-md-8">
-                                                <br>
-                                                <input type="text" class="form-control" name="cpn_serial_100" id="cpn_serial_100" required="required" placeholder="Serial Numbers">
-                                            </div>
-                                            <!-- <div class="form-group col-12 col-md-1">
-                                                <br>
-                                                <input type="text" class="form-control" name="cpn_bill_100" id="cpn_bill_100" required="required"  placeholder="Bill No.">
-                                            </div> -->
-                                            <div class="form-group col-12 col-md-2">
-                                                <br>
-                                                <input type="text" class="form-control" name="total100" id="total100" placeholder="0" required="required" disabled>
-                                            </div>
-                                            <div class="form-group col-12 col-md-1">
-                                                <br>
-                                                <input type="text" class="form-control" placeholder="200" disabled>
-                                            </div>
-                                            <div class="form-group col-12 col-md-1">
-                                                <br>
-                                                <input type="text" class="form-control" name="count200" id="count200" placeholder="0" required="required" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onchange="claim_amount();">
-                                            </div>
-                                            <div class="form-group col-12 col-md-8">
-                                                <br>
-                                                <input type="text" class="form-control" name="cpn_serial_200" id="cpn_serial_200" required="required" placeholder="Serial Numbers">
-                                            </div>
-                                            <!-- <div class="form-group col-12 col-md-1">
-                                                <br>
-                                                <input type="text" class="form-control" name="cpn_bill_200" id="cpn_bill_200" required="required"  placeholder="Bill No.">
-                                            </div> -->
-                                            <div class="form-group col-12 col-md-2">
-                                                <br>
-                                                <input type="text" class="form-control" name="total200" id="total200" placeholder="0" required="required" disabled>
-                                                <br>
-                                            </div>
-                                            <hr>
-                                            <div class="form-group col-12 col-md-6">
-                                                <label>Total Coupon Value (in ₹)</label>
-                                            </div>
-                                            <div class="form-group col-12 col-md-6">
-                                                <input type="text" class="form-control" name="total_claim" id="total_claim" placeholder="0" required="required" disabled>
-                                                <br>
-                                            </div>
-                                            <hr>
-                                            <div class="form-group col-12"><br>
-                                                <label><b>Bank Details</b></label>
-                                            </div>
-                                            <div class="form-group col-12 col-md-6">
-                                                <br>
-                                                Bank Name
-                                                <input type="text" class="form-control" name="cpn_bank_name" placeholder="Bank Name" id="cpn_bank_name" value="<?= $cpn_bank_name; ?>" <?= $edit_bank; ?>>
-                                            </div>
-                                            <div class="form-group col-12 col-md-6">
-                                                <br>
-                                                Branch
-                                                <input type="text" class="form-control" name="cpn_bank_branch" placeholder="Branch" id="cpn_bank_branch" value="<?= $cpn_bank_branch; ?>" <?= $edit_bank; ?>>
-                                            </div>
-                                            <div class="form-group col-12 col-md-6">
-                                                <br>
-                                                Account No
-                                                <input type="text" class="form-control" name="cpn_acc_no" id="cpn_acc_no" placeholder="Account No" value="<?= $cpn_acc_no; ?>" <?= $edit_bank; ?>>
-                                            </div>
-                                            <div class="form-group col-12 col-md-6" id="ifsc-div">
-                                                <br>
-                                                IFSC
-                                                <input type="text" class="form-control" name="cpn_ifsc" id="cpn_ifsc" placeholder="IFSC" value="<?= $cpn_ifsc; ?>" maxlength="11" minlength="11" <?= $edit_bank; ?>>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <br>
-                                                <button type="submit" name="save_cpn" class="btn btn-primary" id="save_cpn">Save</button>
-                                            </div>
+                                            <!--  -->
                                         </div>
                                     </form>
                                 </div>
