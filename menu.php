@@ -14,8 +14,8 @@
       <ul>
         <li><a href="news.php">News</a></li>
         <li><a href="#reflections">Reflections</a></li>
-        <li><a href="gallery.php">Gallery</a></li>
-        <!-- <li><a href="#">Cartoon / കാർട്ടൂൺ</a></li>
+        <!-- <li><a href="#">Story Telling / ഒരു കഥ പറയാം</a></li>
+        <li><a href="#">Cartoon / കാർട്ടൂൺ</a></li>
         <li><a href="#">Quiz / ക്വിസ്</a></li> -->
       </ul>
     </li>

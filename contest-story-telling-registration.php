@@ -114,7 +114,7 @@
                                 <div class="tab-content">
                                 <div class="d-flex justify-content-end">
                                         <button class="btn btn-success horizontal-shake" data-bs-toggle="modal" data-bs-target="#myModal">Result</button>&emsp;
-                                        <a href="https://www.youtube.com/watch?v=tIrV4JzbRF4&list=PLWnK7DhsuZ9CnwyahQsrezv_GYZbDlvQ8" class="mr-2 btn btn-success" target="_blank"><i class="fa fa-download"></i> Entries</a>
+                                        <a href="https://www.youtube.com/watch?v=Lg-BCS3p3sA&list=PLWnK7DhsuZ9CJlcJaV1VCbIRuy9tYURIc" class="mr-2 btn btn-success" target="_blank"><i class="fa fa-download"></i> Entries</a>
                                     </div>
 
                                     <div class="modal" id="myModal">

@@ -24,6 +24,8 @@ if ($user['user_type'] == 'S') {
     include "cultural_sidebar.php";
 } elseif ($user['user_type'] == 'RC') {
     include "reception_sidebar.php";
+} elseif ($user['user_type'] == 'SD') {
+    include "sdf_sidebar.php";
 }
 ?>
 
@@ -39,22 +41,24 @@ if ($user['user_type'] == 'S') {
 
             <!-- start page title -->
             <?php if ($user['user_type'] == 'S') {
-                include "dashboard.php";
-            } elseif ($user['user_type'] == 'P') {
-                include "publisher_dashboard.php";
-            } elseif ($user['user_type'] == 'PC') {
-                include "pgmcmtee_dashboard.php";
-            } elseif ($user['user_type'] == 'FC') {
-                include "finance_dashboard.php";
-            } elseif ($user['user_type'] == 'CC') {
-                include "cultural_dashboard.php";
-            } elseif ($user['user_type'] == 'RC') {
-                include "receptioncmtee_dashboard.php";
-            } ?>
+    include "dashboard.php";
+} elseif ($user['user_type'] == 'P') {
+    include "publisher_dashboard.php";
+} elseif ($user['user_type'] == 'PC') {
+    include "pgmcmtee_dashboard.php";
+} elseif ($user['user_type'] == 'FC') {
+    include "finance_dashboard.php";
+} elseif ($user['user_type'] == 'CC') {
+    include "cultural_dashboard.php";
+} elseif ($user['user_type'] == 'RC') {
+    include "receptioncmtee_dashboard.php";
+} elseif ($user['user_type'] == 'SD') {
+    include "sdf_dashboard.php";
+}?>
 
         </div>
     </div>
     <!-- container-fluid -->
 </div>
 <!-- End Page-content -->
-<?php include "footer.php"; ?>
+<?php include "footer.php";?>

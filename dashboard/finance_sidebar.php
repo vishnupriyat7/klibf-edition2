@@ -48,10 +48,9 @@ $username = $_SESSION['username'];
                 <li class="nav-item">
                     <a href="finance_stall_payment_report.php" class="nav-link" data-key="t-analytics"> <i class="ri-file-list-3-line"></i> <span data-key="t-dashboards"> Stall Payment Report </span></a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="finance_coupon_details_report.php" class="nav-link" data-key="t-analytics"> <i class="ri-file-list-3-line"></i> <span data-key="t-dashboards"> Coupon Details Report </span></a>
-                </li>
-         
+                </li> -->
 
               
 

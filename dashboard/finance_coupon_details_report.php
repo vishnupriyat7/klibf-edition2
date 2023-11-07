@@ -1,9 +1,10 @@
 <?php include "header.php"; ?>
-<?php if ($user['user_type'] == 'FC') {
-    include "finance_sidebar.php";
-} else {
-    include "pgmcmtee_sidebar.php";
-}
+<?php if ($user['user_type'] == 'SD') {
+    include "sdf_sidebar.php";
+} 
+// else {
+//     include "pgmcmtee_sidebar.php";
+// }
 ?>
 
 
@@ -34,7 +35,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card" style="width: 250%;">
+                    <div class="card">
                         <div class="card-header">
                             <h5 class="card-title mb-0">Coupon Details Report</h5>
                         </div>
@@ -42,137 +43,126 @@
                             <!-- <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%"> -->
                             <button onclick="exportTableToExcel('example', 'stallpaymentreport-data')" class="btn btn-primary">Export Table Data To Excel File</button>
                             <table id="example" class="table table-bordered dt-responsive nowrap table-striped" style="font-style:normal; font-size: 12px;">
-                                <thead>
+                                <thead class="text-center justify-content-center">
                                     <tr>
-                                        <th data-ordering="false">Sl.No</th>
-                                        <th data-ordering="false">Publisher Name</th>
-                                        <th data-ordering="false">200 Coupon</th>
-                                        <th data-ordering="false">100 Coupon</th>
-                                        <th data-ordering="false">50 Coupon</th>
-                                        <th data-ordering="false">Coupon Serial Number</th>
-                                        <th data-ordering="false">Total No.of Coupon</th>
-                                        <th data-ordering="false">Total Amount</th>
-                                        <th data-ordering="false">Bank Name</th>
-                                        <th data-ordering="false">IFSC</th>
+                                        <th data-ordering="false" rowspan="2">Sl.No</th>
+                                        <th data-ordering="false" rowspan="2">Publisher Name</th>
+                                        <th data-ordering="false" rowspan="2">Invoice No.</th>
+                                        <th data-ordering="false" colspan="3">50 Coupon</th>
+                                        <th data-ordering="false" colspan="3">100 Coupon</th>
+                                        <th data-ordering="false" colspan="3">200 Coupon</th>
+                                        <th data-ordering="false" rowspan="2">Total No.of Coupon</th>
+                                        <th data-ordering="false" rowspan="2">Total Amount</th>
+                                        <th data-ordering="false" colspan="4">Bank</th>
 
+                                    </tr>
+                                    <tr>
+                                        <th data-ordering="false">Serial.No </th>
+                                        <th data-ordering="false">Count</th>
+                                        <th data-ordering="false">Amount</th>
+                                        <th data-ordering="false">Serial.No </th>
+                                        <th data-ordering="false">Count</th>
+                                        <th data-ordering="false">Amount</th>
+                                        <th data-ordering="false">Seril.No </th>
+                                        <th data-ordering="false">Count</th>
+                                        <th data-ordering="false">Amount</th>
+                                        <th data-ordering="false">Name</th>
+                                        <th data-ordering="false">Account No</th>
+                                        <th data-ordering="false">Branch </th>
+                                        <th data-ordering="false">IFSC</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $query = "SELECT up.*, sb.*, ch.user_id, ch.bank_name, ch.paid_amt, ch.trnctn_no, ch.trnctn_type, ch.trnctn_date, ch.paye_name, ch.ifsc, ch.status, ch.updated_date, ch.invoice_no, ch.id as chid FROM users_profile up JOIN stall_booking sb ON up.user_id = sb.user_id JOIN challan ch ON up.user_id = ch.user_id ORDER BY up.id DESC";
-                                    $coupon_detls = mysqli_query($con, $query);
+                                    $userId = $user['id'];
+                                    $querycoupon = "SELECT up.fascia, cp.*, cb.*  FROM coupon_publisher cp JOIN  coupon_bankdtls cb ON cp.users_id = cb.users_id JOIN users_profile up ON cp.users_id = up.user_id ORDER BY cp.id DESC";
+
+                                    // $querycoupon = "SELECT cp.*, cb.*  FROM coupon_publisher cp JOIN  coupon_bankdtls cb ON cp.users_id = cb.users_id WHERE cp.users_id = $userId ORDER BY cp.id DESC";
+                                    $couponlist = mysqli_query($con, $querycoupon);
                                     $counter = 0;
-                                    while ($coupon = mysqli_fetch_array($coupon_detls)) {
-                                        $id = "$coupon[id]";
-                                        // var_dump($id);
-                                        $amt3x3 = 10000;
-                                        $amt3x2 = 7500;
-                                        $pub_user_id = "$coupon[user_id]";
-                                        $org_name = "$coupon[org_name]";
-                                        $gst_no = "$coupon[gst_no]";
-                                        $cntct_prsn_name = "$coupon[cntct_prsn_name]";
-                                        $cntct_prsn_addr = "$coupon[cntct_prsn_addr]";
-                                        $cntct_prsn_mobile = "$coupon[cntct_prsn_mobile]";
-                                        $cntct_prsn_email = "$coupon[cntct_prsn_email]";
-                                        $cntct_prsn_watsapp = "$coupon[cntct_prsn_watsapp]";
-                                        $alloted_stall3x3 = "$coupon[confirm_3X3]";
-                                        $alloted_stall3x2 = "$coupon[confirm_3X2]";
-                                        $rate = ($amt3x3 * $alloted_stall3x3) + ($amt3x2 *  $alloted_stall3x2);
-                                        $gst = ($amt3x3 * $alloted_stall3x3 * 18 / 100) + ($amt3x2 *  $alloted_stall3x2 * 18 / 100);
-                                        $amounttobe_paid = $gst + $rate;
-                                        $paid_amount = "$coupon[paid_amt]";
-                                        $payee_name = "$coupon[paye_name]";
-                                        $bank_name = "$coupon[bank_name]";
-                                        $ifsc = "$coupon[ifsc]";
-                                        $transaction_natr = "$coupon[trnctn_type]";
-                                        if ($transaction_natr == 'O') {
-                                            $transaction_type = "Online Transaction";
-                                        } else {
-                                            $transaction_type = "Offline Transaction";
-                                        }
-                                        $transaction_number = "$coupon[trnctn_no]";
-                                        $transaction_date = "$coupon[trnctn_date]";
-                                        $status = $coupon["status"];
-                                        $chellan_id = $coupon["chid"];
+                                    while ($coupon = mysqli_fetch_array($couponlist)) {
+                                        $id = $coupon['id'];
+                                        $pub_name = $coupon['fascia'];
+                                        // var_dump($pub_name);
+                                        $couponinvoice = $coupon['cpn_bill_no'];
+                                        $coupon50ct = $coupon['cpn_50_count'];
+                                        $coupon50slno = $coupon['cpn_50_srlno'];
+                                        $coupon50amnt = $coupon50ct * 50;
+                                        $coupon100ct = $coupon['cpn_100_count'];
+                                        $coupon100slno = $coupon['cpn_100_srlno'];
+                                        $coupon100amnt = $coupon100ct * 50;
+                                        $coupon200ct = $coupon['cpn_200_count'];
+                                        $coupon200slno = $coupon['cpn_200_srlno'];
+                                        $coupon200amnt = $coupon200ct * 50;
+                                        $coupontotalamnt = $coupon['total_amount'];
+                                        $coupontotal =  $coupon50ct +  $coupon100ct +  $coupon200ct;
+                                        $bankname = $coupon['bank_name'];
+                                        $account_no = $coupon['account_no'];
+                                        $bank_ifsc = $coupon['bank_ifsc'];
+                                        $bank_branch = $coupon['bank_branch'];
+
                                     ?>
                                         <tr>
                                             <td>
                                                 <?= ++$counter; ?>
                                             </td>
+                                            <td>
+                                                <?= $pub_name; ?>
+                                            </td>
+                                            <td>
+                                                <?= $couponinvoice; ?>
+                                            </td>
+                                            <td>
+                                                <?= $coupon50slno; ?>
+                                            </td>
+                                            <td>
+                                                <?= $coupon50ct; ?>
+                                            </td>
+                                            <td>
+                                                <?= $coupon50amnt; ?>
+                                            </td>
 
                                             <td>
-                                                <?= $org_name; ?>
+                                                <?= $coupon100slno; ?>
+                                            </td>
+
+                                            <td>
+                                                <?= $coupon100ct; ?>
                                             </td>
                                             <td>
-                                                <?= $gst_no; ?>
+                                                <?= $coupon100amnt; ?>
                                             </td>
                                             <td>
-                                                <?= $cntct_prsn_name; ?>
+                                                <?= $coupon200slno; ?>
                                             </td>
                                             <td>
-                                                <?= $cntct_prsn_mobile; ?>
+                                                <?= $coupon200ct; ?>
                                             </td>
                                             <td>
-                                                <?= $cntct_prsn_email; ?>
+                                                <?= $coupon200amnt; ?>
                                             </td>
                                             <td>
-                                                <?= $alloted_stall3x3; ?>
+                                                <?= $coupontotal; ?>
+                                            </td>
+
+                                            <td>
+                                                <?= $coupontotalamnt; ?>
                                             </td>
                                             <td>
-                                                <?= $alloted_stall3x2; ?>
+                                                <?= $bankname; ?>
                                             </td>
                                             <td>
-                                                <?= $rate; ?>
+                                                <?= $account_no; ?>
+                                            </td>
+                                            
+                                            <td>
+                                                <?= $bank_branch; ?>
                                             </td>
                                             <td>
-                                                <?= $gst; ?>
+                                                <?= $bank_ifsc; ?>
                                             </td>
-                                            <td>
-                                                <?= $amounttobe_paid; ?>
-                                            </td>
-                                            <td>
-                                                <?= $paid_amount; ?>
-                                            </td>
-                                            <td>
-                                                <?= $payee_name; ?>
-                                            </td>
-                                            <td>
-                                                <?= $bank_name; ?>
-                                            </td>
-                                            <td>
-                                                <?= $ifsc; ?>
-                                            </td>
-                                            <td>
-                                                <?= $transaction_type; ?>
-                                            </td>
-                                            <td>
-                                                <?= $transaction_number; ?>
-                                            </td>
-                                            <td>
-                                                <?= $transaction_date; ?>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal<?= $id; ?>">View</button>
-                                                <div class="modal" id="myModal<?= $id; ?>">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title"><?= $org_name; ?></h4>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <?php
-                                                                $imgQuery = "select challan_img from challan where id = $chellan_id";
-                                                                $imgStmt = mysqli_query($con, $imgQuery);
-                                                                $challan_image = $imgStmt->fetch_assoc();
-                                                                $img_chellan = base64_encode($challan_image["challan_img"]);
-                                                                ?>
-                                                                <img src="data:image/jpg;charset=utf8;base64,<?= $img_chellan; ?>" height="auto" width="auto" style="max-width: 100%;" class="hover-image">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
+                                           
+
                                         </tr>
                                     <?php  }  ?>
                                 </tbody>

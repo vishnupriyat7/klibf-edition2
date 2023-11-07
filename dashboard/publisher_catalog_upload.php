@@ -40,17 +40,14 @@ $user_id = $user['id'];
                     $file_ext = strrchr($_FILES['catalogue']['name'], '.');
                     //   grabs file extension. my code checked if the file was a pdf a different way and neither seems to work.
                     $destination = $randomd . $file_ext; //new filename
-                    // var_dump($file_ext);die;
                     if ($file_ext == '.pdf') {
                         $fileupload = move_uploaded_file($_FILES['catalogue']['tmp_name'], "$idir" . $destination);
                         $pdf = $domain . "/catalogue/" . $destination;
-                        // var_dump($pdf);
-                        // var_dump($fileupload);die;
                         if ($fileupload) {
                             $query = "INSERT INTO publisher_catalogue (user_id, filename, updated_date) VALUES ('$user_id', '$destination', '$date')";
                             $result = mysqli_query($con, $query);
                         } else {
-                            $msg = 'File type not supported fgjgj. Kindly upload a PDF file.';
+                            $msg = 'File type not supported. Kindly upload a PDF file.';
                             $status = "NOTOK";
                         }
                     } else {
@@ -106,7 +103,7 @@ $user_id = $user['id'];
                                                 </div>
                                                 <div class="form-group col-12 col-md-6">
                                                     </br>
-                                                    *Upload PDF File fghdfj
+                                                    *Upload PDF File
                                                     </br>
                                                     <input type="file" class="form-control" name="catalogue" id="catalogue" placeholder="*Upload PDF File">
                                                 </div>

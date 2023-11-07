@@ -51,7 +51,6 @@ $user_profile_result = $user_profile_stmt->get_result();
 // $users = $users_result->fetch_assoc();
 $user_profile_count = mysqli_num_rows($user_profile_result);
 
-
 // $testqry_stall = "select up.user_id from users_profile up join stall_booking sb where sb.user_id = up.user_id and up.status = 'E'";
 // $bookstall = mysqli_query($con, $testqry_stall);
 // $users_stall = mysqli_fetch_all($bookstall);
@@ -85,7 +84,7 @@ $spclevent_result_count = $spclevent_result->fetch_all();
                 <div class="col-12">
                     <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                         <div class="flex-grow-1">
-                            <h4 class="fs-16 mb-1">Hii, <?php print $user['name']; ?>!</h4>
+                            <h4 class="fs-16 mb-1">Hii, <?php print $user['name'];?>!</h4>
                             <p class="text-muted mb-0">Welcome back to your dashboard.</p>
                         </div>
                         <div class="mt-3 mt-lg-0">
@@ -111,7 +110,7 @@ $spclevent_result_count = $spclevent_result->fetch_all();
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total Number of Registration</p>
-                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $users_count; ?>"></span></h4>
+                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $users_count;?>"></span></h4>
                                 </div>
 
                             </div>
@@ -130,7 +129,7 @@ $spclevent_result_count = $spclevent_result->fetch_all();
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total Number of Profiles Created</p>
-                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $user_profile_count; ?>"></span></h4>
+                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $user_profile_count;?>"></span></h4>
                                 </div>
                             </div>
                         </div><!-- end card body -->
@@ -148,7 +147,7 @@ $spclevent_result_count = $spclevent_result->fetch_all();
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Stalls Booked Alltogether</p>
-                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $stall_count_numrows; ?>"></span></h4>
+                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $stall_count_numrows;?>"></span></h4>
                                 </div>
                             </div>
                         </div><!-- end card body -->
@@ -166,7 +165,7 @@ $spclevent_result_count = $spclevent_result->fetch_all();
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> 3X3 Stalls Booked</p>
-                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $stall3x3_count_numrows; ?>"></span></h4>
+                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $stall3x3_count_numrows;?>"></span></h4>
                                 </div>
                             </div>
                         </div><!-- end card body -->
@@ -184,7 +183,7 @@ $spclevent_result_count = $spclevent_result->fetch_all();
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> 3X2 Stalls Booked</p>
-                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $stall3x2_count_numrows; ?>"></span></h4>
+                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $stall3x2_count_numrows;?>"></span></h4>
                                 </div>
                             </div>
                         </div><!-- end card body -->
@@ -202,7 +201,7 @@ $spclevent_result_count = $spclevent_result->fetch_all();
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> 3X3 Stalls Alloted</p>
-                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $allot_stall3x3_count_numrows; ?>"></span></h4>
+                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $allot_stall3x3_count_numrows;?>"></span></h4>
                                 </div>
                             </div>
                         </div><!-- end card body -->
@@ -220,7 +219,7 @@ $spclevent_result_count = $spclevent_result->fetch_all();
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> 3X2 Stalls Alloted</p>
-                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $allot_stall3x2_count_numrows; ?>"></span></h4>
+                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $allot_stall3x2_count_numrows;?>"></span></h4>
                                 </div>
                             </div>
                         </div><!-- end card body -->
@@ -238,7 +237,7 @@ $spclevent_result_count = $spclevent_result->fetch_all();
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total Book Release Proposed</p>
-                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $bookrls_result_count[0][0]; ?>"></span></h4>
+                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $bookrls_result_count[0][0];?>"></span></h4>
                                 </div>
                             </div>
                         </div><!-- end card body -->
@@ -256,7 +255,7 @@ $spclevent_result_count = $spclevent_result->fetch_all();
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total Book Discussion Proposed</p>
-                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $bookdscn_result_count[0][0]; ?>"></span></h4>
+                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $bookdscn_result_count[0][0];?>"></span></h4>
                                 </div>
                             </div>
                         </div><!-- end card body -->
@@ -274,7 +273,7 @@ $spclevent_result_count = $spclevent_result->fetch_all();
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total Special Events Proposed</p>
-                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $spclevent_result_count[0][0]; ?>"></span></h4>
+                                    <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $spclevent_result_count[0][0];?>"></span></h4>
                                 </div>
                             </div>
                         </div><!-- end card body -->

@@ -74,6 +74,8 @@
     font-size: 30px;
   }
 
+
+
   .modal {
     justify-content: center;
     align-items: center;
@@ -171,6 +173,8 @@
                         <img src="data:image/jpg;charset=utf8;base64,<?= $logo; ?>" height="80vh" width="95vw">
                       </div>
                     </td>
+
+
                     <td>
                       <?= $org_name; ?>
                     </td>
