@@ -45,12 +45,15 @@ $username = $_SESSION['username'];
                 <li class="nav-item">
                     <a href="index.php" class="nav-link" data-key="t-analytics"> <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards"> Dashboard </span></a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a href="finance_stall_payment_report.php" class="nav-link" data-key="t-analytics"> <i class="ri-file-list-3-line"></i> <span data-key="t-dashboards"> Stall Payment Report </span></a>
-                </li> -->
                 <li class="nav-item">
-                    <a href="finance_coupon_details_report.php" class="nav-link" data-key="t-analytics"> <i class="ri-file-list-3-line"></i> <span data-key="t-dashboards"> Coupon Details Report </span></a>
-                </li>             
+                    <a href="sdf_bankdetails.php" class="nav-link" data-key="t-analytics"> <i class="ri-file-list-3-line"></i> <span data-key="t-dashboards"> Bank Details </span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="sdf_coupon_details_report.php" class="nav-link" data-key="t-analytics"> <i class="ri-file-list-3-line"></i> <span data-key="t-dashboards"> Coupon Details Report </span></a>
+                </li>   
+                <li class="nav-item">
+                    <a href="sdf_publshrws_report.php" class="nav-link" data-key="t-analytics"> <i class="ri-file-list-3-line"></i> <span data-key="t-dashboards"> Publisherwise Coupon Details Report </span></a>
+                </li>          
 
             </ul>
         </div>

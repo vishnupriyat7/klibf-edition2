@@ -1,7 +1,7 @@
-<?php include "header.php"; ?>
+<?php include "header.php";?>
 <?php if ($user['user_type'] == 'SD') {
     include "sdf_sidebar.php";
-} 
+}
 // else {
 //     include "pgmcmtee_sidebar.php";
 // }
@@ -15,7 +15,6 @@
 <div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
-
             <!-- start page title -->
             <div class="row">
                 <div class="col-12">
@@ -32,12 +31,11 @@
                 </div>
             </div>
             <!-- end page title -->
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Coupon Details Report</h5>
+                            <h5 class="card-title mb-0">Bank Details</h5>
                         </div>
                         <div class="card-body overflow-auto">
                             <!-- <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%"> -->
@@ -48,24 +46,9 @@
                                         <th data-ordering="false" rowspan="2">Sl.No</th>
                                         <th data-ordering="false" rowspan="2">Publisher Name</th>
                                         <th data-ordering="false" rowspan="2">Invoice No.</th>
-                                        <th data-ordering="false" colspan="3">50 Coupon</th>
-                                        <th data-ordering="false" colspan="3">100 Coupon</th>
-                                        <th data-ordering="false" colspan="3">200 Coupon</th>
-                                        <th data-ordering="false" rowspan="2">Total No.of Coupon</th>
-                                        <th data-ordering="false" rowspan="2">Total Amount</th>
                                         <th data-ordering="false" colspan="4">Bank</th>
-
                                     </tr>
                                     <tr>
-                                        <th data-ordering="false">Serial.No </th>
-                                        <th data-ordering="false">Count</th>
-                                        <th data-ordering="false">Amount</th>
-                                        <th data-ordering="false">Serial.No </th>
-                                        <th data-ordering="false">Count</th>
-                                        <th data-ordering="false">Amount</th>
-                                        <th data-ordering="false">Seril.No </th>
-                                        <th data-ordering="false">Count</th>
-                                        <th data-ordering="false">Amount</th>
                                         <th data-ordering="false">Name</th>
                                         <th data-ordering="false">Account No</th>
                                         <th data-ordering="false">Branch </th>
@@ -74,97 +57,96 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $userId = $user['id'];
-                                    $querycoupon = "SELECT up.fascia, cp.*, cb.*  FROM coupon_publisher cp JOIN  coupon_bankdtls cb ON cp.users_id = cb.users_id JOIN users_profile up ON cp.users_id = up.user_id ORDER BY cp.id DESC";
+$userId = $user['id'];
+$querycoupon = "SELECT up.fascia, cp.*, cb.*  FROM coupon_publisher cp JOIN users_profile up ON cp.users_id = up.user_id ORDER BY cp.id DESC";
 
-                                    // $querycoupon = "SELECT cp.*, cb.*  FROM coupon_publisher cp JOIN  coupon_bankdtls cb ON cp.users_id = cb.users_id WHERE cp.users_id = $userId ORDER BY cp.id DESC";
-                                    $couponlist = mysqli_query($con, $querycoupon);
-                                    $counter = 0;
-                                    while ($coupon = mysqli_fetch_array($couponlist)) {
-                                        $id = $coupon['id'];
-                                        $pub_name = $coupon['fascia'];
-                                        // var_dump($pub_name);
-                                        $couponinvoice = $coupon['cpn_bill_no'];
-                                        $coupon50ct = $coupon['cpn_50_count'];
-                                        $coupon50slno = $coupon['cpn_50_srlno'];
-                                        $coupon50amnt = $coupon50ct * 50;
-                                        $coupon100ct = $coupon['cpn_100_count'];
-                                        $coupon100slno = $coupon['cpn_100_srlno'];
-                                        $coupon100amnt = $coupon100ct * 50;
-                                        $coupon200ct = $coupon['cpn_200_count'];
-                                        $coupon200slno = $coupon['cpn_200_srlno'];
-                                        $coupon200amnt = $coupon200ct * 50;
-                                        $coupontotalamnt = $coupon['total_amount'];
-                                        $coupontotal =  $coupon50ct +  $coupon100ct +  $coupon200ct;
-                                        $bankname = $coupon['bank_name'];
-                                        $account_no = $coupon['account_no'];
-                                        $bank_ifsc = $coupon['bank_ifsc'];
-                                        $bank_branch = $coupon['bank_branch'];
+// $querycoupon = "SELECT cp.*, cb.*  FROM coupon_publisher cp JOIN  coupon_bankdtls cb ON cp.users_id = cb.users_id WHERE cp.users_id = $userId ORDER BY cp.id DESC";
+$couponlist = mysqli_query($con, $querycoupon);
+$counter = 0;
+while ($coupon = mysqli_fetch_array($couponlist)) {
+    $id = $coupon['id'];
+    $pub_name = $coupon['fascia'];
+    // var_dump($pub_name);
+    $couponinvoice = $coupon['cpn_bill_no'];
+    $coupon50ct = $coupon['cpn_50_count'];
+    $coupon50slno = $coupon['cpn_50_srlno'];
+    $coupon50amnt = $coupon50ct * 50;
+    $coupon100ct = $coupon['cpn_100_count'];
+    $coupon100slno = $coupon['cpn_100_srlno'];
+    $coupon100amnt = $coupon100ct * 50;
+    $coupon200ct = $coupon['cpn_200_count'];
+    $coupon200slno = $coupon['cpn_200_srlno'];
+    $coupon200amnt = $coupon200ct * 50;
+    $coupontotalamnt = $coupon['total_amount'];
+    $coupontotal = $coupon50ct + $coupon100ct + $coupon200ct;
+    // $bankname = $coupon['bank_name'];
+    // $account_no = $coupon['account_no'];
+    // $bank_ifsc = $coupon['bank_ifsc'];
+    // $bank_branch = $coupon['bank_branch'];
 
-                                    ?>
+    ?>
                                         <tr>
                                             <td>
-                                                <?= ++$counter; ?>
+                                                <?=++$counter;?>
                                             </td>
                                             <td>
-                                                <?= $pub_name; ?>
+                                                <?=$pub_name;?>
                                             </td>
                                             <td>
-                                                <?= $couponinvoice; ?>
+                                                <?=$couponinvoice;?>
                                             </td>
                                             <td>
-                                                <?= $coupon50slno; ?>
+                                                <?=$coupon50slno;?>
                                             </td>
                                             <td>
-                                                <?= $coupon50ct; ?>
+                                                <?=$coupon50ct;?>
                                             </td>
                                             <td>
-                                                <?= $coupon50amnt; ?>
+                                                <?=$coupon50amnt;?>
                                             </td>
 
                                             <td>
-                                                <?= $coupon100slno; ?>
+                                                <?=$coupon100slno;?>
                                             </td>
 
                                             <td>
-                                                <?= $coupon100ct; ?>
+                                                <?=$coupon100ct;?>
                                             </td>
                                             <td>
-                                                <?= $coupon100amnt; ?>
+                                                <?=$coupon100amnt;?>
                                             </td>
                                             <td>
-                                                <?= $coupon200slno; ?>
+                                                <?=$coupon200slno;?>
                                             </td>
                                             <td>
-                                                <?= $coupon200ct; ?>
+                                                <?=$coupon200ct;?>
                                             </td>
                                             <td>
-                                                <?= $coupon200amnt; ?>
+                                                <?=$coupon200amnt;?>
                                             </td>
                                             <td>
-                                                <?= $coupontotal; ?>
+                                                <?=$coupontotal;?>
                                             </td>
 
                                             <td>
-                                                <?= $coupontotalamnt; ?>
+                                                <?=$coupontotalamnt;?>
+                                            </td>
+                                            <!-- <td>
+                                                <?=$bankname;?>
                                             </td>
                                             <td>
-                                                <?= $bankname; ?>
+                                                <?=$account_no;?>
+                                            </td>
+
+                                            <td>
+                                                <?=$bank_branch;?>
                                             </td>
                                             <td>
-                                                <?= $account_no; ?>
-                                            </td>
-                                            
-                                            <td>
-                                                <?= $bank_branch; ?>
-                                            </td>
-                                            <td>
-                                                <?= $bank_ifsc; ?>
-                                            </td>
-                                           
+                                                <?=$bank_ifsc;?>
+                                            </td> -->
 
                                         </tr>
-                                    <?php  }  ?>
+                                    <?php }?>
                                 </tbody>
                             </table>
                         </div>
@@ -179,4 +161,4 @@
 </div>
 
 <!-- End Page-content -->
-<?php include "footer.php"; ?>
+<?php include "footer.php";?>
