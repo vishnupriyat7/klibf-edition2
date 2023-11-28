@@ -115,7 +115,7 @@ function convertNumberToWordsForIndia($number)
                 <div class="col-lg-12">
                     <div class="card" style="width:100%">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Coupon Details Report</h5>
+                            <h5 class="card-title mb-0">Summary</h5>
                         </div>
                         <div class="card-body overflow-auto">
                             <!-- <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%"> -->
@@ -125,26 +125,25 @@ function convertNumberToWordsForIndia($number)
                                     <tr>
                                         <th data-ordering="false" rowspan="2">Sl.No</th>
                                         <th data-ordering="false" rowspan="2">Publisher Name</th>
-                                        <th data-ordering="false" rowspan="2">Contact Number</th>
-                                        <th data-ordering="false" colspan="2">50 Coupon</th>
+                                        <!-- <th data-ordering="false" rowspan="2">Contact Number</th> -->
+                                        <!-- <th data-ordering="false" colspan="2">50 Coupon</th>
                                         <th data-ordering="false" colspan="2">100 Coupon</th>
-                                        <th data-ordering="false" colspan="2">200 Coupon</th>
-                                        <th data-ordering="false" rowspan="2">Sub Total</th>
+                                        <th data-ordering="false" colspan="2">200 Coupon</th> -->
                                         <th data-ordering="false" colspan="4">Bank</th>
-                                        <th data-ordering="false" rowspan="2">Action</th>
-
-
+                                        <th data-ordering="false" rowspan="2">Sub Total</th>
+                                       
+                                        <!-- <th data-ordering="false" rowspan="2">Action</th> -->
                                     </tr>
                                     <tr>
                                         <!-- <th data-ordering="false">Serial.No </th> -->
-                                        <th data-ordering="false">Count</th>
-                                        <th data-ordering="false">Amount</th>
+                                        <!-- <th data-ordering="false">Count</th>
+                                        <th data-ordering="false">Amount</th> -->
                                         <!-- <th data-ordering="false">Serial.No </th> -->
-                                        <th data-ordering="false">Count</th>
-                                        <th data-ordering="false">Amount</th>
+                                        <!-- <th data-ordering="false">Count</th>
+                                        <th data-ordering="false">Amount</th> -->
                                         <!-- <th data-ordering="false">Seril.No </th> -->
-                                        <th data-ordering="false">Count</th>
-                                        <th data-ordering="false">Amount</th>
+                                        <!-- <th data-ordering="false">Count</th>
+                                        <th data-ordering="false">Amount</th> -->
                                         <th data-ordering="false">Name</th>
                                         <th data-ordering="false">Account No.</th>
                                         <th data-ordering="false">Branch </th>
@@ -193,11 +192,11 @@ function convertNumberToWordsForIndia($number)
                                             <td>
                                                 <?= $pub_name; ?>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <?= $cntct_no; ?>
-                                            </td>
+                                            </td> -->
 
-                                            <td>
+                                            <!-- <td>
                                                 <?= $coupon50ct; ?>
                                             </td>
                                             <td>
@@ -215,11 +214,9 @@ function convertNumberToWordsForIndia($number)
                                             </td>
                                             <td>
                                                 <?= $coupon200amnt; ?>
-                                            </td>
+                                            </td> -->
 
-                                            <td>
-                                                <?= $coupontotalamnt; ?>
-                                            </td>
+                                            
                                             <td>
                                                 <?= $bankname; ?>
                                             </td>
@@ -234,8 +231,11 @@ function convertNumberToWordsForIndia($number)
                                                 <?= $bank_ifsc; ?>
                                             </td>
                                             <td>
-                                                <button name="print" class="btn btn-primary" id="print-slip" onclick="printSlip()">Print Payment Slip</button>
+                                                <?= $coupontotalamnt; ?>
                                             </td>
+                                            <!-- <td>
+                                                <button name="print" class="btn btn-primary" id="print-slip" onclick="printSlip()">Print Payment Slip</button>
+                                            </td> -->
                                         </tr>
                                     <?php } ?>
                                 </tbody>

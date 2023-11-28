@@ -60,7 +60,7 @@ $queue_inst_result_count = $queue_inst_count_result->fetch_all();
                                     </span>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total Number of People</p>
+                                    <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total Count Of Coupon 50</p>
                                     <!-- <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $queue_result_count[0][0]; ?>"></span></h4> -->
                                 </div>
 
@@ -79,7 +79,24 @@ $queue_inst_result_count = $queue_inst_count_result->fetch_all();
                                     </span>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Institutions Booked Alltogether</p>
+                                    <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total Count Of Coupon 100</p>
+                                    <!-- <h4 class=" mb-0"><span class="counter-value" data-target="<?php print count($queue_inst_result_count); ?>"></span></h4> -->
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-light text-primary rounded-circle fs-3">
+                                        <i class="ri-git-merge-fill"></i>
+                                    </span>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total Count Of Coupon 200</p>
                                     <!-- <h4 class=" mb-0"><span class="counter-value" data-target="<?php print count($queue_inst_result_count); ?>"></span></h4> -->
                                 </div>
                             </div>

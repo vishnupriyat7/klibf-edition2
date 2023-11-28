@@ -45,15 +45,16 @@ $username = $_SESSION['username'];
                 <li class="nav-item">
                     <a href="index.php" class="nav-link" data-key="t-analytics"> <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards"> Dashboard </span></a>
                 </li>
-                <li class="nav-item">
-                    <a href="sdf_bankdetails.php" class="nav-link" data-key="t-analytics"> <i class="ri-file-list-3-line"></i> <span data-key="t-dashboards"> Bank Details </span></a>
-                </li>
-                <li class="nav-item">
+               
+                <!-- <li class="nav-item">
                     <a href="sdf_coupon_details_report.php" class="nav-link" data-key="t-analytics"> <i class="ri-file-list-3-line"></i> <span data-key="t-dashboards"> Coupon Details Report </span></a>
-                </li>   
+                </li>    -->
                 <li class="nav-item">
                     <a href="sdf_publshrws_report.php" class="nav-link" data-key="t-analytics"> <i class="ri-file-list-3-line"></i> <span data-key="t-dashboards"> Publisherwise Coupon Details Report </span></a>
-                </li>          
+                </li>   
+                <li class="nav-item">
+                    <a href="sdf_bankdetails_summary.php" class="nav-link" data-key="t-analytics"> <i class="ri-file-list-3-line"></i> <span data-key="t-dashboards"> Summary </span></a>
+                </li>       
 
             </ul>
         </div>
