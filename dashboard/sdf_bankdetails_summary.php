@@ -125,28 +125,15 @@ function convertNumberToWordsForIndia($number)
                                     <tr>
                                         <th data-ordering="false" rowspan="2">Sl.No</th>
                                         <th data-ordering="false" rowspan="2">Publisher Name</th>
-                                        <!-- <th data-ordering="false" rowspan="2">Contact Number</th> -->
-                                        <!-- <th data-ordering="false" colspan="2">50 Coupon</th>
-                                        <th data-ordering="false" colspan="2">100 Coupon</th>
-                                        <th data-ordering="false" colspan="2">200 Coupon</th> -->
-                                        <th data-ordering="false" colspan="4">Bank</th>
+                                        <th data-ordering="false" colspan="5">Bank</th>
                                         <th data-ordering="false" rowspan="2">Sub Total</th>
-                                       
                                         <!-- <th data-ordering="false" rowspan="2">Action</th> -->
                                     </tr>
                                     <tr>
-                                        <!-- <th data-ordering="false">Serial.No </th> -->
-                                        <!-- <th data-ordering="false">Count</th>
-                                        <th data-ordering="false">Amount</th> -->
-                                        <!-- <th data-ordering="false">Serial.No </th> -->
-                                        <!-- <th data-ordering="false">Count</th>
-                                        <th data-ordering="false">Amount</th> -->
-                                        <!-- <th data-ordering="false">Seril.No </th> -->
-                                        <!-- <th data-ordering="false">Count</th>
-                                        <th data-ordering="false">Amount</th> -->
                                         <th data-ordering="false">Name</th>
-                                        <th data-ordering="false">Account No.</th>
                                         <th data-ordering="false">Branch </th>
+                                        <th data-ordering="false">Account Holder Name</th>
+                                        <th data-ordering="false">Account No.</th>
                                         <th data-ordering="false">IFSC</th>
                                     </tr>
                                 </thead>
@@ -163,23 +150,17 @@ function convertNumberToWordsForIndia($number)
                                         $pub_name = $coupon['fascia'];
                                         $head_org_addr = $coupon['head_org_addr'];
                                         $capitalized_head_org_addr = ucfirst(strtolower($head_org_addr));
-                                        // var_dump($capitalized_head_org_addr);
                                         $cntct_no = $coupon['cntct_prsn_mobile'];
-                                        // var_dump($pub_name);
-                                        // $couponinvoice = $coupon['cpn_bill_no'];
                                         $coupon50ct = $coupon['cpn_50_count'];
-                                        // $coupon50slno = $coupon['cpn_50_srlno'];
                                         $coupon50amnt = $coupon50ct * 50;
                                         $coupon100ct = $coupon['cpn_100_count'];
-                                        // $coupon100slno = $coupon['cpn_100_srlno'];
                                         $coupon100amnt = $coupon100ct * 100;
                                         $coupon200ct = $coupon['cpn_200_count'];
-                                        // $coupon200slno = $coupon['cpn_200_srlno'];
                                         $coupon200amnt = $coupon200ct * 200;
-                                        // $coupontotalamnt = $coupon['total_amount'];
                                         $coupontotalamnt = $coupon50amnt + $coupon100amnt + $coupon200amnt;
                                         $bankname = $coupon['bank_name'];
                                         $account_no = $coupon['account_no'];
+                                        $account_holder = $coupon['acc_holder_name'];
                                         $bank_ifsc = $coupon['bank_ifsc'];
                                         $bank_branch = $coupon['bank_branch'];
                                         $totalinword = convertNumberToWordsForIndia($coupontotalamnt);
@@ -216,17 +197,20 @@ function convertNumberToWordsForIndia($number)
                                                 <?= $coupon200amnt; ?>
                                             </td> -->
 
-                                            
+
                                             <td>
                                                 <?= $bankname; ?>
+                                            </td>
+                                            <td>
+                                                <?= $bank_branch; ?>
+                                            </td>
+                                            <td>
+                                                <?= $account_holder; ?>
                                             </td>
                                             <td>
                                                 <?= $account_no; ?>
                                             </td>
 
-                                            <td>
-                                                <?= $bank_branch; ?>
-                                            </td>
                                             <td>
                                                 <?= $bank_ifsc; ?>
                                             </td>
@@ -311,31 +295,31 @@ function convertNumberToWordsForIndia($number)
         iframe.contentDocument.close();
         iframe.focus(); // Optional: focus on the iframe
         iframe.contentWindow.print();
-        
+
     }
+
     function exportTableToExcel(example, filename = '') {
-            var downloadLink;
-            var dataType = 'application/vnd.ms-excel';
-            var tableSelect = document.getElementById(example);
-            var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-            // Specify file name
-            filename = filename ? filename + '.xls' : 'excel_data.xls';
-            // Create download link element
-            downloadLink = document.createElement("a");
-            document.body.appendChild(downloadLink);
-            if (navigator.msSaveOrOpenBlob) {
-                var blob = new Blob(['\ufeff', tableHTML], {
-                    type: dataType
-                });
-                navigator.msSaveOrOpenBlob(blob, filename);
-            } else {
-                // Create a link to the file
-                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-                // Setting the file name
-                downloadLink.download = filename;
-                //triggering the function
-                downloadLink.click();
-            }
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(example);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+        // Create download link element
+        downloadLink = document.createElement("a");
+        document.body.appendChild(downloadLink);
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+            // Setting the file name
+            downloadLink.download = filename;
+            //triggering the function
+            downloadLink.click();
         }
-    
+    }
 </script>
