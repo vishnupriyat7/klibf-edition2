@@ -119,8 +119,8 @@ function convertNumberToWordsForIndia($number)
                         </div>
                         <div class="card-body overflow-auto">
                             <!-- <table id="pay-slip" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%"> -->
-                            <button onclick="exportTableToExcel('print-slip', 'stallpaymentreport-data')" class="btn btn-primary">Export Table Data To Excel File</button>
-                            <table id="print-slip" class="table table-bordered dt-responsive nowrap table-striped" style="font-style:normal; font-size: 12px;">
+                            <button onclick="exportTableToExcel('example', 'Publisherwise Coupon Report')" class="btn btn-primary">Export Table Data To Excel File</button>
+                            <table id="example" class="table table-bordered dt-responsive nowrap table-striped" style="font-style:normal; font-size: 12px;">
                                 <thead class="text-center justify-content-center">
                                     <tr>
                                         <th data-ordering="false" rowspan="2">Sl.No</th>
@@ -162,7 +162,7 @@ function convertNumberToWordsForIndia($number)
                                     $counter = 0;
                                     while ($coupon = mysqli_fetch_array($couponlist)) {
                                         $id = $coupon['cpid'];
-                                        var_dump($id);
+                                        // var_dump($id);
                                         $pub_name = $coupon['fascia'];
                                         $head_org_addr = $coupon['head_org_addr'];
                                         $capitalized_head_org_addr = ucfirst(strtolower($head_org_addr));
@@ -267,7 +267,6 @@ function convertNumberToWordsForIndia($number)
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
 <script type="text/javascript">
     function printSlip(id) {
-        alert(id);
         var pubName = <?php echo json_encode($pub_name) ?>;
         var head_org_addr = <?php echo json_encode($capitalized_head_org_addr) ?>;
         var cntct_no = <?php echo json_encode($cntct_no) ?>;
@@ -284,7 +283,7 @@ function convertNumberToWordsForIndia($number)
         var bank_branch = <?php echo json_encode($bank_branch) ?>;
         var totalinword = <?php echo json_encode($totalinword) ?>;
         // ... (other variables)
-        var htmlContent = " ";
+
         var htmlContent = '<html><head><style>' +
             '@media print {' +
             '   table, th, td {' +
@@ -316,8 +315,7 @@ function convertNumberToWordsForIndia($number)
             '<td colspan="1">' + bank_ifsc + '</td></tr></tbody></table><br><br>' +
             '<h4 style="float: end; text-align: right;"><b>VERIFIED</b></h4></body></html>';
 
-        // var htmlContent = '<html><head> <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/app.min.css" rel="stylesheet" type="text/css" /><link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" /></head><body><br><label><img src="assets/images/Logo_01.png" height="70vh" style="float: left;"></label><h3><b>PAYMENT DETAILS</b></h3><br><h4><b>Name of Publisher:&nbsp;&nbsp;' + pubName + '</h4><br><h4><b>Address:&nbsp;&nbsp;' + head_org_addr + '</h4><br><h4><b>Contact No:&nbsp;&nbsp;'+ cntct_no +'</h4><br><h3><b>AMOUNT DETAILS</b></h3><table class="table table-info table-responsive" id="pay-slip"><tr><th class="text-center">Denomination</th><th class="text-center">Count</th><th class="text-center">Amount</th></tr><tbody><tr><th class="text-center">50</th><td class="text-center">' + coupon50ct + '</td><td class="text-center">' + coupon50amnt + '</td></tr><tr><th class="text-center">100</th><td class="text-center">' + coupon100ct + '</td><td class="text-center">' + coupon100amnt + '</td></tr><tr><th class="text-center">200</th><td class="text-center">' + coupon200ct + '</td><td class="text-center">' + coupon200amnt + '</td></tr><tr><td colspan="2">Total amount payable (in ₹&nbsp;).</td><td><b>' + coupontotalamnt + '</b></td></tr><tr><td>Total amount payable (in words).</td><td><b>' + totalinword + '</b></td></tr></tbody></table><br><h4><b><u>Details of bank account to which payment is made:</u></b></h4><table class="table table-info table-responsive" id="pay-slip"><tr><td><b>Bank Name:</b></td><td>' + bankname + '</td></tr><tr><td><b>Branch:</b></td><td>' + bank_branch + '</td></tr><tr><td><b>Account Number:</b></td><td>' + account_no + '</td></tr><tr><td><b>IFSC</b></td><td colspan="1">' + bank_ifsc + '</td></tr></tbody></table><br><br><h4 style="float: end; text-align: right;"><b>VERIFIED</b></h4></body></html>'
-
+        
         var iframe = document.getElementById("print-frame");
         iframe.contentDocument.write(htmlContent);
         iframe.contentDocument.close();
@@ -325,5 +323,30 @@ function convertNumberToWordsForIndia($number)
         iframe.contentWindow.print();
         
     }
+
+    function exportTableToExcel(example, filename = '') {
+            var downloadLink;
+            var dataType = 'application/vnd.ms-excel';
+            var tableSelect = document.getElementById(example);
+            var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+            // Specify file name
+            filename = filename ? filename + '.xls' : 'excel_data.xls';
+            // Create download link element
+            downloadLink = document.createElement("a");
+            document.body.appendChild(downloadLink);
+            if (navigator.msSaveOrOpenBlob) {
+                var blob = new Blob(['\ufeff', tableHTML], {
+                    type: dataType
+                });
+                navigator.msSaveOrOpenBlob(blob, filename);
+            } else {
+                // Create a link to the file
+                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+                // Setting the file name
+                downloadLink.download = filename;
+                //triggering the function
+                downloadLink.click();
+            }
+        }
     
 </script>
