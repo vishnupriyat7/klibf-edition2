@@ -35,7 +35,7 @@ function convertNumberToWordsForIndia($number)
     }
 
     $number_to_words_string = "";
-    //Finding out whether it is teen ? and then multiply by 10, pay-slip 17 is seventeen, so if 1 is preceeded with 7 multiply 1 by 10 and add 7 to it.
+    //Finding out whether it is teen ? and then multiply by 10, example 17 is seventeen, so if 1 is preceeded with 7 multiply 1 by 10 and add 7 to it.
     for ($i = 0, $j = 1; $i < 9; $i++, $j++) {
         //"01,23,45,6,78"
         //"00,10,06,7,42"
@@ -84,9 +84,9 @@ function convertNumberToWordsForIndia($number)
 <!-- ============================================================== -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
 <style>
-    #print-slip td {
-        text-align: center !important;
-        width: 10%;
+    #pay-slip td {
+        text-align: right !important;
+        width: 20%;
     }
 </style>
 
@@ -115,34 +115,35 @@ function convertNumberToWordsForIndia($number)
                 <div class="col-lg-12">
                     <div class="card" style="width:100%">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Coupon Details Report</h5>
+                            <h5 class="card-title mb-0">Summary</h5>
                         </div>
                         <div class="card-body overflow-auto">
-                            <!-- <table id="pay-slip" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%"> -->
-                            <button onclick="exportTableToExcel('print-slip', 'stallpaymentreport-data')" class="btn btn-primary">Export Table Data To Excel File</button>
-                            <table id="print-slip" class="table table-bordered dt-responsive nowrap table-striped" style="font-style:normal; font-size: 12px;">
+                            <!-- <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%"> -->
+                            <button onclick="exportTableToExcel('example', 'stallpaymentreport-data')" class="btn btn-primary">Export Table Data To Excel File</button>
+                            <table id="example" class="table table-bordered dt-responsive nowrap table-striped" style="font-style:normal; font-size: 12px;">
                                 <thead class="text-center justify-content-center">
                                     <tr>
                                         <th data-ordering="false" rowspan="2">Sl.No</th>
                                         <th data-ordering="false" rowspan="2">Publisher Name</th>
-                                        <th data-ordering="false" rowspan="2">Contact Number</th>
-                                        <th data-ordering="false" colspan="2">50 Coupon</th>
+                                        <!-- <th data-ordering="false" rowspan="2">Contact Number</th> -->
+                                        <!-- <th data-ordering="false" colspan="2">50 Coupon</th>
                                         <th data-ordering="false" colspan="2">100 Coupon</th>
-                                        <th data-ordering="false" colspan="2">200 Coupon</th>
-                                        <th data-ordering="false" rowspan="2">Sub Total</th>
+                                        <th data-ordering="false" colspan="2">200 Coupon</th> -->
                                         <th data-ordering="false" colspan="4">Bank</th>
-                                        <th data-ordering="false" rowspan="2">Action</th>
+                                        <th data-ordering="false" rowspan="2">Sub Total</th>
+                                       
+                                        <!-- <th data-ordering="false" rowspan="2">Action</th> -->
                                     </tr>
                                     <tr>
                                         <!-- <th data-ordering="false">Serial.No </th> -->
-                                        <th data-ordering="false">Count</th>
-                                        <th data-ordering="false">Amount</th>
+                                        <!-- <th data-ordering="false">Count</th>
+                                        <th data-ordering="false">Amount</th> -->
                                         <!-- <th data-ordering="false">Serial.No </th> -->
-                                        <th data-ordering="false">Count</th>
-                                        <th data-ordering="false">Amount</th>
+                                        <!-- <th data-ordering="false">Count</th>
+                                        <th data-ordering="false">Amount</th> -->
                                         <!-- <th data-ordering="false">Seril.No </th> -->
-                                        <th data-ordering="false">Count</th>
-                                        <th data-ordering="false">Amount</th>
+                                        <!-- <th data-ordering="false">Count</th>
+                                        <th data-ordering="false">Amount</th> -->
                                         <th data-ordering="false">Name</th>
                                         <th data-ordering="false">Account No.</th>
                                         <th data-ordering="false">Branch </th>
@@ -152,31 +153,37 @@ function convertNumberToWordsForIndia($number)
                                 <tbody>
                                     <?php
                                     $userId = $user['id'];
-                                    $querycoupon = "SELECT up.fascia, up.cntct_prsn_mobile, up.head_org_addr, cp.id as cpid, cb.id as cbid, cp.*, cb.*  FROM coupon_publisher cp JOIN users_profile up ON cp.users_id = up.user_id JOIN  coupon_bankdtls cb ON cp.users_id = cb.users_id ORDER BY cp.id DESC";
+                                    $querycoupon = "SELECT up.fascia, up.cntct_prsn_mobile, up.head_org_addr, cp.*, cb.*  FROM coupon_publisher cp JOIN users_profile up ON cp.users_id = up.user_id JOIN  coupon_bankdtls cb ON cp.users_id = cb.users_id ORDER BY cp.id DESC";
+
+                                    // $querycoupon = "SELECT cp.*, cb.*  FROM coupon_publisher cp JOIN  coupon_bankdtls cb ON cp.users_id = cb.users_id WHERE cp.users_id = $userId ORDER BY cp.id DESC";
                                     $couponlist = mysqli_query($con, $querycoupon);
                                     $counter = 0;
                                     while ($coupon = mysqli_fetch_array($couponlist)) {
-                                        $id = $coupon['cpid'];
+                                        $id = $coupon['id'];
                                         $pub_name = $coupon['fascia'];
                                         $head_org_addr = $coupon['head_org_addr'];
                                         $capitalized_head_org_addr = ucfirst(strtolower($head_org_addr));
+                                        // var_dump($capitalized_head_org_addr);
                                         $cntct_no = $coupon['cntct_prsn_mobile'];
+                                        // var_dump($pub_name);
+                                        // $couponinvoice = $coupon['cpn_bill_no'];
                                         $coupon50ct = $coupon['cpn_50_count'];
+                                        // $coupon50slno = $coupon['cpn_50_srlno'];
                                         $coupon50amnt = $coupon50ct * 50;
-                                        $formattedCoupon50amnt = number_format($coupon50amnt, 0, '', ',');
                                         $coupon100ct = $coupon['cpn_100_count'];
+                                        // $coupon100slno = $coupon['cpn_100_srlno'];
                                         $coupon100amnt = $coupon100ct * 100;
-                                        $formattedCoupon100amnt = number_format($coupon100amnt, 0, '', ',');
                                         $coupon200ct = $coupon['cpn_200_count'];
+                                        // $coupon200slno = $coupon['cpn_200_srlno'];
                                         $coupon200amnt = $coupon200ct * 200;
-                                        $formattedCoupon200amnt = number_format($coupon200amnt, 0, '', ',');
+                                        // $coupontotalamnt = $coupon['total_amount'];
                                         $coupontotalamnt = $coupon50amnt + $coupon100amnt + $coupon200amnt;
-                                        $formtd_coupontotalamnt = number_format($coupontotalamnt, 0, '', ',');
                                         $bankname = $coupon['bank_name'];
                                         $account_no = $coupon['account_no'];
                                         $bank_ifsc = $coupon['bank_ifsc'];
                                         $bank_branch = $coupon['bank_branch'];
                                         $totalinword = convertNumberToWordsForIndia($coupontotalamnt);
+
                                     ?>
                                         <tr>
                                             <td>
@@ -185,11 +192,11 @@ function convertNumberToWordsForIndia($number)
                                             <td>
                                                 <?= $pub_name; ?>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <?= $cntct_no; ?>
-                                            </td>
+                                            </td> -->
 
-                                            <td>
+                                            <!-- <td>
                                                 <?= $coupon50ct; ?>
                                             </td>
                                             <td>
@@ -207,11 +214,9 @@ function convertNumberToWordsForIndia($number)
                                             </td>
                                             <td>
                                                 <?= $coupon200amnt; ?>
-                                            </td>
+                                            </td> -->
 
-                                            <td>
-                                                <?= $coupontotalamnt; ?>
-                                            </td>
+                                            
                                             <td>
                                                 <?= $bankname; ?>
                                             </td>
@@ -226,8 +231,11 @@ function convertNumberToWordsForIndia($number)
                                                 <?= $bank_ifsc; ?>
                                             </td>
                                             <td>
-                                                <button name="print" class="btn btn-primary" id="pay-slip" onclick="printSlip(<?= $id; ?>)">Print Payment Slip</button>
+                                                <?= $coupontotalamnt; ?>
                                             </td>
+                                            <!-- <td>
+                                                <button name="print" class="btn btn-primary" id="print-slip" onclick="printSlip()">Print Payment Slip</button>
+                                            </td> -->
                                         </tr>
                                     <?php } ?>
                                 </tbody>
@@ -249,131 +257,61 @@ function convertNumberToWordsForIndia($number)
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
 <script type="text/javascript">
-    function printSlip(id) {
-        $.ajax({
-            type: "POST",
-            url: "sdf_publisher_coupon_denom_slip.php",
-            data: {
-                'id': id
-            },
-            dataType: "json",
-            encode: true,
-        }).success(function(data) {
-            var pubName = data['fascia'];
-            var head_org_addr = data['head_org_addr'];
-            var cntct_no = data['cntct_prsn_mobile'];
-            var coupon50ct = data['cpn_50_count'];
-            var coupon50amnt = numberWithCommas(coupon50ct * 50);
-            var coupon100ct = data['cpn_100_count'];
-            var coupon100amnt = numberWithCommas(coupon100ct * 100);
-            var coupon200ct = data['cpn_200_count'];
-            var coupon200amnt = numberWithCommas(coupon200ct * 200);
-            var coupontotal = (coupon50ct * 50) + (coupon100ct * 100) + (coupon200ct * 200)
-            var coupontotalamnt = numberWithCommas(coupontotal);
-            var bankname = data['bank_name'];
-            var account_no = data['account_no'];
-            var bank_ifsc = data['bank_ifsc'];
-            var bank_branch = data['bank_branch'];
-            var totalinword = convert_number(coupontotal);
-            var htmlContent = " ";
-            var htmlContent = '<html><head><style>' +
-                '@media print {' +
-                '   table, th, td {' +
-                '       border: none !important;' +
-                '   }' +
-                '   body {' +
-                '       font-size: 10pt;' +
-                '   }' +
-                '}</style>' +
-                '<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />' +
-                '<link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />' +
-                '<link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />' +
-                '<link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />' +
-                '</head><body><br><label><img src="assets/images/Logo_01.png" height="70vh" style="float: left;"></label>' +
-                '<h3><b>PAYMENT DETAILS</b></h3><br><h4><b>Name of Publisher:&nbsp;&nbsp;' + pubName + '</h4>' +
-                '<h4><b>Address:&nbsp;&nbsp;' + head_org_addr + '</h4><h4><b>Contact No:&nbsp;&nbsp;' + cntct_no + '</h4>' +
-                '<br><h3><b>AMOUNT DETAILS</b></h3><table class="table table-info table-responsive" style="width: 100%">' +
-                '<tr><th class="text-center" style="width: 40%">Denomination</th><th class="text-center" style="width: 30%">Count</th><th style="width: 30%; float: end; text-align: right;">Amount(in ₹).</th></tr>' + 
-                '<tbody><tr><th class="text-center">50</th><td class="text-center">' + coupon50ct + '</td>' +
-                '<td style="float: end; text-align: right;">' + coupon50amnt + '</td></tr><tr><th class="text-center">100</th>' +
-                '<td class="text-center">' + coupon100ct + '</td><td style="float: end; text-align: right;">' + coupon100amnt + '</td></tr>' +
-                '<tr><th class="text-center">200</th><td class="text-center">' + coupon200ct + '</td>' +
-                '<td style="float: end; text-align: right;">' + coupon200amnt + '</td></tr><tr><td colspan="2">Total amount payable (in ₹&nbsp;).</td>' +
-                '<td style="float: end; text-align: right;"><b>' + coupontotalamnt + '</b></td></tr><tr><td>Total amount payable (in words).</td>' +
-                '<td colspan="2"><b>' + totalinword + '</b></td></tr></tbody></table><h4><b><u>Details of bank account to which payment is made:</u></b></h4>' +
-                '<table class="table table-info table-responsive"><tr><td><b>Bank Name:</b></td>' +
-                '<td>' + bankname + '</td></tr><tr><td><b>Branch:</b></td><td>' + bank_branch + '</td></tr>' +
-                '<tr><td><b>Account Number:</b></td><td>' + account_no + '</td></tr><tr><td><b>IFSC</b></td>' +
-                '<td colspan="1">' + bank_ifsc + '</td></tr></tbody></table><br><br>' +
-                '<h4 style="float: end; text-align: right;"><b>VERIFIED</b></h4></body></html>';
-            var iframe = document.getElementById("print-frame");
-            iframe.contentDocument.write(htmlContent);
-            iframe.contentDocument.close();
-            iframe.focus(); // Optional: focus on the iframe
-            iframe.contentWindow.print();
+    function printSlip() {
+        var pubName = <?php echo json_encode($pub_name) ?>;
+        var head_org_addr = <?php echo json_encode($capitalized_head_org_addr) ?>;
+        var cntct_no = <?php echo json_encode($cntct_no) ?>;
+        var coupon50ct = <?php echo json_encode($coupon50ct) ?>;
+        var coupon50amnt = <?php echo json_encode($coupon50amnt) ?>;
+        var coupon100ct = <?php echo json_encode($coupon100ct) ?>;
+        var coupon100amnt = <?php echo json_encode($coupon100amnt) ?>;
+        var coupon200ct = <?php echo json_encode($coupon200ct) ?>;
+        var coupon200amnt = <?php echo json_encode($coupon200amnt) ?>;
+        var coupontotalamnt = <?php echo json_encode($coupontotalamnt) ?>;
+        var bankname = <?php echo json_encode($bankname) ?>;
+        var account_no = <?php echo json_encode($account_no) ?>;
+        var bank_ifsc = <?php echo json_encode($bank_ifsc) ?>;
+        var bank_branch = <?php echo json_encode($bank_branch) ?>;
+        var totalinword = <?php echo json_encode($totalinword) ?>;
+        // ... (other variables)
 
-        });
+        var htmlContent = '<html><head><style>' +
+            '@media print {' +
+            '   table, th, td {' +
+            '       border: none !important;' +
+            '   }' +
+            '   body {' +
+            '       font-size: 10pt;' +
+            '   }' +
+            '}</style>' +
+            '<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />' +
+            '<link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />' +
+            '<link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />' +
+            '<link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />' +
+            '</head><body><br><label><img src="assets/images/Logo_01.png" height="70vh" style="float: left;"></label>' +
+            '<h3><b>PAYMENT DETAILS</b></h3><br><h4><b>Name of Publisher:&nbsp;&nbsp;' + pubName + '</h4>' +
+            '<br><h4><b>Address:&nbsp;&nbsp;' + head_org_addr + '</h4><br><h4><b>Contact No:&nbsp;&nbsp;' + cntct_no + '</h4>' +
+            '<br><h3><b>AMOUNT DETAILS</b></h3><table class="table table-info table-responsive" id="pay-slip">' +
+            '<tr><th class="text-center">Denomination</th><th class="text-center">Count</th><th class="text-center">Amount(in ₹).</th></tr>' +
+            '<tbody><tr><th class="text-center">50</th><td class="text-center">' + coupon50ct + '</td>' +
+            '<td class="text-center">' + coupon50amnt + '</td></tr><tr><th class="text-center">100</th>' +
+            '<td class="text-center">' + coupon100ct + '</td><td class="text-center">' + coupon100amnt + '</td></tr>' +
+            '<tr><th class="text-center">200</th><td class="text-center">' + coupon200ct + '</td>' +
+            '<td class="text-center">' + coupon200amnt + '</td></tr><tr><td colspan="2">Total amount payable (in ₹&nbsp;).</td>' +
+            '<td><b>' + coupontotalamnt + '</b></td></tr><tr><td>Total amount payable (in words).</td>' +
+            '<td><b>' + totalinword + '</b></td></tr></tbody></table><br><h4><b><u>Details of bank account to which payment is made:</u></b></h4>' +
+            '<table class="table table-info table-responsive" id="pay-slip"><tr><td><b>Bank Name:</b></td>' +
+            '<td>' + bankname + '</td></tr><tr><td><b>Branch:</b></td><td>' + bank_branch + '</td></tr>' +
+            '<tr><td><b>Account Number:</b></td><td>' + account_no + '</td></tr><tr><td><b>IFSC</b></td>' +
+            '<td colspan="1">' + bank_ifsc + '</td></tr></tbody></table><br><br>' +
+            '<h4 style="float: end; text-align: right;"><b>VERIFIED</b></h4></body></html>';
+
+        var iframe = document.getElementById("print-frame");
+        iframe.contentDocument.write(htmlContent);
+        iframe.contentDocument.close();
+        iframe.focus(); // Optional: focus on the iframe
+        iframe.contentWindow.print();
+        
     }
-
-    function convert_number(number) {
-        if ((number < 0) || (number > 999999999)) {
-            return "NUMBER OUT OF RANGE!";
-        }
-        var Gn = Math.floor(number / 10000000); /* Crore */
-        number -= Gn * 10000000;
-        var kn = Math.floor(number / 100000); /* lakhs */
-        number -= kn * 100000;
-        var Hn = Math.floor(number / 1000); /* thousand */
-        number -= Hn * 1000;
-        var Dn = Math.floor(number / 100); /* Tens (deca) */
-        number = number % 100; /* Ones */
-        var tn = Math.floor(number / 10);
-        var one = Math.floor(number % 10);
-        var res = "";
-
-        if (Gn > 0) {
-            res += (convert_number(Gn) + " CRORE");
-        }
-        if (kn > 0) {
-            res += (((res == "") ? "" : " ") +
-                convert_number(kn) + " LAKH");
-        }
-        if (Hn > 0) {
-            res += (((res == "") ? "" : " ") +
-                convert_number(Hn) + " THOUSAND");
-        }
-
-        if (Dn) {
-            res += (((res == "") ? "" : " ") +
-                convert_number(Dn) + " HUNDRED");
-        }
-
-
-        var ones = Array("", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN", "ELEVEN", "TWELVE", "THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN", "SEVENTEEN", "EIGHTEEN", "NINETEEN");
-        var tens = Array("", "", "TWENTY", "THIRTY", "FOURTY", "FIFTY", "SIXTY", "SEVENTY", "EIGHTY", "NINETY");
-
-        if (tn > 0 || one > 0) {
-            if (!(res == "")) {
-                res += " AND ";
-            }
-            if (tn < 2) {
-                res += ones[tn * 10 + one];
-            } else {
-
-                res += tens[tn];
-                if (one > 0) {
-                    res += ("-" + ones[one]);
-                }
-            }
-        }
-
-        if (res == "") {
-            res = "zero";
-        }
-        return res;
-    }
-
-    function numberWithCommas(x) {
-    return x.toString().split('.')[0].length > 3 ? x.toString().substring(0,x.toString().split('.')[0].length-3).replace(/\B(?=(\d{2})+(?!\d))/g, ",") + "," + x.toString().substring(x.toString().split('.')[0].length-3): x.toString();
-}
+    
 </script>

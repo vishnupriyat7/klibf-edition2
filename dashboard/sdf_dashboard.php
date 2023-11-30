@@ -13,19 +13,40 @@
     </div>
 </div>
 <!-- end page title -->
-<!-- <?php
-$queue_count_sql = "SELECT SUM(count) FROM queue;";
-$queue_count_stmt = $con->prepare($queue_count_sql);
-$queue_count_stmt->execute();
-$queue_count_result = $queue_count_stmt->get_result();
-$queue_result_count = $queue_count_result->fetch_all();
+<?php
+$coupon50_count_sql = "SELECT SUM(cpn_50_count) FROM coupon_publisher;";
+$coupon50_count_stmt = $con->prepare($coupon50_count_sql);
+$coupon50_count_stmt->execute();
+$coupon50_count_result = $coupon50_count_stmt->get_result();
+$coupon50_result_count = $coupon50_count_result->fetch_all();
+// var_dump($queue_result_count[0][0]);
+$coupon50amnt = $coupon50_result_count[0][0] * 50;
+
+$coupon100_count_sql = "SELECT SUM(cpn_100_count) FROM coupon_publisher;";
+$coupon100_count_stmt = $con->prepare($coupon100_count_sql);
+$coupon100_count_stmt->execute();
+$coupon100_count_result = $coupon100_count_stmt->get_result();
+$coupon100_result_count = $coupon100_count_result->fetch_all();
+// var_dump($queue_result_count[0][0]);
+$coupon100amnt = $coupon100_result_count[0][0] * 100;
+
+$coupon200_count_sql = "SELECT SUM(cpn_200_count) FROM coupon_publisher;";
+$coupon200_count_stmt = $con->prepare($coupon200_count_sql);
+$coupon200_count_stmt->execute();
+$coupon200_count_result = $coupon200_count_stmt->get_result();
+$coupon200_result_count = $coupon200_count_result->fetch_all();
+// var_dump($queue_result_count[0][0]);
+$coupon200amnt = $coupon200_result_count[0][0] * 200;
+
+$total_count = $coupon50_result_count[0][0] + $coupon100_result_count[0][0] + $coupon200_result_count[0][0];
+$total_amount = $coupon50amnt + $coupon100amnt + $coupon200amnt;
 
 $queue_inst_count_sql = "SELECT id FROM queue;";
 $queue_inst_count_stmt = $con->prepare($queue_inst_count_sql);
 $queue_inst_count_stmt->execute();
 $queue_inst_count_result = $queue_inst_count_stmt->get_result();
 $queue_inst_result_count = $queue_inst_count_result->fetch_all();
-?> -->
+?>
 
 
 <div class="row">
@@ -60,8 +81,10 @@ $queue_inst_result_count = $queue_inst_count_result->fetch_all();
                                     </span>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total Number of People</p>
-                                    <!-- <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $queue_result_count[0][0]; ?>"></span></h4> -->
+                                    <p class="text-uppercase fw-semibold fs-15 mb-1">Coupon 50</p>
+                                    <h5 class="mb-0 text-muted">Count  : <span class="counter-value" data-target="<?php print $coupon50_result_count[0][0]; ?>"></span></h5>
+                                    <h5 class="mb-0 text-muted">Amount : <span class="counter-value" data-target="<?php print $coupon50amnt; ?>"></span></h5>
+
                                 </div>
 
                             </div>
@@ -79,9 +102,52 @@ $queue_inst_result_count = $queue_inst_count_result->fetch_all();
                                     </span>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Institutions Booked Alltogether</p>
-                                    <!-- <h4 class=" mb-0"><span class="counter-value" data-target="<?php print count($queue_inst_result_count); ?>"></span></h4> -->
+                                    <p class="text-uppercase fw-semibold fs-15 mb-1">Coupon 100</p>
+                                    <h5 class="mb-0 text-muted">Count  : <span class="counter-value" data-target="<?php print $coupon100_result_count[0][0]; ?>"></span></h5>
+                                    <h5 class="mb-0 text-muted">Amount : <span class="counter-value" data-target="<?php print $coupon100amnt; ?>"></span></h5>
+
                                 </div>
+
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-light text-primary rounded-circle fs-3">
+                                        <i class="ri-git-merge-fill"></i>
+                                    </span>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="text-uppercase fw-semibold fs-15 mb-1">Coupon 200</p>
+                                    <h5 class="mb-0 text-muted">Count  : <span class="counter-value" data-target="<?php print $coupon200_result_count[0][0]; ?>"></span></h5>
+                                    <h5 class="mb-0 text-muted">Amount : <span class="counter-value" data-target="<?php print $coupon200amnt; ?>"></span></h5>
+
+                                </div>
+
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-light text-primary rounded-circle fs-3">
+                                        <i class="ri-git-merge-fill"></i>
+                                    </span>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="text-uppercase fw-semibold fs-15 mb-1">Sub Total</p>
+                                    <h5 class="mb-0 text-muted">Count  : <span class="counter-value" data-target="<?php print $total_count; ?>"></span></h5>
+                                    <h5 class="mb-0 text-muted">Amount : <span class="counter-value" data-target="<?php print $total_amount; ?>"></span></h5>
+
+                                </div>
+
                             </div>
                         </div><!-- end card body -->
                     </div><!-- end card -->
