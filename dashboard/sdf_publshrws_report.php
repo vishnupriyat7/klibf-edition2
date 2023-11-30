@@ -1,5 +1,5 @@
 <?php include "header.php"; ?>
-<?php include "reception_sidebar.php"; ?>
+<?php include "sdf_sidebar.php"; ?>
 
 <!-- ============================================================== -->
 <!-- Start right Content here -->
